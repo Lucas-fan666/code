@@ -14,7 +14,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.patches import FancyArrowPatch, Rectangle
+from matplotlib.patches import Circle, FancyArrowPatch, Rectangle
 import numpy as np
 import pandas as pd
 
@@ -219,203 +219,212 @@ def label_change(ax: plt.Axes, x: np.ndarray, y: np.ndarray, text_value: str, co
 
 
 def draw_supply_chain() -> None:
-    """Draw a restrained, journal-style overview of actors and game structures."""
-    fig, ax = plt.subplots(figsize=(8.4, 7.25))
+    """Map the system boundary, maintained assumptions, and power allocation."""
+    fig, ax = plt.subplots(figsize=(8.4, 5.85))
     ax.set_xlim(0, 12)
-    ax.set_ylim(0, 12)
+    ax.set_ylim(0, 8.35)
     ax.axis("off")
 
-    def panel(x, y, w, h, label, title, accent):
-        ax.add_patch(Rectangle((x, y), w, h, facecolor="white", edgecolor="#B8C4CE", linewidth=0.85, zorder=0))
-        ax.add_patch(Rectangle((x + 0.22, y + h - 0.54), 0.07, 0.31, facecolor=accent, edgecolor="none", zorder=2))
-        ax.text(x + 0.40, y + h - 0.385, label, ha="left", va="center", fontsize=8.1, color=accent, fontweight="bold")
-        ax.text(x + 0.73, y + h - 0.385, title, ha="left", va="center", fontsize=8.1, color=INK, fontweight="bold")
-        ax.plot([x + 0.22, x + w - 0.22], [y + h - 0.69, y + h - 0.69], color="#D7DEE5", lw=0.7, zorder=1)
+    def section_rule(x, y, w, label, title, accent):
+        ax.text(x, y, label, ha="left", va="center", fontsize=8.2, color=accent, fontweight="bold")
+        ax.text(x + 0.44, y, title, ha="left", va="center", fontsize=8.2, color=INK, fontweight="bold")
+        ax.plot([x, x + w], [y - 0.25, y - 0.25], color="#C9D2DA", lw=0.8)
 
-    def node(x, y, w, h, label, accent=NAVY, face="white", fontsize=7.5, weight="normal"):
-        ax.add_patch(Rectangle((x, y), w, h, facecolor=face, edgecolor=accent, linewidth=0.9, zorder=3))
-        ax.text(x + w / 2, y + h / 2, label, ha="center", va="center", fontsize=fontsize, fontweight=weight, linespacing=1.08, zorder=4)
+    def actor(x, y, w, h, title, detail, accent, face):
+        ax.add_patch(Rectangle((x, y), w, h, facecolor=face, edgecolor=accent, linewidth=0.95, zorder=3))
+        ax.add_patch(Rectangle((x, y), 0.08, h, facecolor=accent, edgecolor="none", zorder=4))
+        ax.text(x + w / 2 + 0.04, y + 0.62 * h, title, ha="center", va="center", fontsize=7.6, fontweight="bold")
+        ax.text(x + w / 2 + 0.04, y + 0.28 * h, detail, ha="center", va="center", fontsize=6.8, color=GRAY)
 
     def arrow(start, end, color=INK, style="-", scale=8.5, connection="arc3,rad=0"):
         ax.add_patch(FancyArrowPatch(start, end, arrowstyle="-|>", mutation_scale=scale, linewidth=0.95, color=color, linestyle=style, connectionstyle=connection, zorder=2))
 
-    panel(0.25, 6.75, 5.45, 5.00, "(a)", "Power-supply-chain structure", NAVY)
-    panel(6.30, 6.75, 5.45, 5.00, "(b)", "Maintained assumptions", PURPLE)
-    panel(0.25, 0.25, 5.45, 5.85, "(c)", "Generation-side Cournot structure", NAVY)
-    panel(6.30, 0.25, 5.45, 5.85, "(d)", "Retailer-led Stackelberg structure", BLUE)
+    # (a) Physical and economic system boundary.
+    section_rule(0.25, 8.02, 7.35, "(a)", "Physical and economic system boundary", NAVY)
+    ax.add_patch(Rectangle((0.42, 3.50), 2.28, 3.95, facecolor="#F7F9FA", edgecolor="#C9D2DA", linewidth=0.75, zorder=0))
+    ax.text(1.56, 7.20, "GENERATION", ha="center", va="center", fontsize=6.8, color=GRAY, fontweight="bold")
+    actor(0.67, 6.04, 1.78, 0.76, "Thermal plant", r"deterministic $q_t$", ORANGE, PALE_ORANGE)
+    actor(0.67, 4.60, 1.78, 0.84, "Green plant", r"$\widetilde q_g=\bar q_g+\varepsilon$", GREEN, PALE_GREEN)
+    actor(3.57, 5.28, 1.84, 0.86, "Power retailer", "procure and resell", BLUE, PALE_BLUE)
+    actor(6.15, 5.28, 1.28, 0.86, "Consumers", r"retail price $p_s$", AMBER, "#FFF6DE")
+    ax.plot([3.05, 3.05], [4.95, 6.42], color=INK, lw=1.05, zorder=1)
+    arrow((2.45, 6.42), (3.05, 6.42))
+    arrow((2.45, 5.02), (3.05, 5.02))
+    arrow((3.05, 5.71), (3.57, 5.71))
+    arrow((5.41, 5.71), (6.15, 5.71))
+    arrow((4.03, 5.28), (2.16, 4.94), BLUE, (0, (4, 2)), 7.6, "arc3,rad=-0.14")
+    arrow((4.30, 5.28), (2.18, 6.04), BLUE, (0, (4, 2)), 7.6, "arc3,rad=0.14")
+    ax.text(3.03, 4.15, r"purchase price $p_p$", ha="center", va="center", fontsize=6.65, color=BLUE)
+    ax.text(5.78, 5.92, "electricity", ha="center", va="bottom", fontsize=6.45, color=GRAY)
 
-    # Panel (a): actors and economic flows.
-    ax.add_patch(Rectangle((0.72, 8.63), 4.47, 1.52, facecolor="#F4F6F8", edgecolor="#C6D0D8", linewidth=0.75, zorder=1))
-    ax.text(2.955, 9.91, "Generation side", ha="center", va="center", fontsize=7.2, color=GRAY, fontweight="bold")
-    node(0.96, 8.88, 1.62, 0.72, "Thermal plant\n$q_t$", ORANGE, PALE_ORANGE, 7.5, "bold")
-    node(3.33, 8.88, 1.62, 0.72, "Green plant\n" + r"$\widetilde q_g=\bar q_g+\varepsilon$", GREEN, PALE_GREEN, 7.0, "bold")
-    node(3.33, 10.47, 1.62, 0.58, "Government", GREEN, "white", 7.4, "bold")
-    node(0.96, 7.45, 1.84, 0.68, "Power retailer", BLUE, PALE_BLUE, 7.5, "bold")
-    node(3.56, 7.45, 1.39, 0.68, "Consumers", AMBER, "#FFF6DE", 7.5, "bold")
-    arrow((1.77, 8.88), (1.77, 8.13))
-    arrow((4.14, 8.88), (2.48, 8.13), connection="arc3,rad=0.10")
-    arrow((2.80, 7.79), (3.56, 7.79))
-    arrow((4.14, 10.47), (4.14, 9.60), GREEN, (0, (1.5, 2)))
-    arrow((1.34, 8.13), (1.34, 8.87), BLUE, (0, (4, 2)), 7.5)
-    arrow((2.36, 8.13), (3.76, 8.87), BLUE, (0, (4, 2)), 7.5, "arc3,rad=-0.10")
-    legend_y = 7.06
-    for x0, text_value, color, style in [
-        (0.82, "electricity", INK, "-"),
-        (2.35, "purchase price", BLUE, (0, (4, 2))),
-        (4.12, "subsidy", GREEN, (0, (1.5, 2))),
-    ]:
-        ax.plot([x0, x0 + 0.30], [legend_y, legend_y], color=color, lw=1.05, linestyle=style)
-        ax.text(x0 + 0.38, legend_y, text_value, ha="left", va="center", fontsize=6.45, color=GRAY)
+    ax.text(1.56, 3.82, "all realized output", ha="center", va="center", fontsize=6.35, color=GRAY)
+    ax.add_patch(Circle((1.56, 3.15), 0.12, facecolor=GREEN, edgecolor="white", linewidth=0.7, zorder=4))
+    ax.text(1.81, 3.15, r"renewable shock $\varepsilon$", ha="left", va="center", fontsize=6.55, color=GRAY)
+    arrow((1.56, 3.31), (1.56, 4.60), GREEN, (0, (1.5, 2)), 7.5)
+    ax.text(2.92, 7.16, "Government", ha="center", va="center", fontsize=7.2, color=INK, fontweight="bold")
+    arrow((2.92, 6.98), (2.25, 5.42), GREEN, (0, (1.5, 2)), 8.0, "arc3,rad=0.12")
+    ax.text(3.27, 6.44, r"subsidy $p_g$", ha="left", va="center", fontsize=6.45, color=GREEN)
 
-    # Panel (b): a compact assumption ledger, not a sequence of decorative cards.
+    # (b) Assumption ledger uses typographic grouping rather than stacked cards.
+    section_rule(8.05, 8.02, 3.70, "(b)", "Maintained analytical boundary", PURPLE)
     assumptions = [
-        (10.64, "Retailer procures all generated electricity"),
-        (9.83, "All procured electricity is sold to consumers"),
-        (9.02, r"Additive green uncertainty: $\widetilde q_g=\bar q_g+\varepsilon$"),
-        (8.21, r"Mean-variance objective: $\mathbb{E}[\pi_i]-\theta_i\operatorname{Var}(\pi_i)$"),
-        (7.40, "Exposure channels: retailer margin; thermal quantity"),
+        (7.28, "Clearing", "All generated electricity is procured\nand sold; no curtailment or rationing"),
+        (6.23, "Uncertainty", r"Additive, zero mean, symmetric;" + "\n" + r"$\operatorname{Var}(\varepsilon)=v$ is decision independent"),
+        (5.18, "Preferences", r"$U_i=\mathbb{E}[\pi_i]-\theta_i\operatorname{Var}(\pi_i)$" + "\n" + "in a single-period complete-information game"),
+        (4.13, "Domain", "Interior positive-price, output, and\nprofit equilibria only"),
     ]
-    for row, (y, label) in enumerate(assumptions):
-        ax.add_patch(Rectangle((6.72, y), 4.61, 0.58, facecolor="#FBFCFD", edgecolor="#D2DAE1", linewidth=0.65, zorder=1))
-        ax.add_patch(Rectangle((6.72, y), 0.06, 0.58, facecolor=BLUE if row < 3 else PURPLE, edgecolor="none", zorder=2))
-        ax.text(6.92, y + 0.29, label, ha="left", va="center", fontsize=7.15, color=INK)
+    for idx, (y, tag, detail) in enumerate(assumptions):
+        ax.text(8.12, y, tag.upper(), ha="left", va="top", fontsize=6.25, color=PURPLE if idx > 1 else NAVY, fontweight="bold")
+        ax.text(8.12, y - 0.30, detail, ha="left", va="top", fontsize=6.65, color=INK, linespacing=1.13)
+        if idx < len(assumptions) - 1:
+            ax.plot([8.12, 11.70], [y - 0.82, y - 0.82], color="#E0E5E9", lw=0.65)
 
-    # Central allocation decision linking the common model to the two games.
-    node(4.69, 6.25, 2.62, 0.38, "Market-power allocation", NAVY, "#F1F4F7", 7.2, "bold")
-    arrow((2.98, 6.75), (5.08, 6.63), MID_GRAY, "-", 7.5, "arc3,rad=0.04")
-    arrow((9.02, 6.75), (6.92, 6.63), MID_GRAY, "-", 7.5, "arc3,rad=-0.04")
-    arrow((5.35, 6.25), (3.05, 6.10), NAVY, "-", 8, "arc3,rad=0.04")
-    arrow((6.65, 6.25), (8.95, 6.10), BLUE, "-", 8, "arc3,rad=-0.04")
-
-    # Panel (c): simultaneous Cournot choices followed by market clearing.
-    ax.text(2.98, 5.09, "Simultaneous quantity choices", ha="center", va="center", fontsize=7.0, color=GRAY, fontstyle="italic")
-    node(0.73, 4.18, 1.92, 0.68, "Thermal chooses\n$q_{tC}$", ORANGE, PALE_ORANGE, 7.3, "bold")
-    node(3.30, 4.18, 1.92, 0.68, "Green chooses\n" + r"$\bar q_{gC}$", GREEN, PALE_GREEN, 7.3, "bold")
-    node(1.10, 3.03, 3.76, 0.66, "Aggregate stochastic supply", NAVY, "white", 7.5)
-    node(1.10, 1.96, 3.76, 0.66, r"Market clears: $p_{pC}=a-b(q_{tC}+\widetilde q_{gC})$", PURPLE, "white", 7.1)
-    node(1.10, 0.88, 3.76, 0.66, "Retailer accepts price and procures all output", BLUE, PALE_BLUE, 7.15)
-    arrow((1.69, 4.18), (2.37, 3.69), connection="arc3,rad=-0.08")
-    arrow((4.26, 4.18), (3.58, 3.69), connection="arc3,rad=0.08")
-    arrow((2.98, 3.03), (2.98, 2.62))
-    arrow((2.98, 1.96), (2.98, 1.54))
-
-    # Panel (d): Stackelberg leader and follower responses.
-    node(7.43, 4.31, 3.19, 0.68, "Retailer sets purchase price $p_{pS}$", BLUE, PALE_BLUE, 7.5, "bold")
-    node(6.78, 3.15, 2.00, 0.70, "Thermal response\n$q_{tS}(p_{pS})$", ORANGE, PALE_ORANGE, 7.1)
-    node(9.27, 3.15, 2.00, 0.70, "Green response\n" + r"$\bar q_{gS}(p_{pS})$", GREEN, PALE_GREEN, 7.1)
-    node(7.15, 2.00, 3.76, 0.66, "Total stochastic procurement", NAVY, "white", 7.5)
-    node(7.15, 0.88, 3.76, 0.70, "Equilibrium quantities, price,\nand expected profits", PURPLE, "white", 7.0)
-    arrow((9.02, 4.31), (7.78, 3.85), BLUE, connection="arc3,rad=0.08")
-    arrow((9.02, 4.31), (10.27, 3.85), BLUE, connection="arc3,rad=-0.08")
-    arrow((7.78, 3.15), (8.56, 2.66), connection="arc3,rad=-0.08")
-    arrow((10.27, 3.15), (9.49, 2.66), connection="arc3,rad=0.08")
-    arrow((9.03, 2.00), (9.03, 1.58))
+    # (c) A comparative matrix isolates how power allocation changes exposure.
+    section_rule(0.25, 2.72, 11.50, "(c)", "Market-power allocation and structure-specific risk transmission", NAVY)
+    x_label, x_s, x_c = 0.28, 2.50, 7.22
+    widths = (2.04, 4.50, 4.50)
+    ax.add_patch(Rectangle((x_s, 1.95), widths[1], 0.43, facecolor=BLUE, edgecolor="none"))
+    ax.add_patch(Rectangle((x_c, 1.95), widths[2], 0.43, facecolor=NAVY, edgecolor="none"))
+    ax.text(x_s + widths[1] / 2, 2.165, "Scenario S  |  retailer-led Stackelberg", ha="center", va="center", fontsize=7.25, color="white", fontweight="bold")
+    ax.text(x_c + widths[2] / 2, 2.165, "Scenario C  |  generation-side Cournot", ha="center", va="center", fontsize=7.25, color="white", fontweight="bold")
+    rows = [
+        (1.43, "Control right", r"Retailer sets $p_{pS}$", r"Plants choose $q_{tC}$ and $\bar q_{gC}$"),
+        (0.90, "Risk exposure", r"Retailer margin $(p_s-c-p_{pS})\varepsilon$", r"Thermal quantity channel $-bq_{tC}\varepsilon$"),
+        (0.37, "Transition signal", "Both outputs rise; green share can fall", "Thermal output contracts; green share rises"),
+    ]
+    for idx, (y, row_label, s_text, c_text) in enumerate(rows):
+        face = "#F7F9FA" if idx % 2 == 0 else "white"
+        ax.add_patch(Rectangle((x_label, y - 0.22), widths[0], 0.46, facecolor=face, edgecolor="#D5DCE2", linewidth=0.55))
+        ax.add_patch(Rectangle((x_s, y - 0.22), widths[1], 0.46, facecolor=face, edgecolor="#D5DCE2", linewidth=0.55))
+        ax.add_patch(Rectangle((x_c, y - 0.22), widths[2], 0.46, facecolor=face, edgecolor="#D5DCE2", linewidth=0.55))
+        ax.text(x_label + 0.14, y, row_label, ha="left", va="center", fontsize=6.75, color=GRAY, fontweight="bold")
+        ax.text(x_s + widths[1] / 2, y, s_text, ha="center", va="center", fontsize=6.75, color=INK)
+        ax.text(x_c + widths[2] / 2, y, c_text, ha="center", va="center", fontsize=6.75, color=INK)
     save_figure(fig, "supply_chain")
 
 
 def draw_game_sequences() -> None:
-    """Draw the two move sequences using a conventional flat flowchart."""
-    fig, ax = plt.subplots(figsize=(8.4, 4.05))
+    """Draw both games as actor-specific swimlanes on a common time axis."""
+    fig, ax = plt.subplots(figsize=(8.4, 5.75))
     ax.set_xlim(0, 12)
-    ax.set_ylim(0, 6.0)
+    ax.set_ylim(0, 8.40)
     ax.axis("off")
 
-    def panel(x, label, title, accent):
-        ax.add_patch(Rectangle((x, 0.28), 5.40, 5.38, facecolor="white", edgecolor="#B8C4CE", linewidth=0.85))
-        ax.add_patch(Rectangle((x + 0.24, 5.17), 0.07, 0.28, facecolor=accent, edgecolor="none"))
-        ax.text(x + 0.42, 5.31, label, ha="left", va="center", fontsize=8.2, color=accent, fontweight="bold")
-        ax.text(x + 0.76, 5.31, title, ha="left", va="center", fontsize=8.2, color=INK, fontweight="bold")
-        ax.plot([x + 0.24, x + 5.16], [4.96, 4.96], color="#D7DEE5", lw=0.7)
+    x_actor = 0.28
+    actor_w = 1.72
+    stage_edges = [2.00, 4.35, 6.78, 9.20, 11.72]
+    stage_centers = [(stage_edges[i] + stage_edges[i + 1]) / 2 for i in range(4)]
+    actors = [("Retailer", BLUE), ("Thermal plant", ORANGE), ("Green plant", GREEN), ("Market / nature", PURPLE)]
 
-    def step(x, y, w, h, _stage, title, detail, accent, face="white"):
-        ax.add_patch(Rectangle((x, y), w, h, facecolor=face, edgecolor=accent, linewidth=0.9, zorder=2))
-        ax.add_patch(Rectangle((x, y), 0.10, h, facecolor=accent, edgecolor="none", zorder=3))
-        ax.text(x + w / 2 + 0.05, y + 0.62 * h, title, ha="center", va="center", fontsize=7.55, fontweight="bold", color=INK)
-        ax.text(x + w / 2 + 0.05, y + 0.28 * h, detail, ha="center", va="center", fontsize=6.95, color=GRAY)
+    def sequence_block(y0, label, title, accent, scenario):
+        row_h, header_h = 0.62, 0.76
+        y_top = y0 + 4 * row_h + header_h
+        ax.add_patch(Rectangle((x_actor, y0), stage_edges[-1] - x_actor, y_top - y0, facecolor="white", edgecolor="#BFC9D2", linewidth=0.8, zorder=0))
+        ax.add_patch(Rectangle((x_actor, y_top - header_h), stage_edges[-1] - x_actor, header_h, facecolor="#F4F6F8", edgecolor="none", zorder=0))
+        ax.add_patch(Rectangle((x_actor, y_top - header_h), 0.09, header_h, facecolor=accent, edgecolor="none", zorder=2))
+        ax.text(x_actor + 0.24, y_top - 0.25, label, ha="left", va="center", fontsize=7.6, color=accent, fontweight="bold")
+        ax.text(x_actor + 0.62, y_top - 0.25, title, ha="left", va="center", fontsize=7.65, color=INK, fontweight="bold")
+        for idx, stage in enumerate(["Leader / initial choice", "Follower / price formation", "Realization", "Solution concept"]):
+            ax.text(stage_centers[idx], y_top - 0.56, stage, ha="center", va="center", fontsize=6.2, color=GRAY, fontweight="bold")
+        for row, (actor_name, actor_color) in enumerate(actors):
+            y = y_top - header_h - (row + 1) * row_h
+            face = "#FAFBFC" if row % 2 == 0 else "white"
+            ax.add_patch(Rectangle((x_actor, y), stage_edges[-1] - x_actor, row_h, facecolor=face, edgecolor="none", zorder=0))
+            ax.add_patch(Rectangle((x_actor, y), actor_w, row_h, facecolor="white", edgecolor="none", zorder=1))
+            ax.add_patch(Circle((x_actor + 0.19, y + row_h / 2), 0.055, facecolor=actor_color, edgecolor="none", zorder=3))
+            ax.text(x_actor + 0.35, y + row_h / 2, actor_name, ha="left", va="center", fontsize=6.55, color=INK, fontweight="bold")
+            ax.plot([x_actor, stage_edges[-1]], [y, y], color="#E0E5E9", lw=0.55, zorder=1)
+        for x in stage_edges:
+            ax.plot([x, x], [y0, y_top - header_h], color="#D8DFE5", lw=0.55, zorder=1)
 
-    def down(start, end, color=INK, connection="arc3,rad=0"):
-        ax.add_patch(FancyArrowPatch(start, end, arrowstyle="-|>", mutation_scale=8.5, linewidth=0.95, color=color, connectionstyle=connection, zorder=1))
+        row_centers = [y_top - header_h - (row + 0.5) * row_h for row in range(4)]
 
-    panel(0.25, "(a)", "Scenario S: retailer-led Stackelberg", BLUE)
-    step(1.03, 4.03, 3.82, 0.72, "Stage 1", "Retailer decision", r"Set purchase price $p_{pS}$", BLUE, PALE_BLUE)
-    step(0.52, 2.77, 2.38, 0.78, "Stage 2", "Thermal response", r"Choose $q_{tS}$", ORANGE, PALE_ORANGE)
-    step(3.05, 2.77, 2.38, 0.78, "Stage 2", "Green response", r"Choose $\bar q_{gS}$", GREEN, PALE_GREEN)
-    step(1.03, 1.53, 3.82, 0.72, "Stage 3", "Outcome realization", "Quantities, profits, and risk", NAVY)
-    step(1.03, 0.52, 3.82, 0.56, "Solve", "Equilibrium", "Backward induction", PURPLE)
-    down((2.94, 4.03), (1.71, 3.55), BLUE, "arc3,rad=0.08")
-    down((2.94, 4.03), (4.24, 3.55), BLUE, "arc3,rad=-0.08")
-    down((1.71, 2.77), (2.49, 2.25), connection="arc3,rad=-0.08")
-    down((4.24, 2.77), (3.40, 2.25), connection="arc3,rad=0.08")
-    down((2.94, 1.53), (2.94, 1.08))
+        def event(stage, row, title_text, detail_text, color, face):
+            x0, x1 = stage_edges[stage] + 0.18, stage_edges[stage + 1] - 0.18
+            yc = row_centers[row]
+            ax.add_patch(Rectangle((x0, yc - 0.23), x1 - x0, 0.46, facecolor=face, edgecolor=color, linewidth=0.75, zorder=3))
+            ax.add_patch(Rectangle((x0, yc - 0.23), 0.06, 0.46, facecolor=color, edgecolor="none", zorder=4))
+            ax.text((x0 + x1) / 2 + 0.03, yc + 0.085, title_text, ha="center", va="center", fontsize=6.45, color=INK, fontweight="bold", zorder=5)
+            ax.text((x0 + x1) / 2 + 0.03, yc - 0.105, detail_text, ha="center", va="center", fontsize=5.95, color=GRAY, zorder=5)
+            return ((x0 + x1) / 2, yc)
 
-    panel(6.35, "(b)", "Scenario C: generation-side Cournot", NAVY)
-    step(6.62, 4.03, 2.42, 0.78, "Stage 1", "Thermal choice", r"Choose $q_{tC}$", ORANGE, PALE_ORANGE)
-    step(9.06, 4.03, 2.42, 0.78, "Stage 1", "Green choice", r"Choose $\bar q_{gC}$", GREEN, PALE_GREEN)
-    step(7.27, 2.77, 3.72, 0.78, "Stage 2", "Market clearing", r"$p_{pC}=a-b(q_{tC}+\widetilde q_{gC})$", PURPLE)
-    step(7.27, 1.53, 3.72, 0.72, "Stage 3", "Retailer decision", "Accept price; procure all output", BLUE, PALE_BLUE)
-    step(7.27, 0.52, 3.72, 0.56, "Solve", "Equilibrium", "Simultaneous best responses", NAVY)
-    down((7.83, 4.03), (8.55, 3.55), connection="arc3,rad=-0.08")
-    down((10.27, 4.03), (9.72, 3.55), connection="arc3,rad=0.08")
-    down((9.13, 2.77), (9.13, 2.25))
-    down((9.13, 1.53), (9.13, 1.08))
+        if scenario == "S":
+            p0 = event(0, 0, "Set purchase price", r"$p_{pS}$", BLUE, PALE_BLUE)
+            p1 = event(1, 1, "Choose thermal output", r"$q_{tS}(p_{pS})$", ORANGE, PALE_ORANGE)
+            p2 = event(1, 2, "Choose mean green output", r"$\bar q_{gS}(p_{pS})$", GREEN, PALE_GREEN)
+            p3 = event(2, 3, "Renewable shock realizes", r"$\widetilde q_{gS}=\bar q_{gS}+\varepsilon$", PURPLE, "#F2EEFB")
+            p4 = event(3, 0, "Stackelberg equilibrium", "backward induction", NAVY, "#EEF2F5")
+            ax.add_patch(FancyArrowPatch((p0[0] + 0.80, p0[1]), (p1[0] - 0.80, p1[1]), arrowstyle="-|>", mutation_scale=7.5, lw=0.85, color=BLUE, connectionstyle="arc3,rad=0.10", zorder=2))
+            ax.add_patch(FancyArrowPatch((p0[0] + 0.80, p0[1]), (p2[0] - 0.80, p2[1]), arrowstyle="-|>", mutation_scale=7.5, lw=0.85, color=BLUE, connectionstyle="arc3,rad=-0.10", zorder=2))
+            ax.plot([p1[0], p2[0]], [p1[1] - 0.27, p2[1] + 0.27], color=MID_GRAY, lw=0.75, linestyle=(0, (2, 2)), zorder=2)
+            ax.text(p1[0] + 0.09, (p1[1] + p2[1]) / 2, "simultaneous", ha="left", va="center", fontsize=5.5, color=GRAY)
+            ax.add_patch(FancyArrowPatch((p2[0] + 0.82, p2[1]), (p3[0] - 0.82, p3[1]), arrowstyle="-|>", mutation_scale=7.5, lw=0.85, color=MID_GRAY, connectionstyle="arc3,rad=-0.09", zorder=2))
+            ax.add_patch(FancyArrowPatch((p3[0] + 0.82, p3[1]), (p4[0] - 0.82, p4[1]), arrowstyle="-|>", mutation_scale=7.5, lw=0.85, color=MID_GRAY, connectionstyle="arc3,rad=0.09", zorder=2))
+        else:
+            p0 = event(0, 1, "Choose thermal output", r"$q_{tC}$", ORANGE, PALE_ORANGE)
+            p1 = event(0, 2, "Choose mean green output", r"$\bar q_{gC}$", GREEN, PALE_GREEN)
+            p2 = event(1, 3, "Clear purchase price", r"$p_{pC}=a-b(q_{tC}+\widetilde q_{gC})$", PURPLE, "#F2EEFB")
+            p3 = event(2, 0, "Procure all output", "price taker downstream", BLUE, PALE_BLUE)
+            p4 = event(3, 3, "Cournot--Nash equilibrium", "simultaneous best responses", NAVY, "#EEF2F5")
+            ax.plot([p0[0], p1[0]], [p0[1] - 0.27, p1[1] + 0.27], color=MID_GRAY, lw=0.75, linestyle=(0, (2, 2)), zorder=2)
+            ax.text(p0[0] + 0.09, (p0[1] + p1[1]) / 2, "simultaneous", ha="left", va="center", fontsize=5.5, color=GRAY)
+            ax.add_patch(FancyArrowPatch((p1[0] + 0.82, p1[1]), (p2[0] - 0.82, p2[1]), arrowstyle="-|>", mutation_scale=7.5, lw=0.85, color=MID_GRAY, connectionstyle="arc3,rad=-0.08", zorder=2))
+            ax.add_patch(FancyArrowPatch((p2[0] + 0.82, p2[1]), (p3[0] - 0.82, p3[1]), arrowstyle="-|>", mutation_scale=7.5, lw=0.85, color=MID_GRAY, connectionstyle="arc3,rad=0.08", zorder=2))
+            ax.add_patch(FancyArrowPatch((p3[0] + 0.82, p3[1]), (p4[0] - 0.82, p4[1]), arrowstyle="-|>", mutation_scale=7.5, lw=0.85, color=MID_GRAY, connectionstyle="arc3,rad=-0.08", zorder=2))
+
+    sequence_block(4.35, "(a)", "Scenario S: retailer-led Stackelberg", BLUE, "S")
+    sequence_block(0.25, "(b)", "Scenario C: generation-side Cournot", NAVY, "C")
     save_figure(fig, "game_sequences")
 
 
 def draw_numerical_workflow() -> None:
-    """Draw the theory-to-evidence validation pipeline with flat geometry."""
-    fig, ax = plt.subplots(figsize=(8.4, 4.60))
+    """Draw a stage-banded chain from analytical model to bounded inference."""
+    fig, ax = plt.subplots(figsize=(8.4, 4.35))
     ax.set_xlim(0, 12)
-    ax.set_ylim(0, 7.8)
+    ax.set_ylim(0, 6.15)
     ax.axis("off")
 
-    def row_heading(y, title, accent):
-        ax.add_patch(Rectangle((0.30, y - 0.14), 0.08, 0.28, facecolor=accent, edgecolor="none"))
-        ax.text(0.50, y, title, ha="left", va="center", fontsize=7.7, color=INK, fontweight="bold")
-        ax.plot([2.05, 11.70], [y, y], color="#D1D9E0", lw=0.7)
-
-    def block(x, y, w, h, title, detail, accent, face="white", fontsize=7.35):
-        ax.add_patch(Rectangle((x, y), w, h, facecolor=face, edgecolor=accent, linewidth=0.9, zorder=2))
-        ax.add_patch(Rectangle((x, y + h - 0.07), w, 0.07, facecolor=accent, edgecolor="none", zorder=3))
-        ax.text(x + w / 2, y + 0.66 * h, title, ha="center", va="center", fontsize=fontsize, color=INK, fontweight="bold")
-        ax.text(x + w / 2, y + 0.29 * h, detail, ha="center", va="center", fontsize=6.75, color=GRAY, linespacing=1.08)
-
-    arrow = dict(arrowstyle="-|>", mutation_scale=8.5, lw=0.95, color=MID_GRAY)
-
-    row_heading(7.38, "Analytical derivation", NAVY)
-    block(0.48, 5.87, 3.12, 1.05, "Model specification", "Payoffs, uncertainty, and\ninterior solution domain", NAVY, "#F8FAFB")
-    block(4.44, 5.87, 3.12, 1.05, "Closed-form equilibria", "Prices, outputs, and profits\nunder both structures", PURPLE, "#FBFAFE")
-    block(8.40, 5.87, 3.12, 1.05, "Testable predictions", r"Signs and finite responses in" + "\n" + r"$\theta_rv$ and $\theta_tb^2v$", BLUE, "#F8FBFD")
-    ax.add_patch(FancyArrowPatch((3.60, 6.40), (4.44, 6.40), **arrow))
-    ax.add_patch(FancyArrowPatch((7.56, 6.40), (8.40, 6.40), **arrow))
-
-    row_heading(5.35, "Verification gates", PURPLE)
-    block(0.48, 3.88, 3.12, 1.02, "Algebraic identity", "Closed forms reproduced by\nindependent evaluation", NAVY)
-    block(4.44, 3.88, 3.12, 1.02, "Admissibility", "Positive prices, quantities, profits,\nand interior conditions", PURPLE)
-    block(8.40, 3.88, 3.12, 1.02, "Reproducibility", "Fixed seed 20260901; one\nshared equilibrium engine", BLUE)
-    ax.add_patch(FancyArrowPatch((6.00, 5.87), (6.00, 4.90), **arrow))
-    ax.add_patch(FancyArrowPatch((3.60, 4.39), (4.44, 4.39), **arrow))
-    ax.add_patch(FancyArrowPatch((7.56, 4.39), (8.40, 4.39), **arrow))
-
-    row_heading(3.35, "Numerical evidence", GREEN)
-    evidence = [
-        (0.30, "Risk-return paths", r"$\mathbb{E}[\pi]$ versus $\operatorname{SD}(\pi)$", BLUE),
-        (3.22, "Volatility stress", r"$\lambda=0.05,0.15,0.30$", MAGENTA),
-        (6.14, "Sensitivity", "OAT and PRCC", AMBER),
-        (9.06, "Global robustness", "5,000 feasible draws", GREEN),
+    stages = [
+        (0.20, 2.08, NAVY, "1", "MODEL", ["Payoffs and timing", r"$\widetilde q_g=\bar q_g+\varepsilon$", "Mean--variance utility"]),
+        (2.62, 2.08, PURPLE, "2", "MECHANISMS", ["Closed-form equilibria", r"Scenario S: $\theta_r v$", r"Scenario C: $\theta_t b^2v$"]),
+        (5.04, 2.08, BLUE, "3", "QUALITY GATES", ["Algebraic identities", "Interior admissibility", "Nineteen executable checks"]),
+        (7.46, 2.08, GREEN, "4", "NUMERICAL TESTS", ["Risk--return paths", "Volatility stress", "OAT and PRCC", "5,000 feasible draws"]),
+        (9.88, 1.92, ORANGE, "5", "BOUNDED INFERENCE", ["Direction and\nmagnitude", "Power-structure\ncontrast", "Renewable-share\neffect", "Policy scope\nand limits"]),
     ]
-    for x, title, detail, accent in evidence:
-        block(x, 1.88, 2.64, 0.96, title, detail, accent, "white", 7.05)
-    ax.add_patch(FancyArrowPatch((6.00, 3.88), (6.00, 3.05), **arrow))
-    ax.plot([1.62, 10.38], [3.05, 3.05], color=MID_GRAY, lw=0.9)
-    for x in [1.62, 4.54, 7.46, 10.38]:
-        ax.add_patch(FancyArrowPatch((x, 3.05), (x, 2.84), **arrow))
 
-    ax.add_patch(Rectangle((1.02, 0.48), 9.96, 0.72, facecolor="#F1F4F7", edgecolor=NAVY, linewidth=0.9))
-    ax.text(6.0, 0.84, "Synthesis: direction, magnitude, risk-return trade-off, and transition interpretation", ha="center", va="center", fontsize=7.35, color=INK, fontweight="bold")
-    for x in [1.62, 4.54, 7.46, 10.38]:
-        ax.plot([x, x], [1.88, 1.50], color="#C4CDD5", lw=0.75)
-    ax.plot([1.62, 10.38], [1.50, 1.50], color="#C4CDD5", lw=0.75)
-    ax.add_patch(FancyArrowPatch((6.00, 1.50), (6.00, 1.20), arrowstyle="-|>", mutation_scale=7.0, lw=0.75, color="#AAB7C4"))
+    for x, w, accent, number, title, items in stages:
+        ax.add_patch(Rectangle((x, 1.48), w, 4.12, facecolor="white", edgecolor="#C5CED6", linewidth=0.8, zorder=1))
+        ax.add_patch(Rectangle((x, 5.15), w, 0.45, facecolor=accent, edgecolor="none", zorder=2))
+        ax.add_patch(Circle((x + 0.26, 4.72), 0.17, facecolor=accent, edgecolor="white", linewidth=0.7, zorder=3))
+        ax.text(x + 0.26, 4.72, number, ha="center", va="center", fontsize=7.2, color="white", fontweight="bold", zorder=4)
+        ax.text(x + 0.51, 4.72, title, ha="left", va="center", fontsize=6.65, color=INK, fontweight="bold")
+        ax.plot([x + 0.18, x + w - 0.18], [4.42, 4.42], color="#D9E0E5", lw=0.65)
+        item_y = 4.02
+        spacing = 0.61 if len(items) == 4 else 0.76
+        for idx, item in enumerate(items):
+            y = item_y - idx * spacing
+            ax.add_patch(Rectangle((x + 0.22, y - 0.055), 0.08, 0.11, facecolor=accent, edgecolor="none", zorder=3))
+            ax.text(x + 0.40, y, item, ha="left", va="center", fontsize=6.05 if number == "5" else 6.35, color=INK, linespacing=1.03)
+        if number == "2":
+            ax.plot([x + 0.18, x + w - 0.18], [1.92, 1.92], color="#E2E7EB", lw=0.55)
+            ax.text(x + w / 2, 1.72, "analytical predictions", ha="center", va="center", fontsize=5.85, color=GRAY, fontstyle="italic")
+        elif number == "3":
+            ax.plot([x + 0.18, x + w - 0.18], [1.92, 1.92], color="#E2E7EB", lw=0.55)
+            ax.text(x + w / 2, 1.72, "must pass before inference", ha="center", va="center", fontsize=5.85, color=GRAY, fontstyle="italic")
+
+    for idx in range(len(stages) - 1):
+        x_end = stages[idx][0] + stages[idx][1]
+        x_next = stages[idx + 1][0]
+        ax.add_patch(FancyArrowPatch((x_end + 0.04, 3.55), (x_next - 0.04, 3.55), arrowstyle="-|>", mutation_scale=8.0, lw=0.95, color=MID_GRAY, zorder=4))
+
+    # Deliberately separate reproducibility from scientific inference.
+    ax.add_patch(Rectangle((0.20, 0.36), 11.60, 0.66, facecolor="#F3F6F8", edgecolor=NAVY, linewidth=0.8, zorder=1))
+    ax.text(0.48, 0.69, "REPRODUCIBILITY SPINE", ha="left", va="center", fontsize=6.25, color=NAVY, fontweight="bold")
+    ax.text(2.70, 0.69, "fixed seed 20260901", ha="left", va="center", fontsize=6.2, color=INK)
+    ax.text(5.15, 0.69, "one equilibrium engine", ha="left", va="center", fontsize=6.2, color=INK)
+    ax.text(7.86, 0.69, "tables and figures regenerated together", ha="left", va="center", fontsize=6.2, color=INK)
+    for x in [2.45, 4.90, 7.61]:
+        ax.plot([x, x], [0.50, 0.88], color="#C4CDD5", lw=0.7)
     save_figure(fig, "numerical_workflow")
 
 
