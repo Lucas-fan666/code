@@ -29,4 +29,4 @@ The script uses random seed `20260901` and writes all tables to `data/` and all 
 
 ## Version
 
-The manuscript-submission snapshot is version `1.0.0`. Please cite the accompanying article and use `CITATION.cff` for repository metadata.
+The manuscript-submission snapshot is version `1.1.0`. Please cite the accompanying article and use `CITATION.cff` for repository metadata.
