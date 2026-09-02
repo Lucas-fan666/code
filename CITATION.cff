@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this model or its reproducibility materials, please cite the accompanying article."
+title: "Renewable-Energy Uncertainty and Equilibrium Decisions in a Power Supply Chain"
+type: software
+authors:
+  - family-names: Xu
+    given-names: Bo
+  - family-names: Fan
+    given-names: Junkai
+    email: fanjk@mails.neu.edu.cn
+date-released: 2026-09-02
+version: 1.0.0
+repository-code: "https://github.com/Lucas-fan666/code"
+keywords:
+  - renewable energy uncertainty
+  - mean-variance game
+  - electricity supply chain
+  - Stackelberg game
+  - Cournot competition

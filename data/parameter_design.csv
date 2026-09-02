@@ -1,0 +1,11 @@
+parameter,baseline,range,role
+beta_t,1.5,1.2--1.8,Thermal cost curvature
+beta_g,2.0,1.6--2.4,Green cost curvature
+lambda,0.15,0.05--0.30,Renewable volatility index
+c,55.0,fixed at 55,Retail selling cost
+p_s,60.0,59.5--60.5,Retail sales price
+p_g,1.5,1.0--2.0,Green subsidy
+a,4.5,4.0--5.0,Inverse-demand intercept
+b,1.0,0.8--1.2,Inverse-demand slope
+theta_r,0.0,0--10,Retailer risk aversion in Scenario S
+theta_t,0.0,0--50,Thermal risk aversion in Scenario C

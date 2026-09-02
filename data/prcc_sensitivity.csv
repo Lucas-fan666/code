@@ -1,0 +1,12 @@
+scenario,response_metric,parameter,prcc,absolute_prcc
+S,response_S_total_output_pct,beta_t,0.8986412796852324,0.8986412796852324
+S,response_S_total_output_pct,beta_g,0.8415363295974558,0.8415363295974558
+S,response_S_total_output_pct,lambda,0.997996436938272,0.997996436938272
+S,response_S_total_output_pct,net_price,0.020245506685544742,0.020245506685544742
+S,response_S_total_output_pct,p_g,0.002922827100857245,0.002922827100857245
+C,response_C_green_share_pp,beta_t,-0.7835186469109308,0.7835186469109308
+C,response_C_green_share_pp,beta_g,0.5033382782025693,0.5033382782025693
+C,response_C_green_share_pp,lambda,0.9819698854470937,0.9819698854470937
+C,response_C_green_share_pp,p_g,-0.46164376201917956,0.46164376201917956
+C,response_C_green_share_pp,a,0.1648449495772306,0.1648449495772306
+C,response_C_green_share_pp,b,0.8720898838935431,0.8720898838935431
