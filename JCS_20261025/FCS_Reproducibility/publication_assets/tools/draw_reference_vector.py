@@ -67,7 +67,7 @@ def tape(x,y,w,colored=False,tlabel=True):
  if tlabel:math(x+w+8,y+6,'t',24)
 # Panel headings mirror reference spacing, with no cards or background partitions.
 for x,y,letter,title in [(15,35,'a','State and group memory'),(787,35,'b','Order-preserving coupling'),(15,546,'c','Bounds for nonnested actions'),(787,546,'d','Joint-law-preserving evaluation')]:
- text(x,y,letter,42,'bold');text(x+50,y,title,29,'bold')
+ text(x,y,'('+letter+')',27.124511,'bold');text(x+60,y,title,29,'bold')
 # a: the original irregular network and contrasting memories on an identical face.
 p=np.array([[99,98],[199,81],[60,181],[140,165],[203,156],[264,173],[114,217],[88,258],[175,270],[224,237]])
 for ids,c in [([0,6,4],RED),([3,8,5],TEAL)]:poly(p[ids],c,.2)
@@ -103,20 +103,20 @@ for x,title,g,ws in [(860,'R reset','barR',(182,64)),(1213,'C reset','barC',(70,
 math(934,484,r'S\subseteq S^\prime\ \Rightarrow\ Z_t\preceq Z^\prime_t\ \Rightarrow\ L(S^\prime)\leq L(S)',26)
 # c: equal-size nonnested sets, with explicitly drawn intersection and union.
 net(283,622,.56,states=['u']*6,targets=[3],numbers=True,mono=True)
-math(236,574,r'I=S_1\cap S_2',23)
+math(80,604,r'I=S_1\cap S_2',23)
 net(146,724,.56,states=['u']*6,targets=[1,2,3],numbers=True,mono=True);math(128,667,r'S_1',23)
 net(420,724,.56,states=['u']*6,targets=[3,4,5],numbers=True,mono=True);math(431,667,r'S_2',23)
 net(283,850,.56,states=['u']*6,targets=[1,2,3,4,5],numbers=True,mono=True)
-math(236,794,r'J=S_1\cup S_2',23)
+math(80,836,r'J=S_1\cup S_2',23)
 line(238,646,198,674,arr=True);line(328,646,368,674,arr=True);line(198,776,239,813,arr=True);line(367,776,326,813,arr=True)
-math(222,735,r'|S_1|=|S_2|=3',18)
+math(65,907,r'|S_1|=|S_2|=3',20)
 text(550,574,'Coupled loss interval',20)
 line(602,599,602,866,lw=3.2);line(590,600,615,600,lw=2);line(590,865,615,865,lw=2)
 for y,label in [(600,'L(I)'),(687,r'L(S_1)'),(769,r'L(S_2)'),(856,'L(J)')]:
  if label not in ['L(I)','L(J)']:node(602,y,'u',10)
  math(629,y+8,label,25)
 line(626,710,626,749,both=True,lw=1.5);text(640,734,'No fixed order',18)
-math(65,938,r'|L(S_1)-L(S_2)|\leq L(I)-L(J)',26)
+math(65,945,r'|L(S_1)-L(S_2)|\leq L(I)-L(J)',26)
 math(282,974,r'J\ \mathrm{is\ auxiliary};\ |J|\ \mathrm{may\ exceed}\ k',20)
 # d: replay and batch use the same full joint observation law, not independent actions.
 for cx,cy,sc,states,targets,label in [
