@@ -17,7 +17,7 @@ from matplotlib.lines import Line2D
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'visualization/data'
-OUT = ROOT / ('source' if (ROOT/'source').exists() else 'manuscript')
+OUT = ROOT / 'source'
 OUT.mkdir(exist_ok=True)
 (ROOT/'reports').mkdir(exist_ok=True)
 EXPORT = ROOT / 'visualization/exports'
