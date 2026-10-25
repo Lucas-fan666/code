@@ -19,3 +19,11 @@ python tools/standardize_panel_labels.py --source-dir source --main-tex /path/to
 ```
 
 Use the current main and supplementary LaTeX files because the placed figure widths determine the required font size. The formatter does not redraw measured data or change the study source/configuration hashes. The SVG mechanism is generated directly with its final typography.
+
+## Figure terminology
+
+Current Figure 4 headings are `FEX vs NEX` and `FEX vs greedy`. Current Figure 3 uses `RTC (global)` for the global common-reaction-path comparator, matching Table 3; `Incremental RTC` in Figure 2 denotes the incremental implementation. After exporting the figures, synchronize these vector text labels without changing numerical values or drawing paths:
+
+```bash
+python tools/harmonize_figure_terminology.py --source-dir source --manifest figure_terminology.json
+```

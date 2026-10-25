@@ -205,7 +205,7 @@ def search_landscape():
         for x,lab in zip([.37,.61,.88],[str(c['k']),f"{c['D']:g}",f"{c['beta2_scale']:g}"]):
             param.text(x,row,lab,ha='center',va='center',fontsize=7.5)
     records=[]
-    for ax,m,comp,letter,title in zip([left,right],matrices,comparisons,'ab',['FEX vs node exchange','FEX vs node greedy']):
+    for ax,m,comp,letter,title in zip([left,right],matrices,comparisons,'ab',['FEX vs NEX','FEX vs greedy']):
         heading(ax,letter,title)
         im=ax.imshow(m,cmap=cmap,norm=norm,aspect='auto',interpolation='nearest')
         np.testing.assert_array_equal(im.get_array(),m)
