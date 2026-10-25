@@ -142,5 +142,6 @@ svg='\n'.join(parts);assert '<image' not in svg and 'base64' not in svg
 path=O/'mechanism_reference_vector.svg';path.write_text(svg)
 subprocess.run(['inkscape',str(path),'--export-type=pdf','--export-filename='+str(O/'mechanism_reference_vector.pdf'),'--export-text-to-path'],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 subprocess.run(['inkscape',str(path),'--export-type=png','--export-width=1800','--export-filename='+str(O/'mechanism_reference_vector.png')],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+(R/'source').mkdir(exist_ok=True)
 (R/'source/mechanism_reference_vector.pdf').write_bytes((O/'mechanism_reference_vector.pdf').read_bytes())
 print(path)
