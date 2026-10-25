@@ -1,0 +1,36 @@
+{
+  "study": "Development feasibility and variance estimate, not confirmatory results",
+  "seed_root": 202610218201,
+  "graphs": 8,
+  "histories_per_graph": 1,
+  "families": [
+    "er",
+    "ws",
+    "sparse_sbm",
+    "pa_triadic"
+  ],
+  "sizes": [
+    100,
+    300
+  ],
+  "methods": [
+    "graphical",
+    "fixed_batch",
+    "adaptive_local",
+    "local_rtc"
+  ],
+  "parameters": {
+    "D": 2.0,
+    "H": 10.0
+  },
+  "search": {
+    "k": 4,
+    "candidate_pool": 16,
+    "anchor_budget": 512,
+    "online_budget": 1024
+  },
+  "power_rule": "Approximate one-sided normal 80% power at two-sided95% CI for ratio1.25: ceil((1.96+.841621)^2*s_log^2/log(1.25)^2), round up to multiple8; min32,max64. Bootstrap inference remains primary. Pilot estimate is uncertain.",
+  "planning_target_ratio": 1.25,
+  "minimum_graphs": 32,
+  "maximum_graphs": 64
+}

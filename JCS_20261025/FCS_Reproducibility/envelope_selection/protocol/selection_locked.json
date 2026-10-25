@@ -1,0 +1,83 @@
+{
+  "study": "Envelope-first finite-portfolio epsilon selection",
+  "locked_at_utc": "2026-10-20T15:57:56.329691+00:00",
+  "status": "locked before comparative outcomes on confirmation seeds",
+  "development_seeds": [
+    991300,
+    991301
+  ],
+  "development_scope": "two noncomparative endpoint-cost profiles; fully retained; not confirmation",
+  "seed_root": 202610209101,
+  "bootstrap_seed": 202610209199,
+  "families": [
+    "er",
+    "ws",
+    "sparse_sbm",
+    "pa_triadic"
+  ],
+  "graphs_per_family": 8,
+  "histories_per_graph": 3,
+  "n": 100,
+  "k": 4,
+  "portfolio_size": 8,
+  "parameters": {
+    "D": 2.0,
+    "H": 10.0,
+    "trust": 0.9,
+    "lambda": 0.2,
+    "u": 3.0
+  },
+  "rate_normalization": "unchanged simulator defaults: beta1=1.15/(mean_degree*.9), beta2=3/(mean_face_incidence*.9)",
+  "prehistory": "10% R, 10% C at random without replacement; uncontrolled 2 time units; one unconditioned attempt, retain extinctions",
+  "portfolio": "rumor-degree top-4 anchor; seven one-swap alternatives replace its last target by next ranked outside node, degree/id deterministic ties",
+  "methods": [
+    "envelope",
+    "paired",
+    "uniform",
+    "rtc"
+  ],
+  "selection": {
+    "epsilon": 0.1,
+    "alpha": 0.05,
+    "max_calls": 16384,
+    "batch_size": 32,
+    "screen_cap": 1024,
+    "futility_after": 32,
+    "futility_fraction": 0.5
+  },
+  "independent_evaluation_paths": 256,
+  "randomization": "method order randomized per context; fresh method tapes in disjoint phase coordinates; sequential single-process timing",
+  "accounting": "all auxiliary endpoint copies charged; max_calls common; CPU/wall include Python validation, betting, allocation, trace collection and all simulation calls; exclude compilation, file compression, graph construction and prehistory",
+  "primary": "paired graphical race / envelope-first graph-level geometric-mean capped online wall-time ratio, averaging context log ratios within graph",
+  "secondary": "RTC paired race / envelope-first same wall-time ratio",
+  "multiplicity": "Bonferroni two planned cost comparisons: graph bootstrap central 97.5% intervals; 20000 resamples stratified equally across four families",
+  "quality_gate": "A matched-certified-quality efficiency claim requires every context in both methods of that comparison certified at the common epsilon/alpha. Otherwise only capped-cost and unresolved rates, not matched-quality superiority, are claimed.",
+  "effect_gate": "adjusted lower bound > 1 for primary plus quality_gate; family directions fully reported, not a required post-hoc subset",
+  "descriptive": [
+    "uniform / envelope cost",
+    "marginal-continuation ratios",
+    "CPU time",
+    "envelope certification/futility frequencies",
+    "all four family strata",
+    "all 96 contexts including extinct histories",
+    "independent finite-portfolio plug-in regret with its evaluation uncertainty; no claim to known global optimum"
+  ],
+  "bootstrap_resamples": 20000,
+  "stopping": "all 32 graphs and 96 histories; no result-dependent graph, parameter, endpoint, tolerance or budget changes",
+  "power": "32 independent graphs: approximate 80% power for mean log-cost ratio 0.58*SD at two-sided alpha=.025; developmental profiles do not estimate comparative graph-level variance, so no invented effect-based sample-size claim",
+  "source_sha256": {
+    "envelope_selection/selection.py": "c59104cf009fd1c3c92fbf9a19426d6d7da0a650e61bef25e33c2c4683dfd14f",
+    "envelope_selection/study.py": "7ea074b5d2b692e06b7e8cc52c53e4e001380625d579feb0c09fecf340f4f88d",
+    "envelope_selection/analyze.py": "8f8271335ab1d23f36ef440ef9e47bbb48d7517fdd23539ebd2473cf754653b1",
+    "src/batch_simulator.py": "443c7d2906b080b3324e2e71566f40f191c1e008c637623cdebe8d9dbdb1bf9c",
+    "src/batch_engine.cpp": "4ef040d1a530fb6e003c8d261f4cb098ad3723a9114a721be3efb3724245d051",
+    "src/graph_generation.py": "09d982b4f8e06beb4df0ce2cf336509c0801e23a2e4e106daad5f58a7fb442f4",
+    "vendor/src/engine.cpp": "7eaf2614a190f314e27deb5b443ba061e9d8aa8b1d4f61a6f640b88a8d8de3f5",
+    "vendor/src/graphical_engine.cpp": "c044d06d76298a3db1489f6a7e147aaa48e49ff5ede7d2928dbe9fde569522a5",
+    "vendor/src/legacy_engine.cpp": "fc941786509ffe2a671ec1c6839a6fb2a965a6a93f8b3e0d8f2c90f55f85f69c",
+    "vendor/src/local_rtc_engine.cpp": "c148bc64ab95f93b673d02bb1f7ab25433ecf0525e7821bc3e44e09316a80952",
+    "vendor/src/rtc_engine.cpp": "1940289a63ee32dd1a535c15bebcd380ae437e49e39e33aaacd5963d24302678",
+    "vendor/src/simulator.py": "5dd6b1af3b22c35651b3c91e1ad08a90a1b93d593dcee3737739f06e04f6e213",
+    "vendor/src/set_simulator.py": "e2135305f9fbdbeefae4cd16880f7483f104d87ee7e3444358900cc520af9db1"
+  }
+}

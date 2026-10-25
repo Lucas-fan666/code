@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.so
+*.o
+*.exe
+**/build/
+**/results/raw/
+**/results/development/
+**/results/scaling_extension/
+reproducibility_reports/

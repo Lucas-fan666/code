@@ -1,0 +1,90 @@
+{
+  "study": "Persistent-topology full-prefix replay comparator",
+  "locked_at_utc": "2026-10-21T11:01:39.831798+00:00",
+  "status": "Locked before confirmation graph generation, comparative costs or outcomes",
+  "seed_root": 202610219301,
+  "bootstrap_seed": 202610219399,
+  "graphs": 32,
+  "histories_per_graph": 3,
+  "families": [
+    "er",
+    "ws",
+    "sparse_sbm",
+    "pa_triadic"
+  ],
+  "sizes": [
+    100,
+    300
+  ],
+  "graphs_per_family_size": 4,
+  "methods": [
+    "persistent_replay",
+    "fixed_batch",
+    "adaptive_local"
+  ],
+  "parameters": {
+    "D": 2.0,
+    "H": 10.0
+  },
+  "search": {
+    "k": 4,
+    "candidate_pool": 16,
+    "anchor_budget": 512,
+    "online_budget": 1024
+  },
+  "evaluation_paths": 128,
+  "prehistory": "Exactly10% R,10% C,80% U; zero memory; two uncontrolled time units; one unconditioned attempt per history; all extinction cases retained; same contexts for all methods",
+  "selection": "Existing vendor/src/set_search.py greedy + face exchange; four adaptive singleton-greedy stages, then at most13 FEX proposals; independent discovery and holdout. Only evaluation organization changes. New independent seeds per stage. No optional statistical screening or altered test thresholds.",
+  "allocation": "Identical action prefixes, outcome-independent integer remainder and fresh stage tapes. Persistent replay evaluates every action full prefix once, in one C++ call per stage; topology constructed once per search within timer, owning its arrays. Other evaluators retain the original prefix/remainder interface.",
+  "primary": {
+    "contrast": "persistent_replay/adaptive_local whole-search wall time",
+    "aggregation": "sum three histories within graph, then geometric mean graph ratios",
+    "confidence": 0.975,
+    "gate": "All validation checks pass and Bonferroni 97.5% interval lower bound >1"
+  },
+  "secondary": {
+    "contrast": "fixed_batch/adaptive_local",
+    "confidence": 0.975,
+    "multiplicity": "Bonferroni across both planned contrasts; all strata and adverse results retained"
+  },
+  "bootstrap": "Resample independent graphs within each of eight family/size strata, preserving all histories; percentile bootstrap",
+  "bootstrap_resamples": 20000,
+  "descriptive": [
+    "CPU time",
+    "oracle vs other whole-search cost",
+    "every family/size ratio",
+    "independent final selected-action losses, no test-minimum oracle",
+    "all failures, including fixed_batch outperforming adaptive_local"
+  ],
+  "timing": "Sequential randomized methods; candidate ranking, persistent topology creation/free, per-stage preparation, calls, selection and trace collection included. Compilation/backend loading, graph/prehistory, final evaluation and serialization excluded. No concurrent benchmark workers.",
+  "stopping": "All planned graphs and histories; no significance stopping, no outcome-driven changes; resumable only for incomplete contexts",
+  "scope": "No FEX superiority claim, no whole-objective approximation or deployment-effect claim, no loss equivalence claim for RTC; cost evidence concerns these graph sizes and candidate rule",
+  "source_sha256": {
+    "end_to_end_search/search.py": "578ff55a201b5a2611e2d21388a12d584620491e933f585ca6095d5d77401a25",
+    "end_to_end_search/study.py": "922b6d8af1b182a27178fa3fa7841feac1f8d866b6f27ae9db85c3b3abd4f4ff",
+    "publication_revision/optimized_replay/analyze.py": "93112016c8ce233660c6728825cc055144fbaf533714a3c7630ea8bfc75d32f1",
+    "publication_revision/optimized_replay/persistent.cpp": "2bef0b3c87168e3917d9c7cfabd0cee4c4750f841b167e882323ae957c620614",
+    "publication_revision/optimized_replay/run.py": "a73f20d3e23d466c563e082c714f05636685718b60c7173de6b2b3d840124b80",
+    "publication_revision/optimized_replay/test_backend.py": "0c6a593c80bf74c407bc6131c8ef3f0605fe9ca986af5014eecfd69ef28f9430",
+    "src/batch_engine.cpp": "4ef040d1a530fb6e003c8d261f4cb098ad3723a9114a721be3efb3724245d051",
+    "src/batch_simulator.py": "443c7d2906b080b3324e2e71566f40f191c1e008c637623cdebe8d9dbdb1bf9c",
+    "src/graph_generation.py": "09d982b4f8e06beb4df0ce2cf336509c0801e23a2e4e106daad5f58a7fb442f4",
+    "vendor/src/__init__.py": "98724be0d709afb24cd6e067f565bf3e49c1a0462dedc56200e2d57edf797004",
+    "vendor/src/acs.py": "09ee1763821b7a85f6802e02ed96865d613d4363206fcdc6babfe0d71e7917b2",
+    "vendor/src/aggregate.py": "a44598820345b8a3ab3a0df14118b141b8222339979523479c319341447fbe84",
+    "vendor/src/coupled.py": "23ac319839f60a8b4005c8573f0ac618bbeb1d8d440a1c9ae1edb2d5c8a930ea",
+    "vendor/src/engine.cpp": "7eaf2614a190f314e27deb5b443ba061e9d8aa8b1d4f61a6f640b88a8d8de3f5",
+    "vendor/src/experiment.py": "aac490f17034f908135951596c311af3e57ae62e35198da992c233d8c32f5fac",
+    "vendor/src/graphical_engine.cpp": "c044d06d76298a3db1489f6a7e147aaa48e49ff5ede7d2928dbe9fde569522a5",
+    "vendor/src/graphs.py": "d4265449a8f353c18b65266b83628bd21ca1615c4cdc3bad138a04f776f97d76",
+    "vendor/src/legacy_engine.cpp": "fc941786509ffe2a671ec1c6839a6fb2a965a6a93f8b3e0d8f2c90f55f85f69c",
+    "vendor/src/local_rtc_engine.cpp": "c148bc64ab95f93b673d02bb1f7ab25433ecf0525e7821bc3e44e09316a80952",
+    "vendor/src/policies.py": "1d65b2ead3b71b013d4a75d6fdc2d1185a650dce676bc83a97d66a6403dd19dc",
+    "vendor/src/rtc_engine.cpp": "1940289a63ee32dd1a535c15bebcd380ae437e49e39e33aaacd5963d24302678",
+    "vendor/src/set_search.py": "691fff8640e5fc89fdc12016103e1f0c5367e010a3cf7ca302cca07544d6611b",
+    "vendor/src/set_simulator.py": "e2135305f9fbdbeefae4cd16880f7483f104d87ee7e3444358900cc520af9db1",
+    "vendor/src/shared_scores.py": "7ee6c5df2e55b85c610d916194b067cefebb439dd92555c2aba08cff7bf8a1cd",
+    "vendor/src/simulator.py": "5dd6b1af3b22c35651b3c91e1ad08a90a1b93d593dcee3737739f06e04f6e213"
+  },
+  "planning": "32 new graphs, four per family/size cell, three histories each. Resource-limited precision study; no guaranteed power. No new comparative performance pilot. Four functional tests on separate small seeds passed before lock."
+}

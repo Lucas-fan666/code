@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "replayed_decisions": 192,
+  "online_copies": 938048,
+  "evaluation_copies": 196608,
+  "config_and_all_locked_sources_verified": true,
+  "raw_losses_bounds_seeds_actions_decisions_events_and_accounting": true
+}

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: Please cite the accompanying manuscript and this reproducibility archive.
+title: Monotone Coupling and Joint Simulation for Higher-Order Networks with Memory
+authors:
+  - family-names: Fan
+    given-names: Junkai
+version: 2026.10.25
+date-released: 2026-10-25
+doi: 10.5281/zenodo.23622583
+repository-code: https://github.com/Lucas-fan666/code/tree/jcs-submission-20261025/JCS_20261025

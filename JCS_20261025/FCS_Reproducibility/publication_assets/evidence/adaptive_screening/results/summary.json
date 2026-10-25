@@ -1,0 +1,81 @@
+{
+  "lock_sha256": "f5138661974fccfa5fff64b2407580d384068f189b9d10a9dda7efca33eac79a",
+  "graphs": 32,
+  "contexts": 96,
+  "methods": {
+    "adaptive_screen": {
+      "certified": 96,
+      "certified_by_old_cap": 95,
+      "endpoint_certified": 13,
+      "presolved": 4,
+      "mean_calls": 4602.666666666667,
+      "mean_wall": 2.6131372686354175,
+      "total_wall": 250.86117778900007
+    },
+    "plain": {
+      "certified": 96,
+      "certified_by_old_cap": 95,
+      "endpoint_certified": 0,
+      "presolved": 4,
+      "mean_calls": 5168.666666666667,
+      "mean_wall": 2.840158155760387,
+      "total_wall": 272.65518295299717
+    }
+  },
+  "contrasts": [
+    {
+      "name": "screen_policy",
+      "numerator": "plain",
+      "denominator": "adaptive_screen",
+      "quality_gate": true,
+      "wall_seconds": {
+        "ratio": 1.1268636373504954,
+        "ci": [
+          1.0567830972526633,
+          1.2105506173664144
+        ],
+        "positive_graphs": 21,
+        "negative_graphs": 11,
+        "families": {
+          "er": 1.0224889530343928,
+          "ws": 0.9833044034518318,
+          "sparse_sbm": 1.119801221019601,
+          "pa_triadic": 1.4321810212487058
+        }
+      },
+      "cpu_seconds": {
+        "ratio": 1.1219786036559285,
+        "ci": [
+          1.0517455962548867,
+          1.206151497615566
+        ],
+        "positive_graphs": 20,
+        "negative_graphs": 12,
+        "families": {
+          "er": 1.0142154058961386,
+          "ws": 0.986238064279706,
+          "sparse_sbm": 1.1143936251008784,
+          "pa_triadic": 1.421633723716604
+        }
+      },
+      "marginal_continuations": {
+        "ratio": 1.1961618023878355,
+        "ci": [
+          1.0883520346164162,
+          1.3283733871094259
+        ],
+        "positive_graphs": 10,
+        "negative_graphs": 22,
+        "families": {
+          "er": 1.0414828599756925,
+          "ws": 0.9899603566440031,
+          "sparse_sbm": 1.1669150356583673,
+          "pa_triadic": 1.7015728712048321
+        }
+      },
+      "passed": true
+    }
+  ],
+  "total_online_copies": 938048,
+  "evaluation_copies": 196608
+}

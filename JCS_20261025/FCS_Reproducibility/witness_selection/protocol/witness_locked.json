@@ -1,0 +1,84 @@
+{
+  "study": "Prospective fixed-witness certification refinement",
+  "locked_at_utc": "2026-10-21T05:46:33.391828+00:00",
+  "status": "locked before any comparative simulation on this cohort",
+  "seed_root": 202610217813,
+  "bootstrap_seed": 202610217819,
+  "families": [
+    "er",
+    "ws",
+    "sparse_sbm",
+    "pa_triadic"
+  ],
+  "graphs_per_family": 8,
+  "histories_per_graph": 3,
+  "n": 100,
+  "k": 4,
+  "portfolio_size": 8,
+  "parameters": {
+    "D": 2.0,
+    "H": 10.0,
+    "trust": 0.9,
+    "lambda": 0.2,
+    "u": 3.0
+  },
+  "rate_normalization": "unchanged simulator defaults: beta1=1.15/(mean_degree*.9), beta2=3/(mean_face_incidence*.9)",
+  "prehistory": "10% R, 10% C at random without replacement; uncontrolled 2 time units; one unconditioned attempt, retain extinctions",
+  "portfolio": "rumor-degree top-4 anchor; seven one-swap alternatives replace its last target by next ranked outside node, degree/id deterministic ties",
+  "methods": [
+    "old_screen",
+    "witness_screen",
+    "witness_plain"
+  ],
+  "selection": {
+    "epsilon": 0.1,
+    "alpha": 0.05,
+    "max_calls": 32768,
+    "batch_size": 32,
+    "screen_cap": 1024,
+    "futility_after": 32,
+    "futility_fraction": 0.5
+  },
+  "independent_evaluation_paths": 256,
+  "randomization": "method order randomized per context; fresh method tapes in disjoint phase coordinates; sequential single-process timing",
+  "accounting": "all auxiliary endpoint copies charged; max_calls common; CPU/wall include Python validation, betting, allocation, trace collection and all simulation calls; exclude compilation, file compression, graph construction and prehistory",
+  "bootstrap_resamples": 20000,
+  "stopping": "Exactly 32 new graphs x 3 histories; all outcomes retained; no reruns to improve gate outcomes; no change to grids, methods, epsilon, alpha or budget after results.",
+  "primary": [
+    "old_screen/witness_screen: same screen and engine; original all-pairs bound versus proved fixed-witness bound"
+  ],
+  "multiplicity": "Both planned wall-time contrasts jointly protected by Bonferroni: family-stratified graph-unit bootstrap 20,000 draws, central 97.5% intervals. No unadjusted superiority claims from CPU, copies or family summaries.",
+  "quality_gate": "All 96 queries in both compared cells must be certified at common epsilon=.1 and alpha=.05; wall-time ratio adjusted lower bound >1. No conditioning on certified contexts. Failed gates remain reported.",
+  "descriptive": [
+    "Certified-by-16384 prefix counts",
+    "arithmetical mean wall time and total wall time",
+    "all graph families and graph sign counts",
+    "charged copies and CPU",
+    "independent evaluation means, not false-certificate-rate estimates"
+  ],
+  "power": "32 fixed independent graphs, 8/family. Approximate 80% detectable standardized log-cost effect (2.241+0.842)/sqrt(32)=0.545 for a two-sided .025 contrast; cannot establish rare-error rates or equivalence.",
+  "attribution_scope": "Only pairwise race threshold is refined. Engine, mixture bets, batches, root-screen alpha/2 allocation and futility remain frozen. witness_screen threshold log[4(M-1)/alpha]; witness_plain log[2(M-1)/alpha]. Fresh independent method streams; randomized sequential order.",
+  "source_sha256": {
+    "src/batch_simulator.py": "443c7d2906b080b3324e2e71566f40f191c1e008c637623cdebe8d9dbdb1bf9c",
+    "src/batch_engine.cpp": "4ef040d1a530fb6e003c8d261f4cb098ad3723a9114a721be3efb3724245d051",
+    "src/graph_generation.py": "09d982b4f8e06beb4df0ce2cf336509c0801e23a2e4e106daad5f58a7fb442f4",
+    "vendor/src/engine.cpp": "7eaf2614a190f314e27deb5b443ba061e9d8aa8b1d4f61a6f640b88a8d8de3f5",
+    "vendor/src/graphical_engine.cpp": "c044d06d76298a3db1489f6a7e147aaa48e49ff5ede7d2928dbe9fde569522a5",
+    "vendor/src/legacy_engine.cpp": "fc941786509ffe2a671ec1c6839a6fb2a965a6a93f8b3e0d8f2c90f55f85f69c",
+    "vendor/src/local_rtc_engine.cpp": "c148bc64ab95f93b673d02bb1f7ab25433ecf0525e7821bc3e44e09316a80952",
+    "vendor/src/rtc_engine.cpp": "1940289a63ee32dd1a535c15bebcd380ae437e49e39e33aaacd5963d24302678",
+    "vendor/src/simulator.py": "5dd6b1af3b22c35651b3c91e1ad08a90a1b93d593dcee3737739f06e04f6e213",
+    "vendor/src/set_simulator.py": "e2135305f9fbdbeefae4cd16880f7483f104d87ee7e3444358900cc520af9db1",
+    "coupling_factorial/selection.py": "582b7e8ada9391e711e428cecd2eaca5a09ac2cad8182b920c1b5de9f068eb2f",
+    "witness_selection/selection.py": "a8a637e507789ff372dd05c0911356f999350fb83ed9b3c01336dc7a2fb98175",
+    "witness_selection/study.py": "62a6b5a5b14a10149bb234244b4c2b894bdf3166f39fe8a1fe6f99ad18447b23",
+    "witness_selection/analyze.py": "062c5f7abce512fa4228f17364a4439096d373cfc3ca373a3883bc059cef0529",
+    "witness_selection/validate.py": "205be9e59ee48a32f7f4fcd081a6c5be3a1ca3d9674282cd09fe181eabc3832a",
+    "witness_selection/tests/test_witness.py": "603031d663855d8e4b7a119b219ad876a41fa60c2cc2674f1cefd455f4d12a59",
+    "witness_selection/theory/witness_bound.md": "500df14d54ffd1c9ac4fc53b8c6f70cc4a739a7ab65e2aa1bb9406fa1ca491d2"
+  },
+  "secondary": [
+    "witness_plain/witness_screen: endpoint-screen policy effect with the same improved bound"
+  ],
+  "budget_scope": "Common cap 32768 charged marginal copies, twice earlier cap. Report certified-by-16384 count separately as a descriptive prefix. Mechanism attribution compares cells under the SAME new cap. Do not attribute improved coverage over previous cohorts solely to mechanism."
+}

@@ -1,0 +1,13 @@
+test_exact_marginals (test_batch.Tests.test_exact_marginals) ... ok
+test_nested_and_duplicate (test_batch.Tests.test_nested_and_duplicate) ... ok
+test_replay_identity (test_batch.Tests.test_replay_identity) ... ok
+test_validation (test_batch.Tests.test_validation) ... ok
+test_zero_rates_and_boundary (test_batch.Tests.test_zero_rates_and_boundary) ... ok
+test_ordered_envelope (test_envelope.EnvelopeTests.test_ordered_envelope) ... ok
+test_unresolved_is_visible (test_envelope.EnvelopeTests.test_unresolved_is_visible) ... ok
+test_cross_moment_against_joint_generator (test_joint_law.JointTest.test_cross_moment_against_joint_generator) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.441s
+
+OK

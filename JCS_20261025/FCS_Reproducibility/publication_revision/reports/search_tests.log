@@ -1,0 +1,10 @@
+test_complete_adaptive_transcript_exact_for_replay_compatible (test_search.Tests.test_complete_adaptive_transcript_exact_for_replay_compatible) ... ok
+test_fresh_stages (test_search.Tests.test_fresh_stages) ... ok
+test_no_silent_budget_overrun (test_search.Tests.test_no_silent_budget_overrun) ... ok
+test_profile_preserves_values_and_diagnostics (test_search.Tests.test_profile_preserves_values_and_diagnostics) ... ok
+test_uneven_budget_prefix_identity (test_search.Tests.test_uneven_budget_prefix_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.092s
+
+OK

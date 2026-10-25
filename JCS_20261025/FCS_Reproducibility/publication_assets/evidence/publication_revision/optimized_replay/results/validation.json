@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "lock_verified": true,
+  "all_raw_means_verified": true,
+  "all_decisions_replayed": 288,
+  "exact_replay_fixed": true
+}
