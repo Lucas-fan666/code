@@ -11,7 +11,7 @@ def main():
         if raw in p.parents and not (p.parent/'complete.json').exists():files.remove(p)
     wrapper=ROOT/'reproduce_end_to_end_search.py'
     if wrapper.exists():files.add(wrapper)
-    out=ROOT/'packages/FCS_EndToEnd_Search_Complete.zip'
+    out=ROOT/'packages/JCS_EndToEnd_Search_Complete.zip'
     with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
         z.writestr('end_to_end_search/build/',b'')
         for p in sorted(files):z.write(p,str(p.relative_to(ROOT)))

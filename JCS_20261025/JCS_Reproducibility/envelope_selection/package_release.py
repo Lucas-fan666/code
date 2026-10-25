@@ -31,6 +31,6 @@ def main():
     for f in (ROOT/'visualization').rglob('*'):
         if f.is_file() and '__pycache__' not in f.parts and not any(t in f.parts for t in ['exports','previews']) and f.suffix not in ['.png','.pdf','.svg','.eps','.pyc']:code.append(f)
     code += [ROOT/'reproduce_envelope.py',ROOT/'requirements.txt',ROOT/'README.md']
-    info=[write('FCS_Research_Manuscript_Source.zip',manuscript),write('FCS_Envelope_Selection_Code.zip',code)]
+    info=[write('JCS_Research_Manuscript_Source.zip',manuscript),write('JCS_Envelope_Selection_Code.zip',code)]
     (out/'envelope_release_manifest.json').write_text(json.dumps(info,indent=2)+'\n');print(json.dumps(info,indent=2))
 if __name__=='__main__':main()

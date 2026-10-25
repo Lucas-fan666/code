@@ -5,10 +5,10 @@ validation=json.loads((ROOT/'results/release_validation.json').read_text());asse
 review_validation=json.loads((ROOT/'results/content_review_validation.json').read_text());assert review_validation['all_checks_pass']
 # Preserve the prior compact evidence bundle separately; do not alter its bytes.
 legacy=ROOT/'legacy';legacy.mkdir(exist_ok=True)
-old=ROOT.parent/'FCS_Submission_20261020/packages/FCS_04_Software_Evidence_Lite.zip'
+old=ROOT.parent/'JCS_Submission_20261020/packages/JCS_04_Software_Evidence_Lite.zip'
 if old.exists():shutil.copy2(old,legacy/old.name)
 for directory in ['figure_data','figure_scripts']:
- old=ROOT.parent/'FCS_Submission_20261020/project'/directory
+ old=ROOT.parent/'JCS_Submission_20261020/project'/directory
  if old.exists():shutil.copytree(old,legacy/directory,dirs_exist_ok=True)
 source=[]
 for directory in ['src','vendor/src','scripts','tests','theory','protocol','reports','legacy','manuscript','review_inputs']:
@@ -22,7 +22,7 @@ source.append(ROOT/'results/scaling/summary.json')
 source +=[ROOT/'README.md',ROOT/'reproduce_upgrade.py',ROOT/'requirements.txt']
 raw=[p for d in ['results/raw','results/scaling'] for p in sorted((ROOT/d).rglob('*')) if p.is_file()]
 review=[*sorted((ROOT/'output/pdf').glob('*.pdf')),ROOT/'reports/本轮优化说明.md',ROOT/'reports/cover_letter_updated.md',ROOT/'reports/highlights_updated.md',ROOT/'reports/审稿前优化方向与核查报告.md']
-sets=[('FCS_Research_Manuscript_Source.zip',source),('FCS_New_Experiment_Raw_Results.zip',raw),('FCS_Upgraded_Review_Package.zip',review)]
+sets=[('JCS_Research_Manuscript_Source.zip',source),('JCS_New_Experiment_Raw_Results.zip',raw),('JCS_Upgraded_Review_Package.zip',review)]
 manifest={}
 for name,files in sets:
  p=out/name

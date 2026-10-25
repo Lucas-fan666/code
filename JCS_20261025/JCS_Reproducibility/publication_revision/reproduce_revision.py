@@ -9,6 +9,6 @@ for c in commands:
 # Legacy recomputation is from retained derived CSVs, not an unarchived raw rerun.
 target=ROOT/'legacy/04_Software_Evidence_Lite'
 if not target.exists():
- with zipfile.ZipFile(ROOT/'legacy/FCS_04_Software_Evidence_Lite.zip') as z:z.extractall(ROOT/'legacy')
+ with zipfile.ZipFile(ROOT/'legacy/JCS_04_Software_Evidence_Lite.zip') as z:z.extractall(ROOT/'legacy')
 subprocess.run([sys.executable,'scripts/recompute_review_metrics.py'],cwd=ROOT,check=True)
 print('PASS: offline reconstruction. No new propagation experiments were run.')

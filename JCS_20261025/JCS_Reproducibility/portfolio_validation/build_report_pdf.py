@@ -58,7 +58,7 @@ def main():
  story.append(Spacer(1,16));markdown(HERE/'reports/nearest_methods_audit.md')
  def footer(canvas,doc):
   canvas.setStrokeColor(colors.HexColor('#CAD4DD'));canvas.line(50,40,515,40);canvas.setFont('Helvetica',8);canvas.setFillColor(colors.HexColor('#63717E'));canvas.drawString(50,28,'Research evidence addendum | Junkai Fan');canvas.drawRightString(515,28,str(doc.page))
- doc=SimpleDocTemplate(str(output/'FCS_Portfolio_Validation_Report.pdf'),pagesize=(565,800),leftMargin=50,rightMargin=50,topMargin=45,bottomMargin=54,title='Prospective Portfolio Stress Validation and Nearest-Method Comparison',author='Junkai Fan')
+ doc=SimpleDocTemplate(str(output/'JCS_Portfolio_Validation_Report.pdf'),pagesize=(565,800),leftMargin=50,rightMargin=50,topMargin=45,bottomMargin=54,title='Prospective Portfolio Stress Validation and Nearest-Method Comparison',author='Junkai Fan')
  doc.build(story,onFirstPage=footer,onLaterPages=footer)
- print(output/'FCS_Portfolio_Validation_Report.pdf')
+ print(output/'JCS_Portfolio_Validation_Report.pdf')
 if __name__=='__main__':main()

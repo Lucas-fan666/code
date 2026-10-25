@@ -89,5 +89,5 @@ def main():
     durations=[float(x) for x in re.findall(r'complete; ([0-9.]+)s',(HERE/'results/progress.log').read_text())]
     with (HERE/'reports/envelope_selection_report.md').open('a') as f:
         f.write(f"\n\n## 环境与时间\n\nPython：{env['python'].splitlines()[0]}；NumPy：{env['numpy']}；编译器：{env['compiler']}。CPU配额：{env.get('cpu_quota','not recorded').strip()}。单进程顺序运行。日志内32图累计运行时间约{sum(durations)/60:.1f}分钟（含历史、独立最终评估及文件写入；编译另计）；表中在线选择耗时不包含这些共同离线成本。精确计时与平台记录见environment.json及context_results.csv。\n")
-        f.write('\n\n## 归档恢复与核验\n\n已从原始FCS_New_Experiment_Raw_Results.zip恢复3,216个运行时/扩展文件；现有哈希清单的全部3,217项逐字节验证通过。恢复记录见inherited_archive_recovery.json。inherited_manifest_discrepancies.json仅保留恢复前的差异历史，所列缺失已经解决。此项是归档字节核验，不是重新运行旧模拟；新选择实验的完整原始输出另行包含。\n')
+        f.write('\n\n## 归档恢复与核验\n\n已从原始JCS_New_Experiment_Raw_Results.zip恢复3,216个运行时/扩展文件；现有哈希清单的全部3,217项逐字节验证通过。恢复记录见inherited_archive_recovery.json。inherited_manifest_discrepancies.json仅保留恢复前的差异历史，所列缺失已经解决。此项是归档字节核验，不是重新运行旧模拟；新选择实验的完整原始输出另行包含。\n')
 if __name__=='__main__':main()

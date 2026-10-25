@@ -9,14 +9,14 @@ Versioned code: https://github.com/Lucas-fan666/code/tree/jcs-submission-2026102
 
 Use Python 3.12 and g++ with C++17 support. Install `python -m pip install -r requirements-lock.txt`. The release was checked using Python 3.12.14 and the pinned package versions.
 
-Download these four data files from the accompanying Zenodo deposit and extract them into the **parent** of this directory, retaining their `FCS_Reproducibility/` paths:
+Download these four data files from the accompanying Zenodo deposit and extract them into the **parent** of this directory, retaining their `JCS_Reproducibility/` paths:
 
 - `JCS_Core_Search_Data.zip`
 - `JCS_Early_Certificate_Data.zip`
 - `JCS_Refined_Certificate_Data.zip`
 - `JCS_Portfolio_Extension_Data.zip`
 
-The historical directory name `FCS_Reproducibility` is retained so locked configurations and source hashes remain valid. From this directory run:
+The code and data archives share the `JCS_Reproducibility` root directory. Frozen experiment source/configuration hashes remain valid because their paths are relative to that root. From this directory run:
 
 ```bash
 python reproduce_all.py
@@ -41,6 +41,6 @@ Legacy `reproduce_*.py` entry points can also regenerate studies or edit older m
 
 ## Unchanged locked sources
 
-Original study sources, configurations and raw observations retain their archived hashes. The two top-level reproduction entry points and journal plotting assets were added for this release; none changes the frozen selectors or propagation engines. Original release reports remain historical records and can refer to earlier journal layouts.
+Frozen experiment sources, configurations and raw observations retain their archived hashes. Public package names and non-experimental packaging helpers use the JCS name. The two top-level reproduction entry points and journal plotting assets were added for this release; none changes the frozen selectors or propagation engines. Original release reports remain historical records and can refer to earlier journal layouts.
 
 The DOI was provided by the author. Its public record could not be retrieved during packaging; upload the release files to that record and publish it before relying on public DOI access.

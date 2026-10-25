@@ -2,7 +2,7 @@ from pathlib import Path
 import json,os,subprocess,sys,tempfile,zipfile,time
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parent
 def main():
-    archive=ROOT/'packages/FCS_EndToEnd_Search_Complete.zip'
+    archive=ROOT/'packages/JCS_EndToEnd_Search_Complete.zip'
     (ROOT/'private').mkdir(exist_ok=True)
     fresh=Path(tempfile.mkdtemp(prefix='e2e_archive_',dir=ROOT/'private'))
     with zipfile.ZipFile(archive) as z:z.extractall(fresh)

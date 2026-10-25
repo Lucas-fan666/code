@@ -4,7 +4,7 @@
 
 Junkai Fan. Release: 25 October 2026.
 
-Code and configuration files are in [FCS_Reproducibility](FCS_Reproducibility). See its README for the four required data archives and offline reconstruction commands.
+Code and configuration files are in [JCS_Reproducibility](JCS_Reproducibility). See its README for the four required data archives and offline reconstruction commands.
 
 Zenodo DOI: https://doi.org/10.5281/zenodo.23622583
 

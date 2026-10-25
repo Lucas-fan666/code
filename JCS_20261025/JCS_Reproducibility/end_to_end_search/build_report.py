@@ -53,7 +53,7 @@ def main():
     def footer(canvas,doc):
         canvas.setStrokeColor(colors.HexColor('#CAD4DD'));canvas.line(50,40,515,40)
         canvas.setFont('Helvetica',8);canvas.setFillColor(colors.HexColor('#63717E'));canvas.drawString(50,28,'Complete-search evidence addendum | Junkai Fan');canvas.drawRightString(515,28,str(doc.page))
-    path=out/'FCS_Complete_Search_Report.pdf'
+    path=out/'JCS_Complete_Search_Report.pdf'
     SimpleDocTemplate(str(path),pagesize=(565,800),leftMargin=50,rightMargin=50,topMargin=44,bottomMargin=54,title='Complete Adaptive Search at Preserved Graphical Joint Law',author='Junkai Fan').build(story,onFirstPage=footer,onLaterPages=footer)
     print(path)
 if __name__=='__main__':main()

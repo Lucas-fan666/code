@@ -10,7 +10,7 @@ def main():
   files.update(p for p in base.rglob('*') if p.is_file() and '__pycache__' not in p.parts and 'pdf_qa' not in p.parts and p.name not in ['release_manifest.json','finish.py'] and p.suffix not in ['.pyc','.so','.aux','.log','.out','.fls','.blg'])
  files.update(ROOT/'adaptive_screening/protocol'/name for name in ['adaptive_locked.json','adaptive_locked.sha256'])
  files.add(HERE/'results/run.log')
- out=ROOT/'packages/FCS_Portfolio_Validation_Complete.zip'
+ out=ROOT/'packages/JCS_Portfolio_Validation_Complete.zip'
  with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for p in sorted(files):z.write(p,str(p.relative_to(ROOT)))
   z.writestr('README.md',(HERE/'README.md').read_text())

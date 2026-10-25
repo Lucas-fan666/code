@@ -17,15 +17,15 @@ def main():
    p=ROOT/rel
    if p.exists():files.add(p)
  files.add(HERE/'results/run.log')
- dest=ROOT/'packages/FCS_Adaptive_Screening_Complete.zip'
+ dest=ROOT/'packages/JCS_Adaptive_Screening_Complete.zip'
  with zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for p in sorted(files):z.write(p,str(p.relative_to(ROOT)))
   z.writestr('README.md',(HERE/'README.md').read_text())
- source=ROOT/'packages/FCS_Adaptive_Manuscript_Source.zip'
+ source=ROOT/'packages/JCS_Adaptive_Manuscript_Source.zip'
  with zipfile.ZipFile(source,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for p in sorted((HERE/'manuscript').rglob('*')):
    if include(p):z.write(p,str(p.relative_to(HERE/'manuscript')))
-  z.writestr('README.md','Complete FCS research manuscript source. Run python build_main_only.py with pdflatex and BibTeX installed. Bundled fonts are configured by the helper. Earlier adverse results remain in the main paper. Complete new-study raw data, hashes and reproduction scripts accompany FCS_Adaptive_Screening_Complete.zip. Earlier raw research cohorts remain in their prior archives.\n')
+  z.writestr('README.md','Complete FCS research manuscript source. Run python build_main_only.py with pdflatex and BibTeX installed. Bundled fonts are configured by the helper. Earlier adverse results remain in the main paper. Complete new-study raw data, hashes and reproduction scripts accompany JCS_Adaptive_Screening_Complete.zip. Earlier raw research cohorts remain in their prior archives.\n')
  record=dict(source=str(source),source_bytes=source.stat().st_size,code=str(dest),code_bytes=dest.stat().st_size,code_files=len(files)+1,code_sha256=hashlib.sha256(dest.read_bytes()).hexdigest(),source_sha256=hashlib.sha256(source.read_bytes()).hexdigest())
  (ROOT/'packages/adaptive_release_manifest.json').write_text(json.dumps(record,indent=2)+'\n');print(json.dumps(record,indent=2))
 if __name__=='__main__':main()

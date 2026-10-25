@@ -28,7 +28,7 @@ def main():
  conclusion=main.split('\\section{Conclusion}',1)[1].split('\\section*{Acknowledgements',1)[0];ck('conclusion remains one nonrepeating paragraph',len([p for p in conclusion.strip().split('\n\n') if p.strip()])==1)
  for name in ['main','supplement']:
   log=(ROOT/'manuscript'/f'{name}.log').read_text(errors='replace');ck(name+' clean compilation',not any(s in log for s in ['! LaTeX Error','Overfull \\hbox','Overfull \\vbox','There were undefined references','Citation `']))
-  ck(name+' readable PDF',len(PdfReader(ROOT/'output/pdf'/('FCS_Main_Manuscript.pdf' if name=='main' else 'FCS_Supplement.pdf')).pages)>0)
+  ck(name+' readable PDF',len(PdfReader(ROOT/'output/pdf'/('JCS_Main_Manuscript.pdf' if name=='main' else 'JCS_Supplement.pdf')).pages)>0)
  ck('new plot embedded byte for byte',(ROOT/'manuscript/figures/factorial_selection.pdf').read_bytes()==(HERE/'figures/factorial_selection.pdf').read_bytes())
  hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'results/raw').rglob('*')) if p.is_file()};(HERE/'results/raw_sha256.json').write_text(json.dumps(hashes,indent=2)+'\n')
  v=dict(all_checks_pass=all(z['passed'] for z in checks),checks=checks,scope='Reproducibility and release integrity, not independent proof verification or journal acceptance prediction')

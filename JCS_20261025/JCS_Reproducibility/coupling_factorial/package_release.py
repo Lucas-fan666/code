@@ -13,7 +13,7 @@ def main():
  reports=[p for p in (ROOT/'reports').rglob('*') if p.is_file()]
  extra=[ROOT/'reproduce_factorial.py',ROOT/'README.md']+reports
  out=ROOT/'packages';info=[]
- for name in ['FCS_Research_Manuscript_Source.zip','FCS_Envelope_Selection_Code.zip']:
+ for name in ['JCS_Research_Manuscript_Source.zip','JCS_Envelope_Selection_Code.zip']:
   p=out/name;tmp=p.with_suffix('.tmp.zip')
   with zipfile.ZipFile(p) as z,zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as dst:
    entries={i.filename:z.read(i.filename) for i in z.infolist()}
