@@ -1,0 +1,7 @@
+{
+  "recorded_at_utc": "2026-10-21T08:44:09.879832+00:00",
+  "kind": "inherited prose inconsistency; original lock retained",
+  "item": "accounting sentence says256 independent evaluation paths, while numeric evaluation_paths=128, independent_evaluation description=128, and locked runner all specify128",
+  "resolution": "Execute unchanged locked numeric field and source:128 independent paths/action. The conflicting256 sentence was copied from the preceding study. This is not a data-dependent budget choice. Independent evaluation is outside online cost. All contexts remain retained.",
+  "original_lock_sha256": "c49a58b65babb7ec75d69a6a8d0c3aabb0b9c832382d402d93c8aac0a884b197"
+}

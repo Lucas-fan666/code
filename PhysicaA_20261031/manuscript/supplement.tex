@@ -1,0 +1,2124 @@
+% !TeX program = pdflatex
+\documentclass[preprint,11pt,sort&compress]{elsarticle}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,array,xurl}
+\usepackage{algorithm,algpseudocode,placeins}
+\usepackage{xr-hyper}
+\IfFileExists{main_labels.tex}{\input{main_labels.tex}}{\externaldocument[M-]{main}[PhysicaA_Manuscript.pdf]}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Fset}{\mathcal{F}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Gain}{\mathcal{G}}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetheorem}{S\arabic{theorem}}
+\renewcommand{\theequation}{S\arabic{equation}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thealgorithm}{S\arabic{algorithm}}
+\providecommand{\urlprefix}{}
+\journal{Physica A: Statistical Mechanics and its Applications}
+\date{31 October 2026}
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.06}
+\renewcommand{\floatpagefraction}{0.85}
+\begin{document}
+\begin{frontmatter}
+\title{Supplementary material: Group memory and post-intervention response in higher-order spreading}
+\author[neu]{Junkai Fan}
+\ead{fanjk@mails.neu.edu.cn}
+\affiliation[neu]{organization={School of Business Administration, Northeastern University},city={Shenyang},postcode={110169},country={China}}
+\begin{abstract}
+This supplement gives auxiliary proofs, implementation details and complete numerical results for the main article. It specifies the comparison families, statistical units and available records needed to reproduce each analysis.
+\end{abstract}
+\end{frontmatter}
+\emergencystretch=3em
+\FloatBarrier\section{Relation to the main article}
+The main article contains complete proofs of augmented-state ordered coupling, nested and nonnested variance bounds, joint-law preservation, and the complete-process counterexample. The sections below develop finite-portfolio selection, frozen-score analysis and switching guarantees, then report the experimental designs, complete comparisons and computational records. Each comparison uses the multiplicity adjustment specified for its own family.
+
+The score checks use the submodularity-ratio definition~\cite{das2018}; certificate checks evaluate empirical-Bernstein bounds~\cite{maurer2009} and distinguish fixed-time from time-uniform validity~\cite{howard2021}. Synthetic intervals resample independent graphs and retain their histories and cells. Observed-group intervals condition on one fixed topology per source. Multiplicity adjustment is local to each prespecified comparison family. The locally frozen configurations are versioned artifacts, rather than public preregistrations or independently certified timestamps.
+
+\FloatBarrier\section{Extended theory for certified finite-portfolio selection}\label{sec:extended_selection}
+\subsection{Endpoint screening for a finite action portfolio}
+\label{sec:endpoint_selection}
+The ordered envelope can be used before individual candidates are simulated.
+Let $\mathcal P=\{S_1,\ldots,S_M\}$ be a fixed finite portfolio, $M\ge2$, and define
+\[
+ I_{\mathcal P}=\bigcap_{i=1}^M S_i,\qquad
+ J_{\mathcal P}=\bigcup_{i=1}^M S_i,\qquad
+ B_{\mathrm{env},r}=L(I_{\mathcal P},\xi_r)-L(J_{\mathcal P},\xi_r).
+\]
+The endpoint sets are auxiliary controls with the same per-node intensity and
+duration as the feasible actions; their cardinalities need not equal $k$.
+Theorem~\ref{M-thm:coupling} gives $0\le B_{\mathrm{env},r}\le H$ and
+\begin{equation}
+ \max_{i\le M}Q(S_i)-\min_{i\le M}Q(S_i)\le b_{\mathcal P},
+ \qquad b_{\mathcal P}=\E B_{\mathrm{env},r}.
+ \label{eq:portfolio_diameter}
+\end{equation}
+This is additional oracle information: two endpoint simulations constrain
+the expected losses of candidates that have not themselves been simulated.
+It differs from estimating a covariance matrix from observed candidate paths.
+
+Fix $0<\varepsilon<H$ and $0<\alpha<1$. Set
+$\mathcal B=\{1/32,1/16,1/8,1/4,1/2,0.99\}$ and, for $f\in\mathcal B$,
+$\lambda_f=f/(H-\varepsilon)$. Define the mixture
+\begin{equation}
+ E_n^{\rm env}=\frac1{6}\sum_{f\in\mathcal B}
+       \prod_{r=1}^n[1+\lambda_f(\varepsilon-B_{\mathrm{env},r})].
+ \label{eq:envelope_bet}
+\end{equation}
+The grid is an implementation choice fixed before evaluation, not a fitted
+parameter or a new concentration inequality. Bounded-mean betting and
+time-uniform inference are established tools~\cite{howard2021,waudby2024}.
+
+\begin{theorem}[Anytime endpoint certificate]
+\label{thm:endpoint_certificate}
+Assume the common graphical law and fresh independent replication tapes.
+If $E_n^{\rm env}\ge2/\alpha$ at any inspected sample count, returning any
+prespecified member of $\mathcal P$ has portfolio regret at most
+$\varepsilon$, except on an event of probability at most $\alpha/2$.
+The inspections may be adaptive, and screening may be abandoned at any
+data-dependent time. Candidate-path observations are not required for this
+certificate.
+\end{theorem}
+\begin{proof}
+Under the null $b_{\mathcal P}\ge\varepsilon$, every factor in
+Eq.~\ref{eq:envelope_bet} is nonnegative because
+$\varepsilon-B_{\mathrm{env},r}\ge-(H-\varepsilon)$ and $f<1$. Its conditional expected
+value is $1+\lambda_f(\varepsilon-b_{\mathcal P})\le1$. Each product is
+therefore a nonnegative supermartingale starting at one, as is their
+equally weighted mixture. The maximal inequality for a nonnegative
+supermartingale implies
+$\Prob\{\sup_n E_n^{\rm env}\ge2/\alpha\}\le\alpha/2$ under that null.
+Outside this error event, crossing rejects $b_{\mathcal P}\ge\varepsilon$.
+Equation~\ref{eq:portfolio_diameter} then bounds the regret of every member
+of the portfolio by $\varepsilon$. Pausing inspections or abandoning the
+test cannot enlarge its crossing event. No assumption about the
+conditional law of $B_{\mathrm{env},r}$ given a signed candidate difference is used.
+\end{proof}
+
+The certificate depends on the known coupled bracket, rather than on the
+particular transmission intensities. More generally, let integrable losses
+$L_i$ satisfy $\ell\le L_i\le h$ almost surely for a common random pair
+with $0\le h-\ell\le H$. Taking expectations gives
+$\max_i\E L_i-\min_i\E L_i\le\E(h-\ell)$, and the same proof applies to
+independent replications of $B_{\mathrm{env}}=h-\ell$. The model-specific contribution
+here is the exact construction of this bracket from intersection and union
+controls. Other brackets are not evaluated in the computational study.
+For this one-sided endpoint test, the factor argument in fact needs only
+$B_{\mathrm{env},r}\le H$ and $\E B_{\mathrm{env},r}\ge\max_iQ(S_i)-\min_iQ(S_i)$: a signed endpoint
+difference from another exact coupling can also be used if these mean bounds
+are known. The graphical construction additionally gives $B_{\mathrm{env},r}\ge0$, the
+range--mean variance bound, and pathwise zero width when its expectation
+vanishes. Endpoint certification is therefore not exclusive to graphical
+coupling. The initial endpoint study uses an RTC paired candidate race without screening. A subsequent independent factorial study evaluates RTC with the same screen and retains signed endpoint contrasts; its complete results appear in the supplement.
+
+\subsection{A paired fallback with explicit unresolved outcomes}
+For a fixed ordered pair $(i,j)$, let
+$W_{ij,r}=L(S_i,\xi_r)-L(S_j,\xi_r)\in[-H,H]$ on its successive jointly
+queried fresh tapes. Two families of tests use the same six fractions:
+\begin{align}
+ E^{>}_{ij,n}&=\frac1{6}\sum_{f\in\mathcal B}
+        \prod_{r=1}^n[1+(f/H)W_{ij,r}],\notag\\
+ E^{\varepsilon}_{ij,n}&=\frac1{6}\sum_{f\in\mathcal B}
+        \prod_{r=1}^n[1+\lambda_f(\varepsilon-W_{ij,r})].
+ \label{eq:paired_bets}
+\end{align}
+The first tests $Q(S_i)\le Q(S_j)$ and can eliminate $i$; the second tests
+$Q(S_i)-Q(S_j)\ge\varepsilon$ and can certify a candidate's tolerance
+relative to $j$. These are paired bounded-mean tests, not claims of a new
+general best-arm identification principle.
+
+\begin{theorem}[Envelope-first finite-portfolio selection]
+\label{thm:envelope_selection}
+Run the endpoint screen with error allocation $\alpha/2$. If it does not
+certify, use fresh tapes for a paired race with risk allocation
+$\rho=\alpha/2$. For every ordered pair and each test in
+Eq.~\ref{eq:paired_bets}, use threshold $2M(M-1)/\rho$. Eliminate $i$ only
+when $E^{>}_{ij}$ crosses for an active $j$. Certify $i$ when
+$E^{\varepsilon}_{ij}$ crosses for every other active $j$, or when it is
+the sole remaining candidate. Then
+\begin{equation}
+ \Prob\{\text{certified and }Q(S_{\rm out})-
+          \min_{S\in\mathcal P}Q(S)>\varepsilon\}\le\alpha.
+ \label{eq:portfolio_pac}
+\end{equation}
+The portfolios queried at each round and their sample counts may depend
+on preceding observations. If the budget is exhausted before a certificate,
+the result is unresolved; any accompanying empirical recommendation is
+uncertified. No guarantee about optimization over unqueried feasible sets
+is implied.
+\end{theorem}
+\begin{proof}
+For a pair whose first null is true, $1+(f/H)W_{ij,r}$ is nonnegative
+and has conditional mean at most one. For a pair whose second null is
+true, the same holds for $1+\lambda_f(\varepsilon-W_{ij,r})$.
+Theorem~\ref{M-thm:batch} gives the same two-copy joint law when other active
+candidates change. Fresh tapes, chosen after the active portfolio is fixed,
+make each selected pair's next observation have its fixed joint law
+conditional on the past. A test not queried in a round remains constant.
+Consequently each null mixture is a nonnegative supermartingale, also
+under this adaptive allocation. A union bound over the two tests and
+$M(M-1)$ ordered pairs bounds any false crossing by $\rho$.
+
+On the complement of this event no true minimizer can be eliminated:
+its mean cannot exceed that of another active candidate. At a certified
+stop, a true minimizer remains active and the selected candidate is within
+$\varepsilon$ of it. If only one candidate remains, it is a minimizer.
+Together with Theorem~\ref{thm:endpoint_certificate}, the total probability
+of an incorrect certificate is at most $\alpha/2+\rho=\alpha$.
+The claim concerns the event of an incorrect certified return; it does not
+assert a conditional error bound given certification or guarantee that a
+finite budget will resolve every instance.
+\end{proof}
+
+\begin{algorithm}[t]
+\caption{Envelope-first certified portfolio selection}
+\label{alg:envelope_first}
+\begin{algorithmic}[1]
+\Require Frozen portfolio $\mathcal P$, $\varepsilon,\alpha$, total copy budget
+\State Form $I_{\mathcal P},J_{\mathcal P}$; initialize Eq.~\ref{eq:envelope_bet}
+\While{the screening cap and total budget permit another endpoint batch}
+\State Simulate the two endpoints on fresh common tapes; charge both copies
+\State Update $E^{\rm env}$
+\If{$E^{\rm env}\ge2/\alpha$} \State \Return first portfolio member, certified \EndIf
+\If{the fixed computational futility rule fires} \State \textbf{break} \EndIf
+\EndWhile
+\State Initialize paired tests; retain all $M$ candidates
+\While{budget permits a fresh batch of all active candidates}
+\State Update Eq.~\ref{eq:paired_bets}; charge every active copy
+\State Return a candidate if its tolerance certificate crosses for all competitors
+\State Eliminate candidates with a crossed exact-inferiority test
+\If{one candidate remains} \State \Return it, certified \EndIf
+\EndWhile
+\State \Return empirical recommendation, unresolved
+\end{algorithmic}
+\end{algorithm}
+
+The implementation inspects batches of 32 tapes. It abandons screening
+after at least 32 tapes when the observed endpoint mean is at least
+$\varepsilon/2$, and caps screening at 1,024 tapes. This futility rule
+selects a computation route; it never declares a statistical result.
+All endpoint simulations count toward the same total budget as candidate
+copies. Screening can add up to 2,048 continuations before the fallback
+and can reduce the number available to the race. The six-component test
+need not resolve every alternative. These facts exclude a universal
+efficiency or termination claim.
+
+\begin{proposition}[Zero-width endpoint cost]
+\label{prop:zero_width_cost}
+If $B_{\mathrm{env},r}=0$ almost surely, then, whenever the cap and budget allow it, the
+endpoint screen certifies by the first inspected $n$ satisfying
+\begin{equation}
+ n\ge\frac{\log(12/\alpha)}
+ {\log(1+0.99\varepsilon/(H-\varepsilon))}.
+ \label{eq:zero_width_cost}
+\end{equation}
+It uses two simulated copies per tape, independently of $M$. For the
+specified uniform paired comparator on identical candidate paths, each
+tape instead simulates $M$ copies and must cross the $M$-dependent
+pairwise threshold. This is a comparison between the stated procedures,
+not a minimax lower bound for all selection algorithms.
+\end{proposition}
+\begin{proof}
+The largest-bet component of Eq.~\ref{eq:envelope_bet} is
+$(1+0.99\varepsilon/(H-\varepsilon))^n/6$. This exceeds $2/\alpha$
+under Eq.~\ref{eq:zero_width_cost}; the mixture is at least that component.
+The futility rule does not fire when all $B_{\mathrm{env},r}$ vanish. Rounding up to the
+next inspected batch gives the stated stopping count. Identical candidate
+paths give $W_{ij,r}=0$, so exact-inferiority tests stay at one and the
+uniform procedure evaluates all $M$ copies until its tolerance tests
+cross. Its threshold is $2M(M-1)/\alpha$. This proves the stated cost
+accounting without asserting that the zero-width law can be known from
+a single observed equality.
+\end{proof}
+
+\begin{corollary}[Certified portfolio compression]
+Partition $\mathcal P$ into fixed groups and select one representative per
+group. If endpoint certificates establish expected diameter at most
+$\varepsilon_1$ for every group, and a fresh-tape selection certificate
+returns a representative within $\varepsilon_2$ of the best representative,
+the returned action is within $\varepsilon_1+\varepsilon_2$ of the best
+original action. The total error probability is at most the sum of the
+allocated certificate errors.
+\end{corollary}
+\begin{proof}
+The group containing an original minimizer has a representative with loss
+at most that minimum plus $\varepsilon_1$. The chosen representative has
+loss at most the best representative plus $\varepsilon_2$. Add these two
+inequalities on the joint coverage event and union-bound its complement.
+\end{proof}
+The supplied implementation uses one group, the full frozen portfolio.
+Multigroup compression is a proved extension, not an evaluated algorithm.
+
+\subsection{When can endpoint screening repay its cost?}
+\label{sec:screen_cost}
+The one-sided endpoint test does not require pathwise nonnegativity. Suppose
+independent endpoint contrasts satisfy $\ell\le B_{\mathrm{env},r}\le H$, with known
+$\ell<H$, and their mean $b$ upper-bounds the expected-loss diameter of a
+fixed portfolio. Graphical endpoints give $\ell=0$; exact RTC endpoints give
+$\ell=-H$ without changing $b$, because their marginal losses are unchanged.
+Signed RTC differences must not be truncated. For a fixed $f\in\mathcal B$,
+put $\lambda_f=f/(H-\varepsilon)$ and define
+\begin{align}
+ m_f(b;\ell)&=\frac{H-b}{H-\ell}\log[1+\lambda_f(\varepsilon-\ell)]
+       +\frac{b-\ell}{H-\ell}\log(1-f),\notag\\
+ r_f(\ell)&=\log[1+\lambda_f(\varepsilon-\ell)]-\log(1-f).
+ \label{eq:chord_drift}
+\end{align}
+These quantities are theoretical functions of the unknown mean, not oracle
+inputs supplied to the selection algorithm.
+
+\begin{theorem}[A sufficient finite screening budget]
+\label{thm:screen_power}
+Use the $K=6$ component mixture in Eq.~\ref{eq:envelope_bet}, with screen
+error allocation $\alpha_s$ and threshold $1/\alpha_s$. Suppose
+$m=m_f(b;\ell)>0$ for one of its fixed fractions. If an inspected count $n$
+satisfies
+\begin{equation}
+ nm-r_f(\ell)\sqrt{\frac n2\log\frac1\delta}
+       \ge\log\frac K{\alpha_s},\qquad 0<\delta<1,
+ \label{eq:screen_power}
+\end{equation}
+then a screen allowed to continue through that count certifies by $n$ with
+probability at least $1-\delta$. This statement does not apply to an early
+futility stop that prevents inspection at $n$.
+\end{theorem}
+\begin{proof}
+Set $Z_r=\log[1+\lambda_f(\varepsilon-B_{\mathrm{env},r})]$. The argument of the logarithm
+is at least $1-f>0$. Concavity of the logarithm puts its graph above the
+chord joining $B_{\mathrm{env}}=\ell$ and $B_{\mathrm{env}}=H$. Taking expectations therefore yields
+$\E Z_r\ge m_f(b;\ell)$, while $Z_r$ has range length $r_f(\ell)$.
+The bounded-sum lower-tail inequality gives
+\[
+ \Prob\!\left\{\sum_{r=1}^n Z_r< nm-r_f(\ell)
+                  \sqrt{(n/2)\log(1/\delta)}\right\}\le\delta.
+\]
+On the complementary event, Eq.~\ref{eq:screen_power} implies that the
+chosen component, divided by $K$, is at least $1/\alpha_s$. The full
+mixture is no smaller than this component. Inspection at $n$ consequently
+crosses, unless a certificate has already been returned. The chord bound
+is attained by a distribution supported on $\{\ell,H\}$ with mean $b$;
+the subsequent concentration bound need not be sharp.
+\end{proof}
+For example, a sufficient count is the next inspected integer above
+$[(a+\sqrt{a^2+4mc})/(2m)]^2$, where
+$a=r_f(\ell)\sqrt{\log(1/\delta)/2}$ and
+$c=\log(K/\alpha_s)$. This is a distribution-free sufficient count, not an
+estimate of the measured stopping cost. The graphical support yields a
+more informative worst-case chord bound than allowing $B_{\mathrm{env}}<0$, because the
+chord on the larger interval lies below that on its subinterval. Actual
+RTC and graphical laws need not attain either bound, so this observation
+does not prove lower graphical variance or runtime on every instance.
+
+\begin{proposition}[Positive-drift screening cost]
+\label{prop:screen_drift}
+Under Theorem~\ref{thm:screen_power}, let $\tau$ be the first crossing count
+of the mixture when inspected after each tape, without a cap or futility
+stop. For any fixed fraction with $m=m_f(b;\ell)>0$, write
+$c=\log(K/\alpha_s)$ and $a_f=\log[1+\lambda_f(\varepsilon-\ell)]$. Then
+\begin{equation}
+ \E\tau\le\frac{c+a_f}{m}.
+ \label{eq:screen_drift_cost}
+\end{equation}
+For inspection only at multiples of a batch size $q$, the valid bound is
+$(c+qa_f)/m$ tapes. These statements do not assume a known mean as an
+algorithm input.
+\end{proposition}
+\begin{proof}
+For the chosen component, let $S_t=\sum_{r\le t}Z_r$ and
+$\tau_{\mathrm{hit}}=\inf\{t:S_t\ge c\}$. Each increment is at most $a_f$. For every integer
+$n$, $S_{\tau_{\mathrm{hit}}\wedge n}\le c+a_f$: before crossing the sum is below $c$, and
+its crossing overshoot is at most $a_f$. Since $\tau_{\mathrm{hit}}\wedge n$ is bounded and
+increments are independent of the past,
+$\E S_{\tau_{\mathrm{hit}}\wedge n}=(\E Z_1)\E(\tau_{\mathrm{hit}}\wedge n)$. The chord bound gives
+$\E Z_1\ge m>0$, hence $\E(\tau_{\mathrm{hit}}\wedge n)\le(c+a_f)/m$.
+Monotone convergence proves $\E \tau_{\mathrm{hit}}\le(c+a_f)/m$, including almost-sure
+finiteness. The mixture crosses no later than that component divided by
+$K$, so $\tau\le \tau_{\mathrm{hit}}$. For batch inspection, apply the same argument to
+blocks of $q$ increments: their mean is at least $qm$ and their upper
+increment is $qa_f$. The same bounded-stopping argument
+gives an expected number of blocks at most $(c+qa_f)/(qm)$, or
+$(c+qa_f)/m$ tapes. A single-tape crossing can be followed by a decline before
+the next inspection, so rounding the first single-tape crossing would not
+justify a batch guarantee.
+\end{proof}
+
+\begin{proposition}[A sufficient copy-cost break-even condition]
+\label{prop:screen_break_even}
+Consider a two-stage policy reserving a fixed fallback copy budget $F$.
+The screen may stop at a certificate before an inspected count $n$ and
+otherwise hands the query to that fallback after $n$ endpoint tapes.
+Assume Eq.~\ref{eq:screen_power}. Let $C_f$ be the expected copy cost of
+the direct fallback with that same budget $F$ and risk allocation
+$\alpha_f$, and run it on tapes independent of screening. Then the
+screened policy has expected copy cost at most $2n+\delta C_f$. In
+particular, $2n<(1-\delta)C_f$ is sufficient for a lower expected copy
+cost than this direct fallback. Its erroneous-certified-return probability
+is at most $\alpha_s+\alpha_f$ if each stage has its stated error bound;
+the fallback may still be unresolved.
+\end{proposition}
+\begin{proof}
+The screen uses at most $2n$ copies and fails to certify with probability
+at most $\delta$. Conditional on that failure, the fresh fallback has its
+original distribution and expected copy cost $C_f$. Thus the total
+expectation is at most $2n+\delta C_f$. Rearranging gives the sufficient
+strict inequality. A union bound gives the certificate error statement.
+\end{proof}
+The fixed fallback reservation is essential to this cost comparison. The
+implemented policy reallocates remaining copies after a screen, uses early
+futility, and splits risk between its stages, whereas unscreened baselines
+use the full risk allocation. Proposition~\ref{prop:screen_break_even}
+therefore explains a possible screening regime; it is not a proved cost
+improvement for the implemented capped policy, nor a wall-time guarantee.
+
+\begin{proposition}[An endpoint-only zero-width lower bound]
+\label{prop:screen_lower_bound}
+Consider a black-box screen observing independent $B_{\mathrm{env},r}\in[0,H]$. It must
+control the probability of rejecting $\E B_{\mathrm{env},r}\ge\varepsilon$ by
+$\alpha_s$ for every law in this bounded class. If, under the point mass
+$B_{\mathrm{env},r}=0$, it returns that rejection almost surely after $\tau$ observations,
+then
+\begin{equation}
+ \E_0\tau\ge
+ \frac{\log(1/\alpha_s)}{-\log(1-\varepsilon/H)}.
+ \label{eq:screen_lower_bound}
+\end{equation}
+For a screen required to be valid over the larger class $B_{\mathrm{env},r}\in[-H,H]$,
+if it rejects almost surely under the symmetric two-point law on
+$\{-H,H\}$, the corresponding bound is
+\begin{equation}
+ \E_{\rm sym}\tau\ge
+ \frac{\log(1/\alpha_s)}{-\tfrac12\log[1-(\varepsilon/H)^2]}.
+ \label{eq:signed_screen_lower_bound}
+\end{equation}
+These conclusions also hold for full endpoint-pair observations over
+otherwise unrestricted joint laws having the stated difference support. The bounds do not apply
+to procedures using additional model deductions or candidate observations.
+\end{proposition}
+\begin{proof}
+If $\E_0\tau=\infty$, the result is immediate. Otherwise, include any
+internal randomization in an independent variable. Conditional on it,
+the zero-observation transcript rejects after a finite $\tau$. Consider
+the null law placing mass $1-p$ at zero and mass $p$ at $H$, where
+$p=\varepsilon/H$. Its probability of following the same zero transcript
+through that rejection is $(1-p)^\tau$. Validity therefore requires
+$\E_0(1-p)^\tau\le\alpha_s$. Convexity of $t\mapsto(1-p)^t$ gives
+$(1-p)^{\E_0\tau}\le\alpha_s$, which rearranges to
+Eq.~\ref{eq:screen_lower_bound}. For full endpoint observations, use the
+zero pair $(0,0)$ and the null mixture of $(0,0)$ and $(H,0)$; the same
+transcript argument applies.
+
+For the signed class, let $\eta=\varepsilon/H$ and compare the symmetric
+law $P_0$ with the null law $P_1$ assigning probabilities $(1+\eta)/2$
+and $(1-\eta)/2$ to $H$ and $-H$. The latter has mean $\varepsilon$.
+The stopped likelihood ratio $\Lambda_\tau=dP_1/dP_0$ has
+$\E_0\Lambda_\tau=P_1(\text{finite rejection})\le\alpha_s$, because
+$P_0$ rejects almost surely. If $\E_0\tau<\infty$, the log-likelihood
+increments are bounded, so summing their conditional means gives
+\[
+ \E_0\log\Lambda_\tau
+  =\tfrac12\log(1-\eta^2)\E_0\tau.
+\]
+Jensen's inequality yields
+$\tfrac12\log(1-\eta^2)\E_0\tau\le\log\alpha_s$,
+which proves Eq.~\ref{eq:signed_screen_lower_bound}; infinite expected
+stopping time satisfies it trivially. For full endpoint observations in
+this signed example, use $(H,0)$ and $(0,H)$; the pair then contains no
+additional information beyond $B_{\mathrm{env}}$.
+\end{proof}
+Together with Proposition~\ref{prop:zero_width_cost}, this identifies the
+$ (H/\varepsilon)\log(1/\alpha_s)$ zero-width sampling order as $\varepsilon/H\to0$ for the stated
+distribution-free endpoint-screening problem, up to fixed-grid constants
+and inspection overhead. The signed-class lower bound instead has order
+$(H/\varepsilon)^2\log(1/\alpha_s)$ at the stated symmetric zero-mean
+law. This identifies a worst-case support distinction, not a claim that
+the RTC engine realizes that law or necessarily needs quadratically more
+paths. Both are restricted oracle statements, not optimization lower
+bounds for the network model. In particular, a known
+rumor-free state can be resolved by exact model reasoning without sampling.
+
+\begin{corollary}[Implicit action regions and adaptive proposals]
+\label{cor:implicit_region}
+For fixed $I\subseteq J$ with $|I|\le k\le|J|$, let
+$\mathcal R(I,J)=\{S:I\subseteq S\subseteq J,\ |S|=k\}$. An endpoint
+certificate with error allocation $\alpha_s$ applies uniformly to all
+$\binom{|J\setminus I|}{k-|I|}$ members of this region, even if its returned
+member is chosen after observing the screen. More generally, successive
+regions may be proposed using preceding observations, provided each screen
+uses fresh tapes after its region is fixed. If their predictable error
+allocations sum to at most $\alpha$, the probability of ever certifying a
+region whose expected-loss diameter exceeds $\varepsilon$ is at most
+$\alpha$.
+\end{corollary}
+\begin{proof}
+For every $S\in\mathcal R(I,J)$, monotonicity gives
+$Q(J)\le Q(S)\le Q(I)$ simultaneously. Consequently the region diameter is
+at most $Q(I)-Q(J)$, independent of which member is returned. The endpoint
+test controls erroneous rejection of this mean bound, without a union
+bound over region members. For an adaptive region, condition on the past
+before its fresh tapes are drawn and apply the same test proof. The
+conditional error is bounded by its allocated risk. Taking expectations
+and union-bounding over the successive screens proves the simultaneous
+statement; the predictable allocations have total at most $\alpha$.
+\end{proof}
+This is a proved scope extension. The experiment uses a fixed eight-action
+region and does not implement adaptive proposals or demonstrate savings
+for large implicit regions. A larger region can have a wider endpoint
+bound and be harder to certify; cardinality alone is not an efficiency
+guarantee.
+
+\subsection{A sequential certificate for greedy marginals}
+\begin{proposition}[Stagewise approximate greedy selection]
+\label{prop:race}
+Consider $k$ adaptive greedy stages. At stage $t$, freeze the selected base $S_t$ and $m_t$ candidate nodes. On independent fresh tapes observe $Y_{i,r}=L(S_t)-L(S_t\cup\{i\})\in[0,H]$. For $n\ge2$, let $\bar Y_{i,n}$ and $s^2_{i,n}$ be their sample mean and unbiased variance, and put
+\begin{align*}
+ \delta_{t,i,n}&=\frac{6\alpha}{k m_t\pi^2n^2},\\
+ r_{t,i,n}&=\sqrt{\frac{2s^2_{i,n}\log(4/\delta_{t,i,n})}{n}}\\
+ &\quad+\frac{7H\log(4/\delta_{t,i,n})}{3(n-1)}.
+\end{align*}
+Clip $[\bar Y-r,\bar Y+r]$ to $[0,H]$ to obtain $[l_i,u_i]$. Eliminate a candidate only when $u_i<\max_j l_j$ among active candidates. Certify $b$ only when $l_b\ge\max_{j\ne b}u_j-\varepsilon_t$. With probability at least $1-\alpha$, every certified stage selects a marginal within $\varepsilon_t$ of the largest available marginal, even with adaptive sample counts. At budget exhaustion the procedure may return unresolved; an uncertified heuristic fallback has no such guarantee.
+\end{proposition}
+\begin{proof}
+The two-sided empirical-Bernstein inequality for bounded samples gives coverage at a fixed $(t,i,n)$ with error at most $\delta_{t,i,n}$, using the displayed conservative logarithm. Conditional on the preceding stages, the base and candidate family are fixed. Independence of fresh tapes and portfolio projection in Theorem~\ref{M-thm:batch} give the required identical marginal sampling law, regardless of other active candidates. Union over candidates, all $n\ge2$, and stages has error at most $\alpha$, since $\sum_{n\ge1}6/(\pi^2n^2)=1$. On this joint coverage event a maximizing arm cannot be eliminated: its upper bound is at least the true maximum and every lower bound is at most that maximum. At a certified stop the selected marginal is at least $l_b$, and every surviving competitor's marginal is at most $u_i\le l_b+\varepsilon_t$. A maximizing arm survives, so this proves the assertion.
+\end{proof}
+The guarantee is stagewise. The zero-ratio counterexample prevents turning it into an unrestricted approximation ratio for the recurrent propagation objective. In addition, the range term can prevent certification at practically useful small budgets; certification frequency must be measured rather than presumed.
+
+\subsection{A fixed-witness bound for final-action certification}
+\label{sec:witness_bound}
+The all-pairs correction used above is sufficient to protect every internal
+pairwise statement. Final-action certification admits a smaller correction.
+Consider a fixed portfolio of $M\ge2$ actions with expected losses $Q_i=Q(S_i)$.
+For each ordered pair let $E^{>}_{ij}$ test $Q_i\le Q_j$ and let
+$E^\varepsilon_{ij}$ test $Q_i-Q_j\ge\varepsilon$.
+The former mixes products of $1+\lambda(L_i-L_j)$ with
+$0\le\lambda<1/H$; the latter mixes products of
+$1+\lambda(\varepsilon-L_i+L_j)$ with
+$0\le\lambda<1/(H-\varepsilon)$. The fixed mixture weights sum to one.
+Each process starts at one and is a nonnegative supermartingale under its
+null, because losses are in $[0,H]$ and each fresh tape has the correct
+conditional marginal expectations. Pairwise independence is unnecessary.
+Unqueried processes are frozen, and allocation decisions are predictable.
+
+\begin{theorem}[Fixed-witness certification]
+\label{thm:witness}
+Suppose the race removes action $i$ only if some $E^{>}_{ij}$ reaches $1/\eta$,
+and certifies a surviving action $i$ only if every
+$E^\varepsilon_{ij}$ against another survivor reaches $1/\eta$.
+A sole survivor may also be certified. Cycles and budget exhaustion return
+an unresolved output. With
+\begin{equation}
+ \eta=\frac{r}{2(M-1)},\qquad
+ c_r=\log\frac{2(M-1)}{r},
+\end{equation}
+the probability of returning a certified action with expected regret greater
+than $\varepsilon$ is at most $r$, including under adaptive elimination and
+a finite budget.
+\end{theorem}
+\begin{proof}
+Fix a true minimizer $j^\star$ by a deterministic tie rule. This witness is
+fixed by population expectations for the proof and is not estimated by the
+algorithm. Each of the $M-1$ processes $E^{>}_{j^\star j}$ is a null process.
+By Ville's inequality and a union bound, the probability of ever eliminating
+$j^\star$ is at most $(M-1)\eta$. Otherwise it remains active. A certified
+$\varepsilon$-bad action $i$ then cannot be a sole survivor and must have
+$E^\varepsilon_{i j^\star}\ge1/\eta$. For each fixed such $i$ this is a null
+process. There are at most $M-1$ of them, giving an additional probability
+at most $(M-1)\eta$. The union of the two events has probability at most
+$r$. Fresh tapes and predictable allocation preserve the null
+supermartingale property for stopped or frozen processes. The argument
+also covers tied minimizers.
+\end{proof}
+
+\begin{corollary}[Screened final-action guarantee]
+If the endpoint screen has error allocation $s$ and its fresh-tape fallback
+uses Theorem~\ref{thm:witness} with $r=\alpha-s$, the probability of a
+certified $\varepsilon$-bad return is at most $\alpha$.
+\end{corollary}
+\begin{proof}
+A bad certified return either follows an invalid endpoint certificate or a
+bad certified fallback return. Union bounding the two probabilities gives
+$s+r=\alpha$.
+\end{proof}
+
+For $M=8$ and $s=r=0.025$, the screened fallback threshold decreases from
+$8.40738$ to $6.32794$, without changing $\varepsilon$ or the per-query error
+allocation. An unscreened race uses $5.63479$. This refinement protects the
+final action, rather than all internal pairwise statements simultaneously.
+It does not guarantee termination or a wall-time improvement. Thresholds
+can change elimination and later allocations, so earlier stopping on every
+coupled seed sequence is not asserted.
+
+\subsection{Independent-pilot routing and conditional risk reservation}
+\label{sec:conditional_routing}
+The fixed-witness bound reduces the cost of certification, but reserving
+half the error budget for an unused screen can still slow the fallback.
+An independent pilot can route computation before any confirmation begins.
+Let $\mathcal D_0$ contain a finite collection of independent endpoint tapes,
+and let $A(\mathcal D_0)\in\{0,1\}$ decide whether to enable screening.
+The pilot supplies no certificate and none of its observations enters a
+confirmation process. Its simulation cost is charged in full.
+
+\begin{theorem}[Conditional routing validity]
+\label{thm:conditional_routing}
+Fix a portfolio, an augmented context and $0<\varepsilon<H$.
+If $A=0$, run the fixed-witness race at risk $\alpha$ on fresh tapes.
+If $A=1$, choose a pilot-measurable $s\in(0,\alpha)$, run an independent
+endpoint screen at risk $s$, and, when necessary, run the race on another
+fresh tape stream at risk $\alpha-s$. The probability of returning a
+certified action with expected portfolio regret greater than
+$\varepsilon$ is at most $\alpha$, irrespective of the pilot's routing
+accuracy. An unresolved budget-limited return is not a certificate.
+\end{theorem}
+\begin{proof}
+Condition on $\mathcal D_0$. The context and portfolio are fixed, the route
+and $s$ are measurable, and the confirmation tapes are independent of the
+pilot. When $A=0$, Theorem~\ref{thm:witness} gives error at most $\alpha$.
+When $A=1$, the endpoint mixture in Eq.~\ref{eq:envelope_bet}, tested at
+$1/s$, has null crossing probability at most $s$: its nonnegative factors
+have conditional mean at most one under the null that the mean endpoint
+width is at least $\varepsilon$. Conditional on all screening data, the
+fresh-tape fallback has error at most $\alpha-s$ when reached. A union
+bound therefore gives at most $\alpha$ on this route as well. Averaging
+over the pilot proves the result. A finite budget can produce an unresolved
+output but cannot add a bad certified return.
+\end{proof}
+
+The implementation uses four pilot tapes and enables screening only if
+their mean endpoint width is below $\varepsilon/2$. An enabled screen
+receives $s=0.1\alpha$; otherwise the race retains the full $\alpha$.
+The pilot, screening and race have distinct random-stream coordinates.
+With $M=8$ and $\alpha=0.05$, the skipped-screen race uses threshold
+$5.63479$, the enabled fallback uses $5.74015$, and the screen uses
+$\log(200)=5.29832$. The 32-tape confirmation batches, 1,024-tape screen cap
+and existing computational futility rule are unchanged. These routing
+choices are fixed engineering settings, not optimality claims. Conditional
+validity does not imply a cost advantage; an inaccurate pilot can still
+add work. The empirical comparison below tests that cost separately.
+
+\FloatBarrier\section{Frozen-score and paired-switching guarantees}\subsection{A coefficient condition for the frozen score}
+\label{sec:scoreguarantee}
+The score admits an exact quadratic-exposure expansion
+\begin{equation}
+ h_i(S)=b_i+\sum_{v\in S}c_{iv}
+                +\sum_{\{v,w\}\subseteq S}d_{i,vw},\label{eq:quadratic}
+\end{equation}
+with nonnegative coefficients. Define $\eta_{ivw}=t_0\beta_2T_0(1-a_{ivw})$ for a filled face and zero otherwise. Then
+\begin{align}
+ b_i&=t_0\beta_1T_0\sum_{v\sim i}c_v^0
+           +\sum_{\{i,v,w\}\in\Fset}\eta_{ivw}c_v^0c_w^0,\notag\\
+ c_{iv}&=t_0u\ind\{i=v\}
+    +t_0\beta_1T_0\ind\{v\sim i\}(1-c_v^0)\notag\\
+ &\quad+\sum_{w:\{i,v,w\}\in\Fset}\eta_{ivw}(1-c_v^0)c_w^0,\notag\\
+ d_{i,vw}&=\eta_{ivw}(1-c_v^0)(1-c_w^0).\label{eq:coefficients}
+\end{align}
+Coefficients with repeated node indices are zero, except for the direct-control term in $c_{ii}$. Substitution of $z_v=c_v^0+(1-c_v^0)y_v$ proves the expansion.
+
+\begin{theorem}[Linear-exposure dominance]
+\label{thm:proxy}
+Suppose a finite $\kappa\ge0$ satisfies
+\begin{equation}
+ \frac12\sum_{w\ne v}d_{i,vw}\le\kappa c_{iv}
+ \quad\text{for every }i\text{ with }w_i>0\text{ and }v\in\mathcal C.
+ \label{eq:dominance}
+\end{equation}
+Then $F$ is normalized and monotone, and its truncated submodularity ratio is at least $\gamma=(1+\kappa)^{-1}$. If $\beta_1>0$ and $D>0$, the condition holds with
+\begin{equation}
+ \kappa=\frac{q_{\max}\beta_2(1+T_0)}{2\beta_1},\label{eq:kappabound}
+\end{equation}
+where $q_{\max}$ is the maximum number of filled faces containing a receiver--donor edge.
+\end{theorem}
+\begin{proof}
+All coefficients are nonnegative, so $h_i$ is monotone and $F(\varnothing)=0$. Fix disjoint $L,A\subseteq\mathcal C$, and write
+\[
+ a_{iv}=c_{iv}+\sum_{w\in L}d_{i,vw},\quad
+ t_i=\sum_{v\in A}a_{iv},\quad
+ p_i=\sum_{\{v,w\}\subseteq A}d_{i,vw}.
+\]
+Equation~\ref{eq:dominance} gives $p_i\le\kappa\sum_{v\in A}c_{iv}\le\kappa t_i$. The singleton marginal sum contributed by receiver $i$ is
+\[
+ w_ie^{-h_i(L)}\sum_{v\in A}(1-e^{-a_{iv}})
+ \ge w_ie^{-h_i(L)}(1-e^{-t_i}),
+\]
+using $1-e^{-a-b}\le(1-e^{-a})+(1-e^{-b})$. Its joint marginal is
+$w_ie^{-h_i(L)}(1-e^{-t_i-p_i})$.
+Concavity of $r(t)=1-e^{-t}$ and $r(0)=0$ imply
+$r((1+\kappa)t)\le(1+\kappa)r(t)$.
+Thus the joint marginal is at most $1+\kappa$ times the displayed singleton lower bound. Summing over receivers proves the ratio bound. If $t_i=0$, dominance forces $p_i=0$, and both contributions vanish.
+
+For Eq.~\ref{eq:kappabound}, a positive $d_{i,vw}$ requires $c_v^0=0$ and an edge $\{i,v\}$. Hence $c_{iv}\ge t_0\beta_1T_0$. At most $q_{\max}$ faces contribute to $\sum_wd_{i,vw}$, each by at most $t_0\beta_2T_0(1+T_0)$. The ratio of this sum to $2c_{iv}$ gives the stated sufficient constant. If the numerator is zero, Eq.~\ref{eq:dominance} holds directly.
+\end{proof}
+
+\begin{corollary}[Exact greedy for the score]
+\label{cor:proxygreedy}
+Under Eq.~\ref{eq:dominance}, exact singleton greedy applied to $F$ for $k$ steps returns $S_k$ such that, for a size-$k$ score maximizer $O$,
+\begin{equation}
+ F(S_k)\ge[1-(1-\gamma/k)^k]F(O)
+          \ge(1-e^{-\gamma})F(O).\label{eq:proxyapprox}
+\end{equation}
+\end{corollary}
+\begin{proof}
+At the current greedy set $L$, the ratio and monotonicity give
+$\sum_{v\in O\setminus L}[F(L\cup\{v\})-F(L)]\ge\gamma[F(O)-F(L)]$.
+There are at most $k$ summands, so the largest greedy marginal reduces the residual by a factor at most $1-\gamma/k$. Iterate for $k$ steps and use $(1-\gamma/k)^k\le e^{-\gamma}$, the standard weak-submodularity recurrence~\cite{das2018}.
+\end{proof}
+
+\begin{proposition}[Localization of positive score complementarity]
+\label{prop:localization}
+If $d_{i,uv}=0$ for every positive-weight receiver $i$, the second set difference of $F$ for $u,v$ at every background $L$ is nonpositive. Positive score complementarity therefore requires a shared donor-pair term.
+\end{proposition}
+\begin{proof}
+With no $uv$ term, let $a_{iu}$ and $a_{iv}$ be the two increments in Eq.~\ref{eq:quadratic} at background $L$. Receiver $i$ contributes
+\[
+ -w_ie^{-h_i(L)}(1-e^{-a_{iu}})(1-e^{-a_{iv}})\le0.
+\]
+Sum over receivers.
+\end{proof}
+
+These statements provide a structural analysis of the proposal score. Equation~\ref{eq:score} is not a lower or upper bound on $g$, so Eq.~\ref{eq:proxyapprox} is a guarantee for exact score-greedy only. Multistep recurrent dynamics can create effects outside the score's donor-pair neighborhood. The tested Monte Carlo greedy and thirteen-candidate exchange policies do not inherit this approximation factor.
+
+\subsection{Independent paired certification}
+\label{sec:certificate}
+Let discovery information $\mathcal D$ freeze an anchor $S_0$, alternatives $S_1,\ldots,S_m$, and outcome-independent sample allocations $n_j\ge2$. Fresh tapes are independent of $\mathcal D$ and iid across repetitions; different alternatives may share tapes. Define
+\begin{align}
+ Z_{ji}&=L(S_0,\xi_i)-L(S_j,\xi_i)\in[-H,H],\notag\\
+ \mu_j&=Q(S_0)-Q(S_j),\qquad
+ s_j^2=\frac{1}{n_j-1}\sum_{i=1}^{n_j}(Z_{ji}-\bar Z_j)^2.
+ \label{eq:paired}
+\end{align}
+Here iid denotes independent and identically distributed simulation tapes. Write $\widehat S=S_{\widehat\jmath}$ for the selected index $\widehat\jmath\in\{0,\ldots,m\}$, with $\mu_0=0$.
+
+\begin{theorem}[One-query switching certificate]
+\label{thm:certificate}
+For $0<\alpha<1$ and $m\ge1$, set
+\begin{equation}
+ r_j=\sqrt{\frac{2s_j^2\log(2m/\alpha)}{n_j}}
+       +\frac{14H\log(2m/\alpha)}{3(n_j-1)}.\label{eq:eb}
+\end{equation}
+Fix $\tau\ge0$. Retain the anchor unless some $\bar Z_j-r_j>\tau$, and otherwise select the largest lower bound. Then
+\begin{equation}
+ \Prob\{\widehat S\ne S_0,\ \mu_{\widehat\jmath}\le\tau
+                 \mid\mathcal D\}\le\alpha,\label{eq:false}
+\end{equation}
+and, with $\mathcal E_{\mathrm{sw}}=\{\widehat S\ne S_0\}$,
+\begin{align}
+ \E[Q(\widehat S)-Q(S_0)\mid\mathcal D]
+ \le-\tau\Prob(\mathcal E_{\mathrm{sw}}\mid\mathcal D)+(H+\tau)\alpha.
+ \label{eq:risk}
+\end{align}
+For $m=0$, always retain the anchor.
+\end{theorem}
+\begin{proof}
+Apply the fixed-sample empirical-Bernstein bound~\cite{maurer2009} to $(H-Z_{ji})/(2H)\in[0,1]$, with failure probability $\alpha/m$. Its sample variance is $s_j^2/(4H^2)$. Multiplying the bound by $2H$ gives
+$\mu_j\ge\bar Z_j-r_j$, including the $14H$ term in Eq.~\ref{eq:eb}. A union bound gives simultaneous validity with probability at least $1-\alpha$; independence between alternatives is unnecessary. On this event every switch has gain strictly above $\tau$, proving Eq.~\ref{eq:false}. Excess loss is at most $-\tau$ on a valid switch, zero without a switch, and at most $H$ on an invalid switch. Decomposing over these events yields
+$-\tau\Prob(\mathcal E_{\mathrm{sw}}\mid\mathcal D)+(H+\tau)\Prob(\mathcal E_{\mathrm{sw}}\cap\text{invalid}\mid\mathcal D)$,
+which proves Eq.~\ref{eq:risk}.
+\end{proof}
+
+At $\tau=0$, Eq.~\ref{eq:risk} is an $\alpha H$ expected-excess bound, not exact expected non-increase. This distinction is substantive: an anchor with constant loss $0.5$ and an alternative with loss $0$ with probability $1/4$ and $1$ otherwise have risks $0.5$ and $0.75$. One-sample holdout minimization deploys the alternative with probability $1/4$, giving expected loss $0.5625$.
+
+\begin{corollary}[Portfolio regret and time-uniform validity]
+\label{cor:portfolio}
+For a frozen portfolio, use Eq.~\ref{eq:eb} with $\log(4m/\alpha)$ to obtain two-sided bounds, include the anchor with lower bound zero, and select the largest lower bound. With probability at least $1-\alpha$, regret relative to the best member $j^*$ of this portfolio is at most $2r_{j^*}$, taking $r_0=0$ for the anchor. Alternatively, assigning
+\begin{equation}
+ \delta_{j,n}=\frac{6\alpha}{m\pi^2n^2},\qquad n\ge2,\label{eq:spending}
+\end{equation}
+and replacing $\log(2m/\alpha)$ by $\log(2/\delta_{j,n})$ gives simultaneous one-sided validity at arbitrary prefix stopping times for the frozen streams.
+\end{corollary}
+\begin{proof}
+For the first claim, a union bound over both tails gives $\bar Z_j-r_j\in[\mu_j-2r_j,\mu_j]$ simultaneously. The chosen gain is at least its lower bound, which is at least the lower bound of $j^*$. Hence $\mu_{\widehat\jmath}\ge\mu_{j^*}-2r_{j^*}$, exactly the regret statement. For the second claim, union-bound the fixed-time inequalities over $j$ and $n$. Equation~\ref{eq:spending} has total error at most $\alpha$, so every prefix bound is valid on the same event, including a data-selected stopping prefix.
+\end{proof}
+
+The time-uniform construction has a $\log n$ penalty; confidence-sequence methods can offer tighter boundaries under their own conditions~\cite{howard2021,waudby2024}. Changing the anchor or alternatives after examining the certification tapes requires fresh error accounting. The finite-portfolio regret statement does not compare against every size-$k$ node set.
+
+\FloatBarrier\section{Complete cohort inventory}
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{.18\textwidth}>{\raggedright\arraybackslash}p{.22\textwidth}>{\raggedright\arraybackslash}p{.30\textwidth}>{\raggedright\arraybackslash}p{.18\textwidth}}
+\caption{Evaluation cohorts, independently sampled units, and charged budgets. Final evaluation is separate from online selection.}\label{tab:cohorts}\\
+\toprule
+Cohort & Units & Online selection and independent evaluation & Purpose\\
+\midrule\endfirsthead
+\toprule
+Cohort & Units & Online selection and independent evaluation & Purpose\\
+\midrule\endhead
+
+Complete adaptive search & 64 new graphs, 3 histories; $n=100,300$ & 1,024 online; 256 final paths per distinct set & Same-law whole-search cost\\
+Optimized replay & 32 further graphs, 3 histories; $n=100,300$ & 1,024 online; 128 final paths per distinct set & Persistent topology control\\
+Larger certified portfolios & 32 new graphs per setting; one history & 32,768-copy cap; $M=16,32$; 128 final paths/action & Screening stress tests\\
+Original search & 30 graphs, 3 histories, $n=100$ & 1,024 online; 512 final paths per distinct set & Initial search endpoint\\
+Calibrated confirmation & 60 new graphs, 3 histories per cell & 1,024 online; 512 final; all eight cells & Conditional FEX--NEX test\\
+Decision cost & 32 new graphs, 2 settings, 3 histories & Four nonnested sets; 8--512 online paths & Cost at fixed quality\\
+Portfolio runtime & 32 graphs, 3 histories per graph; $n=100,300$ & $8M$ marginal continuations per block; $M\in\{2,8\}$; 3 blocks; 5 evaluators & Preserved-law CPU comparison; equal-budget RTC\\
+Large portfolio extension & 16 graphs, randomized augmented states; $n=1,000,3,000$ & $2M$ marginal continuations per workload; $M\in\{2,8,32\}$; 3 evaluators & Descriptive computation; no efficacy test\\
+Scaling & 16 graphs at each of five sizes & 24 paths per engine and graph, $n\le10,000$ & Engine workload\\
+Pool sensitivity & 32 graphs, 2 histories, $n=100,300$ & 2,048 online; pools 16, 64, and all nodes & Candidate-domain effect\\
+Endpoint selection & 32 new graphs, 3 histories, $n=100$ & 16,384 maximum online copies; 256 final per action & Certified portfolio cost\\
+Engine/screen attribution & 32 further graphs, 3 histories, $n=100$ & 16,384 online copies; 256 final per action & Four-cell attribution\\
+Witness refinement & 32 further graphs, 3 histories, $n=100$ & 32,768 online copies; 256 final per action & Final-action correction test\\
+Pilot-routed screening & 32 further graphs, 3 histories, $n=100$ & 32,768 online copies; 256 final per action & Conditional-risk efficiency test\\
+Strong baselines & 32 new graphs, 2 histories, $n=100,300$ & 4,096 online; pool 64; 512 final & Seventeen FEX contrasts\\
+Observed groups & Four fixed 200-node graphs & 12 histories each; 4,096 online; 512 final & Separate topology tests\\
+\bottomrule
+\end{longtable}
+\endgroup
+\noindent\footnotesize Portfolio-runtime and extension totals are 115,200 and 4,032 marginal continuations, respectively. One tape evaluated on $M$ sets costs $M$ continuations; prehistory is excluded.\normalsize
+
+\FloatBarrier\section{Complete fixed-contrast variance summaries}
+The initial fixed-action benchmark gives a median thinning-to-graphical difference-variance ratio of $33.50$, with a descriptive 95\% interval $[21.58,74.10]$, across twelve contexts for the nested no-target versus two-target comparison. The recorded-time-adjusted ratio is $53.28$ $[27.30,131.44]$. For the nonnested two-target versus four-target contrast, the variance ratio is $6.79$ $[2.77,15.23]$. These measurements concern estimating specified contrasts; the latter actions also have different cardinalities.
+
+The later decision-cost cohort explicitly uses equal-size nonnested actions. Its finite-positive median variance ratio against thinning is $4.00$ for those comparisons and $7.66$ for its nested control; complete zero-variance categories and ratios of mean variances are retained with the analysis outputs. These separate cohorts show why the nested range theorem and a measured nonnested variance reduction should be stated separately.
+
+% BEGIN REVIEW_RTC_VARIANCE
+In the same initial twelve-context nested-pair benchmark, the median thinning-to-RTC difference-variance ratio is $15.49$, compared with $33.50$ for thinning-to-graphical. In the later decision-cost cohort, the median RTC-to-graphical difference-variance ratios are $1.37965$ for nested controls and $1.13251$ for equal-size nonnested actions, over 178 and 1,042 finite-positive comparisons, respectively. The respective complete counts are 192 and 1,152: ten and 37 comparisons have zero variance under both methods, and four and 73 have zero graphical variance with positive RTC variance; none has the opposite zero-variance pattern. Ratios of mean RTC to graphical variances are $1.28529$ and $1.03350$. These descriptive summaries show that the variance advantage over common reaction paths is much smaller than the advantage over global thinning and is not universal. The distinctive proved property is the augmented path order and its resulting variance bounds; it is not a guarantee of smaller variance than RTC. Ratios from different cohorts or contrasts must not be divided to infer a paired variance ratio.
+% END REVIEW_RTC_VARIANCE
+
+\FloatBarrier\section{Complete conditional-search and mechanism evidence}
+\subsection{Calibration and independent confirmation}\label{sec:conditional_details}
+An independent calibration cohort contains sixteen graphs, four per family. It evaluates the full grid $k\in\{4,8\}$, $D\in\{2,4\}$, $s\in\{0.5,1.5\}$ at $u=3$. A cell is eligible when mean rumor-degree intervention reduces the mean no-control loss by 30--70\%, with no-control loss at least $0.05$. This operational moderate-suppression definition selects five cells before confirmatory evaluation. All eight cells are evaluated and retained.
+
+Sixty new graphs, fifteen per family, supply three histories per cell. Each exchange policy receives 512 anchor, 256 discovery, and 256 holdout calls; node greedy receives 1,024 calls. The designated primary endpoint is the per-graph mean NEX-minus-FEX loss over the five eligible cells. The secondary endpoint is greedy-minus-FEX over the same cells. Forty thousand family-stratified bootstrap repetitions give two-comparison Bonferroni 97.5\% intervals. The primary criterion additionally requires positive mean differences in all four families.
+
+The primary reduction is $0.01637$ $[0.01022,0.02306]$, with 45 positive and fifteen negative graph means. All four family means are positive, satisfying the fixed criterion. NEX and FEX mean losses are $1.21049$ and $1.19412$, a descriptive relative reduction of 1.35\%. The corrected secondary gain over greedy is $0.03811$ $[0.02792,0.04921]$, with 49 positive and eleven negative graphs. Figure~\ref{fig:confirmation} gives the family breakdown: sparse SBM has a descriptive interval containing zero, and preferential attachment with closure contributes approximately 61.5\% of the pooled primary mean.
+
+% BEGIN REVIEW_ROBUSTNESS
+\paragraph{Post-hoc descriptive robustness} We recomputed each graph's mean NEX-minus-FEX loss across the five independently calibrated eligible cells from the retained graph-level policy-loss file. Table~\ref{tab:robustness} reports descriptive summaries; these analyses were not prespecified and are not part of a prespecified comparison family. The 10\% trimmed mean removes the six lowest and six highest graph gains. Excluding the PA-with-closure family leaves 45 graphs. The largest-five share is their summed gain divided by the signed net gain across all 60 graphs. The positive median and trimmed mean indicate that the observed mean is not generated solely by a few extreme gains, while the family exclusion and concentration measure quantify material heterogeneity; none is a new confirmatory test.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Post-hoc descriptive FEX robustness on the 60 confirmation graphs, averaging only the five eligible cells. No new inferential interval is attached.}
+\label{tab:robustness}
+\begin{tabular}{lr}\toprule Summary & Value\\\midrule
+Mean gain & 0.01637\\
+Median gain & 0.00823\\
+10\% trimmed mean & 0.01220\\
+Positive/negative graphs & 45/15\\
+Mean excluding PA-with-closure & 0.00840\\
+Largest-five share of net gain & 42.38\%\\
+\bottomrule\end{tabular}
+\end{table}
+% END REVIEW_ROBUSTNESS
+
+
+
+Table~\ref{tab:grid} reports every cell, including the three outside the calibrated range. The cell intervals belong to a separate 24-comparison family. The aggregate criterion confirms the defined average; it does not assert a positive effect in every cell or a statistical interaction between eligible and ineligible cells. Face-pair replacements occur in 17.2--30.6\% of deployed cell contexts.
+
+Figure~\ref{fig:confirmation}(a,b) in the main article displays the corresponding family-level means across the complete grid on a shared linear color scale. The stronger PA-with-closure responses coexist with smaller or mixed responses elsewhere. Table~\ref{tab:grid} retains every cellwise adjusted interval.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Complete confirmation grid. Eligibility is fixed by independent calibration. Gain is NEX minus FEX; intervals adjust the 24 cellwise comparisons.}
+\label{tab:grid}
+\begin{tabular}{rrrrlrl}
+\toprule
+Cell & $k$ & $D$ & $s$ & Eligible & Gain & Interval\\
+\midrule
+1 & 4 & 2 & .5 & Yes & .01566 & [-.00218,.04000]\\
+2 & 4 & 2 & 1.5 & No & -.00027 & [-.01131,.01094]\\
+3 & 4 & 4 & .5 & Yes & .02953 & [.00750,.05654]\\
+4 & 4 & 4 & 1.5 & No & .00230 & [-.01252,.01500]\\
+5 & 8 & 2 & .5 & Yes & .00921 & [-.00784,.03354]\\
+6 & 8 & 2 & 1.5 & Yes & .01471 & [.00020,.03282]\\
+7 & 8 & 4 & .5 & No & .00514 & [-.00082,.01224]\\
+8 & 8 & 4 & 1.5 & Yes & .01271 & [-.00106,.03110]\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Initial search and mechanism evidence}
+The initial 30-graph designated FEX--NEX comparison has gain $0.02133$, 95\% interval $[-0.00185,0.04099]$, with 20 positive, nine negative, and one tied graph. Its outcome is inconclusive. The secondary FEX--greedy gain is $0.04717$ with six-comparison adjusted interval $[0.01596,0.08074]$. These remain separate results; the later conditional experiment does not replace the initial endpoint.
+
+Matched pair controls give a face-minus-control complementarity difference of $0.01495$, reduced to $0.00026$ when $\beta_2=0$, for a difference-in-differences of $0.01469$. Eighteen of thirty graph-average face complementarities are positive and the pair-level median is zero. The full distribution and unrestricted-pair, proposal-memory-off, and face-block controls are retained in the supplement. They characterize heterogeneous interactions rather than identify face restriction or memory as the unique cause of search improvement.
+
+\FloatBarrier\section{Independent-pilot routing and larger portfolios}
+\label{sec:adaptive_study}
+A fourth independently planned selection cohort tests the pilot-routed policy
+of Theorem~\ref{thm:conditional_routing}. It contains 32 new graphs, eight per
+family, and three natural histories each. The model, eight-action candidate
+rule, $\varepsilon=0.1$, per-query $\alpha=0.05$ and common 32,768-copy cap
+are unchanged from the preceding cohort. Four charged endpoint pilot tapes
+route computation; no pilot observation contributes to confirmation. An
+enabled screen receives $0.1\alpha$, with $0.9\alpha$ for its fresh fallback;
+a skipped screen leaves the full $\alpha$ for the race.
+
+The comparator is the frozen witness-plain implementation, not a weaker
+all-pairs race. Both methods receive the identical exact presolve for an
+initially rumor-free context, where all intervention losses are zero.
+All such contexts remain in the analysis and the measured presolve cost is
+included. Timings are sequential, method order is randomized, and every
+method executes and pays for its own simulation. Race seed streams are
+aligned to reduce comparison noise; the pilot and confirmation phases use
+separate coordinates. No cross-method caching is used.
+
+The only planned cost contrast is plain/routed-screen wall time. We retain
+the conservative central 97.5\% interval from 20,000 family-stratified
+graph-unit bootstrap draws. Every query in both methods must be certified
+and the interval's lower bound must exceed one. CPU time, continuation
+counts, family ratios and total elapsed time are descriptive. Zero-copy
+presolves contribute a neutral log-copy ratio to that descriptive metric.
+The interval applies to this new policy and cohort, rather than providing
+simultaneous coverage across the sequence of earlier studies.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Independent-pilot study with the frozen strong plain comparator. Every context is retained and the same exact extinction presolve is available to both methods. The common cap is 32,768 marginal copies.}
+\label{tab:adaptive_cells}
+\setlength{\tabcolsep}{4pt}\begin{tabular}{lrrrrrr}
+\toprule
+Method & Certified & By 16,384 & Exact presolve & Endpoint only & Mean copies & Mean time (s)\\
+\midrule
+Pilot-routed screen & 96/96 & 95/96 & 4 & 13 & 4602.7 & 2.613 \\
+Frozen plain race & 96/96 & 95/96 & 4 & 0 & 5168.7 & 2.840 \\
+\bottomrule
+\end{tabular}
+\end{table}
+The planned geometric wall-time ratio is 1.127 [1.057, 1.211], with 21/32 positive graph log ratios. The all-query quality and wall-cost gates both pass. Arithmetic mean online times are 2.840 s for plain and 2.613 s for routed screening; total times are 272.66 and 250.86 s. The pilot enables screening in 26 contexts and skips it in 66; the common exact presolve resolves 4. All pilot simulations cost 736 marginal copies. Earlier fixed-risk screening failures remain reported; the present experiment evaluates a changed policy on new graphs.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{All family-level plain/routed-screen wall ratios, reported descriptively without family-specific superiority tests.}
+\label{tab:adaptive_families}
+\begin{tabular}{lr}
+\toprule
+Family & Ratio\\
+\midrule
+ER & 1.022 \\
+WS & 0.983 \\
+Sparse SBM & 1.120 \\
+PA + closure & 1.432 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{adaptive_comparison}
+\caption{Independent-pilot routing. (a) Mean charged copies and certified-query counts, including the common exact presolve. (b) The pooled planned plain/routed-screen geometric wall-time ratio with its conservative 97.5\% interval, and family-level descriptive points without intervals. Values above one favor routed screening. All pilot costs are included.}
+\label{fig:adaptive_comparison}
+\end{figure}
+
+\paragraph{Larger portfolios}
+Two further prespecified stress configurations use 32 new graphs each: $n=300,M=16$ with a shared three-target core, and $n=100,M=32$ with diverse four-target sets. Plain and pilot-routed races certify all 32 queries in each setting, but their respective plain/routed time ratios, 1.1305 [0.9829, 1.3218] and 1.0296 [0.8909, 1.2886], do not pass the adjusted cost criteria. Complete stress outcomes, including unresolved empirical-Bernstein comparator outputs, are given in the supplement. The eight-action efficiency finding therefore remains conditional on its portfolio design.
+
+\FloatBarrier\section{Deterministic validation}
+Six small graphs at two cardinalities verified the quadratic score expansion, coefficient ratio bound, greedy recurrence, and score-complementarity localization by enumeration, with maximum expansion discrepancy $1.11\times10^{-16}$. Four 27-state triangle chains at $\lambda=0$ were evaluated through intervention and post-intervention occupation by matrix exponentials and independent uniformization, agreeing to $3.61\times10^{-16}$. At $\beta_1=0$, no-action and singleton losses are $0.1060307909$, versus $0.0415425304$ for the pair. The positive-memory-relaxation result is established by the path proof in the main article; these finite chains are a check of the frozen-memory cases.
+
+Sixty-six fixed-time, dependent-candidate, and sequential finite-support probability cases were checked using binomial sums or absorbing recursions. Retrospective application of empirical-Bernstein and Hoeffding certificates to the 128 archived exchange queries authorizes zero switches under either rule. This is a power diagnostic at the existing budgets, not a new deployment experiment.
+
+\FloatBarrier\section{Implementation, initialization and runtime interpretation}
+The graphical construction uses three destination-reset proposal clocks per node, deterministic between-event memory evolution and shared uniform acceptance marks. Reset to the current state is inert. The operational-time comparator uses six directed state-transition channels per node and integrated hazards. Its incremental implementation caches local rates and uses a $6n$ indexed heap. Both are valid coupling constructions; only the graphical scheme implements the stated augmented order.
+
+The graphical work bound includes $O(n\log(n+1))$ queue initialization and topology indexing. The measured proposal-work slope does not prove a bound solely in $n$, because incident edge/face counts and proposal rates vary. Original global RTC versus graphical timing is implementation dependent. The local RTC comparison at 3,000 and 10,000 nodes remains unfavorable to graphical runtime. Some workloads use legal random initial states rather than naturally generated coexistence histories and assess computation, not correction effectiveness.
+
+The decision-cost reference uses independent streams A and B, not a sample-minimum bias correction. Four fixed equal-size candidate actions are a restricted portfolio. The threshold is 0.02 excess cumulative loss on the observed budget grid. Non-crossing baselines are censored, not extrapolated; bootstrap failures to reach the graphical threshold are retained by the locked conservative rule. Retiming an unchanged trajectory does not create a new statistical observation.
+
+\FloatBarrier\section{Baseline definitions and budget scope}
+R-degree ranks current rumor nodes by structural degree and uses deterministic tie handling. Rumor-neighbor scoring counts current rumor exposure. Other zero-path controls rank by ordinary core, betweenness or adaptations of group and hypercore importance. Hypergraph collective-influence adaptations use the present face incidence and state weighting, not the original authors' native contagion solver. Precise formulas and fixed parameters are preserved in the implementation specification distributed with the baseline package. These adaptations cannot establish a ranking over original methods in their own models.
+
+The primary simulation baselines are full-budget singleton greedy; shared-anchor node and face exchange; empirical CELF; simulated annealing; full one-swap local search; a fixed sampled two-swap neighborhood; and successive halving. Every primary simulated policy receives 4,096 physical paths and the same 64-node domain. CELF reuses empirical priorities without a submodularity certificate and is an empirical control. The annealing schedule and shortlist rules were fixed before the new test cohort. Full-graph heuristic controls are reported descriptively, separately from the same-pool primary family. Search time and trajectory cost are distinct.
+
+\FloatBarrier\section{Complete outcome tables}
+\subsection{All seventeen adjusted FEX comparisons}
+{\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{31mm}>{\raggedright\arraybackslash}p{21mm}>{\raggedright\arraybackslash}p{21mm}>{\raggedright\arraybackslash}p{21mm}>{\raggedright\arraybackslash}p{12mm}>{\raggedright\arraybackslash}p{12mm}>{\raggedright\arraybackslash}p{12mm}}
+\toprule
+Method & Gain & Lower & Upper & Pos. & Neg. & Tie\\\midrule
+\endhead
+
+R-degree & 0.13947 & 0.08069 & 0.21097 & 30 & 2 & 0\\
+
+R-neighbor & 0.11308 & 0.06746 & 0.15948 & 29 & 3 & 0\\
+
+k core & 0.13955 & 0.08139 & 0.21271 & 30 & 2 & 0\\
+
+Between. & 0.24839 & 0.17463 & 0.32943 & 31 & 1 & 0\\
+
+Group proxy & 0.03835 & 0.01160 & 0.06786 & 27 & 5 & 0\\
+
+hypercore & 0.08914 & 0.02867 & 0.15045 & 27 & 5 & 0\\
+
+CI proxy & 0.08381 & 0.04334 & 0.13135 & 27 & 5 & 0\\
+
+risk kcore & 0.13944 & 0.08201 & 0.20984 & 30 & 2 & 0\\
+
+Risk between. & 0.17075 & 0.11608 & 0.23414 & 29 & 3 & 0\\
+
+Risk hypercore & 0.06577 & 0.00581 & 0.12489 & 24 & 8 & 0\\
+
+greedy & 0.04829 & -0.00399 & 0.10609 & 18 & 14 & 0\\
+
+NEX & 0.02217 & 0.00526 & 0.04175 & 12 & 14 & 6\\
+
+CELF & 0.06005 & 0.00604 & 0.11737 & 23 & 9 & 0\\
+
+annealing & 0.08464 & 0.02868 & 0.15086 & 26 & 6 & 0\\
+
+1-swap & 0.06765 & 0.02032 & 0.12129 & 21 & 11 & 0\\
+
+2-swap & 0.06257 & 0.01579 & 0.12043 & 28 & 4 & 0\\
+
+Halving & -0.02508 & -0.05127 & 0.00249 & 13 & 19 & 0\\
+
+\bottomrule
+\end{longtable}}
+
+\subsection{All absolute baseline losses}
+{\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{40mm}>{\raggedright\arraybackslash}p{12mm}>{\raggedright\arraybackslash}p{22mm}>{\raggedright\arraybackslash}p{22mm}>{\raggedright\arraybackslash}p{22mm}>{\raggedright\arraybackslash}p{22mm}}
+\toprule
+Method & Domain & Mean loss & Lower & Upper & Paths\\\midrule
+\endhead
+
+annealing & pool & 2.49103 & 2.09046 & 2.86731 & 4096\\
+
+Between. & pool & 2.65478 & 2.26704 & 3.02489 & 0\\
+
+betweenness full & full & 2.67595 & 2.28946 & 3.04412 & 0\\
+
+CELF & pool & 2.46644 & 2.06037 & 2.84241 & 4096\\
+
+FEX & pool & 2.40639 & 2.01736 & 2.77206 & 4096\\
+
+greedy & pool & 2.45468 & 2.07434 & 2.82381 & 4096\\
+
+greedy anchor 3072 & aux. & 2.48446 & 2.09824 & 2.84908 & 3072\\
+
+Group proxy & pool & 2.44474 & 2.05917 & 2.81241 & 0\\
+
+group proxy full & full & 2.44471 & 2.06040 & 2.80594 & 0\\
+
+CI proxy & pool & 2.49020 & 2.10435 & 2.86127 & 0\\
+
+hyper ci proxy full & full & 2.49047 & 2.10104 & 2.85673 & 0\\
+
+hypercore & pool & 2.49553 & 2.10909 & 2.85931 & 0\\
+
+hypercore full & full & 2.49551 & 2.10990 & 2.85306 & 0\\
+
+k core & pool & 2.54594 & 2.14722 & 2.92433 & 0\\
+
+k core full & full & 2.54594 & 2.15262 & 2.91924 & 0\\
+
+1-swap & pool & 2.47404 & 2.07489 & 2.84650 & 4096\\
+
+2-swap & pool & 2.46896 & 2.08086 & 2.83919 & 4096\\
+
+NEX & pool & 2.42856 & 2.04937 & 2.78583 & 4096\\
+
+R-degree & pool & 2.54586 & 2.15042 & 2.92605 & 0\\
+
+r degree full & full & 2.54586 & 2.14826 & 2.91734 & 0\\
+
+Risk between. & pool & 2.57714 & 2.18680 & 2.94835 & 0\\
+
+risk betweenness full & full & 2.58085 & 2.18402 & 2.95444 & 0\\
+
+Risk hypercore & pool & 2.47217 & 2.06901 & 2.83949 & 0\\
+
+risk hypercore full & full & 2.47218 & 2.07798 & 2.84220 & 0\\
+
+risk kcore & pool & 2.54583 & 2.14164 & 2.91927 & 0\\
+
+risk kcore full & full & 2.54583 & 2.15069 & 2.92022 & 0\\
+
+R-neighbor & pool & 2.51947 & 2.13209 & 2.87952 & 0\\
+
+rumor neighbors full & full & 2.52116 & 2.13238 & 2.88576 & 0\\
+
+Halving & pool & 2.38131 & 1.99465 & 2.74387 & 4096\\
+
+\bottomrule
+\end{longtable}}
+
+\subsection{All eight scaling and pool endpoints}
+{\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{30mm}>{\raggedright\arraybackslash}p{16mm}>{\raggedright\arraybackslash}p{16mm}>{\raggedright\arraybackslash}p{26mm}>{\raggedright\arraybackslash}p{26mm}>{\raggedright\arraybackslash}p{26mm}}
+\toprule
+endpoint & n & pool & Gain & Lower & Upper\\\midrule
+\endhead
+
+pool gain & 100 & 16 & 0.01201 & -0.00360 & 0.03325\\
+
+pool gain & 100 & 64 & 0.02779 & -0.01122 & 0.07235\\
+
+pool gain & 100 & all & 0.03942 & -0.01272 & 0.10103\\
+
+pool gain & 300 & 16 & 0.00441 & -0.00482 & 0.01397\\
+
+pool gain & 300 & 64 & 0.00450 & -0.00302 & 0.01173\\
+
+pool gain & 300 & all & 0.03891 & 0.01500 & 0.06316\\
+
+runtime ratio & 3000 &  & 0.58613 & 0.55628 & 0.61612\\
+
+runtime ratio & 10000 &  & 0.57413 & 0.55558 & 0.59374\\
+
+\bottomrule
+\end{longtable}}
+
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.78\textwidth]{candidate_pool_sensitivity.pdf}
+\caption{Candidate-domain sensitivity, separated from computational scaling. Points show NEX-minus-FEX loss for all six size/pool settings, with the original eight-endpoint-family adjusted $99.375\%$ intervals. Distinct pool definitions are categorical and are not joined by lines. All-node pools contain $n$ candidates. Only the $n=300$, all-node interval excludes zero.}
+\label{fig:pool_sensitivity}
+\end{figure}
+
+\subsection{All sixteen fixed-topology comparisons}
+{\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{25mm}>{\raggedright\arraybackslash}p{25mm}>{\raggedright\arraybackslash}p{23mm}>{\raggedright\arraybackslash}p{23mm}>{\raggedright\arraybackslash}p{23mm}>{\raggedright\arraybackslash}p{10mm}>{\raggedright\arraybackslash}p{10mm}>{\raggedright\arraybackslash}p{10mm}}
+\toprule
+Source & Method & Gain & Lower & Upper & Pos. & Neg. & Tie\\\midrule
+\endhead
+
+Ask Ubuntu & R-degree & 0.00671 & 0.00181 & 0.01191 & 9 & 2 & 1\\
+
+Ask Ubuntu & greedy & 0.00236 & -0.00026 & 0.00582 & 5 & 5 & 2\\
+
+Ask Ubuntu & NEX & -0.00015 & -0.00057 & 0 & 0 & 2 & 10\\
+
+Ask Ubuntu & Halving & 0.00486 & 0.00124 & 0.00888 & 8 & 3 & 1\\
+
+Email EU & R-degree & 0.05447 & 0.01876 & 0.10070 & 10 & 1 & 1\\
+
+Email EU & greedy & 0.00776 & 0.00023 & 0.02108 & 8 & 1 & 3\\
+
+Email EU & NEX & 0.00052 & 0 & 0.00184 & 3 & 0 & 9\\
+
+Email EU & Halving & 0.01551 & -0.01346 & 0.04028 & 8 & 3 & 1\\
+
+High school & R-degree & 0.15825 & 0.07985 & 0.25240 & 12 & 0 & 0\\
+
+High school & greedy & -0.00145 & -0.05979 & 0.04743 & 7 & 4 & 1\\
+
+High school & NEX & 0.00371 & -0.00424 & 0.01538 & 3 & 1 & 8\\
+
+High school & Halving & 0.03911 & 0.00066 & 0.09594 & 8 & 3 & 1\\
+
+Primary school & R-degree & 0.02580 & -0.00557 & 0.06322 & 10 & 2 & 0\\
+
+Primary school & greedy & 0.02768 & -0.01352 & 0.12830 & 4 & 7 & 1\\
+
+Primary school & NEX & 0.00458 & -0.02074 & 0.03906 & 2 & 1 & 9\\
+
+Primary school & Halving & 0.00371 & -0.01968 & 0.02267 & 7 & 5 & 0\\
+
+\bottomrule
+\end{longtable}}
+
+\FloatBarrier\section{Observed groups and unfavorable legacy diagnostics}
+The sources are exact-three records from the ScHoLP release: thread participants in a 24-hour window, sender/time email reconstruction, and maximal cliques reconstructed from wearable contacts. The last two are not directly observed group endorsements. The extraction takes a whole-face traversal from the maximum-incidence root of the largest exact-three component and keeps the induced exact-three records. This biases the fixed sample toward active regions. Time, multiplicity and direction are discarded. The four 200-node extracts contain no isolates; the earlier 48-node Ask Ubuntu extract contains seventeen.
+
+The old active history explains the old nonzero policy contrast after the three isolated-rumor histories are identified analytically. Holding old actions and histories fixed while knocking out triangle transmission is a model sensitivity diagnostic, not reoptimization or a causal real-world experiment. New evaluations preserve its negative direction. The grid varying pool and budget has repeated search seeds on four old histories, not new independent networks. All twelve cell means remain negative relative to R-degree. No global optimality claim for that heuristic follows.
+
+\FloatBarrier\section{Protocol provenance and reconstruction scope}
+The original 30-graph comparison and the independent calibration-based 60-graph comparison remain distinct studies. Private hashes identify locally frozen artifacts; they are not independently certified public registration timestamps. All grid cells and prespecified comparison outcomes are retained.
+
+The decision-cost cohort includes recovered observations recomputed with the original seeds and uniformly retimed across the cohort. Retained losses match the corresponding replay. Its recovery and physical-work accounting are documented in the accompanying evidence records; recovery work is not counted as additional independent evidence. Metadata and reference verification are inherited from the supplied audit rather than represented as a new audit of every publication.
+
+\FloatBarrier\section{Complete prespecified comparison forests}
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.94\textwidth]{grid.pdf}
+\caption{All calibration-grid cells. Filled marks indicate independently eligible cells. Each interval adjusts the separate twenty-four-comparison descriptive cell family; it does not replace the aggregate primary gate.}
+\end{figure}
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{baselines.pdf}
+\caption{All seventeen same-pool FEX contrasts, including all seven simulation controls and ten zero-path adaptations. Positive values favor FEX. Intervals use the prespecified seventeen-comparison adjustment. Full-budget greedy and successive halving remain inconclusive. Open markers denote intervals containing zero.}
+\end{figure}
+\FloatBarrier\section{New locked portfolio-runtime cohort}
+The local computational configuration is \texttt{protocol/runtime\_locked.json}; its SHA-256 is
+\begin{quote}\footnotesize\texttt{f2e22b384963fa5d456bdcda73a372e8}\allowbreak\texttt{9ea6df07a45f96b30ab9d6baad408372}\end{quote}
+The configuration is a local prospective lock, not a publicly registered or independently timestamped preregistration. All 32 graphs and all 96 natural histories are retained. There are 2880 timed calls and 115200 charged marginal continuations, including all methods and timing blocks. Timings use the reported environment, and compilation is excluded. Every copy is charged separately. Wall times and exact raw losses are in the accompanying archive.
+
+The following table gives every descriptive CPU-time ratio to local adaptive batching. It does not attach confirmatory intervals to individual cells. Fixed replay and both batch evaluators have equal graphical joint laws; incremental RTC does not necessarily have equal selection accuracy at equal tapes. Replay-compatible batching is an additional descriptive implementation comparator. Ratios below one are retained and favor the listed comparator.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{lrrrrrr}
+\toprule Family & $n$ & Copies & Replay & Global & RTC & Fixed batch\\\midrule\endhead
+er & 100 & 2 & 1.587 & 4.610 & 1.124 & 0.984\\
+er & 100 & 8 & 2.746 & 5.836 & 2.185 & 0.644\\
+er & 300 & 2 & 5.087 & 11.443 & 2.806 & 2.944\\
+er & 300 & 8 & 10.116 & 17.522 & 5.392 & 1.962\\
+ws & 100 & 2 & 2.244 & 5.107 & 1.597 & 1.450\\
+ws & 100 & 8 & 3.610 & 6.873 & 2.605 & 0.938\\
+ws & 300 & 2 & 3.643 & 13.295 & 2.478 & 2.209\\
+ws & 300 & 8 & 6.526 & 20.363 & 4.351 & 1.554\\
+sparse\_sbm & 100 & 2 & 1.985 & 4.694 & 1.556 & 1.201\\
+sparse\_sbm & 100 & 8 & 3.446 & 5.964 & 2.806 & 0.798\\
+sparse\_sbm & 300 & 2 & 5.675 & 11.843 & 2.925 & 3.224\\
+sparse\_sbm & 300 & 8 & 9.980 & 16.924 & 5.302 & 1.964\\
+pa\_triadic & 100 & 2 & 1.114 & 4.450 & 1.092 & 0.697\\
+pa\_triadic & 100 & 8 & 1.679 & 5.112 & 1.755 & 0.447\\
+pa\_triadic & 300 & 2 & 1.468 & 10.574 & 1.301 & 0.889\\
+pa\_triadic & 300 & 8 & 2.407 & 14.251 & 2.235 & 0.626\\
+\bottomrule\end{longtable}}
+
+The correctness suite uses separate validation seeds: 300 tapes check exact five-action replay at three initial memory settings; 600 tapes per evaluator check nested order and duplicate actions; a 27-state matrix calculation checks marginal occupation; a 729-state joint generator checks a nonnested coupled cross moment; and 2,000 tapes check the ordered-envelope inequalities. These tests validate implementation properties at specified cases, without replacing the proofs. A separate eight-sample greedy-stage test returns unresolved, confirming that a fallback is not mislabeled as certified. Sequential certification power has not been confirmed by the runtime study; the archived WP6 zero-switch outcome remains unchanged.
+
+\FloatBarrier\section{Descriptive larger-graph portfolio extension}
+The independently seeded extension has local configuration \texttt{scaling\_locked.json}, SHA-256:
+\begin{quote}\footnotesize\texttt{2b501c5e79895ed72521b920f4916a71}\allowbreak\texttt{836edac092acb792929565f671a04e1b}\end{quote}
+There are two graphs per family/size, two tapes per workload, 144 timed calls and 4,032 charged marginal continuations. Initialization is included and compilation excluded. The following complete table reports ratios of mean CPU time within each two-graph cell. It has no inferential intervals. Initial augmented states are randomized legal states rather than natural histories. Ratios above one favor local batching; all below-one cells are retained.
+
+{\footnotesize\begin{longtable}{lrrrr}
+\toprule Family & $n$ & Copies & Replay/local & RTC/local\\\midrule\endhead
+er & 1000 & 2 & 10.067 & 3.382\\
+er & 1000 & 8 & 21.352 & 8.195\\
+er & 1000 & 32 & 30.934 & 11.009\\
+er & 3000 & 2 & 13.339 & 3.846\\
+er & 3000 & 8 & 28.543 & 7.812\\
+er & 3000 & 32 & 39.308 & 10.744\\
+ws & 1000 & 2 & 4.277 & 2.101\\
+ws & 1000 & 8 & 8.398 & 4.889\\
+ws & 1000 & 32 & 10.529 & 6.065\\
+ws & 3000 & 2 & 4.225 & 2.594\\
+ws & 3000 & 8 & 8.315 & 4.349\\
+ws & 3000 & 32 & 11.148 & 6.299\\
+sparse\_sbm & 1000 & 2 & 10.154 & 3.099\\
+sparse\_sbm & 1000 & 8 & 19.340 & 7.387\\
+sparse\_sbm & 1000 & 32 & 27.721 & 10.364\\
+sparse\_sbm & 3000 & 2 & 14.074 & 3.665\\
+sparse\_sbm & 3000 & 8 & 28.374 & 7.211\\
+sparse\_sbm & 3000 & 32 & 42.501 & 11.560\\
+pa\_triadic & 1000 & 2 & 1.744 & 1.250\\
+pa\_triadic & 1000 & 8 & 2.687 & 2.347\\
+pa\_triadic & 1000 & 32 & 5.652 & 3.728\\
+pa\_triadic & 3000 & 2 & 2.028 & 1.644\\
+pa\_triadic & 3000 & 8 & 2.048 & 2.025\\
+pa\_triadic & 3000 & 32 & 5.149 & 3.915\\
+\bottomrule\end{longtable}}
+
+
+\FloatBarrier\section{Complete-search workloads and implementation diagnostics}
+The independently planned cohort contains $64$ graphs, three unconditioned histories each, and $768$ complete searches. Each search charges $1,024$ marginal continuations. There are $786,432$ online continuations and $134,144$ independent final-evaluation continuations. All search decisions are reconstructed from retained losses and seeds. The graphical-replay and fixed-batch transcripts agree exactly, while the local-adaptive implementation preserves their observation law without requiring identical same-seed realizations. All original larger-portfolio screening extensions remain separate results and are not superseded.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Complete-search costs and descriptive final losses. Independent losses are not equivalence tests or regrets against a known optimum.}
+\begin{tabular}{lrrrr}
+\toprule
+Evaluator & Total wall time (s) & Mean time (s/search) & Oracle fraction & Final loss\\
+\midrule
+Action-wise replay & 919.68 & 4.7900 & 0.9981 & 1.627313 \\
+Fixed batching & 229.30 & 1.1943 & 0.9924 & 1.627313 \\
+Local adaptive & 191.97 & 0.9998 & 0.9910 & 1.614239 \\
+Incremental RTC & 624.94 & 3.2549 & 0.9972 & 1.627108 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The secondary fixed/local interval includes one. RTC has a different joint observation law; its equal-budget cost does not imply the same decision quality. Timing includes candidate ranking, input validation, native topology construction, online inference and trace collection. It excludes reusable simulator construction, graph generation, prehistory, serialization, independent final evaluation and diagnostic reruns. All implementations use the same common-prefix/remainder interface. Replay may repeat input and topology preparation for remainder actions; persistent-topology and one-call-per-action full-prefix implementations are not separately timed in that 64-graph lock. The new independent 32-graph confirmation below supplies this stronger comparator.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Descriptive family-level replay/local complete-search ratios. No family-specific superiority test is performed.}
+\begin{tabular}{lrrr}
+\toprule
+Family & Graphs & Ratio & Positive/negative\\
+\midrule
+ER & 16 & 5.856 & 16/0 \\
+WS & 16 & 4.466 & 16/0 \\
+Sparse SBM & 16 & 5.414 & 16/0 \\
+PA + closure & 16 & 2.013 & 14/2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Diagnostic native timers replay the same stored query workloads on the first graph in every family/size cell. They separate topology construction from combined copy setup and event processing. Replay topology accounts for 0.097\% of its measured native cost on these workloads. Proposal counts sum action-wise dispatches for replay and shared dispatches for batching; accepted transitions count per-copy work. Local simulation can continue correction-only transitions after rumor extinction, while replay stops a loss-absorbed copy. Counters therefore measure work and are not quality observables. Candidate-count/overlap workloads are descriptive and all cells are retained.
+
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{complete_search_mechanisms}
+\caption{Prespecified diagnostic workloads. (a) Native time on identical recorded query portfolios. (b) All candidate-count and overlap workloads; the two portfolio constructions also differ in their constituent sets, so these are not isolated causal effects of overlap.}
+\label{fig:complete_search_mechanisms}
+\end{figure}
+
+\FloatBarrier\section{Earlier fixed-portfolio runtime and certified-selection cohorts}
+\subsection{Preserved-law portfolio computation}
+A new computational cohort uses 32 independently seeded graphs, balanced across ER, WS, sparse SBM and PA-triadic families and sizes 100 and 300. Three unconditioned, naturally generated histories per graph are retained, including rumor extinction. The runtime histories instead start with exactly 80\% inactive, 10\% rumor, and 10\% correction nodes and zero face memory, followed by two time units without intervention; they are not conditioned on coexistence. Each workload compares two or eight distinct size-four sets sharing a three-node anchor. Fixed graphical replay, replay-compatible batching, local adaptive batching, global-refresh stacked evaluation, and incremental RTC receive the same eight tapes per block and three randomized-order timing blocks. Each batch is charged as its number of copies times its tape count. Compilation is excluded; input validation, initialization and event evaluation are included. Replay performs separate calls per action, so the measured gain includes amortized validation, topology construction and event scheduling rather than an isolated event-kernel speedup. This is a runtime experiment rather than a test of intervention superiority.
+
+The design and source hashes were frozen before comparative outputs. The primary endpoint is the graph-level geometric mean CPU-time ratio of fixed graphical replay to local adaptive batching. Global-refresh and incremental-RTC contrasts are adjusted secondary endpoints; all three use 20,000 graph-bootstrap resamples and Bonferroni-adjusted 98.333\% intervals. Portfolio sizes are averaged on the log-ratio scale within graph. Unlike the earlier family-stratified analyses, this runtime bootstrap resamples all 32 graphs without enforcing family quotas within each resample. Wall times and every family/size/portfolio cell are retained descriptively.
+
+The primary ratio is 3.182 with adjusted interval [2.362, 4.205]; its lower bound exceeds one. The corresponding global-refresh ratio is 8.652 [6.996, 10.677], and the equal-budget incremental-RTC/local CPU-time ratio is 2.304 [1.832, 2.813], which does not establish matched selection quality. The descriptive fixed-batch/local CPU ratio is 1.198, with 21 of 32 graph ratios above one; this study does not confirm an additional benefit of local adaptation over replay-compatible batching. The global-refresh stacked comparator is our common-reset implementation with global refresh, rather than the original authors' code. Theorem~\ref{M-thm:batch} makes the graphical and adaptive evaluators equal in joint law, so their runtime comparison holds at unchanged loss and fresh-tape search distributions. RTC has the same individual loss laws but a different joint law; its equal-budget timing does not establish equal selection accuracy. This new workload does not supersede the earlier large-$n$ RTC timing advantage or the original decision-cost gate.
+
+All 23,040 replay-compatible batch outputs equal their old-engine losses exactly. Independent validation additionally checks marginal occupation against matrix exponentials, coupled loss cross moments against a 729-state joint generator, nested order, and the intersection--union envelope. These are correctness checks, not extra efficacy replications. Figure~\ref{fig:portfolio} summarizes runtime; complete cells appear in the supplement.
+
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.98\textwidth]{portfolio_efficiency.pdf}
+\caption{Portfolio evaluation at unchanged graphical joint law. (a) Graph-level geometric mean CPU-time ratios with three-comparison adjusted 98.333\% bootstrap intervals; ratios above one favor local adaptive batching. (b) Every family/size/portfolio replay-to-local ratio, shown descriptively without per-cell significance claims. Incremental RTC is a distinct coupling; its runtime comparison is at equal marginal-continuation budget.}
+\label{fig:portfolio}
+\end{figure}
+
+\paragraph{Larger graphs and portfolios}
+A separately locked descriptive extension evaluates 16 fresh graphs: two per family and size at $n=1{,}000$ and $3{,}000$, with portfolios of 2, 8 and 32 sets. Initial labels contain exactly 10\% rumor and 10\% correction nodes; face memories are independent uniform values in $[-0.9,0.9]$. These legal computational contexts are distinct from the natural histories of the primary runtime cohort. Each method receives two tapes per workload, with randomized method order, totaling 4,032 charged marginal continuations across graphical replay, local batching and incremental RTC. Figure~\ref{fig:batch_scaling} reports CPU time per marginal continuation; all 24 cells and unfavorable ratios are retained in the supplement. This small descriptive extension checks implementation behavior at larger sizes and portfolios, without new confirmatory intervals or efficacy claims.
+
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.94\textwidth]{portfolio_scaling.pdf}
+\caption{Descriptive portfolio scaling on fresh larger graphs. Lines show median CPU seconds per marginal continuation over eight graph instances per size; shading denotes their interquartile range, not a confidence interval. All methods evaluate the same sets and two tapes per workload. These randomized augmented states test computation and are not naturally generated histories.}
+\label{fig:batch_scaling}
+\end{figure}
+
+
+\subsection{Order-informed portfolio selection}
+\label{sec:envelope_experiment}
+The endpoint method in Algorithm~\ref{alg:envelope_first} is evaluated on a separate locked cohort of 32 new 100-node graphs, eight per synthetic family, with three unconditioned natural histories each. Every context freezes eight distinct size-four actions: the rumor-degree anchor and seven one-swap alternatives sharing three targets. The tolerance is $\varepsilon=0.1$ cumulative-loss units (1\% of $H=10$), and the error allocation is $\alpha=0.05$. This tolerance concerns expected regret within the frozen portfolio; it is distinct from the earlier 0.02 threshold relative to a finite-sample reference.
+
+Each method has at most 16,384 online marginal continuations. The endpoint method allocates at most 1,024 tapes to the two auxiliary actions before a paired fallback. Comparators are the same graphical paired race with screening removed, a uniform graphical sampler with the same tolerance tests and no eliminations, and the paired race using incremental RTC. Plain comparators receive their full $\alpha$ allocation, whereas the endpoint method splits it between screening and fallback. The $\alpha$ bound is per selection query; it is not a simultaneous 95\% correctness statement for all 96 outputs. Method order is randomized, and calls run sequentially. Online timing starts after candidate canonicalization and entry checks; it includes per-call validation, betting-test updates, trace collection and simulation; compilation, topology generation, prehistory and file compression are excluded. Every auxiliary copy is charged. The source and configuration hashes were frozen before comparative outcomes on these seeds.
+
+These are controlled implementations of the stated betting rules, not runs of a published best-arm-identification software package. The two planned comparisons use family-stratified graph bootstrap with 20,000 resamples and Bonferroni-adjusted 97.5\% intervals. Context log-cost ratios are averaged within each graph. The strict quality gate requires certification in every context for both methods in a claimed efficiency comparison; unresolved outcomes are retained at their incurred capped cost. Table~\ref{tab:envelope_selection} reports all four methods, and Fig.~\ref{fig:envelope_selection} shows the planned contrasts and descriptive family breakdown.
+
+The graphical paired-race/envelope-first wall-time ratio is $1.174$ $[1.014, 1.352]$, with 15 of 32 graph ratios above one. The incremental-RTC paired-race/envelope-first wall-time ratio is $2.164$ $[1.825, 2.529]$, with 30 of 32 graph ratios above one. The prespecified matched-certified-quality efficiency criterion is not met. Capped runtime differences must therefore be read together with certification rates; they do not establish a matched-quality improvement.
+
+The descriptive primary family ratios are er: 1.208; ws: 0.870; sparse sbm: 0.959; pa triadic: 1.883.
+
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Fresh finite-portfolio selection: certification, endpoint-only returns, total charged online copies and wall time. Means are over all 96 contexts, including unresolved cases.}
+\label{tab:envelope_selection}
+\begin{tabular}{lrrrr}
+\toprule
+Method & Certified & Endpoint & Copies & Time (s)\\
+\midrule
+Envelope-first & 94/96 & 19 & 5690.0 & 3.353 \\
+Paired graphical race & 95/96 & 0 & 6465.0 & 3.525 \\
+Uniform graphical & 93/96 & 0 & 7253.3 & 3.771 \\
+Paired incremental RTC & 96/96 & 0 & 6490.7 & 9.292 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{envelope_selection}
+\caption{Order-informed selection on the fresh locked cohort. (a) Comparator/envelope-first wall-time ratios; pooled planned contrasts use adjusted 97.5\% intervals, and family intervals are descriptive 95\% intervals. Values above one favor envelope-first selection. (b) Every context's total charged online copies; auxiliary endpoints count in full. Costs include unresolved runs; neither planned comparison meets the matched-certified-quality gate. These are fixed-portfolio tolerance certificates, not guarantees of globally optimal intervention.}
+\label{fig:envelope_selection}
+\end{figure}
+
+Independent final tapes evaluate all eight frozen candidates with 256 paths per action. The retained plug-in regret is a noisy diagnostic relative to the lowest evaluation-sample mean; it does not estimate certificate error without bias or identify a known optimum. Mathematical certificate validity follows from Theorem~\ref{thm:envelope_selection}. Full context-level outcomes, seeds, losses, cost records and test traces are supplied. Screening failures and any unfavorable family ratios remain part of the evaluation.
+
+A post-hoc descriptive check retains the 92 contexts with rumor present initially. Their graph-level paired-race/envelope-first wall-time ratio is 1.152, with 15 endpoint-only certificates. This check is outside the prespecified comparison family. Rumor-free contexts could instead be handled by a common exact presolve without simulation; that presolve was not implemented in the locked comparison. The tolerance is a fraction of the loss range, not a relative-error guarantee against the unknown optimum.
+
+
+\subsection{Separating endpoint information from coupling implementation}
+\label{sec:factorial}
+Endpoint certification is not exclusive to graphical coupling. We therefore
+run a new, independently planned $2\times2$ comparison: graphical versus
+incremental RTC simulation, each with and without the same endpoint screen.
+The cohort contains 32 further graphs, eight per family, and three natural
+histories per graph. All 96 contexts, including rumor-free ones, are retained.
+The model, eight-action one-swap portfolio, $\varepsilon=0.1$, $\alpha=0.05$,
+16,384-copy online cap, batch size and 1,024-tape screening cap match the
+initial selection study. No new extinction presolve is added.
+
+The screened cells split error allocation equally between screening and
+fallback; plain cells retain the full allocation. Thus these contrasts
+measure the complete screening policy, including its risk reservation,
+rather than isolating information from that reservation. RTC screen
+observations are $L(I)-L(J)\in[-H,H]$ and are never clipped. Their expectation
+is the same endpoint difference as under the graphical law. Each auxiliary
+copy is charged. Four planned log-cost contrasts use family-stratified,
+graph-unit bootstrap with 20,000 draws and Bonferroni-adjusted 98.75\%
+intervals. Context log ratios are averaged within each graph; timings are
+sequential and method order is randomized. Timing begins after candidate
+canonicalization and entry checks; per-call simulator validation, test
+updates, allocation and trace collection are included. Compilation, graph generation,
+prehistory and compression are excluded from online time, as before.
+Engine contrasts compare the available exact implementations: graphical
+portfolio batching and action-wise incremental RTC. They combine
+dependence with computational organization and are not pure
+coupling-variance effects.
+
+Table~\ref{tab:factorial_cells} reports every cell. All planned capped-time
+contrasts and graph-level signs appear in Table~\ref{tab:factorial_cost};
+Fig.~\ref{fig:factorial_selection} retains unresolved queries in the cost
+comparison. The matched-certified-quality efficiency criterion passes for RTC screening, the unscreened-engine comparison. The other planned contrasts do not pass that joint criterion.
+
+RTC screening records 273 negative endpoint contrasts among 15,328 queried endpoint tapes. Their signs do not invalidate the mean-bound certificate. These counts are descriptive and are not a variance-superiority test.
+
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Independent engine/screen study. Means include unresolved queries; endpoint-only certificates do not simulate the individual candidates.}
+\label{tab:factorial_cells}
+\begin{tabular}{lrrrr}
+\toprule
+Method & Certified & Endpoint & Copies & Time (s)\\
+\midrule
+Graphical + screen & 95/96 & 21 & 5936.7 & 3.164 \\
+Graphical race & 96/96 & 0 & 6825.7 & 3.442 \\
+RTC + screen & 96/96 & 21 & 5707.0 & 8.528 \\
+RTC race & 96/96 & 0 & 6669.3 & 8.246 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[!htbp]
+\centering\small
+\caption{All four planned graph-level geometric capped-time contrasts on the new cohort. Ratios above one favor the denominator; intervals are adjusted 98.75\% intervals. Graph signs refer to mean log ratios. Certification gates must also pass for an equal-quality efficiency claim.}
+\label{tab:factorial_cost}
+\begin{tabular}{lrrr}
+\toprule
+Contrast & Ratio & Interval & $+/-$ graphs\\
+\midrule
+Graphical race/Graphical + screen & 1.212 & [1.021, 1.461] & 15/17 \\
+RTC race/RTC + screen & 1.427 & [1.169, 1.773] & 19/13 \\
+RTC + screen/Graphical + screen & 1.395 & [0.981, 1.925] & 23/9 \\
+RTC race/Graphical race & 1.642 & [1.203, 2.162] & 25/7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{factorial_selection}
+\caption{Separating screening from the simulation engine. (a) All 96 query costs per cell; horizontal bars are medians, red crosses denote unresolved outputs, and labels give certification counts. (b) All four planned geometric wall-time ratios and adjusted 98.75\% intervals. Costs include unresolved outputs and cannot alone establish equal-quality acceleration.}
+\label{fig:factorial_selection}
+\end{figure}
+
+For RTC screening, the prespecified graph-level geometric race/screen time ratio is 1.427 [1.169, 1.773], with screened and plain cells certifying 96/96 and 96/96 queries, respectively. Arithmetic context-mean times are 8.528 s with screening and 8.246 s without it. The geometric endpoint and arithmetic average answer different cost questions; the former does not by itself establish lower total elapsed time for this equally weighted workload. The difference between the two summaries reveals heterogeneous costs; neither summary replaces the other.
+
+The four-family wall-time ratios are reported descriptively in the supplement, without selecting favorable families. The fixed eight-action construction leaves candidate-overlap generality untested. Independent 256-path evaluations are retained, but their sample minima are not known optima or empirical certificate-error estimates. The theoretical support-range and copy-cost results explain conditions under which screening can help; they do not assert that those sufficient conditions hold on this cohort.
+
+\subsection{Independent evaluation of the fixed-witness refinement}
+\label{sec:witness_study}
+A third selection cohort freezes 32 new graphs, eight from each of the same
+four families, and three natural histories per graph. The model, fixed
+eight-action portfolio, batch size, mixture bets, screen, futility rule,
+$\varepsilon=0.1$ and per-query $\alpha=0.05$ are unchanged.
+All three policies use the graphical portfolio evaluator.
+The primary contrast compares the original screened policy against its
+fixed-witness version; the secondary contrast compares refined plain and
+screened policies. Only the race correction changes between the original
+and refined screened implementations. Both contrasts are locked before
+comparative simulation, with randomized sequential timing and fresh method
+streams. Both use 20,000 family-stratified graph bootstrap draws and
+Bonferroni-adjusted 97.5\% intervals. All-query certification and a wall-time
+ratio lower bound above one are required jointly.
+
+All methods receive the same 32,768-copy cap, twice the earlier cap.
+Consequently, cross-cohort coverage changes cannot be attributed solely to
+the refined bound. Table~\ref{tab:witness_cells} separately gives the count
+certified using at most 16,384 copies in these runs; this is a descriptive
+prefix count, not an independent rerun at the earlier cap. Auxiliary
+endpoints are fully charged. Independent 256-tape evaluations per action
+are retained without treating sample minima as known optima or estimating
+rare certificate-error probabilities. Alpha is a per-query guarantee, not
+a simultaneous guarantee over the 96 queries.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Fixed-witness refinement on the independently planned third cohort. Means include every query; the common cap is 32,768 marginal copies.}
+\label{tab:witness_cells}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Certified & By 16,384 & Endpoint only & Mean copies & Mean time (s)\\
+\midrule
+Original screened & 96/96 & 95/96 & 15 & 5982.3 & 3.265 \\
+Witness screened & 96/96 & 96/96 & 14 & 4700.0 & 2.558 \\
+Witness plain & 96/96 & 96/96 & 0 & 4862.0 & 2.545 \\
+\bottomrule
+\end{tabular}
+\end{table}
+The primary original/refined screened geometric wall-time ratio is 1.239 [1.160, 1.325], with 28/32 positive graph log ratios. Both the all-query quality gate and adjusted cost gate pass. The secondary refined plain/screened ratio is 1.047 [0.955, 1.167], with 13/32 positive graphs; its joint criterion does not pass. Arithmetic mean times for original screened, refined screened and refined plain policies are 3.265, 2.558 and 2.545 s, respectively. These estimates concern the fixed candidate construction and common new budget, and retain the earlier two unresolved cohorts.
+
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{witness_comparison}
+\caption{Fixed-witness refinement. (a) Mean charged copies and certified-query counts. (b) Both planned geometric wall-time ratios with adjusted 97.5\% intervals. Values above one favor the denominator. Certification counts and costs are reported separately; the common cap exceeds the earlier studies' cap.}
+\label{fig:witness_comparison}
+\end{figure}
+
+
+
+\FloatBarrier\section{Larger-portfolio screening stress tests}
+Each of two settings contains 32 new independent graphs, eight per family, and one unconditioned history per graph. All methods use $\varepsilon=0.1$, per-query $\alpha=0.05$ and a 32,768-copy cap. The shared-core setting has $n=300,M=16$; the diverse setting has $n=100,M=32$. The settings jointly vary size, candidate count and overlap and therefore do not identify separate causal effects of these factors. The four comparisons use graph-family-stratified bootstrap and adjusted central $98.75\%$ intervals. Unresolved outputs retain their incurred capped cost.
+\begin{table}[ht]
+\centering\small
+\caption{All locked larger-portfolio cost comparisons. Certification counts are numerator/denominator method counts; no cost comparison passes the joint criterion.}
+\begin{tabular}{llrrl}
+\toprule Setting & Comparator/routed & Ratio & Interval & Certified\\\midrule
+$n=300,M=16$ & Plain & 1.1305 & [0.9829,1.3218] & 32/32;32/32\\
+$n=300,M=16$ & Pairwise EB & 3.3289 & [2.8218,4.0006] & 0/32;32/32\\
+$n=100,M=32$ & Plain & 1.0296 & [0.8909,1.2886] & 32/32;32/32\\
+$n=100,M=32$ & Pairwise EB & 2.8052 & [2.0036,3.9056] & 3/32;32/32\\
+\bottomrule\end{tabular}
+\end{table}
+The empirical-Bernstein comparator is the bounded jointly observed adapter documented with its source and constants. Its unresolved outcomes preclude matched-quality interpretations of the corresponding capped-cost ratios. Independent final evaluation uses 128 paths per action. An inherited prose sentence in the unchanged lock says 256, whereas its numeric field, dedicated evaluation description and locked implementation specify 128; the separate clarification records this inconsistency without altering the original hash.
+
+\FloatBarrier\section{Persistent-topology replay confirmation}
+The protocol hash is \nolinkurl{3972cfbc0274d809acd8906612318b3e078fde40d0dfa736669a796e0d94a11b}. Sources and analysis were frozen before the new comparative outcomes. The new cohort has 32 graphs, three histories per graph and 288 complete searches. Every search spends 1,024 online marginal continuations, totaling 294,912; independent final evaluation contributes 22,400 continuations at 128 paths per distinct selected set. Retained action/seed observations reproduce all query means and all 288 final decisions. Persistent replay and replay-compatible fixed batching agree exactly in every one of 96 contexts. The local evaluator preserves their joint distribution but need not give identical paths for the same integer seed.
+
+Persistent replay owns its face/edge arrays and topology for the full search, validates its context once, and evaluates every action's complete allocated prefix in one native stage call. Creation, release, candidate ranking, input preparation, selection and trace collection are timed. Compilation, graph generation, prehistory, independent evaluation and serialization are excluded. This removes the earlier comparator's repeated per-action topology build and extra remainder call; it does not supply every possible optimization to the replay kernel. Both planned contrasts use central $97.5\%$ Bonferroni-adjusted intervals and graph resampling within eight family/size strata. No outcome-based extension or stopping is used.
+
+The persistent-replay/local ratio is 3.790121 [3.386896,4.195307], with graph signs 31/1. Fixed-batch/local is 1.001328 [0.893950,1.107776], with signs 16/16. Descriptive persistent/local family ratios are ER 4.9632, WS 4.2844, sparse SBM 4.4971 and PA with closure 2.1579. All contexts, raw losses, seeds, timings, counts, source hashes and the graph-level analysis are supplied with the new study. These results do not establish local-adaptation superiority over fixed batching.
+
+
+
+\FloatBarrier\section{Envelope-first finite-portfolio selection study}
+The additional configuration is \texttt{envelope\_selection/protocol/selection\_locked.json}, with its SHA-256 companion. It defines 32 new graphs, three histories each, eight frozen actions, tolerance 0.1 and error allocation 0.05, a 16,384-copy cap, and all primary and secondary comparisons before execution. It is a locally locked configuration, not an independently timestamped public preregistration. Two earlier noncomparative endpoint-cost profiles are retained separately as development data.
+
+The full six-component betting construction, null hypotheses and union-bound proof appear in Supplementary Section~\ref{sec:extended_selection}. Zero-width endpoint screening has a portfolio-size-independent simulated-copy count; this statement does not bound topology-processing cost or prove a minimax separation. The baseline methods use the same six fractions and their full error allocation. A failed screen can incur 2,048 auxiliary continuations before the fallback, so endpoint screening has no distribution-free cost dominance. Multigroup compression is a mathematical corollary and was not implemented in this study.
+
+The analysis program retains all 384 method/context outcomes and checks charged copies against the compressed per-batch seeds and losses. The final evaluation contains 256 independent paths for each action. The resulting sample-minimum regret is descriptive and can be optimistic; the formal selection statement is the probability of an erroneous certified return, not a conditional error rate among observed certificates. The new study's raw outcome files, summary JSON, accounting CSV and number lineage accompany the code package. The earlier per-trajectory runtime/scaling archive has also been recovered: all 3,217 entries match the retained SHA-256 manifest. This verifies archived bytes rather than rerunning those simulations; their numerical conclusions are retained with their original study scope.
+
+\FloatBarrier\section{Independent engine/screen attribution}
+The follow-up uses \texttt{coupling\_factorial/protocol/factorial\_locked.json}
+and its SHA-256 companion. The configuration and source hashes were fixed
+before comparative outcomes on its new seeds. The four methods and four
+planned cost contrasts are all retained. This is a local prospective lock,
+not an independently timestamped public registration. The complete tables include unresolved outcomes; no cost comparison is conditioned on
+observed certification. The complete raw traces, graph/history states,
+independent evaluations, timing records, accounting and numerical lineage
+are supplied in the code archive.
+
+Descriptive family wall-time ratios (ER, WS, sparse SBM, PA with closure,
+respectively) are as follows: screen graphical: er 1.219, ws 1.035, sparse sbm 1.044, pa triadic 1.639; screen rtc: er 1.387, ws 1.083, sparse sbm 1.228, pa triadic 2.245; engine screened: er 1.636, ws 1.658, sparse sbm 1.517, pa triadic 0.920; engine plain: er 1.863, ws 1.734, sparse sbm 1.784, pa triadic 1.260.
+
+The supporting count bound assumes a positive lower bound on log-bet drift.
+The fixed six fractions need not have positive drift for every alternative
+with endpoint mean below tolerance. Its finite-horizon version assumes that
+the screen is not abandoned before the stated inspection. The break-even
+proposition fixes the fallback reservation and allocation, whereas the
+implemented policy has futility and reallocates unused copies. It therefore
+does not prove cost dominance for the implementation or for equal total
+budget. Deterministic chord checks and exact absorbing recursions for a
+toy bounded law are in \texttt{coupling\_factorial/check\_theory.py}; those
+checks are not empirical coverage experiments or confirmation data.
+
+\FloatBarrier\FloatBarrier\section{Complete-search graph-level displays}
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{complete_search_comparison}
+\caption{Complete adaptive search. (a) The primary replay/local ratio with its $95\%$ interval and two secondary ratios with adjusted $97.5\%$ intervals. The open RTC marker denotes equal budget, rather than matched selection quality. (b) All graph-level replay/local ratios; blue and coral indicate sizes $100$ and $300$, and horizontal bars show descriptive group geometric means.}
+\label{fig:complete_search}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering\includegraphics[width=.96\textwidth]{optimized_replay}
+\caption{Persistent-topology replay confirmation. (a) Both planned whole-search ratios with Bonferroni-adjusted $97.5\%$ intervals. (b) All 32 independent graph-level persistent-replay/local ratios, grouped by family and node count. The dashed reference denotes equal time; plotted group means are descriptive.}
+\label{fig:optimized_replay}
+\end{figure}
+
+\FloatBarrier\section{Search specification and additional evaluation details}
+This section consolidates material from the longer main article. The study populations, locked endpoints, comparison families, outcome directions and uncertainty statements are unchanged.
+
+\subsection{Complete history and parameter specification}\label{sec:design_details}
+The evaluation distinguishes mathematical verification, fixed-contrast estimation, matched-quality decision cost, intervention search, and structural transfer. Table~\ref{tab:jcs_cohorts} summarizes the cohorts. Synthetic networks cover Erd\H{o}s--R\'enyi-type graphs~\cite{gilbert1959}, Watts--Strogatz small-world graphs~\cite{watts1998}, sparse stochastic blockmodels (SBM)~\cite{holland1983}, and preferential attachment with triangle closure~\cite{barabasi1999}. Node labels are independently permuted. Existing three-cliques are filled independently with probability $0.6$; these are explicitly synthetic groups.
+
+For the original and calibrated search cohorts, unless varied, $T_0=0.9$, $\lambda=0.2$, $u=3$, $H=10$, $k=4$, and $D=2$. For mean degree $\bar d$ and mean face participation $\bar f$, rates are $\beta_1=1.15/(T_0\bar d)$ and $\beta_2=3s/(T_0\bar f)$, where $s$ is the face-strength scale; a zero denominator gives zero for the corresponding rate. Initial prehistory states have probabilities $(0.6,0.2,0.2)$ for $(U,R,C)$ and zero memory. A length-three prehistory uses correction at node zero with strength $1.5$ for duration $0.6$. Endpoints are accepted when both $R$ and $C$ remain. All attempted histories are retained, including rejections.
+
+The complete-search, optimized-replay and recent runtime cohorts instead use exactly 10\% rumor, 10\% correction and 80\% inactive nodes initially, zero memory and two uncontrolled prehistory time units. Every natural-history outcome is retained, including rumor extinction. One continuation is one physical stochastic trajectory, not one independent network. Histories and parameter cells are first averaged within a graph; the earlier synthetic cohorts use graph-level, family-stratified percentile bootstrap~\cite{efron1979}. Search, holdout, and final evaluation use disjoint tapes. Common final tapes compare distinct deployed actions without selecting an evaluation-sample minimum as an oracle. All loss differences below are in cumulative occupation units. Multiplicity families and budgets are fixed separately for each experiment; their nominal coverage is not a single simultaneous guarantee over the entire research sequence. Full configurations, hashes, all grid outcomes, and numeric source mappings accompany the implementation.
+
+
+\subsection{Frozen proposal score and search specification}\label{sec:search_details}
+To rank proposals cheaply, define $c_v^0=\ind\{x_v=C\}$, $y_v(S)=\ind\{v\in S\}$, $z_v(S)=c_v^0+(1-c_v^0)y_v(S)$, $t_0=\min(D,1)$, and
+$w_i=[\ind\{x_i=R\}+\tfrac14\ind\{x_i=U\}]/n$. The frozen exposure score is
+\begin{align}
+ h_i(S)&=t_0\!\left[u y_i(S)+\beta_1T_0\sum_{v\sim i}z_v(S)\right.\notag\\
+ &\hspace{12mm}\left.+\beta_2T_0\sum_{\{i,v,w\}\in\Fset}(1-a_{ivw})z_v(S)z_w(S)\right],\notag\\
+ F(S)&=\sum_iw_i[e^{-h_i(\varnothing)}-e^{-h_i(S)}].\label{eq:score}
+\end{align}
+The score freezes memory and treats targeted donors as corrected. Actual simulated continuations always start from the true context. Node exchange (NEX) retains the anchor and the twelve highest-scoring single-node replacements. Face exchange (FEX) retains the anchor, six single replacements, and six two-node replacements whose incoming nodes share a filled face. Every removal pair from the anchor is scored for an incoming pair; duplicates are removed and missing pair slots revert to singles. Both methods simulate at most thirteen distinct final sets.
+
+Discovery evaluates the shortlist, freezes its two lowest-mean candidates, and adds the anchor. Independent holdout tapes select the lowest-mean finalist. This empirical finalist rule is the deployed policy in the reported experiments. The optional certified rule in Section~\ref{sec:certificate} is a distinct decision rule.
+
+The deployable workflow is Algorithm~\ref{alg:search} in the main article.
+
+All physical continuation calls, including the greedy anchor and integer remainders, are charged. Shared anchor work counts once in the experiment's physical total and in full in each independently deployable policy budget. Ranking considers $O(k|\mathcal C|)$ single exchanges and $O(\binom{k}{2}|P_{\mathcal C}|)$ pair exchanges, where $P_{\mathcal C}$ is the incoming-pair set. A naive score evaluation costs $O(n+|E|+|\Fset|)$. Restricting the pair set reduces this ranking workload, while its effect on final loss remains an empirical question.
+
+\subsection{Order-informed certificates and their role}\label{sec:portfolio_details}
+For a fixed finite portfolio $\mathcal P$, define the auxiliary controls
+\[
+ I_{\mathcal P}=\bigcap_{S\in\mathcal P}S,\qquad
+ J_{\mathcal P}=\bigcup_{S\in\mathcal P}S.
+\]
+The common graphical construction gives
+\begin{equation}
+\max_{S\in\mathcal P}Q(S)-\min_{S\in\mathcal P}Q(S)
+\le \E[L(I_{\mathcal P})-L(J_{\mathcal P})].
+\label{eq:portfolio_details}
+\end{equation}
+Two endpoint continuations can therefore bound the expected-loss diameter even when candidate paths have not been queried. A bounded-mean sequential test can certify that this diameter is at most a specified tolerance. When the screen cannot certify, an independent paired race supplies a fallback. Every endpoint and candidate continuation is charged.
+
+Supplementary Theorems~\ref{thm:endpoint_certificate} and~\ref{thm:envelope_selection} prove the error accounting, including adaptive inspections and an explicit unresolved outcome at a finite cap. Fixed-witness and independent-pilot variants are given with complete proofs in the supplement. These are portfolio guarantees, not approximation guarantees over every size-$k$ target set. The empirical NEX/FEX finalist rule uses independent holdout minimization and is evaluated separately from the optional certified selector.
+
+The frozen score also has an explicit sufficient coefficient condition for a positive submodularity ratio (Supplementary Theorem~\ref{thm:proxy}). That condition explains a proposal heuristic; it is not a bound on $g$ or a performance guarantee for the deployed exchange policy. The full recurrent process admits the zero-ratio counterexample in Proposition~\ref{M-prop:counter}.
+
+
+\subsection{Fixed-contrast RTC comparison}\label{sec:variance_details}
+
+The initial twelve-context fixed-action benchmark has a median thinning-to-graphical difference-variance ratio of $33.50$, with descriptive interval $[21.58,74.10]$, for a nested no-target/two-target contrast. The thinning-to-RTC median is $15.49$ in that benchmark. The two medians come from separate paired constructions, so their quotient is not a direct RTC/graphical variance ratio.
+
+The later decision-cost cohort includes equal-size nonnested actions. Its finite-positive median thinning/graphical variance ratios are $7.66$ for nested controls and $4.00$ for equal-size nonnested contrasts. Direct RTC/graphical medians are $1.37965$ and $1.13251$, respectively. The complete zero-variance categories and alternative aggregations are in the supplement. Thus the observed variance advantage over RTC is limited; the construction's proved order and envelope properties do not assert uniformly lower variance than another exact coupling.
+
+
+\subsection{Full scaling and pool sensitivity}\label{sec:scaling_details}
+
+Scaling uses $n\in\{100,300,1000,3000,10000\}$ and sixteen graphs per size. The stronger RTC implementation retains the same six reaction channels and integrated-hazard representation while adding local rate caches, lazy memory, and an indexed heap. At 3,000 and 10,000 nodes, geometric mean local-RTC/graphical wall-time ratios are $0.58613$ $[0.55628,0.61612]$ and $0.57413$ $[0.55558,0.59374]$, with adjusted 99.375\% intervals. Incremental RTC is faster on these workloads. Batch indexing and trajectory initialization are included; compilation, topology generation, and outer Python-object setup are excluded.
+
+The graphical log--log time slope is descriptively $1.1964$ against $n$ and $1.0029$ against the measured proposal-work proxy, consistent with Eq.~\ref{eq:work}'s local accounting. Nine density cells and all size curves are supplied in the supplement. Candidate-pool sensitivity uses 16, 64, and all nodes on 32 graphs at $n=100,300$, with two histories and 2,048 calls per policy. Only the $n=300$, all-node contrast has a positive adjusted interval: $0.03891$ $[0.01500,0.06316]$, twelve positive and four negative graphs; its preferential-attachment family mean is negative. The remaining five pool intervals contain zero.
+
+Figure~\ref{fig:scalability} separates computational scaling from candidate-pool search effects. Its time curves summarize the observed implementations; Supplementary Fig.~\ref{fig:pool_sensitivity} retains all six pool contrasts and their original adjusted coverage.
+\begin{figure*}[t]
+\centering\includegraphics[width=.98\textwidth]{scalability_pool.pdf}
+\caption{Computational scaling. (a) Per-trajectory wall-time medians and interquartile ranges over sixteen measured graph instances per size, for graphical coupling and incremental RTC. Shading is an interquartile range, not a confidence interval. (b) Graphical wall time versus the measured proposal-work proxy, showing every scaling observation; the dashed descriptive log--log fit has slope $1.003$. The figure characterizes measured computational work rather than a uniform runtime advantage. Candidate-pool search effects are reported separately in Supplementary Fig.~\ref{fig:pool_sensitivity}.}
+\label{fig:scalability}
+\end{figure*}
+
+
+\subsection{Strong baselines and observed-group transfer}\label{sec:transfer_details}
+
+On 32 further graphs, all primary simulated methods use a common 64-node pool, 4,096 online continuations and 512 independent final paths. Seventeen planned FEX comparisons have adjusted $99.706\%$ intervals. FEX improves over NEX by $0.02217$ $[0.00526,0.04175]$, with graph signs $12/14/6$ for positive/negative/tied. Comparisons against full-budget greedy and successive halving contain zero; halving has the lowest observed mean among those methods. Supplementary complete tables report every heuristic and simulation comparator.
+
+Four 200-node observed-group extracts, each with twelve synthetic histories, test structural transfer separately by source. No source has a strictly positive adjusted lower bound for FEX over NEX. The earlier unfavorable 48-node Ask Ubuntu study and its independent diagnostics remain in the supplement. These tests assess transfer across observed structures using synthetic memory, spreading rates and correction responses.
+
+
+\subsection{Optional certification and charged cost}\label{sec:certification_details}
+
+The endpoint and fallback rules control risk within a finite portfolio; a capped query can remain unresolved. The first two eight-action screening cohorts fail their joint efficiency criteria. A new independently planned pilot-routed study compares against a frozen strong plain race on 32 graphs and three histories, with the same exact extinction presolve, tolerance $0.1$, per-query risk $0.05$ and 32,768-copy cap for both methods. Both certify 96/96 queries. The planned plain/routed geometric wall-time ratio is $1.127$ $[1.057,1.211]$, including every pilot copy, and 21/32 graph log ratios are positive. Larger 16- and 32-action stress tests have intervals containing one and do not establish transfer of this efficiency gain. Full theory, outcomes, and charged-cost accounting are supplementary.
+
+
+
+\subsection{Additional fixed-quality loss estimates}\label{sec:quality_estimates}
+At the maximum online budget, graphical mean excess loss is $0.00496$, with descriptive $95\%$ interval $[0.00322,0.00678]$. The zero-simulation rumor-degree comparator has excess loss $0.13553$ $[0.11687,0.15523]$, above the quality target. The curves and the comparator mean are displayed in the main article's cost-quality figure.
+
+\FloatBarrier\section{Controlled-initial-memory response experiment}\label{sec:memory_response_details}
+This additional descriptive study fixes one graph from each family and uses constructed, ordered memory initializations $A_\sigma(0)=\pm0.9$ with identical node states. The exact design is recorded in \texttt{physica\_a\_revision/mechanism\_config.json}, together with its SHA-256 checksum. Graphs are generated with the existing sparse generators, $n=100$ and face-filling probability $0.6$. Initial states contain exactly $20$ rumor, $20$ correction and $60$ inactive nodes. Controls are either empty or the four highest-degree rumor nodes, with ties broken by node index. Rates are $\beta_1=1.15/(T_0\bar d)$ and $\beta_2=3s/(T_0\bar f)$ for $s\in\{0,1\}$, with a zero rate for a zero denominator. The parameters $T_0=0.9$, $\lambda=0.2$, $u=3$, $D=2$ and $H=10$ are fixed. Each graph uses $128$ independent tapes shared across its eight conditions. All four graphs and all conditions are reported.
+
+The instrumented implementation records state fractions and mean analytically advanced face memory every $0.1$ time unit through time $12$. It continues after rumor extinction because the requested memory and correction trajectories remain active. Loss integrals use exact event intervals rather than quadrature of the displayed samples. Checks compare $256$ integrals with the unchanged loss-only evaluator (maximum difference zero), verify state fractions and memory ranges, and verify sampled path ordering. At $s=0$, the node paths and losses are exactly invariant to the two memory initializations. Shading in the main figure is one conditional Monte Carlo standard error: at each time, replication-level averages are first formed across the four fixed contexts, and their standard deviation is divided by $\sqrt{128}$. It does not estimate graph-population uncertainty.
+
+Mean post-withdrawal losses, averaged over these four contexts, are reported below. These are descriptive means without confirmatory tests or parameter selection. Complete per-context values and raw replication summaries accompany the plotting script.
+\begin{table}[ht]\centering
+\caption{Descriptive occupation losses in the controlled-initial-memory study.}
+\begin{tabular}{llrr}\toprule
+Face scale & Control & Initial $-T_0$ & Initial $+T_0$\\\midrule
+$0$ & None & 0.70554 & 0.70554\\
+$0$ & Four targets & 0.46411 & 0.46411\\
+$1$ & None & 0.29816 & 4.42865\\
+$1$ & Four targets & 0.17504 & 3.59998\\\bottomrule
+\end{tabular}\end{table}
+The original simulation engines and confirmation data were not modified.
+
+\begingroup
+\interlinepenalty=10000
+
+\begin{figure}[ht]\centering\includegraphics[width=.86\linewidth]{original_memory_contexts.pdf}
+\caption{Separate contexts underlying main Fig.~\ref{fig:memory_response}. Each row is one fixed graph and each column a face-strength setting. Teal and red denote initial $-T_0$ and $+T_0$; solid and dashed lines denote no control and four targets. Curves average 128 tapes within each context. The vertical line marks withdrawal. Node trajectories for the two memory initializations coincide at $s=0$.}\label{fig:original_memory_contexts}
+\end{figure}
+\FloatBarrier\section{Memory-mechanism and comparison-bound diagnostics}\label{sec:response_extension}
+This descriptive extension uses eight new graphs (two per ER, WS, sparse SBM and PA-with-closure family), $n=100$, and one constructed initial state per graph with 20 rumor, 20 correction and 60 inactive nodes. The graph generator and face-filling rule are unchanged. Transmission parameters are $\beta_1=1.15/(T_0\bar d)$ and $\beta_2=3/(T_0\bar f)$, with zero rates when the respective denominator vanishes, and $T_0=0.9$, $u=3$, $D=2$, $H=10$. Thus the higher-order transmission prefactor remains fixed across memory comparisons.
+
+Nine settings comprise memory identically zero, two frozen initializations at $\pm T_0$, and the two initializations under each $\lambda\in\{0.02,0.2,2\}$. The $128$ independent tape identifiers for each graph are reused across its settings and controls. Initial rumor nodes are ranked by descending degree, breaking ties by node index. Set $S$ contains the first four; $T_{\mathrm{set}}$ replaces the fourth with the fifth. We also evaluate no control, $I=S\cap T_{\mathrm{set}}$, and $J=S\cup T_{\mathrm{set}}$. There are $8\times9\times5\times128=46,080$ physical trajectories. Table~\ref{tab:memory_modes} gives all condition means across graphs; graph-level values and raw losses are archived.
+
+The design, reporting rules and seeds were saved before simulation in \path{response_extension/design.json}, with a SHA-256 checksum. This is a descriptive extension, not an added confirmatory comparison family. The unchanged loss evaluator is used throughout. All sampled nested inequalities and intersection--union bounds pass. Plotted values are computed from archived losses.
+
+\begin{table}[ht]
+\centering\small
+\caption{Mean occupation loss across the eight fixed contexts. Dynamic-setting labels give initial memory and $\lambda$. All five controls are included.}\label{tab:memory_modes}
+\begin{tabular}{lrrrrr}\toprule
+Memory setting & None & $S$ & $T_{\mathrm{set}}$ & $I$ & $J$\\\midrule
+Zero memory & 2.28842 & 1.04551 & 1.01169 & 1.20956 & 0.86374\\
+Frozen, $-T_0$ & 0.13390 & 0.06507 & 0.06352 & 0.07516 & 0.05509\\
+Frozen, $+T_0$ & 5.49464 & 4.99693 & 5.01560 & 5.13328 & 4.85799\\
+Dynamic, $-T_0$, $0.02$ & 0.15126 & 0.06897 & 0.06743 & 0.08010 & 0.05832\\
+Dynamic, $+T_0$, $0.02$ & 5.44010 & 4.92053 & 4.94120 & 5.06059 & 4.77750\\
+Dynamic, $-T_0$, $0.2$ & 0.39225 & 0.14251 & 0.12656 & 0.17057 & 0.10776\\
+Dynamic, $+T_0$, $0.2$ & 5.01595 & 4.18250 & 4.19297 & 4.36788 & 3.98538\\
+Dynamic, $-T_0$, $2$ & 1.62213 & 0.73032 & 0.69979 & 0.82950 & 0.60720\\
+Dynamic, $+T_0$, $2$ & 3.73173 & 2.36186 & 2.35136 & 2.59847 & 2.12623\\
+\bottomrule\end{tabular}\end{table}
+
+For a given graph and setting, define tape-level $Y=L(\varnothing)-L(S)$, $W=L(S)-L(T_{\mathrm{set}})$, $B_{\mathrm{env}}=L(I)-L(J)$, and $P_S=L(S)-L(J)$, $P_{T_{\mathrm{set}}}=L(T_{\mathrm{set}})-L(J)$. With bars denoting sample averages, the displayed ratios are
+\[
+ r_{\rm nested}=\frac{\overline{(Y-\bar Y)^2}}{\bar Y(H-\bar Y)},\qquad
+ r_{\rm exchange}=\frac{\overline{(W-\bar W)^2}}{H\min\{\overline{B_{\mathrm{env}}},\overline{P_S+P_{T_{\mathrm{set}}}}\}-\bar W^2}.
+\]
+We use empirical population moments (variance divisor $128$) to compare the bound under the empirical tape distribution. These ratios are not unbiased estimates of population ratios and have no inferential intervals. Denominators at most $10^{-12}$ would be reported separately; all 72 cases are defined in both comparisons. Nested ratios range from $0.00175$ to $0.58480$ (median $0.16093$); exchange ratios range from $0.00234$ to $0.50003$ (median $0.11129$). The median exchange bound divided by $H^2$ is $0.01602$. These sampled bounds are narrower than a generic signed-contrast bound but retain appreciable slack relative to the empirical variances.
+
+\begin{figure}[ht]\centering\includegraphics[width=.98\linewidth]{bound_diagnostics.pdf}
+\caption{All 72 empirical variance-to-bound ratios for nested and nonnested comparisons. Colors and symbols identify families. The horizontal dotted line is equality with the plug-in bound. Ratios describe the empirical distribution of tapes; they do not certify population tightness.}\label{fig:bound_diagnostics}\end{figure}
+\begin{figure}[ht]\centering\includegraphics[width=.85\linewidth]{memory_contexts.pdf}
+\caption{Initial-memory loss gaps for every graph. Red: no control; teal: four targets. Solid and dashed lines distinguish the two graphs in each family. Every estimated graph-specific gap decreases over the three tested rates; no continuous-parameter monotonicity is inferred.}\label{fig:memory_contexts}\end{figure}
+\FloatBarrier
+
+\FloatBarrier\section{Post-hoc sensitivity to the selection-quality threshold}\label{sec:threshold_sensitivity}
+The original WP3 target is mean excess loss $0.02$ relative to the independently selected finite-portfolio reference. After inspecting the original curves, we recomputed the stable threshold crossing at $0.01,0.015,0.025,0.03$, alongside the original target. These thresholds are post-hoc choices, not a new confirmatory family. No hypothesis test or replacement endpoint is introduced. The rule is unchanged: the mean estimate must be at most the target at the selected grid budget and every larger grid budget. It does not use a confidence upper bound.
+
+The analysis reaggregates all $21,504$ retained context--trial--method--budget rows into $896$ graph-level entries, then reproduces all pooled curve means. The maximum difference from the archived graph-level summaries is $8.89\times10^{-16}$. It uses retained derived summaries, not a rerun or recovery of the original raw trajectory tapes. The original locked configuration, analysis script, input hashes and a standalone reanalysis script accompany the results.
+
+Table~\ref{tab:threshold_sensitivity} reports every tested threshold for the pooled sample and each family. A value $>512$ means no stable crossing was observed within the budget grid; it is not an extrapolated minimum. At the original target the pooled budgets remain $128,512,128,512$ for graphical, thinning, RTC and antithetic thinning. At $0.025$ the thinning/graphical trajectory ratio is two, whereas at $0.03$ it is four. At the stricter $0.01$ target, RTC first qualifies at $512$ and graphical coupling at $256$, while both thinning variants remain unresolved within the grid. These descriptive comparisons do not alter the original multiplicity-adjusted intervals or the failed joint efficiency criterion.
+
+\begin{table}[ht]\centering\small
+\caption{Post-hoc stable-crossing budgets in physical trajectories. Pooled means use 32 graphs; family means use eight. Thresholds and family summaries here carry no new inferential claims.}\label{tab:threshold_sensitivity}
+\begin{tabular}{lrrrrr}\toprule
+Graphs & Target & Graphical & Thinning & RTC & Antithetic\\\midrule
+All graphs & 0.010 & 256 & $>512$ & 512 & $>512$\\
+All graphs & 0.015 & 256 & $>512$ & 256 & 512\\
+All graphs & 0.020 & 128 & 512 & 128 & 512\\
+All graphs & 0.025 & 128 & 256 & 128 & 512\\
+All graphs & 0.030 & 64 & 256 & 64 & 256\\
+ER & 0.010 & 512 & $>512$ & 512 & $>512$\\
+ER & 0.015 & 256 & $>512$ & 512 & $>512$\\
+ER & 0.020 & 128 & 512 & 256 & 512\\
+ER & 0.025 & 128 & 512 & 256 & 512\\
+ER & 0.030 & 128 & 256 & 256 & 256\\
+WS & 0.010 & 256 & $>512$ & 256 & $>512$\\
+WS & 0.015 & 128 & $>512$ & 256 & 512\\
+WS & 0.020 & 128 & 512 & 128 & 512\\
+WS & 0.025 & 32 & 256 & 128 & 512\\
+WS & 0.030 & 32 & 256 & 32 & 128\\
+SBM & 0.010 & 256 & $>512$ & 512 & $>512$\\
+SBM & 0.015 & 256 & 512 & 256 & 512\\
+SBM & 0.020 & 128 & 512 & 128 & 512\\
+SBM & 0.025 & 128 & 256 & 128 & 512\\
+SBM & 0.030 & 128 & 256 & 64 & 256\\
+PA + closure & 0.010 & 256 & $>512$ & 256 & $>512$\\
+PA + closure & 0.015 & 128 & 512 & 64 & 512\\
+PA + closure & 0.020 & 64 & 256 & 32 & 256\\
+PA + closure & 0.025 & 16 & 128 & 16 & 256\\
+PA + closure & 0.030 & 8 & 128 & 8 & 64\\
+\bottomrule\end{tabular}\end{table}
+\FloatBarrier
+\section{Search and evaluation implementation}
+\subsection{Runtime accounting and persistent replay}\label{sec:runtime_implementation}
+\subsubsection{Sources of shared computation}
+The implementation diagnostics in Supplementary Fig.~\ref{fig:complete_search_mechanisms} separate topology construction from combined copy setup and event processing on recorded query portfolios. Topology construction accounts for 0.097\% of replay's measured native cost on these diagnostic workloads. The runtime gain therefore cannot be explained by topology reuse alone: shared proposal dispatch and amortized copy/interface work are part of the measured computation. The confirmation below tests a replay implementation that already shares topology and avoids repeated prefix calls.
+
+\subsubsection{Persistent-topology replay}
+The preceding replay interface can repeat preparation when a stage has unequal integer allocations. We specified a stronger comparator before evaluating 32 new independent graphs, four per family/size stratum, with three unconditioned histories each. It owns and constructs the topology once per complete search, then evaluates each action's full tape prefix exactly once in a single native call per stage. Topology creation and release remain inside the timer. The search, $16$-node pool, $k=4$, $1,024$ online continuations, stage allocation and fresh-tape rule are unchanged. All 288 searches are reconstructed from the recorded observations; persistent replay and fixed batching have exactly matching transcripts in all 96 contexts.
+
+\subsection{Candidate screening and search}\label{sec:search_implementation}
+Let $\mathcal C\subseteq V$ be the candidate-node pool. The screening rule includes the top-$k$ rumor-degree action, then fills the pool by descending $d_i(1+\ind\{x_i=R\})+2f_i$, with deterministic ties. Policies within a primary comparison share this rule. A simulation-greedy procedure builds an anchor $S_0\subseteq\mathcal C$ of size $k$.
+
+Node exchange (NEX) includes the anchor and the twelve highest-ranked single-node replacements. Face exchange (FEX) includes the anchor, six single replacements and six two-node replacements whose incoming nodes share a filled face. Both methods simulate at most thirteen distinct sets. Proposals are ranked by a frozen exposure score, Eq.~\ref{eq:score}; the score proposes actions, while every continuation uses the true dynamic process. It freezes current face memories, treats targeted nodes as corrected donors, and scores the increase in correction exposure through direct control, edges and faces. A saturating exponential combines these exposures with larger weights for current rumor transmitters.
+
+Discovery freezes the two candidates with lowest estimated losses and adds the anchor. Independent holdout tapes select the finalist. All physical continuation calls, including anchor work and integer remainders, are charged. The complete score, pair enumeration and ranking complexity appear in Supplementary Section~\ref{sec:search_details}.
+
+
+\section{Natural-history memory and feedback study}\label{sec:natural_memory_details}
+The design and source hashes were fixed before the simulations. The study uses 32 new independent graphs and two histories per graph. Extinction is not an exclusion criterion. When fewer than four rumor nodes remain, the target set is filled by descending degree with deterministic ties. The 64 continuation tapes are shared across conditions, while graph generation, histories and continuations use distinct seed namespaces. Intervals below resample graphs within the four families (4,000 replicates), keeping histories and settings together. They are descriptive pointwise intervals, not a confirmation family with simultaneous coverage.
+
+\begin{longtable}{rrlrrrr}
+\caption{All natural-history loss contrasts. Positive values mean the first rule has greater occupation loss. F: dynamic natural minus frozen; Z: dynamic natural minus zero; R: dynamic natural minus reset dynamic. Control 0 is absent and 1 uses four targets. Signs count graph-level means.}\label{tab:natural_memory_all}\\
+\toprule $\lambda$ & Control & Contrast & Mean & 95\% interval & Positive & Negative\\\midrule\endfirsthead
+\toprule $\lambda$ & Control & Contrast & Mean & 95\% interval & Positive & Negative\\\midrule\endhead
+0.02 & 0 & F & 0.04540 & [0.03535, 0.05553] & 29 & 1\\
+0.02 & 0 & Z & 0.10738 & [0.07638, 0.13969] & 27 & 5\\
+0.02 & 0 & R & 0.05842 & [0.03759, 0.08083] & 25 & 7\\
+0.02 & 1 & F & 0.03408 & [0.02459, 0.04395] & 28 & 2\\
+0.02 & 1 & Z & 0.24161 & [0.16337, 0.32566] & 30 & 1\\
+0.02 & 1 & R & 0.19598 & [0.12749, 0.27207] & 30 & 1\\
+0.2 & 0 & F & 0.25677 & [0.20143, 0.31248] & 29 & 3\\
+0.2 & 0 & Z & 0.31875 & [0.24557, 0.39339] & 28 & 4\\
+0.2 & 0 & R & 0.02477 & [0.01198, 0.03928] & 25 & 7\\
+0.2 & 1 & F & 0.19752 & [0.15115, 0.24435] & 30 & 1\\
+0.2 & 1 & Z & 0.40506 & [0.29186, 0.52226] & 31 & 0\\
+0.2 & 1 & R & 0.12891 & [0.07893, 0.18527] & 29 & 2\\
+2 & 0 & F & 0.46849 & [0.38093, 0.56202] & 30 & 2\\
+2 & 0 & Z & 0.53046 & [0.42574, 0.63991] & 30 & 2\\
+2 & 0 & R & 0.00476 & [0.00197, 0.00751] & 23 & 7\\
+2 & 1 & F & 0.43754 & [0.34051, 0.53469] & 30 & 2\\
+2 & 1 & Z & 0.64508 & [0.48669, 0.80402] & 30 & 2\\
+2 & 1 & R & 0.02818 & [0.01681, 0.04045] & 29 & 1\\
+\bottomrule\end{longtable}
+Graph-family means and zero counts are supplied in \texttt{contrasts.csv}. The complete feedback time grid, pointwise intervals and mean absolute paired residuals are in \texttt{feedback\_all\_times.csv}. All comparisons and settings are included. The initial node and memory arrays, graph incidence, target sets, loss samples and time traces are in the per-graph NPZ files. Their generation and seed rules are in \texttt{design.json} and \texttt{run.py}.
+
+\subsection{Feedback at the observation endpoint}
+The endpoint $t=12$ is the end of the specified loss window. The following table reports the residual memory term, averaged over graphs. It does not establish an infinite-time effect or a universal persistence threshold.
+\par\medskip
+\begin{center}\begin{tabular}{rrrl}\toprule $\lambda$ & Control & Mean residual & 95\% interval\\\midrule
+0.02 & 0 & 0.000612 & [-0.000484, 0.001768]\\
+0.02 & 1 & 0.008853 & [0.004996, 0.013015]\\
+0.2 & 0 & 0.001354 & [-0.002014, 0.005029]\\
+0.2 & 1 & 0.030176 & [0.016743, 0.045831]\\
+2 & 0 & 0.000689 & [-0.000208, 0.001616]\\
+2 & 1 & 0.009066 & [0.004766, 0.013871]\\
+\bottomrule\end{tabular}\end{center}
+\section{Simulation implementation and search applications}\label{sec:full_computational_application}
+\begin{algorithm}[t]
+\caption{Exact reset-tape loss for a fixed target set}
+\label{alg:simulation}
+\begin{algorithmic}[1]
+\Require $G,x,a,S,u,D,H$ and one tape identifier $\xi$
+\State Build the common bounds in Eq.~\ref{M-eq:bounds}
+\State Initialize state, rumor count, and face memories/drives
+\State Insert the $3n$ proposal clocks into a min-priority queue
+\While{the next proposal is before $D+H$ and rumor remains}
+\State Pop the earliest node $i$, destination $v$, and time $t$
+\State Integrate the current rumor count over the elapsed part of $[D,D+H]$
+\State Evaluate incident memories at $t$ using Eq.~\ref{M-eq:flow}
+\State Obtain the channel's common acceptance mark
+\State Reset to $v$ if $v=U$ or the mark accepts $q_i^v/B_i^v$
+\If{the node state changed}
+\State Store the advanced incident memories and refresh their drives
+\EndIf
+\State Reschedule the popped channel using its next common increment
+\EndWhile
+\State Complete the integral to $D+H$ and return $L(S,\xi)$
+\end{algorithmic}
+\end{algorithm}
+\begin{proposition}[Work bound and exact extinction stopping]
+\label{prop:work}
+For $P$ realized proposals at nodes $i_1,\ldots,i_P$, the implementation has the upper bound
+\begin{align}
+ O\!\Big(&n+|E|+|\Fset|+n\log(n+1)\notag\\
+       &+\sum_{q=1}^P[\log(n+1)+d_{i_q}+f_{i_q}]\Big)
+       \label{eq:work}
+\end{align}
+and $O(n+|E|+|\Fset|)$ memory. If the rumor count reaches zero, returning the accumulated loss without further simulation is exact for Eq.~\ref{M-eq:loss}.
+\end{proposition}
+\begin{proof}
+Adjacency and incidence indexing takes $O(n+|E|+|\Fset|)$ work. Per-trajectory state and face initialization is linear in $n+|\Fset|$, while the present implementation inserts the clocks individually in $O(n\log(n+1))$ work. A proposal requires a heap update and at most the incident edge and face inspections. Advancing and refreshing an incident face is constant work because its size is three. Summing gives Eq.~\ref{eq:work}; storing indexing, states, face data, and the queue gives the memory bound. Indexing can be shared across a batch.
+
+When no node is in $R$, every rumor-donor product and pairwise rumor indicator is zero, so all rumor-reset intensities vanish. The rumor-free node subset is invariant, irrespective of memory. The remaining occupation integral is identically zero. Stopping the loss computation is consequently exact; generating a complete terminal state or history would instead require continuing the process.
+\end{proof}
+
+\begin{proposition}[Fixed-query unbiasedness]
+\label{prop:unbiased}
+For fixed sets and independent replication tapes, sample means of losses, paired gains, and the four-term complementarity contrast in Eq.~\ref{M-eq:complementarity} are unbiased for their corresponding population quantities. The assertion also holds conditionally for sets selected using an independent discovery sample.
+\end{proposition}
+\begin{proof}
+Theorem~\ref{M-thm:coupling} gives the correct marginal law of each action; exact stopping preserves its loss. Linearity of expectation gives every fixed linear contrast, without requiring independence between actions on the same tape. Conditional on discovery, the chosen sets are fixed and the independent evaluation tapes have their original distribution, so the same argument applies conditionally and then unconditionally.
+\end{proof}
+
+Selection from noisy sample means introduces bias into the selected minimum. We use separate tapes for search and final evaluation. Global thinning, shared operational-time reaction paths, and destination-reset coupling can all have correct marginals while producing different dependence between action losses~\cite{anderson2007,anderson2012}. We compare their paired estimates and selection costs in Section~\ref{M-sec:experiments}.
+
+\subsection{Batch evaluation of candidate actions}
+
+The theorem permits shared scheduling and removal of jointly inert proposals without changing the distribution of the loss vector used by search.
+
+For the present triangle model a valid local bound follows explicitly from the relaxing memory. At refresh time $t$, until a node influencing the channel changes, a face memory remains between $a_\sigma(t)$ and its current drive $\Phi_\sigma$. For rumor reset replace $a_\sigma$ by $\max\{a_\sigma(t),\Phi_\sigma\}$ in each active face term; for correction reset replace it by $\min\{a_\sigma(t),\Phi_\sigma\}$. If $\lambda=0$, use its current value. Pairwise donor terms are fixed on this interval. Include each copy's actual correction intensity before taking the maximum over copies with a noninert reset, and refresh at withdrawal. After a jump at $i$, only receiver $i$, its neighbors, and coface vertices can require new bounds. A Fenwick tree supports channel selection and bound updates in $O(\log(n+1))$ time per updated channel. Recomputing a receiver's bound costs $O(M(d_i+f_i+1))$ in the supplied implementation; the update cost therefore accounts for both portfolio size and local incidence.
+
+\begin{algorithm}[t]
+\caption{Predictable-envelope portfolio evaluation}
+\label{alg:batch}
+\begin{algorithmic}[1]
+\Require Fixed actions $S_1,\ldots,S_M$, initial context, horizon $K_{\mathrm{hor}}$, fresh tape
+\State Set $t=0$; share topology indexing; initialize states and losses
+\State Build valid channel envelopes $b_c$ and their cumulative-rate tree
+\While{$t<K_{\mathrm{hor}}$ and at least one loss continuation remains active}
+\State If $\sum_c b_c=0$, advance to the next boundary or $K_{\mathrm{hor}}$, refresh and continue
+\State Draw $t'=t+\operatorname{Exp}(\sum_c b_c)$
+\If{a scheduled boundary or terminal time $K_{\mathrm{hor}}$ occurs first}
+\State Set $t$ to that time; integrate loss and refresh bounds if $t<K_{\mathrm{hor}}$
+\State \textbf{continue}
+\EndIf
+\State Set $t=t'$; select $c$ proportionally to $b_c$; draw $h\in[0,b_c]$
+\State Integrate occupation to the proposal time in each active copy
+\For{each active copy $j$}
+\State Evaluate the analytic memory flow and effective intensity $q_c^j$
+\State Apply the reset exactly when $h<q_c^j$
+\EndFor
+\State Refresh affected channel bounds and their cumulative-rate entries
+\State Finish rumor-free loss copies using Proposition~\ref{prop:work}
+\EndWhile
+\State Complete remaining occupation integrals and return the loss vector
+\end{algorithmic}
+\end{algorithm}
+For a zero total proposal rate, the implementation advances directly to the next scheduled boundary or the terminal time. Loss-only extinction stopping uses Proposition~\ref{prop:work}; a requested complete state trajectory must instead be continued to $K_{\mathrm{hor}}$. The pseudocode describes joint evaluation of losses, and Theorem~\ref{M-thm:batch} states the corresponding full-path construction before loss-only stopping.
+
+
+\subsection{Search application}
+\label{sec:search}
+\subsection{Anchor, score, and exchange neighborhoods}
+Both node exchange (NEX) and face exchange (FEX) start from a simulation-greedy anchor in the same candidate pool. NEX compares the anchor with twelve single replacements; FEX compares it with six single replacements and six two-node replacements whose incoming nodes share a filled face. A frozen exposure score ranks proposals by direct, edge and face correction exposure, while all continuations use the full dynamic model. Discovery selects two candidates plus the anchor; independent holdout tapes select the finalist. Every continuation is charged. The candidate rule, score and ranking details are in Supplementary Section~\ref{sec:search_implementation}.
+
+\begin{algorithm}[t]
+\caption{Budgeted anchor-and-exchange search}
+\label{alg:search}
+\begin{algorithmic}[1]
+\Require Context, $\mathcal C$, $k$, and budgets $B_a,B_d,B_h$
+\State Build simulation-greedy anchor $S_0$ with $B_a$ calls
+\State Rank NEX or FEX proposals using Eq.~\ref{eq:score}
+\State Keep at most thirteen distinct sets, including $S_0$
+\State Spend $B_d$ discovery calls across the shortlisted sets
+\State Freeze the two smallest discovery means and include $S_0$
+\State Spend $B_h$ fresh holdout calls across frozen finalists
+\State \Return the finalist with the smallest holdout mean
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Order-informed certification}
+For a finite portfolio $\mathcal P$, its intersection $I_{\mathcal P}$ and union $J_{\mathcal P}$ give
+\begin{equation}
+\max_{S\in\mathcal P}Q(S)-\min_{S\in\mathcal P}Q(S)
+\le \E[L(I_{\mathcal P})-L(J_{\mathcal P})].
+\label{eq:portfolio_main}
+\end{equation}
+Two auxiliary controls can therefore bound the portfolio's expected-loss diameter before all candidate paths are queried. Supplementary Theorems~\ref{thm:endpoint_certificate} and~\ref{thm:envelope_selection} combine this envelope with sequential tests and explicit error accounting. The certificates use established betting and concentration methods~\cite{waudby2024,howard2021,hoeffding1963,maurer2009}. Their proofs and cost experiments are supplementary; Algorithm~\ref{alg:search} uses empirical holdout selection.
+
+\subsection{Paired variance and cost at a fixed selection quality}
+\begin{figure*}[!t]
+\centering\includegraphics[width=.98\textwidth]{cost_accuracy.pdf}
+\caption{Cost and selection quality for four equal-size nonnested actions. Panels (a) and (b) compare physical trajectory budgets and wall time on a shared vertical scale. Insets enlarge the original high-budget Graphical/RTC and thinning/antithetic comparisons. Markers alternate across observed budgets to reduce occlusion; all mean values and interval endpoints are reported. The reference is chosen on independent sample A and assessed on sample B. Trajectory counts charge both antithetic partners. The fixed threshold is excess loss $0.02$; curve error bars are descriptive 95\% intervals, while cost ratios use the adjusted intervals in Table~\ref{tab:cost}. Wall time covers online selection after candidates are fixed. The zero-simulation R-degree anchor is reported numerically below the panels and lies above their common vertical range.}
+\label{fig:cost}
+\end{figure*}
+
+The nested fixed-contrast benchmark has a median thinning/graphical difference-variance ratio of $33.50$. Direct RTC/graphical medians in the later cohort are $1.38$ for nested and $1.13$ for equal-size nonnested contrasts. These measurements support variance reduction against thinning, while the proved distinction from RTC is the path order and its bounds. Complete ratios and zero-variance cases are in Supplementary Section~\ref{sec:variance_details}.
+
+\paragraph{Selection quality at a fixed trajectory cost}
+The matched-quality experiment uses 32 graphs and 192 contexts. Each context fixes four distinct size-$k$ actions: the rumor-degree action and three surrogate exchange proposals. Two settings cover $(k,D,s)=(4,2,0.5)$ and $(8,4,1.5)$. A reference sample A uses 1,024 paths per action to choose a reference set. An independent sample B uses 2,048 paths per action to estimate deployment loss minus that fixed reference loss. This finite-portfolio reference allows negative estimated differences and is not a global optimum over all size-$k$ sets.
+
+Each method receives 8--512 physical online paths per four-action selection, with four selection repetitions and shared budget prefixes. The quality target is estimated mean excess loss at most $0.02$, attained at the first observed budget for which all subsequent grid budgets also pass. This crossing rule uses the mean estimate, not an upper confidence bound; it is an empirical quality threshold rather than a per-query certificate. Thresholds and the budget grid are fixed in advance; no interpolation is used. The reported cost is the first qualifying grid budget, not the minimum over all possible budgets. Comparators are global thinning, six-channel common reaction paths based on the random time-change representation (RTC), and thinning with antithetic $U\mapsto1-U$ tapes. Both antithetic partners are charged. All engines use the same exact rumor-extinction stopping rule.
+
+Graphical coupling reaches the target at 128 paths, compared with 512 for thinning and antithetic thinning, and 128 for RTC. It uses one quarter as many physical trajectories as thinning, a 75\% budget reduction at the specified four-action quality target. Table~\ref{tab:cost} reports the multiplicity-adjusted ratios; the thinning path-ratio interval [2,4] corresponds to a budget reduction interval [50\%,75\%]. Figure~\ref{fig:cost} shows the complete quality curves. A post-hoc descriptive check at thresholds $0.01,0.015,0.025,0.03$ leaves the original endpoint unchanged. At $0.025$, graphical coupling and thinning first qualify at $128$ and $256$ trajectories, respectively; at $0.03$, they qualify at $64$ and $256$. Thus the observed cost ratio depends on the target and discrete grid. Full results, including unreached targets and family summaries, are in Supplementary Section~\ref{sec:threshold_sensitivity}.
+
+\begin{table}[t]
+\centering\small
+\caption{Cost at the fixed quality target: comparator cost divided by graphical cost. All intervals are Bonferroni-adjusted 99.375\% intervals for the eight-endpoint family.}
+\label{tab:cost}
+\begin{tabular}{llrl}
+\toprule
+Comparator & Cost & Ratio & Interval\\
+\midrule
+Thinning & Paths & 4.000 & [2.000,4.000]\\
+Thinning & Time & 6.715 & [3.291,6.979]\\
+RTC, global & Paths & 1.000 & [1.000,2.000]\\
+RTC, global & Time & 3.505 & [3.419,7.137]\\
+Antithetic & Paths & 4.000 & [2.000,4.000]\\
+Antithetic & Time & 6.680 & [3.349,6.966]\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The quality threshold is selected from a discrete prespecified budget grid. Bootstrap trajectory-cost ratios can have point masses at grid-induced values, so a point estimate may coincide with an interval endpoint. Wall-time percentile intervals need not be symmetric about the full-sample estimate.
+
+Six cost ratios and two coupling-only policy ablations form one eight-endpoint family, using 20,000 graph-stratified bootstrap repetitions. The strict joint criterion is not met because the adjusted RTC trajectory ratio has lower bound one. The adjusted comparisons support the thinning result within this family. With greedy logic, 16-node pool, and 1,024-call budget unchanged, replacing thinning by graphical coupling lowers independently evaluated loss by $0.07388$ $[0.04319,0.10197]$. The corresponding RTC contrast is $0.00776$ $[-0.02167,0.03236]$, leaving its policy-quality difference unresolved.
+
+\subsection{Complete-search runtime}
+\begin{figure*}[!t]
+\centering\includegraphics[width=.98\textwidth]{physicaA_runtime_summary.pdf}
+\caption{Complete-search computation and graph-level consistency. (a) The 64-graph study reports its primary replay/local ratio with a $95\%$ interval and secondary ratios with adjusted $97.5\%$ intervals. The open RTC marker denotes equal marginal budget and a different coupling, without matched-quality evidence. (b) The 32-graph confirmation uses persistent topology and one full-prefix call per action and stage; both intervals are adjusted $97.5\%$. (c,d) Every graph-level primary ratio is shown, distinguished by network size; short vertical bars are descriptive family geometric means. Values above one favor local batching. Primary ratios correspond to geometric-ratio time savings of 75.7\% and 73.6\%. Each cohort uses its own multiple-comparison adjustment.}
+\label{fig:jcs_runtime}
+\end{figure*}
+
+We measure whole-search wall time while keeping the joint distribution of candidate losses fixed. The study uses 64 graphs, balanced across four families and sizes $100$ and $300$, with three unconditioned natural histories each. Each search uses the same $16$-node pool and $1,024$ marginal continuations, including its greedy anchor, discovery and independent holdout. Only the evaluator changes. The evaluation follows the stage allocation and independence conditions of Theorem~\ref{M-thm:batch}.
+
+The primary whole-search wall-time ratio of action-wise replay to local adaptive batching is 4.109 $[3.840,4.384]$ (graph-level, family/size-stratified $95\%$ interval). Expressed as the reciprocal transformation of this geometric ratio, batching uses 24.3\% of replay time, a 75.7\% reduction $[74.0\%,77.2\%]$. This is a transformed geometric comparison, not the arithmetic mean of per-graph percentage savings. Timing includes candidate ranking, validation, topology construction, selection and trace collection. The timer measures the complete implementation, including amortized costs; it does not isolate event scheduling. All 64 graphs are included; 62 favor local batching and two favor replay. Replay-compatible fixed batching reproduces the complete replay transcripts and selected sets exactly. Incremental RTC is additionally timed at equal marginal budget, but its different joint law precludes a same-quality interpretation without separate evidence. Complete costs and diagnostic overlap workloads appear in the supplement.
+
+Figure~\ref{fig:jcs_runtime} also reports the fixed-batch comparison and the equal-budget incremental-RTC timing control. Supplementary Fig.~\ref{fig:complete_search} shows all graph-level observations.
+
+A second cohort uses 32 new independent graphs and a stronger replay implementation that shares topology and evaluates each action's full prefix once per stage. Search settings, the $16$-node pool and $1,024$-trajectory budget are unchanged. Persistent replay and fixed batching match transcripts in all 96 contexts. Implementation accounting is given in Supplementary Section~\ref{sec:runtime_implementation}.
+
+The persistent-replay/local whole-search wall-time ratio is 3.790 [3.387, 4.195], with 31 graphs favoring local batching and one favoring replay. The same reciprocal transformation gives a 73.6\% reduction [70.5\%, 76.2\%] in the time represented by that ratio. Thus the benefit persists when topology ownership and full-prefix calls are optimized in replay. Figure~\ref{fig:jcs_runtime} includes the fixed-batch control. The two planned contrasts use Bonferroni-adjusted $97.5\%$ intervals, resampling graphs within the eight family/size strata. The primary runtime criterion is met. Supplementary Fig.~\ref{fig:optimized_replay} displays every graph. Together, the cohorts measure batching after two levels of replay optimization.
+
+The supplement reports additional fixed-portfolio timings and larger-portfolio workloads.
+
+\subsection{Computational scope and scaling}
+Per-trajectory tests reach $n=10,000$ and give a descriptive graphical time slope of $1.003$ against measured proposal work, consistent with the local accounting in Eq.~\ref{eq:work}. Incremental RTC is faster on the largest single-trajectory workloads. Full scaling curves, adjusted comparisons and candidate-pool sensitivity are in Supplementary Section~\ref{sec:scaling_details}. Pool effects are not uniformly positive across sizes and network families.
+
+\begin{figure*}[!t]
+\centering\includegraphics[width=.98\textwidth]{confirmation.pdf}
+\caption{Where the conditional search gain occurs. All methods use $1,024$ online continuations per policy, with independent final evaluation. (a,b) The complete eight-cell confirmation grid on 60 graphs: entries are baseline loss minus FEX loss, averaged over histories and then within each family or across all graphs. Both panels use the same zero-centered linear color scale. Filled markers identify the five cells selected by independent calibration; open markers identify the other cells. Here $s$ is the face-strength scale and $u=3$ throughout. Family cells and pooled cell means are descriptive; the separately adjusted cellwise intervals remain in Supplementary Table~\ref{tab:grid}. (c) Aggregation over the five calibrated cells. Aggregate primary FEX--NEX and secondary FEX--greedy intervals are adjusted $97.5\%$ intervals for the two planned comparisons; family intervals are descriptive $95\%$ intervals. Histories and cells stay grouped within each graph. Positive differences favor FEX.}
+\label{fig:confirmation}\label{fig:gridheatmap}
+\end{figure*}
+
+\subsection{Independently calibrated search application}
+An independent 16-graph calibration evaluates all eight cells of $k\in\{4,8\}$, $D\in\{2,4\}$, and face-strength scale $s\in\{0.5,1.5\}$, with $u=3$. A cell is eligible when the rumor-degree intervention reduces mean no-control loss by 30--70\%, with no-control mean at least $0.05$. Five cells satisfy this rule before testing on 60 new graphs, fifteen per family, with three histories per cell. All eight cells are shown in Fig.~\ref{fig:confirmation}(a,b), with complete adjusted intervals in the supplement.
+
+Each exchange policy uses 512 anchor, 256 discovery and 256 holdout continuations; the greedy comparator uses 1,024. The primary graph-level average NEX-minus-FEX loss over the five eligible cells is $0.01637$ $[0.01022,0.02306]$, with 45 positive and 15 negative graphs. The interval is Bonferroni-adjusted at $97.5\%$ for the two planned comparisons. All four family means are positive, meeting the additional criterion. Mean losses are $1.21049$ for NEX and $1.19412$ for FEX, a descriptive relative reduction of $1.35\%$. The secondary, multiplicity-adjusted greedy-minus-FEX gain is $0.03811$ $[0.02792,0.04921]$.
+
+Figure~\ref{fig:confirmation} displays the complete grid and calibrated-region effects. The earlier 30-graph primary FEX--NEX comparison was inconclusive; its corrected secondary gain over greedy was positive. Supplementary Section~\ref{sec:conditional_details} reports the original comparison and post-hoc robustness summaries.
+
+The conditional mean gain does not imply an advantage on every topology. Strong-baseline and observed-group comparisons, together with larger-portfolio certification tests, are reported in Supplementary Sections~\ref{sec:transfer_details} and~\ref{sec:certification_details}.
+
+\section{Earlier controlled-memory cohorts and full design}\label{sec:earlier_memory_cohorts}
+\subsection{Design, budgets, and statistical units}
+The experiments connect the response mechanism to the comparison method. We first check exactness, then separate initial group bias from dynamic feedback, examine the size of the variance bounds, and measure comparison and search costs. The final search study tests a conditional application of the method. Confirmatory hypotheses, budgets, graph seeds and analysis rules were fixed in advance in configuration files archived with their SHA-256 hashes. The controlled and natural-history memory studies and their bound diagnostics are descriptive and use separate graphs and tapes; the adjacent quality-threshold analysis is post-hoc. Synthetic networks cover Erd\H{o}s--R\'enyi-type graphs~\cite{gilbert1959}, Watts--Strogatz graphs~\cite{watts1998}, sparse stochastic blockmodels~\cite{holland1983} and preferential attachment with triangle closure~\cite{barabasi1999}. Table~\ref{tab:jcs_cohorts} lists the principal cohorts; the complete inventory, model parameters, history generation and budgets are in Supplementary Table~\ref{tab:cohorts} and Section~\ref{sec:design_details}.
+
+The complete-search cohorts start with 10\% rumor, 10\% correction and 80\% inactive nodes, zero memory and two uncontrolled prehistory time units. Every natural-history outcome is included, including extinction. Search stages and final assessment use disjoint tapes. Bootstrap inference~\cite{efron1979} resamples independent graphs within the prespecified family/size strata, keeping histories and settings together. Multiplicity adjustment is applied separately within each planned comparison family. 
+
+\begin{table*}[t]
+\centering\small
+\caption{Principal evaluation cohorts. A continuation is one physical trajectory. Inference groups all histories and settings of each graph. Supplementary Table~\ref{tab:cohorts} lists all additional cohorts and budgets.}
+\label{tab:jcs_cohorts}
+\begin{tabular}{>{\raggedright\arraybackslash}p{.24\textwidth}>{\raggedright\arraybackslash}p{.25\textwidth}>{\raggedright\arraybackslash}p{.41\textwidth}}
+\toprule
+Question & Independent units & Charged computation and assessment\\
+\midrule
+Initial-memory response & Four fixed graphs, one per family; $n=100$ & Eight conditions per graph; 128 shared tapes per condition; 4,096 trajectories in total\\
+Memory and bound diagnostics & Eight additional graphs, two per family; $n=100$ & Nine memory settings, five controls, 128 tapes; 46,080 trajectories; descriptive\\
+Natural-history feedback & 32 new graphs, two histories each; $n=100$ & Four memory rules, three rates, two controls, 64 tapes; 98,304 continuations plus 64 prehistories; descriptive\\
+Complete search, fixed joint law & 64 graphs, 3 histories; $n=100,300$ & 1,024 online continuations; 256 final paths per distinct set\\
+Persistent-topology replay & 32 further graphs, 3 histories & Same 1,024 online budget; 128 final paths per distinct set\\
+Cost at fixed selection quality & 32 graphs, 2 settings, 3 histories & Four nonnested actions; 8--512 online paths; independent reference and assessment\\
+Conditional search application & 60 new graphs, 3 histories per cell & All eight cells included; 1,024 online and 512 final paths\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Exactness and mathematical verification}
+\label{sec:verification}
+We check finite special cases by deterministic calculation and compare implementation outputs under common tapes. Four frozen-memory triangle cases were solved on the full 27-state space by matrix exponentials and independent uniformization, with maximum discrepancy $3.61\times10^{-16}$. In the zero-pairwise-rate example, no-action and singleton losses were $0.1060307909$, whereas joint intervention gave $0.0415425304$. The path proof covers positive relaxation.
+
+The complete-search validation reconstructs 768 searches in the 64-graph cohort and 288 in the persistent-replay cohort from recorded observations. Replay-compatible fixed batching matches the replay transcripts exactly. Exact transcript agreement checks the replay-compatible implementation. The local-envelope evaluator has the distributional guarantee of Theorem~\ref{M-thm:batch}; it need not reproduce the same realization from an identical seed. Supplementary deterministic checks cover score expansions and selection certificates. The empirical search and optional certified selector are assessed separately in the supplement.
+
+\subsection{Controlled initial memory and spreading response}
+\label{sec:memory_response}
+The first experiment asks whether current node labels suffice to describe the response to temporary control. To isolate the state carried by memory, we initialize the same node configuration with all face memories at either $-T_0$ or $+T_0$. This descriptive experiment uses one fixed $100$-node graph from each of the four families, with $20$ rumor, $20$ correction and $60$ inactive nodes. For each graph we compare no control with correction of the four highest-degree rumor nodes for $D=2$. We use $T_0=0.9$, $\lambda=0.2$, $u=3$, $H=10$, and the degree-normalized rates specified in the supplement, with face-strength scale $s=0$ or $1$. For each graph, the same $128$ independent replication tapes are reused across all eight combinations of face strength, control and initial memory. All $4,096$ trajectories are included. The design and seeds were saved before this experiment; the study is a controlled-initial-condition illustration, separate from the confirmation cohorts.
+
+Figure~\ref{fig:memory_response} shows that a common current node state can lead to different responses under the two initial memories when $s=1$. With $s=0$, the node paths coincide exactly between memory initializations on every shared tape: memory still evolves, but no longer enters the node intensities. Stronger correction and lower numerical memory preserve the node order at every recorded time. The instrumented simulator continues after rumor extinction to record the memory curves; in $256$ checks its exact occupation integrals agree with the unchanged loss-only evaluator. Full condition summaries, seeds and validation are in Supplementary Section~\ref{sec:memory_response_details}.
+
+\begin{figure*}[t]
+\centering\includegraphics[width=.98\textwidth]{memory_response.pdf}
+\caption{Controlled-initial-memory response (descriptive). Columns show $s=0$ and $s=1$; rows show mean rumor occupation and mean face memory. Curves average $128$ trajectories on each of four fixed graph/initial-state contexts. Color denotes initial face memory; line style denotes intervention. Shading shows conditional Monte Carlo standard errors, not uncertainty over a graph population. The vertical line marks control withdrawal at $D=2$. The two memory-initialization node curves coincide when $s=0$. All conditions are shown.}
+\label{fig:memory_response}
+\end{figure*}
+
+\subsection{Static bias, dynamic memory and time scales}
+\label{sec:timescales}
+A second descriptive experiment keeps higher-order transmission active and compares three memory mechanisms: $A_\sigma(t)\equiv0$, frozen $A_\sigma(t)=A_\sigma(0)$, and the dynamic relaxation law. Freezing is implemented by $\lambda=0$; it is a memory-free comparator only when the initial memory is also zero. We use eight new graphs, two per family, at $n=100$. Each graph has the same node initialization across nine memory settings and five control sets, with $128$ shared independent tapes. All $46,080$ trajectories are reported. The design was fixed before simulation and is descriptive, separate from the existing confirmation studies.
+
+For dynamic memory, $\lambda\in\{0.02,0.2,2\}$ corresponds to relaxation times $\tau_A=1/\lambda\in\{50,5,0.5\}$; with $D=2$ and $H=10$, the dimensionless durations are $\lambda D\in\{0.04,0.4,4\}$ and $\lambda H\in\{0.2,2,20\}$. Figure~\ref{fig:timescales} shows the response to initial memory $\pm T_0$, keeping transmission prefactors and control fixed. Without control, the initial-memory loss gap decreases from $5.28884$ to $2.10960$ across the dynamic grid; with four targets it decreases from $4.85156$ to $1.63153$. Each of the eight graph-specific estimated gaps decreases across this grid under both control conditions.
+
+Faster relaxation reduces sensitivity to the initial memory, but it also makes memory follow the changing donor configuration. These effects differ from removing memory modulation. At $\lambda=2$, controlled mean losses from initial $-T_0$ and $+T_0$ are $0.73032$ and $2.36186$, compared with $1.04551$ for memory fixed at zero. The results distinguish static group bias, persistence of initial memory and subsequent state-driven feedback. They establish a finite-grid response in these constructed contexts, not monotonicity in $\lambda$ for the model class. Supplementary Section~\ref{sec:response_extension} gives every condition and graph-specific curve.
+
+\begin{figure*}[t]
+\centering\includegraphics[width=.98\textwidth]{memory_timescales.pdf}
+\caption{Memory mechanisms at fixed higher-order transmission (descriptive; eight graphs). Red denotes no control and teal denotes four targets. (a) Loss difference between initial $+T_0$ and $-T_0$ under dynamic memory; dotted lines show frozen-memory differences. Error bars are one conditional Monte Carlo standard error for the equally weighted graph average; they quantify tape noise with these graphs fixed, not uncertainty across a population of graphs. (b) Mean loss from initial $-T_0$ (solid circles) and $+T_0$ (dashed squares); dotted horizontal lines show memory fixed at zero. Both signs use identical initial node states. Frozen memory means $\lambda=0$; the other tick labels give the relaxation rate. Lines connect tested settings, with no interpolation-based inference.}
+\label{fig:timescales}
+\end{figure*}
+
+\subsection{Naturally generated memories and feedback}\label{sec:natural_memory}
+We next replace uniform extreme memories by states produced by the process itself. On 32 new graphs (eight per family), two uncontrolled prehistories start with 10 rumor, 10 correction and 80 inactive nodes and zero memory. After two time units at $\lambda=0.2$, each terminal state branches into four memory rules: dynamic memory from the generated value, dynamic memory reset to zero, frozen generated memory, and memory held at zero. The same node state, topology, target set and continuation tapes are used within a context. Continuation rates are $\lambda=0.02,0.2,2$, with no control or four targets; $u=3,D=2,H=10$ and the transmission normalization are unchanged. All 64 histories are included, including 4 rumor-free endpoints. The design was fixed before execution; all comparisons are descriptive.
+
+Figure~\ref{fig:natural_memory} compares post-control occupation and the feedback contribution. Table~\ref{tab:natural_memory_all} reports every contrast, graph-level sign count and pointwise stratified bootstrap interval. The experiment uses 98,304 continuation trajectories in addition to the 64 prehistories. Frozen and zero-memory conditions are repeated as shared-tape controls across the three rates, not counted as additional independent evidence.
+
+With four targets, mean losses under dynamic natural memory are $1.63886$, $1.80230$ and $2.04232$ as $\lambda$ increases across the grid; frozen and zero-memory losses are $1.60478$ and $1.39725$. Dynamic-minus-frozen contrasts are $0.03408$, $0.19752$ and $0.43754$, with positive family means at every tested rate. In contrast, resetting the initial memory reduces the dynamic loss by $0.19598$, $0.12891$ and $0.02818$. Thus reduced sensitivity to initial memory coexists with increased occupation under faster dynamic feedback in these contexts. Faster forgetting of the initial condition is not equivalent to weaker post-control spreading.
+
+For dynamic natural and reset memories at a common $\lambda$, the exact difference of their spatial means decomposes as
+\[
+ \delta\bar A(t)=e^{-\lambda t}\bar A(0)
+ +\lambda\int_0^t e^{-\lambda(t-s)}\delta\bar\Phi(s)\,ds.
+\]
+The second term records differences in subsequent node activity. It is estimated by subtracting the direct initial term from the paired memory traces. We report the full time grid, including both control conditions, rather than selecting a persistence cutoff. Spatially averaged signed responses can cancel across faces; the accompanying data also give the mean absolute paired residual. This decomposition distinguishes feedback from direct initial-memory decay without interpreting occupation differences as rebound probabilities. At $\lambda=2$ and $t=12$, the controlled mean direct term is approximately $1.69\times10^{-13}$, whereas the feedback residual is $0.00907$ with descriptive interval $[0.00477,0.01387]$. The corresponding uncontrolled interval includes zero. The observed controlled contrast therefore survives through differing node histories at this finite endpoint, even though the direct initial term has decayed.
+
+\begin{figure*}[t]\centering\includegraphics[width=.98\textwidth]{natural_memory.pdf}
+\caption{Naturally generated memory (32 graphs, 64 histories; descriptive). (a) Post-control occupation under four memory rules, with four targets. Frozen and zero controls are identical across the continuation-rate grid. (b) Spatial mean-memory contrast between dynamic natural and dynamic reset branches after subtracting direct exponential decay of the initial memory; the vertical line marks control withdrawal. Full pointwise uncertainty and both control conditions are reported in the supplement and accompanying CSV files.}\label{fig:natural_memory}
+\end{figure*}
+
+\subsection{Empirical size of the comparison bounds}
+The memory experiments establish response differences; we next examine the fluctuation bounds used to estimate intervention contrasts. The same tapes compare $\varnothing\subset S$ and four-target sets $S,T_{\mathrm{set}}$ sharing three nodes, with their intersection and union as auxiliary controls. Every sampled loss satisfies both the nested order and the nonnested envelope. Across the $72$ graph--memory contexts, the median empirical variance divided by the plug-in bound is $0.16093$ for nested differences and $0.11129$ for exchanges. All denominators exceed $10^{-12}$; no case is omitted. For exchanges, the median plug-in bound relative to the generic $H^2$ bound is $0.01602$.
+
+The auxiliary interval can therefore substantially reduce the generic bound in these overlapping portfolios, while still exceeding the empirical variance. The ratios use empirical moments from the same $128$ tapes, with variance normalized by $128$. Given the sampled pathwise inequalities, the corresponding empirical moment bounds follow algebraically. The plot measures their slack in these samples; ratios below one are not an independent statistical test of the population bound. Supplementary Fig.~\ref{fig:bound_diagnostics} reports all points, ranges and definitions. Portfolio overlap is important here: these actions share three targets, so the diagnostic does not establish similarly narrow envelopes for disjoint controls.
+
+
+\section{Withdrawal-time experiments and observed contact data}\label{sec:physics_new}
+The full prospectively fixed descriptive design is \path{physicaA_physics/physicaA_locked_config.json}, archived with its SHA-256 checksum. It specifies every graph seed, context count, memory branch and tested cell. There are eight synthetic graphs and two observed topologies, with two prehistories per graph or topology. The synthetic contexts use 64 paired replications per duration; the observed contexts use 128. Losses are evaluated for $H=10$ after withdrawal at $D=1,2,4$. All contexts are included.
+
+Sensor contacts were recorded in 20-second windows. The simplicial-closure collection constructs a maximal clique in each window. The high-school data contain 172,035 timestamped groups and 327 participants; the primary-school data contain 106,879 groups and 242 participants. Faces in this study are the distinct records of exactly three participants. Pairwise edges include projections of all records. Larger groups do not automatically supply additional filled triangles. Original node identifiers, edge and face arrays, data-provider descriptions, download URLs and checksums are in the archive. This is validation on observed topology with synthetic dynamics, not observed misinformation trajectories.
+
+Each paired replication simulates untreated and treated endpoints under a common pre-withdrawal tape. A fresh common tape then continues four branches: untreated node state and memory, treated node state and retained memory, treated node state and the paired untreated memory, and treated node state with zero memory. The last branch is distinct from the baseline-memory counterfactual. The paired ordering implies nonnegative state and memory components; it does not force a strictly positive memory component.
+
+The following table reports every graph and duration. Synthetic graph IDs 0--7 are two ER, two WS, two sparse-SBM and two PA-with-closure graphs, respectively. IDs 8 and 9 denote the high-school and primary-school topologies. Fractions are ratios of mean gains. A denominator at most $10^{-10}$ is treated as undefined, not zero; none of the observed-topology fractions or their 2,000 conditional bootstrap draws was undefined. No interval is adjusted for simultaneous coverage, and no confirmation decision is based on these intervals.
+\begin{longtable}{rrrrrr}
+\caption{Complete withdrawal-time results. $G$ is total loss reduction, $G_A$ its memory component, and $\eta_A$ the memory fraction. The interval applies to $\eta_A$ in percent.}\label{tab:withdrawal_all}\\
+\toprule ID & $D$ & $G$ & $G_A$ & $100\eta_A$ & 95\% interval\\\midrule\endfirsthead
+\toprule ID & $D$ & $G$ & $G_A$ & $100\eta_A$ & 95\% interval\\\midrule\endhead
+0 & 1 & 0.75662 & 0.01220 & 1.61 & [0.12, 3.76]\\
+0 & 2 & 1.06477 & 0.01053 & 0.99 & [0.24, 2.10]\\
+0 & 4 & 1.40104 & 0.03978 & 2.84 & [1.18, 4.99]\\
+1 & 1 & 0.64622 & 0.03591 & 5.56 & [0.55, 12.41]\\
+1 & 2 & 1.12570 & 0.08215 & 7.30 & [2.77, 12.58]\\
+1 & 4 & 1.34624 & 0.06507 & 4.83 & [2.27, 8.13]\\
+2 & 1 & 0.76612 & 0.01986 & 2.59 & [0.43, 6.06]\\
+2 & 2 & 1.23745 & 0.05213 & 4.21 & [2.04, 6.80]\\
+2 & 4 & 1.69737 & 0.07861 & 4.63 & [2.77, 6.74]\\
+3 & 1 & 0.30368 & 0.00752 & 2.48 & [0.36, 7.08]\\
+3 & 2 & 0.49585 & 0.02450 & 4.94 & [1.24, 10.26]\\
+3 & 4 & 0.89881 & 0.09821 & 10.93 & [6.19, 16.72]\\
+4 & 1 & 0.82401 & 0.00090 & 0.11 & [0.00, 0.31]\\
+4 & 2 & 1.00183 & 0.03786 & 3.78 & [0.00, 10.45]\\
+4 & 4 & 0.84013 & 0.00595 & 0.71 & [0.01, 2.22]\\
+5 & 1 & 0.81968 & 0.03058 & 3.73 & [1.39, 6.75]\\
+5 & 2 & 1.10768 & 0.06195 & 5.59 & [2.10, 10.41]\\
+5 & 4 & 1.35002 & 0.09733 & 7.21 & [2.58, 13.89]\\
+6 & 1 & 0.01295 & 0.00014 & 1.05 & [0.09, 2.75]\\
+6 & 2 & 0.00508 & 0.00000 & 0.00 & [0.00, 0.00]\\
+6 & 4 & 0.00093 & 0.00000 & 0.00 & [0.00, 0.00]\\
+7 & 1 & 0.39287 & 0.05180 & 13.19 & [2.28, 36.44]\\
+7 & 2 & 0.40728 & 0.02162 & 5.31 & [3.10, 11.10]\\
+7 & 4 & 0.71356 & 0.16297 & 22.84 & [6.32, 43.71]\\
+8 & 1 & 0.12745 & 0.01596 & 12.52 & [4.94, 22.47]\\
+8 & 2 & 0.12825 & 0.02462 & 19.19 & [11.39, 28.94]\\
+8 & 4 & 0.23737 & 0.06696 & 28.21 & [21.33, 36.46]\\
+9 & 1 & 0.69125 & 0.01882 & 2.72 & [1.52, 4.44]\\
+9 & 2 & 0.80637 & 0.05187 & 6.43 & [2.77, 12.90]\\
+9 & 4 & 0.96147 & 0.11090 & 11.53 & [4.75, 20.37]\\
+\bottomrule\end{longtable}
+The intervals in Table~\ref{tab:withdrawal_all} are conditional on each fixed graph and its two histories. The synthetic aggregate interval in the main article instead resamples graphs within the four families. The CSV file reports all four branch losses, state contributions and undefined-draw counts.
+
+\section{Single-triangle retention and rebound}\label{sec:triangle_new}
+Every cell of the eight-rate by six-duration grid uses 512 paired replications. The initial state is $(R,R,U)$, the initial memory is $T_0=0.9$, and the first two nodes are targets. Pairwise and face prefactors have the same normalization as the other experiments. The complete post-withdrawal grid is $0:0.05:10$. The sampled within-path maximum is a lower-resolution observation of continuous-time pathwise maxima; it is not the maximum of the ensemble mean. No extinction path is discarded.
+\begin{longtable}{rrrrr}
+\caption{All triangle cells. $\mathcal R$ is mean sampled pathwise rebound; $\mathcal R_{\rm mean}$ is the positive overshoot of the mean curve; memory fractions are in percent.}\label{tab:triangle_all}\\
+\toprule $\lambda$ & $D$ & $\mathcal R$ & $\mathcal R_{\rm mean}$ & $100\eta_A$\\\midrule\endfirsthead
+\toprule $\lambda$ & $D$ & $\mathcal R$ & $\mathcal R_{\rm mean}$ & $100\eta_A$\\\midrule\endhead
+0.02 & 0.25 & 0.12760 & 0.00000 & 0.000\\
+0.02 & 0.5 & 0.08919 & 0.00521 & 0.000\\
+0.02 & 1 & 0.03841 & 0.00000 & 0.021\\
+0.02 & 2 & 0.01497 & 0.00000 & 0.000\\
+0.02 & 4 & 0.00130 & 0.00130 & 0.000\\
+0.02 & 8 & 0.00000 & 0.00000 & 0.000\\
+0.05 & 0.25 & 0.12370 & 0.00000 & 0.001\\
+0.05 & 0.5 & 0.09505 & 0.00586 & 0.012\\
+0.05 & 1 & 0.04557 & 0.00195 & 0.003\\
+0.05 & 2 & 0.00651 & 0.00000 & 0.003\\
+0.05 & 4 & 0.00000 & 0.00000 & 0.000\\
+0.05 & 8 & 0.00000 & 0.00000 & 0.000\\
+0.1 & 0.25 & 0.12695 & 0.00000 & 0.281\\
+0.1 & 0.5 & 0.09049 & 0.00391 & 0.053\\
+0.1 & 1 & 0.03451 & 0.00000 & 0.785\\
+0.1 & 2 & 0.00391 & 0.00000 & 0.012\\
+0.1 & 4 & 0.00065 & 0.00065 & 0.000\\
+0.1 & 8 & 0.00000 & 0.00000 & 0.000\\
+0.2 & 0.25 & 0.12760 & 0.00000 & 0.518\\
+0.2 & 0.5 & 0.08919 & 0.00000 & 0.049\\
+0.2 & 1 & 0.02995 & 0.00000 & 0.041\\
+0.2 & 2 & 0.00781 & 0.00000 & 0.027\\
+0.2 & 4 & 0.00000 & 0.00000 & 0.000\\
+0.2 & 8 & 0.00000 & 0.00000 & 0.000\\
+0.5 & 0.25 & 0.13997 & 0.00000 & 0.017\\
+0.5 & 0.5 & 0.08789 & 0.00521 & 1.469\\
+0.5 & 1 & 0.04036 & 0.00000 & 0.020\\
+0.5 & 2 & 0.00911 & 0.00195 & 0.032\\
+0.5 & 4 & 0.00000 & 0.00000 & 0.000\\
+0.5 & 8 & 0.00000 & 0.00000 & 0.000\\
+1 & 0.25 & 0.11458 & 0.00000 & 0.267\\
+1 & 0.5 & 0.09635 & 0.00846 & 1.964\\
+1 & 1 & 0.03906 & 0.00130 & 0.576\\
+1 & 2 & 0.00716 & 0.00195 & 0.000\\
+1 & 4 & 0.00000 & 0.00000 & 0.000\\
+1 & 8 & 0.00000 & 0.00000 & 0.000\\
+2 & 0.25 & 0.12760 & 0.00521 & 0.320\\
+2 & 0.5 & 0.06836 & 0.00000 & 0.965\\
+2 & 1 & 0.03060 & 0.00000 & 0.371\\
+2 & 2 & 0.00521 & 0.00000 & 0.024\\
+2 & 4 & 0.00000 & 0.00000 & 0.000\\
+2 & 8 & 0.00000 & 0.00000 & 0.000\\
+5 & 0.25 & 0.12630 & 0.00716 & 0.107\\
+5 & 0.5 & 0.07031 & 0.00000 & 0.019\\
+5 & 1 & 0.02930 & 0.00000 & 0.734\\
+5 & 2 & 0.00456 & 0.00260 & 0.016\\
+5 & 4 & 0.00000 & 0.00000 & 0.000\\
+5 & 8 & 0.00000 & 0.00000 & 0.000\\
+\bottomrule\end{longtable}
+\begin{figure}[t]\centering\includegraphics[width=.65\linewidth]{physicaA_triangle_ensemble.pdf}\caption{Overshoot of the mean occupation curve on the same complete triangle grid. Its scale is much smaller than mean within-path rebound.}\label{fig:triangle_ensemble}\end{figure}
+
+\section{Weighted four-uniform factors}\label{sec:hyperedge4}
+The 12-node example uses hyperedges $\{0,1,2,3\}$, $\{2,3,4,5\}$, $\{4,5,6,7\}$, $\{6,7,8,9\}$ and $\{8,9,10,11\}$ with respective weights $0.5,1,1.5,0.75,1.25$. Pairwise edges are their boundaries. The initial node vector contains four rumor, four inactive and four correction states; face memories are equally spaced from $-0.3$ to $0.3$. Rates are $\beta_1=0.2$, $\beta_2=0.5$, $T_0=0.9$, $\lambda=0.2$, $u=3$, $D=2$, $H=10$.
+
+We compare no targets, $\{0\}$, $\{0,1\}$, $\{1,2\}$ and $\{0,1,2\}$, adding the auxiliary intersection $\{1\}$ for the nonnested pair. Both the strict-majority drive with threshold three and $\Phi_f=T_{0,f}(N_R-N_C)/4$ are antitone and bounded. All donor intensities use products over the three other nodes. On 256 shared replications per set and drive, the sampled occupation order, terminal node and reverse memory order, and auxiliary loss envelope satisfy the theorem conditions. These calculations illustrate the extension; they are not a proof for all hypergraphs.
+\begin{figure}[t]\centering\includegraphics[width=.92\linewidth]{physicaA_hyperedge4.pdf}\caption{Ordered occupation response on weighted four-uniform factors under two bounded antitone drives. The vertical line marks withdrawal.}\label{fig:hyperedge4}\end{figure}
+
+\section{Threshold-free precision and cost}\label{sec:precision_new}
+The configuration \path{physicaA_precision/physicaA_precision_locked.json} fixes four graph/history contexts before their new comparisons: history zero from graph IDs 0, 8, 16 and 24 of the natural-history study. Two size-four actions share three targets; the fourth is replaced by the next node in the fixed ranking. Each method uses eight repetitions at pair budgets $8,16,32,64,128$. Both actions are charged, and repeated prefix calls at different budgets are counted as executed simulations. Reference and online streams are independent. The full study executes 64,000 marginal paths, including reference work.
+
+The 2,048-pair reference estimates $\delta_{\rm ref}$. For each repetition, reference-based squared error is $(\widehat\delta_n-\delta_{\rm ref})^2$. The plotted MSE averages these errors; it includes uncertainty in the finite reference. Paired-loss sample variance, estimated from all largest-budget repetitions, is divided by $n$ to estimate variance of the sample mean. The average reference Monte Carlo standard error across contexts is $0.01009$. It is not an oracle reference or a selection-quality guarantee.
+
+Original timing arrays are retained. Final cost curves use a separate serial replay after the other simulation jobs completed, rotating method order across graph, repetition and budget. Every replayed loss agrees with the original value within $10^{-12}$. These 47,616 calls provide timing measurements rather than additional independent stochastic observations. All per-graph curves, timing arrays and finite-reference values are archived. The aggregate MSE and variance in the main text use equal weights across the four fixed contexts and do not support a population-level superiority test.
+
+\begingroup
+\small\setlength{\bibsep}{0pt}
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+\endgroup
+\endgroup
+\end{document}

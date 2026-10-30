@@ -1,0 +1,56 @@
+{
+  "lock_sha256": "3972cfbc0274d809acd8906612318b3e078fde40d0dfa736669a796e0d94a11b",
+  "graphs": 32,
+  "histories_per_graph": 3,
+  "searches": 288,
+  "online_copies": 294912,
+  "independent_evaluation_copies": 22400,
+  "comparisons": [
+    {
+      "numerator": "persistent_replay",
+      "denominator": "adaptive_local",
+      "ratio": 3.790121188332195,
+      "interval": [
+        3.3868955866085235,
+        4.195306977965493
+      ],
+      "confidence": 0.975,
+      "positive": 31,
+      "negative": 1,
+      "gate_passed": true
+    },
+    {
+      "numerator": "fixed_batch",
+      "denominator": "adaptive_local",
+      "ratio": 1.0013280874348884,
+      "interval": [
+        0.8939501831303768,
+        1.1077757854067376
+      ],
+      "confidence": 0.975,
+      "positive": 16,
+      "negative": 16,
+      "gate_passed": false
+    }
+  ],
+  "exact_replay_fixed_transcripts": true,
+  "decisions_replayed": 288,
+  "families": [
+    {
+      "family": "er",
+      "ratio": 4.963160493024133
+    },
+    {
+      "family": "ws",
+      "ratio": 4.284413654171323
+    },
+    {
+      "family": "sparse_sbm",
+      "ratio": 4.497145499144956
+    },
+    {
+      "family": "pa_triadic",
+      "ratio": 2.15787226945024
+    }
+  ]
+}

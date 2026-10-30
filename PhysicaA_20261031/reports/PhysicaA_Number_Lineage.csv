@@ -1,0 +1,22 @@
+location,quantity,value,source
+Main Table 2,synthetic_D2_total_gain,0.8057039612011718,reproducibility/physicaA_physics/results/summary.json
+Main Table 2,synthetic_D2_state_gain,0.7693606326857938,reproducibility/physicaA_physics/results/summary.json
+Main Table 2,synthetic_D2_memory_gain,0.03634332851537807,reproducibility/physicaA_physics/results/summary.json
+Main Table 2 and Section 5,contact-high-school_D2_total_gain,0.1282533925255046,reproducibility/physicaA_physics/results/summary.json
+Main Table 2 and Section 5,contact-high-school_D2_state_gain,0.10363552754430176,reproducibility/physicaA_physics/results/summary.json
+Main Table 2 and Section 5,contact-high-school_D2_memory_gain,0.02461786498120285,reproducibility/physicaA_physics/results/summary.json
+Main Table 2,contact-high-school_D2_memory_fraction,0.191947086127233,reproducibility/physicaA_physics/results/counterfactual_summary.csv
+Main Table 2,contact-high-school_D2_fraction_low,0.11393971953747474,reproducibility/physicaA_physics/results/counterfactual_summary.csv
+Main Table 2,contact-high-school_D2_fraction_high,0.28937087751802937,reproducibility/physicaA_physics/results/counterfactual_summary.csv
+Main Table 2 and Section 5,contact-primary-school_D2_total_gain,0.8063659825452312,reproducibility/physicaA_physics/results/summary.json
+Main Table 2 and Section 5,contact-primary-school_D2_state_gain,0.7544941621882719,reproducibility/physicaA_physics/results/summary.json
+Main Table 2 and Section 5,contact-primary-school_D2_memory_gain,0.0518718203569592,reproducibility/physicaA_physics/results/summary.json
+Main Table 2,contact-primary-school_D2_memory_fraction,0.06432788768349311,reproducibility/physicaA_physics/results/counterfactual_summary.csv
+Main Table 2,contact-primary-school_D2_fraction_low,0.027713851919943654,reproducibility/physicaA_physics/results/counterfactual_summary.csv
+Main Table 2,contact-primary-school_D2_fraction_high,0.12904428310670096,reproducibility/physicaA_physics/results/counterfactual_summary.csv
+Main Section 6.1,thinning_reference_based_mse,0.014907157003208726,reproducibility/physicaA_precision/results/publication_summary.json
+Main Section 6.1,thinning_contrast_sample_variance,2.2174582307965562,reproducibility/physicaA_precision/results/publication_summary.json
+Main Section 6.1,rtc_reference_based_mse,0.0026883088016334193,reproducibility/physicaA_precision/results/publication_summary.json
+Main Section 6.1,rtc_contrast_sample_variance,0.407610072997463,reproducibility/physicaA_precision/results/publication_summary.json
+Main Section 6.1,graphical_reference_based_mse,0.0028445011667208517,reproducibility/physicaA_precision/results/publication_summary.json
+Main Section 6.1,graphical_contrast_sample_variance,0.3170934738964715,reproducibility/physicaA_precision/results/publication_summary.json

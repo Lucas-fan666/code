@@ -1,0 +1,22 @@
+number,value,raw,formula,analysis
+controlled_loss_dynamic_natural_lambda_0.02,1.6388595273792772,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_dynamic_reset_lambda_0.02,1.4428800195282032,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_frozen_natural_lambda_0.02,1.6047819786761734,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_zero_lambda_0.02,1.3972461281940012,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+dynamic_minus_frozen_lambda_0.02,0.034077548703103894,graph_0.npz ... graph_31.npz : loss,mean graph-level paired difference; control=1,analyze.py
+natural_minus_reset_dynamic_lambda_0.02,0.19597950785107376,graph_0.npz ... graph_31.npz : loss,mean graph-level paired difference; control=1,analyze.py
+controlled_loss_dynamic_natural_lambda_0.2,1.8023039198438329,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_dynamic_reset_lambda_0.2,1.6733965862962603,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_frozen_natural_lambda_0.2,1.6047819786761734,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_zero_lambda_0.2,1.3972461281940012,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+dynamic_minus_frozen_lambda_0.2,0.19752194116765961,graph_0.npz ... graph_31.npz : loss,mean graph-level paired difference; control=1,analyze.py
+natural_minus_reset_dynamic_lambda_0.2,0.12890733354757264,graph_0.npz ... graph_31.npz : loss,mean graph-level paired difference; control=1,analyze.py
+controlled_loss_dynamic_natural_lambda_2,2.0423213526621993,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_dynamic_reset_lambda_2,2.0141404805454903,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_frozen_natural_lambda_2,1.6047819786761734,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+controlled_loss_zero_lambda_2,1.3972461281940012,"graph_0.npz ... graph_31.npz : loss[history,lambda,mode,control=1,tape]","equal mean over graphs, histories, tapes",analyze.py
+dynamic_minus_frozen_lambda_2,0.43753937398602594,graph_0.npz ... graph_31.npz : loss,mean graph-level paired difference; control=1,analyze.py
+natural_minus_reset_dynamic_lambda_2,0.028180872116709,graph_0.npz ... graph_31.npz : loss,mean graph-level paired difference; control=1,analyze.py
+feedback_t12_lambda_0.02,0.008853470553821713,"graph_0.npz ... graph_31.npz : traces[...,3], a",mean(A_dynamic_natural-A_dynamic_reset)-exp(-lambda*t)*mean(A0),detail_analysis.py
+feedback_t12_lambda_0.2,0.030175540693701042,"graph_0.npz ... graph_31.npz : traces[...,3], a",mean(A_dynamic_natural-A_dynamic_reset)-exp(-lambda*t)*mean(A0),detail_analysis.py
+feedback_t12_lambda_2.0,0.009065551978500723,"graph_0.npz ... graph_31.npz : traces[...,3], a",mean(A_dynamic_natural-A_dynamic_reset)-exp(-lambda*t)*mean(A0),detail_analysis.py

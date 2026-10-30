@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-10-30T14:14:57.684967+00:00",
+  "design": {
+    "role": "prospectively fixed descriptive mechanism study, no confirmatory tests",
+    "families": [
+      "er",
+      "ws",
+      "sparse_sbm",
+      "pa_triadic"
+    ],
+    "graphs_per_family": 8,
+    "n": 100,
+    "histories": 2,
+    "replications": 64,
+    "prehistory": 2,
+    "initial_R": 10,
+    "initial_C": 10,
+    "prehistory_lambda": 0.2,
+    "T": 0.9,
+    "u": 3,
+    "D": 2,
+    "H": 10,
+    "lambdas": [
+      0.02,
+      0.2,
+      2.0
+    ],
+    "modes": [
+      "dynamic_natural",
+      "dynamic_reset",
+      "frozen_natural",
+      "zero"
+    ],
+    "controls": [
+      "none",
+      "top4_R_degree_then_degree_fill"
+    ],
+    "seed_root": 202610301901,
+    "time_grid": [
+      0,
+      12,
+      0.2
+    ],
+    "reporting": "all graphs including extinction; equal graph weighting; graph bootstrap descriptive 95 percent intervals, 4000 resamples; all 3 rates and 2 controls; no significance selection",
+    "primary_descriptive_contrast": "dynamic natural minus frozen natural post-withdrawal loss",
+    "secondary_contrasts": [
+      "dynamic natural minus zero",
+      "dynamic natural minus dynamic reset"
+    ],
+    "feedback": "paired mean-memory difference dynamic natural minus dynamic reset, minus exp(-lambda*t)*mean(initial natural memory); all time points, signed means and absolute paired deviation; not rebound probability",
+    "compression": "move detailed search implementation and runtime interpretation to supplement without removing results"
+  },
+  "sources": {
+    "natural_memory/run.py": "6a6975916279bf3aebb83e5279aa3551a5e62df376e12e9d4f5141a1728ecdd3",
+    "natural_memory/engine.cpp": "dde34448388e87c6eb7020bb4680180dae1cb6293849707e67c3f130db8059f6",
+    "natural_memory/analyze.py": "564bc8c455d3f623356486441b000c12606ce80c300f1724d835b14b67593559",
+    "vendor/src/graphical_engine.cpp": "c044d06d76298a3db1489f6a7e147aaa48e49ff5ede7d2928dbe9fde569522a5"
+  }
+}

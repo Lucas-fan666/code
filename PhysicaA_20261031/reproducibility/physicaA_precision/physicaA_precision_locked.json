@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-10-30T16:13:04.166661+00:00",
+  "design": {
+    "role": "prospectively fixed descriptive threshold-free precision benchmark",
+    "contexts": [
+      0,
+      8,
+      16,
+      24
+    ],
+    "source": "natural_memory/results: history 0 in first graph of each family",
+    "methods": [
+      "thinning",
+      "rtc",
+      "graphical"
+    ],
+    "trials": 8,
+    "pair_budgets": [
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "reference_pairs": 2048,
+    "actions": "top4 R-prioritized degree and replace fourth by fifth",
+    "T0": 0.9,
+    "lam": 0.2,
+    "u": 3,
+    "D": 2,
+    "H": 10,
+    "seed_root": 202610302701,
+    "metrics": [
+      "reference-relative MSE",
+      "paired-loss sample variance divided by pair budget",
+      "measured wall time per budget",
+      "variance times measured amortized pair cost"
+    ],
+    "reference_caveat": "finite independent reference; report its Monte Carlo SE; not exact oracle MSE",
+    "reporting": "all four contexts and all budgets; no new significance tests; shared prefixes across budgets but every repeated simulation call charged"
+  },
+  "sources": {
+    "physicaA_precision/run.py": "5edd00137b64bc4b84a168977a14648a678a19443f9aefda320e911c10337b73",
+    "physicaA_precision/analyze.py": "55cb24846efdbf56f7e244c0e43f9faa789e8d588beff2178cfc0b3bbe02b763",
+    "vendor/src/engine.cpp": "7eaf2614a190f314e27deb5b443ba061e9d8aa8b1d4f61a6f640b88a8d8de3f5",
+    "vendor/src/rtc_engine.cpp": "1940289a63ee32dd1a535c15bebcd380ae437e49e39e33aaacd5963d24302678",
+    "vendor/src/graphical_engine.cpp": "c044d06d76298a3db1489f6a7e147aaa48e49ff5ede7d2928dbe9fde569522a5",
+    "natural_memory/results/graph_0.npz": "43da27afc4ea641ee3a4fb63c9fbe0f00dc981ec50ad45388f6a35e556f4cbd9",
+    "natural_memory/results/graph_8.npz": "49c5d32f6aaa8cf783627f5c5742ac2668c5cc2c368938d4884db281df42da5a",
+    "natural_memory/results/graph_16.npz": "96a23b65a6f44b5d930d889f0fc4da906f7d8a7ba3418da9a7bca3b97e7b3415",
+    "natural_memory/results/graph_24.npz": "167abc349dd8d3200dec717bb70521d6b4c0b70a64b8b0a5a2eb9bc8cb3dd11d"
+  }
+}

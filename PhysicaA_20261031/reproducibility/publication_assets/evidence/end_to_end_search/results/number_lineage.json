@@ -1,0 +1,6 @@
+{
+  "online_copies": "Sum method.json:marginal_continuations; independently checked from all raw chunks",
+  "primary": "context_costs.csv -> sum three history costs within each graph -> mean log(graphical/adaptive_local); bootstrap graphs within eight family/size strata",
+  "final_losses": "context evaluation.npz -> selected action mean -> histories then equal-weight graphs",
+  "intervals": "primary central95%; two secondary central97.5% Bonferroni; separate prespecified inferential families"
+}

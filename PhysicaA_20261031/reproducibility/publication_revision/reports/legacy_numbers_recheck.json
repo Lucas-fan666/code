@@ -1,0 +1,82 @@
+{
+  "input_main_sha256": "f3ab235f8780a0d896850003139571a62ac6c15889f5177325dc8ae50552f103",
+  "source_sha256": {
+    "WP0/coupling_ratios_recomputed.csv": "1afb0bfd8c3467318075ee85421f2de9ae4358ecff6f0af8e679588e95b7790d",
+    "WP2/graph_policy_losses_recomputed.csv": "5cf9b553187de8bf13984ac79a757a1d9df0ef85f591a00f7493495d28b2623b",
+    "WP2/summary.json": "3ace271b513e4054dbea88dc74852a8ab42dd0835a7b3a89ed2fcbbb715229a7",
+    "WP3/variance_efficiency_summary.csv": "9e4082092db84f805fad0e97f97b4ba48bd472575470d959da959dd375bbd214"
+  },
+  "wp2_protocol_sha256": "16d011d9b97124edd1b3d15bcfe328d6f30536e655fc70c2c94e7ddef557df43",
+  "wp2_lock_matches": true,
+  "wp0_initial_pair": {
+    "rtc": {
+      "comparisons": 12,
+      "median_thinning_to_engine_variance": 15.494583909787536
+    },
+    "graphical": {
+      "comparisons": 12,
+      "median_thinning_to_engine_variance": 33.500962154712
+    }
+  },
+  "wp3_rtc_over_graphical": {
+    "equal_non_nested": {
+      "comparisons": 1152,
+      "both_zero": 37,
+      "graphical_zero_baseline_positive": 73,
+      "baseline_zero_graphical_positive": 0,
+      "finite_positive_comparisons": 1042,
+      "median_variance_ratio": 1.1325053852789035,
+      "ratio_of_mean_variances": 1.0334951980028655
+    },
+    "nested": {
+      "comparisons": 192,
+      "both_zero": 10,
+      "graphical_zero_baseline_positive": 4,
+      "baseline_zero_graphical_positive": 0,
+      "finite_positive_comparisons": 178,
+      "median_variance_ratio": 1.3796498153911854,
+      "ratio_of_mean_variances": 1.2852938086188663
+    }
+  },
+  "wp2_robustness": {
+    "scope": "Post hoc descriptive; not part of any locked comparison family",
+    "eligible_cells": [
+      0,
+      2,
+      4,
+      5,
+      7
+    ],
+    "graphs": 60,
+    "mean": 0.016365667640889377,
+    "median": 0.008228951468214632,
+    "trim_fraction_each_tail": 0.1,
+    "trim_count_each_tail": 6,
+    "trimmed_mean": 0.01219848968033183,
+    "positive": 45,
+    "negative": 15,
+    "ties": 0,
+    "without_pa_graphs": 45,
+    "without_pa_mean": 0.008396905641870397,
+    "top5_share_of_net_gain": 0.4237588833907281,
+    "top5_graph_ids": [
+      54,
+      59,
+      55,
+      46,
+      37
+    ],
+    "family_means": {
+      "er": 0.011025390262366505,
+      "pa_triadic": 0.04027195363794631,
+      "sparse_sbm": 0.007002618921842175,
+      "ws": 0.007162707741402509
+    }
+  },
+  "editorial_checks": {
+    "repeated_conclusion_sentence_1": 5,
+    "repeated_conclusion_sentence_2": 5,
+    "plural_AI_statement": 1
+  },
+  "limits": "These are recomputations from retained derived CSVs, not new stochastic simulations or an independent rerun of raw propagation labels."
+}

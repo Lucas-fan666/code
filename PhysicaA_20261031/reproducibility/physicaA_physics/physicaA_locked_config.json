@@ -1,0 +1,169 @@
+{
+  "created_utc": "2026-10-30T16:09:28.529510+00:00",
+  "design": {
+    "role": "prospectively fixed descriptive numerical study; all settings reported, no confirmatory tests",
+    "synthetic": {
+      "families": [
+        "er",
+        "ws",
+        "sparse_sbm",
+        "pa_triadic"
+      ],
+      "graphs_per_family": 2,
+      "n": 100,
+      "histories": 2,
+      "paired_replications": 64
+    },
+    "observed": {
+      "datasets": [
+        "contact-high-school",
+        "contact-primary-school"
+      ],
+      "histories": 2,
+      "paired_replications": 128,
+      "topology_rule": "all nodes; edge projection of all time groups; faces only unique groups of size exactly three"
+    },
+    "T0": 0.9,
+    "lam": 0.2,
+    "u": 3.0,
+    "D": [
+      1.0,
+      2.0,
+      4.0
+    ],
+    "H": 10.0,
+    "prehistory": 2.0,
+    "initial_fraction_R": 0.1,
+    "initial_fraction_C": 0.1,
+    "k": 4,
+    "targets": "R first by degree, then fill by degree; deterministic ties",
+    "transmission": "beta1*T0*mean_degree=1.15; beta2*T0*mean_face_participation=3",
+    "branches": [
+      "baseline",
+      "treated_retained",
+      "treated_baseline_memory",
+      "treated_zero_memory"
+    ],
+    "contrast": "memory component=loss(treated_baseline_memory)-loss(treated_retained); state component=loss(baseline)-loss(treated_baseline_memory); total=sum; fraction=ratio of means, undefined if denominator<=1e-10",
+    "post_grid": "0:.25:10",
+    "seed_root": 202610302501,
+    "uncertainty": "pointwise descriptive bootstrap, 2000 resamples; synthetic graphs within family; observed paired replications within each fixed history; do not pool observed datasets",
+    "triangle": {
+      "initial": [
+        1,
+        1,
+        0
+      ],
+      "memory": 0.9,
+      "targets": [
+        0,
+        1
+      ],
+      "lambda_grid": [
+        0.02,
+        0.05,
+        0.1,
+        0.2,
+        0.5,
+        1.0,
+        2.0,
+        5.0
+      ],
+      "duration_grid": [
+        0.25,
+        0.5,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "reps": 512,
+      "post_grid": "0:.05:10",
+      "primary_rebound": "mean of within-trajectory sampled maximum R fraction minus withdrawal R fraction, all trajectories including extinction",
+      "secondary_rebound": "maximum of mean R curve minus mean withdrawal R fraction, positive part",
+      "crossover": "finite-time crossover only; no phase or critical point claim"
+    },
+    "hyperedge": {
+      "n": 12,
+      "arity": 4,
+      "faces": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          6,
+          7,
+          8,
+          9
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "weights": [
+        0.5,
+        1.0,
+        1.5,
+        0.75,
+        1.25
+      ],
+      "drives": [
+        "majority",
+        "linear_count"
+      ],
+      "reps": 256,
+      "sets": [
+        [],
+        [
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      "validation": "correct marginal 3-uniform match against archived engine; nested loss and sampled-state order, reverse memory order, intersection-union bounds on 4-uniform examples"
+    }
+  },
+  "sources": {
+    "physicaA_physics/run.py": "f22d36651db2a8be3c1650513256db0ab5df52b3b8e7dafbac04990647100131",
+    "physicaA_physics/engine.cpp": "b7c5dd8c62fc8ceb92d241c695299015e0381fb8026fa770381a2fbf61acf0a4",
+    "physicaA_physics/api.py": "67636e23ed642cef9fcbffe476c79dc56dcf9d7914a069eb2120bc6aa245532f",
+    "physicaA_physics/analyze.py": "6a9848c18f1e47caf5eae27c3cdf109b8bca42c6e0ad0e703f72a87f7e6bacf1",
+    "physicaA_physics/prepare_sources.py": "35405484e2b31aabb53a5fc8e44964449bd2b2a18c3239d52824d94317de6f78",
+    "physicaA_physics/topology_provenance.json": "bbdfc621f43c95e839c2aed21647a4dbf60dd852951406f1b92a67b2c48be98c",
+    "vendor/src/graphical_engine.cpp": "c044d06d76298a3db1489f6a7e147aaa48e49ff5ede7d2928dbe9fde569522a5",
+    "vendor/src/rtc_engine.cpp": "1940289a63ee32dd1a535c15bebcd380ae437e49e39e33aaacd5963d24302678",
+    "vendor/src/engine.cpp": "7eaf2614a190f314e27deb5b443ba061e9d8aa8b1d4f61a6f640b88a8d8de3f5",
+    "src/graph_generation.py": "09d982b4f8e06beb4df0ce2cf336509c0801e23a2e4e106daad5f58a7fb442f4",
+    "physicaA_physics/contact-high-school.npz": "fd1ad7b3fe361bc98880772cccd2be18dd43cc22937bedcd300227808b606f08",
+    "physicaA_physics/contact-primary-school.npz": "d5a69121238feb9e46b01b64c7db458535da0a8f218641f6887c637060eb4790"
+  }
+}

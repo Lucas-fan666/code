@@ -1,0 +1,13 @@
+{
+  "abstract_words": 254,
+  "original_source_unchanged": true,
+  "earlier_adverse_sections_retained": true,
+  "new_sections": [
+    "fixed-witness theorem and full proof",
+    "independent third-cohort evaluation"
+  ],
+  "claim_gate_results": {
+    "mechanism_refinement": true,
+    "screen_policy": false
+  }
+}

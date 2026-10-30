@@ -1,0 +1,510 @@
+[
+  {
+    "key": "iacopini2019",
+    "doi": "10.1038/s41467-019-10431-6",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s41467-019-10431-6"
+  },
+  {
+    "key": "han2026",
+    "doi": "10.48550/arXiv.2607.10171",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://arxiv.org/abs/2607.10171"
+  },
+  {
+    "key": "chang2025",
+    "doi": "10.1109/icde65448.2025.00048",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://ieeexplore.ieee.org/document/11113041/"
+  },
+  {
+    "key": "xie2025",
+    "doi": "10.1287/ijoc.2024.0591",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://pubsonline.informs.org/doi/10.1287/ijoc.2024.0591"
+  },
+  {
+    "key": "hoeffding1963",
+    "doi": "10.1080/01621459.1963.10500830",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.tandfonline.com/doi/full/10.1080/01621459.1963.10500830"
+  },
+  {
+    "key": "vosoughi2018",
+    "doi": "10.1126/science.aap9559",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.science.org/doi/10.1126/science.aap9559"
+  },
+  {
+    "key": "lazer2018",
+    "doi": "10.1126/science.aao2998",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.science.org/doi/10.1126/science.aao2998"
+  },
+  {
+    "key": "delvicario2016",
+    "doi": "10.1073/pnas.1517441113",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://pnas.org/doi/full/10.1073/pnas.1517441113"
+  },
+  {
+    "key": "lewandowsky2012",
+    "doi": "10.1177/1529100612451018",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://journals.sagepub.com/doi/10.1177/1529100612451018"
+  },
+  {
+    "key": "ecker2022",
+    "doi": "10.1038/s44159-021-00006-y",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s44159-021-00006-y"
+  },
+  {
+    "key": "pennycook2021",
+    "doi": "10.1038/s41586-021-03344-2",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s41586-021-03344-2"
+  },
+  {
+    "key": "bakcoleman2022",
+    "doi": "10.1038/s41562-022-01388-6",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s41562-022-01388-6"
+  },
+  {
+    "key": "kempe2003",
+    "doi": "10.1145/956750.956769",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/956750.956769"
+  },
+  {
+    "key": "leskovec2007",
+    "doi": "10.1145/1281192.1281239",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/1281192.1281239"
+  },
+  {
+    "key": "budak2011",
+    "doi": "10.1145/1963405.1963499",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/1963405.1963499"
+  },
+  {
+    "key": "tang2014",
+    "doi": "10.1145/2588555.2593670",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/2588555.2593670"
+  },
+  {
+    "key": "tang2015",
+    "doi": "10.1145/2723372.2723734",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/2723372.2723734"
+  },
+  {
+    "key": "borgs2014",
+    "doi": "10.1137/1.9781611973402.70",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://epubs.siam.org/doi/10.1137/1.9781611973402.70"
+  },
+  {
+    "key": "nemhauser1978",
+    "doi": "10.1007/bf01588971",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "http://link.springer.com/10.1007/BF01588971"
+  },
+  {
+    "key": "chen2010",
+    "doi": "10.1145/1835804.1835934",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/1835804.1835934"
+  },
+  {
+    "key": "chen2009",
+    "doi": "10.1145/1557019.1557047",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/1557019.1557047"
+  },
+  {
+    "key": "watts1998",
+    "doi": "10.1038/30918",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/30918"
+  },
+  {
+    "key": "gilbert1959",
+    "doi": "10.1214/aoms/1177706098",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "http://projecteuclid.org/euclid.aoms/1177706098"
+  },
+  {
+    "key": "holland1983",
+    "doi": "10.1016/0378-8733(83)90021-7",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/0378873383900217"
+  },
+  {
+    "key": "holme2012",
+    "doi": "10.1016/j.physrep.2012.03.001",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/S0370157312000841"
+  },
+  {
+    "key": "karsai2011",
+    "doi": "10.1103/physreve.83.025102",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://link.aps.org/doi/10.1103/PhysRevE.83.025102"
+  },
+  {
+    "key": "rosvall2014",
+    "doi": "10.1038/ncomms5630",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/ncomms5630"
+  },
+  {
+    "key": "lambiotte2019",
+    "doi": "10.1038/s41567-019-0459-y",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s41567-019-0459-y"
+  },
+  {
+    "key": "scholtes2014",
+    "doi": "10.1038/ncomms6024",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/ncomms6024"
+  },
+  {
+    "key": "battiston2020",
+    "doi": "10.1016/j.physrep.2020.05.004",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/S0370157320302489"
+  },
+  {
+    "key": "battiston2021",
+    "doi": "10.1038/s41567-021-01371-4",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s41567-021-01371-4"
+  },
+  {
+    "key": "bick2023",
+    "doi": "10.1137/21m1414024",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://epubs.siam.org/doi/10.1137/21M1414024"
+  },
+  {
+    "key": "boccaletti2023",
+    "doi": "10.1016/j.physrep.2023.04.002",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/S0370157323001643"
+  },
+  {
+    "key": "petri2018",
+    "doi": "10.1103/physrevlett.121.228301",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://link.aps.org/doi/10.1103/PhysRevLett.121.228301"
+  },
+  {
+    "key": "arruda2020",
+    "doi": "10.1103/physrevresearch.2.023032",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://link.aps.org/doi/10.1103/PhysRevResearch.2.023032"
+  },
+  {
+    "key": "stonge2022",
+    "doi": "10.1038/s42005-021-00788-w",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s42005-021-00788-w"
+  },
+  {
+    "key": "mancastroppa2023",
+    "doi": "10.1038/s41467-023-41887-2",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.nature.com/articles/s41467-023-41887-2"
+  },
+  {
+    "key": "neuhauser2020",
+    "doi": "10.1103/physreve.101.032310",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://link.aps.org/doi/10.1103/PhysRevE.101.032310"
+  },
+  {
+    "key": "benson2016",
+    "doi": "10.1126/science.aad9029",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.science.org/doi/10.1126/science.aad9029"
+  },
+  {
+    "key": "yin2017",
+    "doi": "10.1145/3097983.3098069",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dl.acm.org/doi/10.1145/3097983.3098069"
+  },
+  {
+    "key": "centola2010",
+    "doi": "10.1126/science.1185231",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.science.org/doi/10.1126/science.1185231"
+  },
+  {
+    "key": "centola2007",
+    "doi": "10.1086/521848",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "http://www.journals.uchicago.edu/doi/10.1086/521848"
+  },
+  {
+    "key": "dodds2004",
+    "doi": "10.1103/physrevlett.92.218701",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://link.aps.org/doi/10.1103/PhysRevLett.92.218701"
+  },
+  {
+    "key": "davis1984",
+    "doi": "10.1111/j.2517-6161.1984.tb01308.x",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://academic.oup.com/jrsssb/article/46/3/353/7028122"
+  },
+  {
+    "key": "gillespie1977",
+    "doi": "10.1021/j100540a008",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://pubs.acs.org/doi/abs/10.1021/j100540a008"
+  },
+  {
+    "key": "lewis1979",
+    "doi": "10.1002/nav.3800260304",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://onlinelibrary.wiley.com/doi/10.1002/nav.3800260304"
+  },
+  {
+    "key": "efron1979",
+    "doi": "10.1214/aos/1176344552",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://projecteuclid.org/journals/annals-of-statistics/volume-7/issue-1/Bootstrap-Methods-Another-Look-at-the-Jackknife/10.1214/aos/1176344552.full"
+  },
+  {
+    "key": "howard2021",
+    "doi": "10.1214/20-aos1991",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://projecteuclid.org/journals/annals-of-statistics/volume-49/issue-2/Time-uniform-nonparametric-nonasymptotic-confidence-sequences/10.1214/20-AOS1991.full"
+  },
+  {
+    "key": "he2012",
+    "doi": "10.1137/1.9781611972825.40",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://epubs.siam.org/doi/10.1137/1.9781611972825.40"
+  },
+  {
+    "key": "tong2017",
+    "doi": "10.1109/infocom.2017.8056957",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "http://ieeexplore.ieee.org/document/8056957/"
+  },
+  {
+    "key": "anderson2007",
+    "doi": "10.1063/1.2799998",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://pubs.aip.org/jcp/article/127/21/214107/349528/A-modified-next-reaction-method-for-simulating"
+  },
+  {
+    "key": "anderson2012",
+    "doi": "10.1137/110849079",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://epubs.siam.org/doi/10.1137/110849079"
+  },
+  {
+    "key": "waudby2024",
+    "doi": "10.1093/jrsssb/qkad009",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://academic.oup.com/jrsssb/article/86/1/1/7043257"
+  },
+  {
+    "key": "maurer2009",
+    "doi": null,
+    "status": "primary URL verified separately"
+  },
+  {
+    "key": "karnin2013",
+    "doi": null,
+    "status": "primary URL verified separately"
+  },
+  {
+    "key": "benson2018",
+    "doi": "10.1073/pnas.1800683115",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://pnas.org/doi/full/10.1073/pnas.1800683115"
+  },
+  {
+    "key": "stover2010",
+    "doi": "10.48550/arXiv.1006.5723",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://arxiv.org/abs/1006.5723"
+  },
+  {
+    "key": "das2018",
+    "doi": null,
+    "status": "primary URL verified separately"
+  },
+  {
+    "key": "feldman2014",
+    "doi": "10.4230/LIPIcs.APPROX-RANDOM.2014.160",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX-RANDOM.2014.160"
+  },
+  {
+    "key": "bai2018",
+    "doi": null,
+    "status": "primary URL verified separately"
+  },
+  {
+    "key": "schoenebeck2022",
+    "doi": "10.1016/j.ic.2022.104919",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/S0890540122000700"
+  },
+  {
+    "key": "chen2023cc",
+    "doi": "10.24963/ijcai.2023/614",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.ijcai.org/proceedings/2023/614"
+  },
+  {
+    "key": "qu2025",
+    "doi": "10.1016/j.ins.2024.121816",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/S0020025524017304"
+  },
+  {
+    "key": "robiglio2025",
+    "doi": "10.1103/physrevlett.134.137401",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://link.aps.org/doi/10.1103/PhysRevLett.134.137401"
+  },
+  {
+    "key": "kirkpatrick1983",
+    "doi": "10.1126/science.220.4598.671",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.science.org/doi/10.1126/science.220.4598.671"
+  },
+  {
+    "key": "zhang2024",
+    "doi": "10.1063/5.0178329",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://pubs.aip.org/cha/article/34/2/023111/3265378/Influence-maximization-based-on-threshold-models"
+  },
+  {
+    "key": "highschool2015",
+    "doi": "10.1371/journal.pone.0136497",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dx.plos.org/10.1371/journal.pone.0136497"
+  },
+  {
+    "key": "primaryschool2011",
+    "doi": "10.1371/journal.pone.0023176",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dx.plos.org/10.1371/journal.pone.0023176"
+  },
+  {
+    "key": "barabasi1999",
+    "doi": "10.1126/science.286.5439.509",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://www.science.org/doi/10.1126/science.286.5439.509"
+  },
+  {
+    "key": "andersonyuan2019",
+    "doi": "10.1007/s11538-018-0430-6",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "http://link.springer.com/10.1007/s11538-018-0430-6"
+  },
+  {
+    "key": "steelewarne2026",
+    "doi": "10.1371/journal.pcbi.1014687",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://dx.plos.org/10.1371/journal.pcbi.1014687"
+  },
+  {
+    "key": "zhangsimplicial2024",
+    "doi": "10.1016/j.physa.2024.129842",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/S0378437124003510"
+  },
+  {
+    "key": "luo2025",
+    "doi": "10.1016/j.physa.2025.131010",
+    "code": 302,
+    "status": "resolver accessible",
+    "location": "https://linkinghub.elsevier.com/retrieve/pii/S0378437125006624"
+  },
+  {
+    "key": "andersonma2026",
+    "doi": null,
+    "status": "primary URL verified separately"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "cost_quality_curves.csv": {
+    "archive_entry": "retained_results/WP3/cost_quality_curves.csv",
+    "sha256": "b16260b6017df4d311844eab9155f593d806630396b5c6dbee918c73f9721b51"
+  },
+  "selection_quality_graphs.csv": {
+    "archive_entry": "retained_results/WP3/selection_quality_graphs.csv",
+    "sha256": "7e5350352b63ecd263a75016a7ea8fe16bd43a55f5431d67a3ddc8231e39cfd7"
+  },
+  "selection_quality_raw_recomputed.csv": {
+    "archive_entry": "retained_results/WP3/selection_quality_raw_recomputed.csv",
+    "sha256": "64fd7d2a493c4d95445f84f53f49e35ea89f4841f453c44e629338b91cd62c75"
+  },
+  "analyze_wp3.py": {
+    "archive_entry": "code_configs/WP3/scripts/analyze_wp3.py",
+    "sha256": "92b1f0609da59adedbf2019e77222159fb2d2ae028a3a506ed6bd83e4f9e29ed"
+  },
+  "wp3_locked_config.json": {
+    "archive_entry": "code_configs/WP3/wp3_locked_config.json",
+    "sha256": "38631783c1cbdd357145afa1a9129cb769aee617a3ccf809921a611bcf3779a3"
+  },
+  "wp3_locked_config.sha256": {
+    "archive_entry": "code_configs/WP3/wp3_locked_config.sha256",
+    "sha256": "e035f2946c88e144f3949b77739f38313f1e288bbc2498ea57e2861bae2d13d4"
+  }
+}

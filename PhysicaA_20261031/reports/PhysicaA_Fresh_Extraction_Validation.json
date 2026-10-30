@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "scope": "fresh extraction, source compilation, new physical/precision analyses and three PDF builds; no historical propagation rerun",
+  "compiled_from_archived_source": true
+}

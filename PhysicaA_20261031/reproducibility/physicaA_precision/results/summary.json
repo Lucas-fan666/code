@@ -1,0 +1,32 @@
+{
+  "contexts": 4,
+  "budgets": [
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "mean_reference_se": 0.010091395704069655,
+  "note": "Four fixed graph/history contexts; MSE relative to independent finite 2048-pair reference; same prefixes across budgets; all actual timing calls charged. No new significance test or quality threshold.",
+  "largest_budget": [
+    {
+      "reference_based_mse": 0.014907157003208726,
+      "contrast_sample_variance": 2.2174582307965562,
+      "mean_wall_seconds": 0.6723930783124956,
+      "variance_times_pair_cost": 0.014425703571747741
+    },
+    {
+      "reference_based_mse": 0.0026883088016334193,
+      "contrast_sample_variance": 0.407610072997463,
+      "mean_wall_seconds": 1.4549441301562638,
+      "variance_times_pair_cost": 0.005910099733047425
+    },
+    {
+      "reference_based_mse": 0.0028445011667208517,
+      "contrast_sample_variance": 0.3170934738964715,
+      "mean_wall_seconds": 0.4651262002812615,
+      "variance_times_pair_cost": 0.0014767198783526658
+    }
+  ]
+}

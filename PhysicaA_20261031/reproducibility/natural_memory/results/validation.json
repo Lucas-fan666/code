@@ -1,0 +1,10 @@
+{
+  "trajectories": 98304,
+  "prehistories": 64,
+  "graphs": 32,
+  "engine_loss_checks": 1536,
+  "max_loss_difference": 0.0,
+  "all_control_orders_passed": true,
+  "elapsed_seconds": 680.6270320415497,
+  "design_sha256": "b29b397cb81085dc8dae3a32324d1daee0c644c15369e79ad4b5072cd4f2f410"
+}

@@ -1,0 +1,60 @@
+{
+  "abstract_words": 208,
+  "pages": {
+    "main": 12,
+    "supplement": 56,
+    "main_review": 26
+  },
+  "highlights_characters": [
+    63,
+    68,
+    71,
+    70,
+    73
+  ],
+  "references_checked": 74,
+  "doi_resolver_accessible": 69,
+  "primary_url_checked": 5,
+  "latex_references_resolved": true,
+  "no_overfull_boxes": true,
+  "all_configuration_hashes_match": true,
+  "physics_checks": {
+    "counterfactual_histories": 20,
+    "counterfactual_paired_replications": 4608,
+    "counterfactual_physical_calls": 27668,
+    "triangle_grid_physical_calls": 122880,
+    "hyperedge4_retained_calls": 3072,
+    "archived_engine_comparison_calls": 512,
+    "failed_validation_calls_in_original_run": 1280,
+    "retained_study_calls": 153620,
+    "historical_revision_calls_including_first_validation": 155412,
+    "verification_calls_this_invocation": 512,
+    "order_and_same_node_state_checks": true,
+    "triangle_engine_loss_difference": 0.0,
+    "locked_sources_and_config_unchanged": true,
+    "config_sha256": "3c21d07b231b37af3ee012f853d996c7f4875ca1c98eb12b8ebf089fc19574b9",
+    "protocol_deviations": [
+      "Validation assertion wrongly treated {0} and {1,2} as nested; corrected without altering dynamics or parameters; auxiliary intersection {1} explicitly evaluated.",
+      "One over-escaped plot label corrected through a separate rendering wrapper; no numerical change."
+    ]
+  },
+  "serial_retiming": {
+    "physical_calls": 47616,
+    "all_replayed_losses_match": true,
+    "elapsed_seconds": 170.52818535100005,
+    "original_timings_retained": true
+  },
+  "proof_text_comparison": {
+    "old_count": 28,
+    "new_count": 28,
+    "canonical_missing": 0,
+    "canonical_extra": 0,
+    "scope": "Textual equality after explicit notation/whitespace/cross-reference normalization, not a new proof certification."
+  },
+  "publication_status": "Assigned Zenodo DOI; upload/publication is the author's remaining external action.",
+  "source_sha256": {
+    "main.tex": "0af857bab4134d0197181dd8f7bf4269872410b36d346850967a10c3168beaa0",
+    "supplement.tex": "24b2af59137272e1a87aaff36e958e6942667bc7717e63b1ab2c6dcf49a66f27",
+    "references.bib": "807907a226eb1a1dcacfcd09e0363fa53e518a2f0a859491aafbebbddbd29f52"
+  }
+}

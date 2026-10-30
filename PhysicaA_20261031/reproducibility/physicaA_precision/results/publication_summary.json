@@ -1,0 +1,20 @@
+{
+  "thinning": {
+    "reference_based_mse": 0.014907157003208726,
+    "contrast_sample_variance": 2.2174582307965562,
+    "mean_wall_seconds": 0.7160392058750205,
+    "variance_times_pair_cost": 0.0153866984507352
+  },
+  "rtc": {
+    "reference_based_mse": 0.0026883088016334193,
+    "contrast_sample_variance": 0.407610072997463,
+    "mean_wall_seconds": 1.5550347679061787,
+    "variance_times_pair_cost": 0.006352303217507636
+  },
+  "graphical": {
+    "reference_based_mse": 0.0028445011667208517,
+    "contrast_sample_variance": 0.3170934738964715,
+    "mean_wall_seconds": 0.47616900184374344,
+    "variance_times_pair_cost": 0.0015141965668094047
+  }
+}

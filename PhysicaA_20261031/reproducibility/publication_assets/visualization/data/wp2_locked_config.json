@@ -1,0 +1,256 @@
+{
+  "name": "WP2 near-critical intervention confirmation",
+  "version": 2,
+  "created_utc": "2026-10-18T11:23:29.240274+00:00",
+  "authorization": "User: 进入 WP2; stop after WP2 report for user decision",
+  "status": "prospective local lock; persist lock externally before calibration; not a public registry",
+  "hypotheses": {
+    "primary": "Mean node-exchange loss minus face-exchange loss, averaged equally across independently eligible cells, is positive; require positive means in all four families",
+    "secondary": "Mean node-greedy loss minus face-exchange loss averaged across the same eligible cells is positive",
+    "motivation": "Stronger interventions may amplify synergy near suppression; prior 8-graph signal was post hoc, not confirmation"
+  },
+  "graphs": {
+    "n": 100,
+    "families": [
+      "er",
+      "ws",
+      "sparse_sbm",
+      "pa_triadic"
+    ],
+    "confirmation_per_family": 15,
+    "calibration_per_family": 4,
+    "face_fill_probability": 0.6,
+    "er": "each edge independently with p=6/(n-1)",
+    "ws": "6-neighbor ring, one-pass rewiring probability .15, original generator unchanged",
+    "sparse_sbm": "two equal blocks; independent p_in=10/(n-1), p_out=2/(n-1)",
+    "pa_triadic": "initial 4-clique; each new node has 3 distinct old targets: degree-proportional first target; subsequent with probability .5 uniformly among last target neighbors not yet chosen, otherwise degree-proportional among remaining old nodes",
+    "labels": "independent uniform permutation after construction; prevents fixed historical target 0 being always a PA hub",
+    "faces": "independent fill of each existing 3-clique, probability .6; synthetic groups, not observed interactions",
+    "replacement": "no graph replacement or family exclusion based on density, history acceptance, calibration or confirmation outcomes"
+  },
+  "grid": [
+    {
+      "id": 0,
+      "k": 4,
+      "u": 3.0,
+      "D": 2.0,
+      "beta2_scale": 0.5
+    },
+    {
+      "id": 1,
+      "k": 4,
+      "u": 3.0,
+      "D": 2.0,
+      "beta2_scale": 1.5
+    },
+    {
+      "id": 2,
+      "k": 4,
+      "u": 3.0,
+      "D": 4.0,
+      "beta2_scale": 0.5
+    },
+    {
+      "id": 3,
+      "k": 4,
+      "u": 3.0,
+      "D": 4.0,
+      "beta2_scale": 1.5
+    },
+    {
+      "id": 4,
+      "k": 8,
+      "u": 3.0,
+      "D": 2.0,
+      "beta2_scale": 0.5
+    },
+    {
+      "id": 5,
+      "k": 8,
+      "u": 3.0,
+      "D": 2.0,
+      "beta2_scale": 1.5
+    },
+    {
+      "id": 6,
+      "k": 8,
+      "u": 3.0,
+      "D": 4.0,
+      "beta2_scale": 0.5
+    },
+    {
+      "id": 7,
+      "k": 8,
+      "u": 3.0,
+      "D": 4.0,
+      "beta2_scale": 1.5
+    }
+  ],
+  "grid_scope": "8-cell full grid in k,D,beta2_scale; u=3 fixed to bound cost; no inference for u=6 or untested settings",
+  "parameters": {
+    "trust": 0.9,
+    "lambda": 0.2,
+    "H": 10.0
+  },
+  "parameter_normalization": {
+    "beta1": "1.15/(mean_degree*trust), zero if no edges",
+    "beta2": "3*beta2_scale/(mean_face_participation*trust), zero if no faces"
+  },
+  "histories": {
+    "per_graph_cell": 3,
+    "max_attempts": 10000,
+    "initial_probabilities_U_R_C": [
+      0.6,
+      0.2,
+      0.2
+    ],
+    "initial_memory": 0.0,
+    "prehistory_target": 0,
+    "prehistory_u": 1.5,
+    "prehistory_D": 0.6,
+    "prehistory_H": 2.4,
+    "prehistory_law": "original exact thinning history simulator; cell-specific beta values; total duration 3",
+    "acceptance": "endpoint has at least one R and one C; otherwise retry documented next attempt; retain all attempt initial/end states, memory and seeds",
+    "across_cells": "same topology, fresh cell-specific histories; dependence clustered by graph",
+    "failure": "if 10000 attempts exhausted, stop and report; no replacement or silent conditioning change"
+  },
+  "seeds": {
+    "calibration": 83017261018,
+    "confirmation": 94018261018,
+    "validation_only": 70000001,
+    "topology": "SeedSequence(root,graph,1); modulo 2**32-2; fill seed topology_seed+1",
+    "label_permutation": "SeedSequence(root,graph,2)",
+    "history_initial": "SeedSequence(root,graph,cell,10,attempt)",
+    "history_process": "SeedSequence(root,graph,cell,11,attempt)",
+    "selection": "SeedSequence(root,graph,cell,history,phase,stage), phases NG100/anchor300/exchanges400",
+    "selection_remainder": "same coordinates plus 91, independent of outcomes",
+    "calibration_evaluation": "SeedSequence(calibration_root,graph,cell,history,900)",
+    "confirmation_evaluation": "SeedSequence(confirmation_root,graph,cell,history,1000)",
+    "sharing": "action-common seeds within stage; common exchange seeds across policies; any repeated action+seed is reported as repeat, not independent sample"
+  },
+  "calibration": {
+    "graphs": 16,
+    "reps": 256,
+    "policies": [
+      "none",
+      "top_rdegree"
+    ],
+    "eligibility": "0.30 <= (mean_no_control - mean_R_degree)/mean_no_control <= 0.70, denominator >= .05",
+    "minimum_none_burden": 0.05,
+    "graph_weighting": "equal graphs and balanced families; ratio of graph-averaged burdens, not mean of individual ratios",
+    "freeze": "hash eligibility.json after ALL calibration cells complete, before ANY confirmatory trajectories",
+    "independence": "separate root seeds, topologies and histories; no search or primary comparison on calibration",
+    "all_cells": "confirm and report all 8 cells, even if ineligible; no grid extension based on results",
+    "no_eligible_cell": "primary endpoint not estimable and gate fails; no substitute primary"
+  },
+  "selection": {
+    "policies": [
+      "top_rdegree",
+      "node_greedy",
+      "node_exchange",
+      "face_exchange"
+    ],
+    "budget": 1024,
+    "anchor_budget": 512,
+    "discovery_budget": 256,
+    "holdout_budget": 256,
+    "candidate_pool": 16,
+    "pool_rule": "unchanged candidate_nodes: include R-degree k-set, then rank by degree*(1+R_indicator)+2*face_count, ID ties",
+    "top_rdegree": "all graph nodes: R indicator first, degree second, node ID last",
+    "exchange_rule": "unchanged single anchor, 13-set portfolio; node: anchor+12 singles; face: anchor+6 singles+6 face pairs, missing pairs filled with singles; at most two discovered finalists plus anchor; fresh holdout selects",
+    "budget_accounting": "NG1024; each exchange512 anchor+256 discovery+256 holdout. Shared anchor physically once. Physical per context=2560; standalone logical=3072. No double-addition of shared cost",
+    "overhead": "record full selection seconds, but WP2 is not an isolated timing benchmark",
+    "search_noise": "no safety or no-harm claim from the 256-rollout holdout"
+  },
+  "evaluation": {
+    "engine": "graphical",
+    "reps": 512,
+    "sets": "each distinct deployed k-set and empty set, exactly once per history; common new tapes",
+    "loss": "integral of rumor fraction over [D,D+H], unnormalized by H; smaller is better",
+    "independence": "final tapes disjoint from every selection stage"
+  },
+  "statistics": {
+    "unit": "graph; first average 3 histories per cell",
+    "primary_aggregate": "equal-weight average over independently eligible cells within each graph, then equal graph average",
+    "main_family": [
+      "face_vs_node_exchange",
+      "face_vs_node_greedy"
+    ],
+    "main_correction": "Bonferroni over 2 predeclared aggregate comparisons, two-sided alpha=.025 each, nominal family .05",
+    "cell_family": "all 8 cells x 3 contrasts (FEX-NEX, FEX-NG, NG-Rdegree); separate descriptive Bonferroni family of 24, alpha=.05/24 each; no cellwise result can replace primary aggregate",
+    "bootstrap": "40000 percentile resamples, independently within each of 4 graph families, retain all histories/cells of resampled graph; numpy quantile method linear",
+    "bootstrap_seed": 2026101802,
+    "cell_seed": "base+10*cell+contrast_index (0,1,2)",
+    "aggregate_seed": "base+500+contrast_index (0,1)",
+    "family_intervals": "descriptive pointwise 95%, same contrast seed; family means alone used for direction gate",
+    "point95": "also report pointwise 95% for transparency; decision uses only adjusted intervals",
+    "sign_counts": "graph means: positive >1e-12; negative <-1e-12; otherwise tie",
+    "gate": "at least 1 eligible cell AND primary aggregate adjusted lower bound >0 AND each of 4 aggregate family means >0; secondary cannot rescue failed primary",
+    "no_stopping": "fixed graph count and rollout counts, no interim effect inspection or optional stopping",
+    "limitations": "bootstrap has nominal, not finite-sample exact coverage; new family/regime variation may exceed historical power input"
+  },
+  "power_planning_file_sha256": "69da5837d4abbef477806cee27aa4731c28593af4958616cecbf900465653634",
+  "power": "60 graphs planned for .025 absolute mean difference at approximate 80% normal power using historical SD .0615031, endpoint alpha=.025. This approximation excludes direction-gate loss and regime shift. 512 eval reps gives old graph MC fraction .0604; 1024 search budget retained to isolate proposed mechanism.",
+  "execution": {
+    "workers": 8,
+    "checkpoint": "atomic context outputs; reuse only matching protocol and source hash; deterministic retry only for operational interruption; record retries/cost separately if any",
+    "raw_outputs": "all selection losses/actions/seeds/diagnostics; shared anchor calls; independent evaluation losses; graph and all accepted/rejected historical endpoints; complete counts",
+    "source_policy": "unmodified original sources under vendor; new wrappers only; lock transitive source manifest",
+    "failure_policy": "NaN, invalid states or event cap raise error, no omission; algorithm fix after outcomes invalidates confirmation and requires reported deviation and new cohort"
+  },
+  "claim_decision": "WP2 pass permits B only within calibrated range and fixed budget/pool; A requires WP3. Neither significance nor power establishes publication readiness.",
+  "source_sha256": {
+    "scripts/analyze_wp2.py": "f19346f08bc219a9c4246a751760d7533a29f82aff40ff67cba781260f09e0e7",
+    "scripts/common.py": "e9a355b6f526834f4d559787454241faa6baa42e29462aede011dc13ae994ed9",
+    "scripts/make_lock.py": "7311589d151ca1174e2121ed1eb04670bf1ee73f1fd06a52623a438895e219ba",
+    "scripts/plot_wp2.py": "3c83eb34ae5af4ff5fec00e8f582bf3773807b89b1d99c33aa71556611f48629",
+    "scripts/power_analysis.py": "74362dc8ac3554ddc0bfb9081b6b3fbd415bb91e5b05fb7c330660883a643699",
+    "scripts/run_wp2.py": "d08c5a1d0f8d7190ed059408b8ebc120fc7a77dff471f124a1db04bdbc8ca86b",
+    "tests/test_wp2.py": "eecb015396d2973910195ca4ff75d2b2b6f969574e5097f265d5156a5707ba22",
+    "vendor/src/__init__.py": "98724be0d709afb24cd6e067f565bf3e49c1a0462dedc56200e2d57edf797004",
+    "vendor/src/acs.py": "09ee1763821b7a85f6802e02ed96865d613d4363206fcdc6babfe0d71e7917b2",
+    "vendor/src/aggregate.py": "a44598820345b8a3ab3a0df14118b141b8222339979523479c319341447fbe84",
+    "vendor/src/coupled.py": "23ac319839f60a8b4005c8573f0ac618bbeb1d8d440a1c9ae1edb2d5c8a930ea",
+    "vendor/src/engine.cpp": "9e4822c5f768c664ce731ee58bf44e552c87e42114cc37c51c9d2f3914049424",
+    "vendor/src/experiment.py": "aac490f17034f908135951596c311af3e57ae62e35198da992c233d8c32f5fac",
+    "vendor/src/graphical_engine.cpp": "cc26fbe3719f85210cfb12efd4aa51efcc6a942464179b4f2698bd086987fdfe",
+    "vendor/src/graphs.py": "d4265449a8f353c18b65266b83628bd21ca1615c4cdc3bad138a04f776f97d76",
+    "vendor/src/legacy_engine.cpp": "fc941786509ffe2a671ec1c6839a6fb2a965a6a93f8b3e0d8f2c90f55f85f69c",
+    "vendor/src/policies.py": "1d65b2ead3b71b013d4a75d6fdc2d1185a650dce676bc83a97d66a6403dd19dc",
+    "vendor/src/rtc_engine.cpp": "de534ec5b3b63fd4146892cfb8c0f8b86d0f334f89ebc12b3e784c2ab50140ec",
+    "vendor/src/set_search.py": "691fff8640e5fc89fdc12016103e1f0c5367e010a3cf7ca302cca07544d6611b",
+    "vendor/src/set_simulator.py": "e2135305f9fbdbeefae4cd16880f7483f104d87ee7e3444358900cc520af9db1",
+    "vendor/src/shared_scores.py": "7ee6c5df2e55b85c610d916194b067cefebb439dd92555c2aba08cff7bf8a1cd",
+    "vendor/src/simulator.py": "5dd6b1af3b22c35651b3c91e1ad08a90a1b93d593dcee3737739f06e04f6e213"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "libraries": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8"
+    },
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "compile_options": [
+      "-O3",
+      "-std=c++17",
+      "-shared",
+      "-fPIC"
+    ],
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_quota": "800000 100000",
+    "memory_limit": "8589934592",
+    "BLAS_threads": 1
+  },
+  "preconfirmation_amendment": {
+    "previous_protocol_sha256": "a85e5bc927a566013b3d70c9de7115573c9726d2464dbc8e0762c446483e3fa4",
+    "reason": "Exact absorbing-rumor early termination to reduce computation, decided before any confirmation trajectories or calibration-effect summaries",
+    "change": "If current R count is zero, break proposal loop: with no R donor, all R reset rates vanish forever, so all remaining loss is exactly zero.",
+    "unchanged": "parameters, grid, graphs/seeds, hypotheses, budgets, statistics and eligibility rule",
+    "calibration": "retain v1 raw files unchanged; rerun under v2, require exact loss equality; count v1 calls as additional implementation validation/replay, never independent evidence",
+    "diagnostics": "proposal/update counts cover the realized prefix until rumor extinction; not full-horizon state trajectories; only scalar losses used",
+    "no_confirmation_data_at_amendment": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "status": "unlocked design draft; not a preregistration; no new simulations executed",
+  "objective": "Isolate law-preserving batch execution gains and establish cost at matched decision quality against strong coupling implementations",
+  "preferred_claim": "Exact ordered batch simulation for memory-dependent set-intervention comparisons",
+  "comparators": ["one-call compiled serial graphical replay with shared topology and validated input", "fixed-clock batch", "local predictable-envelope batch", "incremental common reaction paths", "appropriate stacked/split implementation with documented reset channels"],
+  "search_logic": ["same node greedy implementation", "same successive-halving implementation"],
+  "workload_axes": ["graph family", "graph size", "portfolio size", "target-set overlap", "memory relaxation", "higher-order intensity"],
+  "primary_endpoints_to_lock": ["CPU cost ratio versus compiled serial replay under unchanged graphical joint law", "wall-clock cost ratio versus strongest competing evaluator at a prespecified independently assessed finite-portfolio selection quality"],
+  "secondary_endpoints_to_lock": ["CPU ratio versus fixed-clock batch", "memory", "event and envelope work", "certificate unresolved/valid-decision rates"],
+  "sample_size": "To be determined from existing graph-level variance and predeclared minimum practical effects before any new comparison is run",
+  "analysis": "Graph-level uncertainty; histories and workload cells nested within graph; simultaneous error allocation for the declared primary family; retain all cells and non-crossing quality cases",
+  "guardrails": "Fresh independent graphs/histories/tapes; independent reference; include all marginal-copy and auxiliary-envelope costs; never interpret exact same-law replay equivalence as matched RTC selection quality"
+}

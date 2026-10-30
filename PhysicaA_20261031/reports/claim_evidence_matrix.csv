@@ -1,0 +1,16 @@
+claim_id,location,scope,evidence
+ordered_response,Main Theorem 1 and Corollary 2,Exact augmented-state comparison under sufficient reset/flow conditions,manuscript/main.tex; reports/PhysicaA_Proof_Fingerprints.json
+nested_fluctuation,Main Theorem 3,Classical bounded-variable bound applied to nonnegative coupled differences,manuscript/main.tex
+nonnested_envelope,Main Theorem 5,Intersection/union envelope for equal-cardinality actions,manuscript/main.tex
+complementarity,Main Proposition 6 and Corollary 7,Strict complementarity and absence of a uniform positive submodularity ratio,manuscript/main.tex; reproducibility/theory_checks/validation.json
+withdrawal_memory,Main Section 3.5 and Table 2,Paired protocol decomposes state and memory contributions,reproducibility/physicaA_physics/results/counterfactual_0.npz through counterfactual_9.npz; counterfactual_summary.csv
+contact_topology,Main Section 5.3,Memory component on two observed contact topologies with synthetic rates,data_sources/; reproducibility/physicaA_physics/topology_provenance.json; results/counterfactual_8.npz and counterfactual_9.npz
+retention_rebound,Main Section 5.5,All 48 triangle cells; direct retention differs from measured rebound,reproducibility/physicaA_physics/results/triangle.npz; triangle_grid.csv
+four_uniform,Main Section 5.6; Supplement weighted-factor section,Illustration of sufficient comparison conditions beyond triangles,reproducibility/physicaA_physics/results/hyperedge4.npz; validate_hyperedge.py
+natural_history,Main Section 5.4,Initial-memory forgetting and feedback are distinct,reproducibility/natural_memory/results/graph_0.npz through graph_31.npz; number_lineage.csv
+bound_slack,Main Section 5.6,Descriptive plug-in variance-to-bound ratios on overlapping controls,reproducibility/response_extension/results/bounds.csv; graph_0.npz through graph_7.npz
+joint_evaluation,Main Theorem 8,Same joint path and adaptive observation law under stated conditions,manuscript/main.tex; reproducibility/tests/test_joint_law.py
+precision,Main Section 6.1; Figure 5,Threshold-free comparison against a finite independent reference; RTC MSE is reported,reproducibility/physicaA_precision/results/graph_0.npz through graph_3.npz; precision_publication_curves.csv
+quality_grid,Main Section 6; Supplement computational application,128 versus 512 trajectories on a specified four-action discrete quality grid; RTC also 128,reproducibility/threshold_sensitivity/inputs/; PhysicaA_Original_WP3_Data.zip
+runtime,Main Section 6; Supplement computational application,Whole-search comparison against persistent-topology replay under the same joint law,PhysicaA_Original_Search_Runtime_Data.zip: publication_revision/optimized_replay/results/
+search_scope,Supplement full search/confirmation tables,"Original uncertain main endpoint, conditional secondary gains and mixed transfer are included",PhysicaA_Original_WP2_Data.zip; PhysicaA_Original_Search_Runtime_Data.zip; PhysicaA_Original_Portfolio_Data.zip

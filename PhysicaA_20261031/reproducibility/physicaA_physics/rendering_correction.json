@@ -1,0 +1,6 @@
+{
+  "reason": "Over-escaped lambda in axis-label string; rendering only",
+  "locked_analysis_sha256": "6a9848c18f1e47caf5eae27c3cdf109b8bca42c6e0ad0e703f72a87f7e6bacf1",
+  "patched_analysis_sha256": "6a9848c18f1e47caf5eae27c3cdf109b8bca42c6e0ad0e703f72a87f7e6bacf1",
+  "numerical_changes": false
+}

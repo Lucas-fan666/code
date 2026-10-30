@@ -1,0 +1,16 @@
+{
+  "role": "post-hoc descriptive analysis of previously observed curves; not preregistered",
+  "thresholds": [
+    0.01,
+    0.015,
+    0.02,
+    0.025,
+    0.03
+  ],
+  "primary_threshold_unchanged": 0.02,
+  "rule": "first observed budget with mean excess loss <= epsilon at this and every larger grid budget",
+  "uncertainty": "No new tests or confidence intervals; point estimates and right censoring only",
+  "families": "all four families and pooled sample",
+  "source": "retained derived loss summaries; no regeneration of original trajectory tapes",
+  "created_utc": "2026-10-30T08:53:54.093574+00:00"
+}

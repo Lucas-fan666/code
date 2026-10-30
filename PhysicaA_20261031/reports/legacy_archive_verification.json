@@ -1,0 +1,32 @@
+[
+  {
+    "name": "JCS_Refined_Certificate_Data.zip",
+    "bytes": 23580321,
+    "checksum": "md5:aa48f074bb0321938712880189410470",
+    "source": "https://zenodo.org/api/records/23622583/files/JCS_Refined_Certificate_Data.zip/content"
+  },
+  {
+    "name": "JCS_Portfolio_Extension_Data.zip",
+    "bytes": 24902706,
+    "checksum": "md5:2279f2d661ef176fa2cc51e92139cbb5",
+    "source": "https://zenodo.org/api/records/23622583/files/JCS_Portfolio_Extension_Data.zip/content"
+  },
+  {
+    "name": "JCS_Reproducibility_Code.zip",
+    "bytes": 3353552,
+    "checksum": "md5:c4126015e7014bf17ccce3222998551d",
+    "source": "https://zenodo.org/api/records/23622583/files/JCS_Reproducibility_Code.zip/content"
+  },
+  {
+    "name": "JCS_Early_Certificate_Data.zip",
+    "bytes": 43282640,
+    "checksum": "md5:3799c7ae4bd22ce0572bbfa56e1d1047",
+    "source": "https://zenodo.org/api/records/23622583/files/JCS_Early_Certificate_Data.zip/content"
+  },
+  {
+    "name": "JCS_Core_Search_Data.zip",
+    "bytes": 19403029,
+    "checksum": "md5:ea32a93ce5a39afb1f75809cc158e8ff",
+    "source": "https://zenodo.org/api/records/23622583/files/JCS_Core_Search_Data.zip/content"
+  }
+]

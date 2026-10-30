@@ -1,0 +1,20 @@
+{
+  "counterfactual_histories": 20,
+  "counterfactual_paired_replications": 4608,
+  "counterfactual_physical_calls": 27668,
+  "triangle_grid_physical_calls": 122880,
+  "hyperedge4_retained_calls": 3072,
+  "archived_engine_comparison_calls": 512,
+  "failed_validation_calls_in_original_run": 1280,
+  "retained_study_calls": 153620,
+  "historical_revision_calls_including_first_validation": 155412,
+  "verification_calls_this_invocation": 512,
+  "order_and_same_node_state_checks": true,
+  "triangle_engine_loss_difference": 0.0,
+  "locked_sources_and_config_unchanged": true,
+  "config_sha256": "3c21d07b231b37af3ee012f853d996c7f4875ca1c98eb12b8ebf089fc19574b9",
+  "protocol_deviations": [
+    "Validation assertion wrongly treated {0} and {1,2} as nested; corrected without altering dynamics or parameters; auxiliary intersection {1} explicitly evaluated.",
+    "One over-escaped plot label corrected through a separate rendering wrapper; no numerical change."
+  ]
+}

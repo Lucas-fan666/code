@@ -1,0 +1,13 @@
+{
+  "created_utc": "2026-10-30T16:19:38.707506+00:00",
+  "purpose": "Retain original timings; separately replay identical online losses serially, rotating method order. Not new independent samples.",
+  "method_order": "cyclic rotation by (graph+trial+budget_index)%3",
+  "source_sha256": "b382177ce31a19ecdc7c22af9e381720cf7838a88379c428ebcaef29cfd6bd5f",
+  "source_study": "physicaA_precision_locked.json",
+  "no_reference_rerun": true,
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+    "logical_cpus": 9
+  }
+}

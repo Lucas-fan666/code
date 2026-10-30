@@ -1,0 +1,18 @@
+{
+  "physical_trajectories": 4096,
+  "contexts": 4,
+  "all_conditions": 32,
+  "loss_instrumentation_checks": 256,
+  "max_loss_instrumentation_difference": 0.0,
+  "sampled_path_order_checks": true,
+  "beta2_knockout_memory_invariance": true,
+  "state_fraction_and_memory_range_checks": true,
+  "config_sha256": "e1f9d6153dbc1d34260b8a9cc2dd9df0f45089bde8895d2a2d6d80fa11645bd6",
+  "elapsed_seconds": 15.483986572000049,
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+  }
+}

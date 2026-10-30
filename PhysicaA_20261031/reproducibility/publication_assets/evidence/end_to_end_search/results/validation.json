@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "replayed_searches": 768,
+  "online_marginal_continuations": 786432,
+  "replay_fixed_batch_transcripts_exact": true,
+  "stage_streams_disjoint": true,
+  "evaluation_streams_disjoint": true,
+  "locked_source_hashes_verified": true
+}

@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-10-30T03:46:41.286450+00:00",
+  "design": {
+    "role": "descriptive; no significance tests or new confirmation claims",
+    "families": [
+      "er",
+      "ws",
+      "sparse_sbm",
+      "pa_triadic"
+    ],
+    "graphs_per_family": 2,
+    "n": 100,
+    "replications": 128,
+    "modes": [
+      [
+        "zero",
+        0.0,
+        0.0
+      ],
+      [
+        "frozen_-1",
+        -1.0,
+        0.0
+      ],
+      [
+        "frozen_+1",
+        1.0,
+        0.0
+      ],
+      [
+        "dynamic_-1_0.02",
+        -1.0,
+        0.02
+      ],
+      [
+        "dynamic_+1_0.02",
+        1.0,
+        0.02
+      ],
+      [
+        "dynamic_-1_0.2",
+        -1.0,
+        0.2
+      ],
+      [
+        "dynamic_+1_0.2",
+        1.0,
+        0.2
+      ],
+      [
+        "dynamic_-1_2.0",
+        -1.0,
+        2.0
+      ],
+      [
+        "dynamic_+1_2.0",
+        1.0,
+        2.0
+      ]
+    ],
+    "T": 0.9,
+    "u": 3.0,
+    "D": 2.0,
+    "H": 10.0,
+    "face_scale": 1.0,
+    "initial_counts": [
+      20,
+      20,
+      60
+    ],
+    "seed_root": 202610300801,
+    "actions": [
+      "none",
+      "S",
+      "T",
+      "I",
+      "J"
+    ],
+    "action_rule": "S top four initial-R degree; T replace fourth with fifth; I intersection; J union",
+    "rates": "beta1=1.15/(T*mean_degree); beta2=3/(T*mean_face_participation)",
+    "reporting": "all graphs and modes; conditional MC summaries; no family population inference",
+    "bound_ratios": "empirical population moments ddof=0 on common tapes; denominator<=1e-12 omitted and counted; no claim of population tightness"
+  },
+  "source_hash": "32ff12b3f60a457efa01b5530bde8b1da208182d67bf03bb6e885d60cb96dfe0"
+}

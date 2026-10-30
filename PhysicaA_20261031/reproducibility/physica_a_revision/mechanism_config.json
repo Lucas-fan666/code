@@ -1,0 +1,58 @@
+{
+  "created_at_utc": "2026-10-29T15:55:35.423453+00:00",
+  "design": {
+    "study": "Descriptive controlled-initial-memory response",
+    "role": "exploratory illustration, no hypothesis tests",
+    "families": [
+      "er",
+      "ws",
+      "sparse_sbm",
+      "pa_triadic"
+    ],
+    "graphs_per_family": 1,
+    "n": 100,
+    "replications": 128,
+    "graph_seed_root": 202610290701,
+    "initial_seed_root": 202610290702,
+    "tape_seed_root": 202610290703,
+    "initial_counts": {
+      "R": 20,
+      "C": 20,
+      "U": 60
+    },
+    "initial_memory_fractions": [
+      -1.0,
+      1.0
+    ],
+    "face_strength_scales": [
+      0.0,
+      1.0
+    ],
+    "controls": [
+      "none",
+      "top4_R_degree"
+    ],
+    "T": 0.9,
+    "relaxation": 0.2,
+    "u": 3.0,
+    "D": 2.0,
+    "H": 10.0,
+    "beta1_rule": "1.15/(T*mean_degree)",
+    "beta2_rule": "3*s/(T*mean_face_participation), zero if no faces",
+    "time_grid": {
+      "start": 0.0,
+      "stop": 12.0,
+      "step": 0.1
+    },
+    "fill_probability": 0.6,
+    "uncertainty": "Monte Carlo standard errors conditional on four fixed graph/initial-state contexts; not graph-population inference",
+    "reporting": "all four graphs, all eight conditions per graph; no selection by loss or visual appearance",
+    "timing_role": "not a runtime benchmark; this instrumented simulator continues after rumor extinction"
+  },
+  "source_sha256": {
+    "physica_a_revision/run_mechanism.py": "5d6d152ffa73199cca7513fc109f79760f3793f94501b90b6220721c1e1643ea",
+    "physica_a_revision/trace_engine.cpp": "cebbfe2e9582d8cbf2aa1860d07969513a22f0b487e301194f4c3e46aeeb87a5",
+    "vendor/src/graphical_engine.cpp": "c044d06d76298a3db1489f6a7e147aaa48e49ff5ede7d2928dbe9fde569522a5",
+    "src/graph_generation.py": "09d982b4f8e06beb4df0ce2cf336509c0801e23a2e4e106daad5f58a7fb442f4"
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "synthetic": [
+    {
+      "D": 1,
+      "total_gain": 0.5652680359170941,
+      "memory_gain": 0.019863191688329205,
+      "state_gain": 0.5454048442287649,
+      "fraction": 0.035139421347437506,
+      "fraction_interval": [
+        0.01870360128847398,
+        0.05068667421487651
+      ],
+      "positive_graphs": 8,
+      "zero_graphs": 0
+    },
+    {
+      "D": 2,
+      "total_gain": 0.8057039612011718,
+      "memory_gain": 0.03634332851537807,
+      "state_gain": 0.7693606326857938,
+      "fraction": 0.045107546028687946,
+      "fraction_interval": [
+        0.03106363131121137,
+        0.058442994061744614
+      ],
+      "positive_graphs": 7,
+      "zero_graphs": 1
+    },
+    {
+      "D": 4,
+      "total_gain": 1.031011533120827,
+      "memory_gain": 0.06849010402973982,
+      "state_gain": 0.9625214290910871,
+      "fraction": 0.06643000764736672,
+      "fraction_interval": [
+        0.04053696938259348,
+        0.08949648638589904
+      ],
+      "positive_graphs": 7,
+      "zero_graphs": 1
+    }
+  ],
+  "observed": [
+    {
+      "graph": 8,
+      "name": "contact-high-school",
+      "D": 1,
+      "baseline": 2.1526747210613357,
+      "retained": 2.025228925927733,
+      "hybrid": 2.0411881336258375,
+      "zero": 1.9707911608047106,
+      "total_gain": 0.12744579513360266,
+      "memory_gain": 0.01595920769810442,
+      "state_gain": 0.11148658743549822,
+      "memory_fraction": 0.12522349349677822,
+      "fraction_low": 0.0494100095199396,
+      "fraction_high": 0.22466997039420172,
+      "undefined_ratio_bootstraps": 0,
+      "memory_low": 0.005577194565193555,
+      "memory_high": 0.0298104330507063
+    },
+    {
+      "graph": 8,
+      "name": "contact-high-school",
+      "D": 2,
+      "baseline": 2.208454350193724,
+      "retained": 2.08020095766822,
+      "hybrid": 2.1048188226494227,
+      "zero": 1.9969523303646517,
+      "total_gain": 0.1282533925255046,
+      "memory_gain": 0.02461786498120285,
+      "state_gain": 0.10363552754430176,
+      "memory_fraction": 0.191947086127233,
+      "fraction_low": 0.11393971953747474,
+      "fraction_high": 0.28937087751802937,
+      "undefined_ratio_bootstraps": 0,
+      "memory_low": 0.01382012160816395,
+      "memory_high": 0.03888502600311942
+    },
+    {
+      "graph": 8,
+      "name": "contact-high-school",
+      "D": 4,
+      "baseline": 2.2517041865519807,
+      "retained": 2.014329540305607,
+      "hybrid": 2.081289685586736,
+      "zero": 1.9515699684161654,
+      "total_gain": 0.23737464624637344,
+      "memory_gain": 0.0669601452811291,
+      "state_gain": 0.17041450096524433,
+      "memory_fraction": 0.28208634047475534,
+      "fraction_low": 0.21334931266826135,
+      "fraction_high": 0.3645976410870033,
+      "undefined_ratio_bootstraps": 0,
+      "memory_low": 0.04800968992378641,
+      "memory_high": 0.0894651774377298
+    },
+    {
+      "graph": 9,
+      "name": "contact-primary-school",
+      "D": 1,
+      "baseline": 6.4745109341314295,
+      "retained": 5.783257066654368,
+      "hybrid": 5.802076707153751,
+      "zero": 5.676684325963523,
+      "total_gain": 0.691253867477061,
+      "memory_gain": 0.018819640499382482,
+      "state_gain": 0.6724342269776785,
+      "memory_fraction": 0.02722536738647181,
+      "fraction_low": 0.015192724944350703,
+      "fraction_high": 0.044432607109804706,
+      "undefined_ratio_bootstraps": 0,
+      "memory_low": 0.0112884677387611,
+      "memory_high": 0.027728122221024883
+    },
+    {
+      "graph": 9,
+      "name": "contact-primary-school",
+      "D": 2,
+      "baseline": 6.433256070980704,
+      "retained": 5.626890088435474,
+      "hybrid": 5.678761908792432,
+      "zero": 5.54588043439019,
+      "total_gain": 0.8063659825452312,
+      "memory_gain": 0.0518718203569592,
+      "state_gain": 0.7544941621882719,
+      "memory_fraction": 0.06432788768349311,
+      "fraction_low": 0.027713851919943654,
+      "fraction_high": 0.12904428310670096,
+      "undefined_ratio_bootstraps": 0,
+      "memory_low": 0.02191352037230788,
+      "memory_high": 0.10163507407185679
+    },
+    {
+      "graph": 9,
+      "name": "contact-primary-school",
+      "D": 4,
+      "baseline": 6.793260811955548,
+      "retained": 5.831793649902638,
+      "hybrid": 5.942691610096314,
+      "zero": 5.6333704529621045,
+      "total_gain": 0.961467162052909,
+      "memory_gain": 0.11089796019367569,
+      "state_gain": 0.8505692018592335,
+      "memory_fraction": 0.11534243141168563,
+      "fraction_low": 0.04751447445225643,
+      "fraction_high": 0.20374944135594528,
+      "undefined_ratio_bootstraps": 0,
+      "memory_low": 0.047013958526196685,
+      "memory_high": 0.1929028427607398
+    }
+  ],
+  "triangle": {
+    "path_rebound_range": [
+      0.0,
+      0.13997395833333334
+    ],
+    "mean_curve_rebound_range": [
+      0.0,
+      0.008463541666666685
+    ],
+    "undefined_memory_fraction_cells": 0
+  },
+  "scope": "all summaries descriptive; observed datasets separate; fractions are model-internal paired counterfactual decompositions"
+}

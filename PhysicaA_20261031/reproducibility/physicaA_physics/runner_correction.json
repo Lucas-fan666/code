@@ -1,0 +1,6 @@
+{
+  "reason": "Only the invalid final nested-set test is replaced by the corrected validation entry point. The complete counterfactual and triangle simulation prefix is byte-identical to the locked source.",
+  "locked_source_sha256": "f22d36651db2a8be3c1650513256db0ab5df52b3b8e7dafbac04990647100131",
+  "corrected_runner_sha256": "4eae20cec0548b4281b506435f53d773c3cff04f80f2e2f2c3a27d6cdc70e7c7",
+  "model_and_grid_changes": false
+}

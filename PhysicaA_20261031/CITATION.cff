@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying article and the reproducibility archive."
+title: "Group memory and post-intervention response in higher-order spreading"
+authors:
+  - family-names: Fan
+    given-names: Junkai
+    affiliation: "School of Business Administration, Northeastern University, China"
+    email: fanjk@mails.neu.edu.cn
+version: "physicaA-20261031"
+date-released: 2026-10-31
+doi: 10.5281/zenodo.23811459
+repository-code: "https://github.com/Lucas-fan666/code/tree/physicaA-submission-20261031"

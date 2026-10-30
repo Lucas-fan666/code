@@ -1,0 +1,13 @@
+claim,evidence,role,scope
+exact_augmented_order,manuscript/main.tex:thm:coupling,theorem,finite bounded controls and stated pressure/flow monotonicity
+nonnested_variance_envelope,manuscript/main.tex:thm:exchange_envelope,theorem,same graphical tape with intersection and union
+joint_law_and_transcript_invariance,manuscript/main.tex:thm:batch,theorem,nonexplosive valid predictable envelopes and fresh round tapes
+relative_precision_scaling,manuscript/main.tex:thm:variance,theorem,ordered contrast with positive unknown mean and independent tapes
+strict_complementarity_zero_ratio,manuscript/main.tex:prop:counter,theorem,complete legal three-node process not global inapproximability
+complete_search_speedup_4.109,end_to_end_search/results/summary.json,locked_primary,64 graphs three histories 95 percent stratified interval
+persistent_replay_speedup_3.790,publication_revision/optimized_replay/results/summary.json,locked_primary,32 new graphs three histories 97.5 percent adjusted interval
+no_confirmed_extra_local_benefit,publication_revision/optimized_replay/results/summary.json,locked_secondary,1.001328 interval includes one
+conditional_face_exchange_gain,legacy/04_Software_Evidence_Lite/retained_results/WP2/summary.json,locked_primary,independent calibration five eligible cells 60 graphs
+legacy_RTC_and_robustness,scripts/recompute_review_metrics.py,descriptive_recomputation,retained derived CSVs not new propagation
+pilot_routing_gain,adaptive_screening/results/summary.json,locked_primary,eight-action cohort common cap and per-query certificates
+larger_screening_failures,portfolio_validation/results/summary.json,locked_comparisons,both plain comparisons include one and EB outputs unresolved

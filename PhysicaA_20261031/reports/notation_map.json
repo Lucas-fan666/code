@@ -1,0 +1,11 @@
+{
+  "face": "sigma",
+  "memory_scale": "T_0",
+  "target_set": "T_set",
+  "expected_contrast": "Delta_SW",
+  "background_set": "B_g",
+  "auxiliary_width": "B_env",
+  "horizon": "K_hor",
+  "stopping_time": "tau_hit",
+  "switch_event": "E_sw"
+}

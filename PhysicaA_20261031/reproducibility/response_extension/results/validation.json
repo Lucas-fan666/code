@@ -1,0 +1,9 @@
+{
+  "physical_trajectories": 46080,
+  "graphs": 8,
+  "conditions": 360,
+  "bound_comparisons": 72,
+  "path_checks_passed": true,
+  "elapsed_seconds": 138.59405279159546,
+  "design_sha256": "1619a1ad32eac32fa7d5e58fe5785802d10ce210c6de30f4794e42130cc50c8e"
+}

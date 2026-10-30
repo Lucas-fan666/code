@@ -1,0 +1,7 @@
+{
+  "order_reset_checks": 41958,
+  "joint_channel_generator_checks": 59049,
+  "max_generator_discrepancy": 0,
+  "scope": "exhaustive node states on one triangle; finite memory/rate/time grids, not a proof of all parameters",
+  "external_independent_review": false
+}

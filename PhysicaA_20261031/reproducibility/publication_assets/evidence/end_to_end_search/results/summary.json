@@ -1,0 +1,129 @@
+{
+  "study": "Complete adaptive greedy-plus-FEX search at preserved graphical joint law",
+  "lock_sha256": "f43f6209b86bacf1c527f3909cb167ddcc05cbde9f96c7bbe746067e3bb3109c",
+  "graphs": 64,
+  "histories_per_graph": 3,
+  "searches": 768,
+  "online_marginal_continuations": 786432,
+  "independent_evaluation_continuations": 134144,
+  "comparisons": [
+    {
+      "numerator": "graphical",
+      "denominator": "adaptive_local",
+      "ratio": 4.108864217388078,
+      "interval": [
+        3.839799612573177,
+        4.383848814873146
+      ],
+      "confidence": 0.95,
+      "graph_signs": {
+        "positive": 62,
+        "negative": 2,
+        "zero": 0
+      },
+      "role": "primary",
+      "gate_passed": true,
+      "interpretation": "same graphical joint law"
+    },
+    {
+      "numerator": "fixed_batch",
+      "denominator": "adaptive_local",
+      "ratio": 1.0507526747111258,
+      "interval": [
+        0.9683442850842705,
+        1.1353764374587927
+      ],
+      "confidence": 0.975,
+      "graph_signs": {
+        "positive": 33,
+        "negative": 31,
+        "zero": 0
+      },
+      "role": "secondary",
+      "gate_passed": false,
+      "interpretation": "same graphical joint law"
+    },
+    {
+      "numerator": "local_rtc",
+      "denominator": "adaptive_local",
+      "ratio": 2.996523390795043,
+      "interval": [
+        2.778393400621116,
+        3.2227446379272835
+      ],
+      "confidence": 0.975,
+      "graph_signs": {
+        "positive": 62,
+        "negative": 2,
+        "zero": 0
+      },
+      "role": "secondary",
+      "gate_passed": null,
+      "interpretation": "equal marginal budget only; RTC uses a different joint law, no matched-quality speedup claim"
+    }
+  ],
+  "families": [
+    {
+      "family": "er",
+      "graphs": 16,
+      "replay_local_ratio": 5.856031931317086,
+      "positive": 16,
+      "negative": 0
+    },
+    {
+      "family": "ws",
+      "graphs": 16,
+      "replay_local_ratio": 4.4658196281660105,
+      "positive": 16,
+      "negative": 0
+    },
+    {
+      "family": "sparse_sbm",
+      "graphs": 16,
+      "replay_local_ratio": 5.413903923892284,
+      "positive": 16,
+      "negative": 0
+    },
+    {
+      "family": "pa_triadic",
+      "graphs": 16,
+      "replay_local_ratio": 2.0131308305058275,
+      "positive": 14,
+      "negative": 2
+    }
+  ],
+  "costs": {
+    "graphical": {
+      "total_wall_seconds": 919.6823908259958,
+      "mean_wall_seconds": 4.790012452218728,
+      "mean_cpu_seconds": 4.7896624439322935,
+      "oracle_wall_fraction": 0.9981477823377104
+    },
+    "fixed_batch": {
+      "total_wall_seconds": 229.30253766799433,
+      "mean_wall_seconds": 1.1942840503541372,
+      "mean_cpu_seconds": 1.194209906432287,
+      "oracle_wall_fraction": 0.9923737410071342
+    },
+    "adaptive_local": {
+      "total_wall_seconds": 191.96989335399758,
+      "mean_wall_seconds": 0.9998431945520707,
+      "mean_cpu_seconds": 0.999787047072927,
+      "oracle_wall_fraction": 0.9910236732391068
+    },
+    "local_rtc": {
+      "total_wall_seconds": 624.942026985017,
+      "mean_wall_seconds": 3.2549063905469637,
+      "mean_cpu_seconds": 3.2546974337291705,
+      "oracle_wall_fraction": 0.9972229442603256
+    }
+  },
+  "independent_final_loss_means": {
+    "graphical": 1.6273131373708163,
+    "fixed_batch": 1.6273131373708163,
+    "adaptive_local": 1.6142385695899417,
+    "local_rtc": 1.627108433860953
+  },
+  "replay_compatible_searches_exact": true,
+  "quality_scope": "Graphical implementations have equal adaptive output distributions under the proved fresh-tape assumptions. No hypothesis-test non-rejection is used as equivalence evidence. Finite independent losses are descriptive; RTC quality equivalence is not established."
+}

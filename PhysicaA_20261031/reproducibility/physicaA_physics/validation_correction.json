@@ -1,0 +1,11 @@
+{
+  "reason": "Original validation incorrectly compared {0} and {1,2} as nested; they are not. Nesting checks now use actual set inclusion. Added auxiliary intersection {1} required by the prespecified envelope check.",
+  "model_changes": false,
+  "failed_validation_calls": 1280,
+  "additional_corrected_hyperedge_calls": 3072,
+  "raw_failed_validation_arrays_saved": false,
+  "failed_validation_log": "reports/physics_run.log",
+  "all_corrected_checks_passed": true,
+  "raw_failed_validation_arrays_reconstructed": true,
+  "reconstructed_file": "results/failed_validation_reconstructed.npz"
+}
