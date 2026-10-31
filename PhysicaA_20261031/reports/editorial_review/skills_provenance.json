@@ -1,0 +1,39 @@
++{
+  "date": "2026-10-31",
+  "mode": "Author-requested pre-submission editing, not journal-assigned peer review.",
+  "skills": [
+    {
+      "name": "antidefensivewriting",
+      "source_url": "https://github.com/jtanch05/antidefensivewriting/blob/aeaf22fe1ffc029a4405885c309a1ee14dedc321/SKILL.md",
+      "blob_sha": "e452d021a6430e6a66c4f2e582368f09e202b441"
+    },
+    {
+      "name": "scientific-visualization",
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/skills/scientific-visualization/SKILL.md",
+      "blob_sha": "44ea38c24fb5015535254bfd9b5ae9a856195408"
+    },
+    {
+      "name": "peer-review",
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/skills/peer-review/SKILL.md",
+      "blob_sha": "d4f3c3e3b5c19fec2518d569ded7e37ac96a964b"
+    }
+  ],
+  "implementation": "Guidance applied to this revision; no permanent personal-skill installation is claimed.",
+  "scientific_skills_credit": {
+    "authors": [
+      "Timothy Kassis",
+      "Vinayak Agarwal",
+      "Yuhuan He",
+      "Darshil Patel",
+      "Aubrey M. Brueckner"
+    ],
+    "title": "Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents",
+    "year": 2026,
+    "doi": "10.48550/arXiv.2609.00065",
+    "location": "README software credits; scientific bibliography unchanged.",
+    "verified_source": "https://arxiv.org/abs/2609.00065"
+  },
+  "venue_scope_url": "https://shop.elsevier.com/journals/physica-a-statistical-mechanics-and-its-applications/0378-4371",
+  "journal_guide_check": "Official journal-specific Guide for Authors returned HTTP 403.",
+  "privacy": "No manuscript or simulation content was uploaded to the skill repositories or to a separate editing/image-generation service."
+}

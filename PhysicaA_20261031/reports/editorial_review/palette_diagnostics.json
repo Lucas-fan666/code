@@ -1,0 +1,40 @@
+{
+  "categorical": {
+    "ink": {
+      "hex": "#24324B",
+      "contrast_on_white": 12.860913789295589
+    },
+    "blue": {
+      "hex": "#4059A9",
+      "contrast_on_white": 6.522015204055176
+    },
+    "teal": {
+      "hex": "#087E83",
+      "contrast_on_white": 4.858406052086963
+    },
+    "rumor": {
+      "hex": "#B34567",
+      "contrast_on_white": 5.297887034917432
+    },
+    "gold": {
+      "hex": "#AD7E26",
+      "contrast_on_white": 3.6274584670133243
+    },
+    "purple": {
+      "hex": "#7868A8",
+      "contrast_on_white": 4.834064516652225
+    },
+    "gray": {
+      "hex": "#7D8796",
+      "contrast_on_white": 3.6344846270721067
+    },
+    "thinning": {
+      "hex": "#B26744",
+      "contrast_on_white": 4.271274181915898
+    }
+  },
+  "sequential_lightness_monotone": true,
+  "diverging_branches_lightness_monotone": true,
+  "normalization": "Unchanged linear scales; zero center for signed contrasts.",
+  "note": "Lightness and contrast screening is not a complete color-vision/accessibility assessment. Markers and line styles provide redundant encoding."
+}

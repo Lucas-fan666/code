@@ -1,0 +1,10 @@
+{
+  "location": "Main Section 6.1",
+  "quantity": "Percent reduction in context-averaged finite-reference MSE",
+  "value": 80.91855364434292,
+  "formula": "100 * (1 - graphical.reference_based_mse / thinning.reference_based_mse)",
+  "source": "reproducibility/physicaA_precision/results/publication_summary.json",
+  "budget_paired_samples": 128,
+  "graph_history_contexts": 4,
+  "new_test": false
+}

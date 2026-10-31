@@ -7,7 +7,8 @@ def run(path,*flags):subprocess.run([sys.executable,str(path),*flags],check=True
 run(P/'physicaA_physics/reproduce.py',*(['--simulate'] if args.simulate else []))
 if args.simulate:
  run(P/'physicaA_precision/run.py');run(P/'physicaA_precision/retime.py')
-run(P/'physicaA_precision/analyze.py');run(P/'physicaA_precision/publication.py');run(P/'physicaA_physics/plot_publication.py')
+run(P/'physicaA_precision/analyze.py');run(P/'physicaA_precision/publication.py')
+run(R/'visualization/render_all.py')
 if not args.skip_pdf:
  if not (R/'manuscript/main.tex').exists():raise SystemExit('Analyses completed. Extract PhysicaA_LaTeX_Source.zip into manuscript before the PDF build.')
  run(R/'manuscript/build.py')

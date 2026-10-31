@@ -44,7 +44,7 @@ This supplement gives auxiliary proofs, implementation details and complete nume
 \FloatBarrier\section{Relation to the main article}
 The main article contains complete proofs of augmented-state ordered coupling, nested and nonnested variance bounds, joint-law preservation, and the complete-process counterexample. The sections below develop finite-portfolio selection, frozen-score analysis and switching guarantees, then report the experimental designs, complete comparisons and computational records. Each comparison uses the multiplicity adjustment specified for its own family.
 
-The score checks use the submodularity-ratio definition~\cite{das2018}; certificate checks evaluate empirical-Bernstein bounds~\cite{maurer2009} and distinguish fixed-time from time-uniform validity~\cite{howard2021}. Synthetic intervals resample independent graphs and retain their histories and cells. Observed-group intervals condition on one fixed topology per source. Multiplicity adjustment is local to each prespecified comparison family. The locally frozen configurations are versioned artifacts, rather than public preregistrations or independently certified timestamps.
+The score checks use the submodularity-ratio definition~\cite{das2018}; certificate checks evaluate empirical-Bernstein bounds~\cite{maurer2009} and distinguish fixed-time from time-uniform validity~\cite{howard2021}. Synthetic intervals resample independent graphs, keeping each graph's histories and cells together. Observed-group intervals condition on one fixed topology per source. Multiplicity adjustment is local to each prespecified comparison family. The designs were fixed in advance in versioned configuration files; they were not registered with a public preregistration service.
 
 \FloatBarrier\section{Extended theory for certified finite-portfolio selection}\label{sec:extended_selection}
 \subsection{Endpoint screening for a finite action portfolio}
@@ -775,22 +775,22 @@ Observed groups & Four fixed 200-node graphs & 12 histories each; 4,096 online; 
 \FloatBarrier\section{Complete fixed-contrast variance summaries}
 The initial fixed-action benchmark gives a median thinning-to-graphical difference-variance ratio of $33.50$, with a descriptive 95\% interval $[21.58,74.10]$, across twelve contexts for the nested no-target versus two-target comparison. The recorded-time-adjusted ratio is $53.28$ $[27.30,131.44]$. For the nonnested two-target versus four-target contrast, the variance ratio is $6.79$ $[2.77,15.23]$. These measurements concern estimating specified contrasts; the latter actions also have different cardinalities.
 
-The later decision-cost cohort explicitly uses equal-size nonnested actions. Its finite-positive median variance ratio against thinning is $4.00$ for those comparisons and $7.66$ for its nested control; complete zero-variance categories and ratios of mean variances are retained with the analysis outputs. These separate cohorts show why the nested range theorem and a measured nonnested variance reduction should be stated separately.
+The later decision-cost cohort explicitly uses equal-size nonnested actions. Its finite-positive median variance ratio against thinning is $4.00$ for those comparisons and $7.66$ for its nested control; complete zero-variance categories and ratios of mean variances are retained with the analysis outputs. Fixed-contrast variance and decision-cost results concern different cohorts and comparisons.
 
 % BEGIN REVIEW_RTC_VARIANCE
-In the same initial twelve-context nested-pair benchmark, the median thinning-to-RTC difference-variance ratio is $15.49$, compared with $33.50$ for thinning-to-graphical. In the later decision-cost cohort, the median RTC-to-graphical difference-variance ratios are $1.37965$ for nested controls and $1.13251$ for equal-size nonnested actions, over 178 and 1,042 finite-positive comparisons, respectively. The respective complete counts are 192 and 1,152: ten and 37 comparisons have zero variance under both methods, and four and 73 have zero graphical variance with positive RTC variance; none has the opposite zero-variance pattern. Ratios of mean RTC to graphical variances are $1.28529$ and $1.03350$. These descriptive summaries show that the variance advantage over common reaction paths is much smaller than the advantage over global thinning and is not universal. The distinctive proved property is the augmented path order and its resulting variance bounds; it is not a guarantee of smaller variance than RTC. Ratios from different cohorts or contrasts must not be divided to infer a paired variance ratio.
+In the same initial twelve-context nested-pair benchmark, the median thinning-to-RTC difference-variance ratio is $15.49$, compared with $33.50$ for thinning-to-graphical. In the later decision-cost cohort, the median RTC-to-graphical difference-variance ratios are $1.37965$ for nested controls and $1.13251$ for equal-size nonnested actions, over 178 and 1,042 finite-positive comparisons, respectively. The respective complete counts are 192 and 1,152: ten and 37 comparisons have zero variance under both methods, and four and 73 have zero graphical variance with positive RTC variance; none has the opposite zero-variance pattern. Ratios of mean RTC to graphical variances are $1.28529$ and $1.03350$. These descriptive summaries show that the variance advantage over common reaction paths is much smaller than the advantage over global thinning and is not universal. The theorem guarantees the augmented path order and its resulting bounds; variance relative to RTC remains an empirical property. Ratios from different cohorts or contrasts must not be divided to infer a paired variance ratio.
 % END REVIEW_RTC_VARIANCE
 
 \FloatBarrier\section{Complete conditional-search and mechanism evidence}
 \subsection{Calibration and independent confirmation}\label{sec:conditional_details}
-An independent calibration cohort contains sixteen graphs, four per family. It evaluates the full grid $k\in\{4,8\}$, $D\in\{2,4\}$, $s\in\{0.5,1.5\}$ at $u=3$. A cell is eligible when mean rumor-degree intervention reduces the mean no-control loss by 30--70\%, with no-control loss at least $0.05$. This operational moderate-suppression definition selects five cells before confirmatory evaluation. All eight cells are evaluated and retained.
+An independent calibration cohort contains sixteen graphs, four per family. It evaluates the full grid $k\in\{4,8\}$, $D\in\{2,4\}$, $s\in\{0.5,1.5\}$ at $u=3$. A cell is eligible when mean rumor-degree intervention reduces the mean no-control loss by 30--70\%, with no-control loss at least $0.05$. This operational moderate-suppression definition selects five cells before confirmatory evaluation. All eight cells are evaluated.
 
 Sixty new graphs, fifteen per family, supply three histories per cell. Each exchange policy receives 512 anchor, 256 discovery, and 256 holdout calls; node greedy receives 1,024 calls. The designated primary endpoint is the per-graph mean NEX-minus-FEX loss over the five eligible cells. The secondary endpoint is greedy-minus-FEX over the same cells. Forty thousand family-stratified bootstrap repetitions give two-comparison Bonferroni 97.5\% intervals. The primary criterion additionally requires positive mean differences in all four families.
 
 The primary reduction is $0.01637$ $[0.01022,0.02306]$, with 45 positive and fifteen negative graph means. All four family means are positive, satisfying the fixed criterion. NEX and FEX mean losses are $1.21049$ and $1.19412$, a descriptive relative reduction of 1.35\%. The corrected secondary gain over greedy is $0.03811$ $[0.02792,0.04921]$, with 49 positive and eleven negative graphs. Figure~\ref{fig:confirmation} gives the family breakdown: sparse SBM has a descriptive interval containing zero, and preferential attachment with closure contributes approximately 61.5\% of the pooled primary mean.
 
 % BEGIN REVIEW_ROBUSTNESS
-\paragraph{Post-hoc descriptive robustness} We recomputed each graph's mean NEX-minus-FEX loss across the five independently calibrated eligible cells from the retained graph-level policy-loss file. Table~\ref{tab:robustness} reports descriptive summaries; these analyses were not prespecified and are not part of a prespecified comparison family. The 10\% trimmed mean removes the six lowest and six highest graph gains. Excluding the PA-with-closure family leaves 45 graphs. The largest-five share is their summed gain divided by the signed net gain across all 60 graphs. The positive median and trimmed mean indicate that the observed mean is not generated solely by a few extreme gains, while the family exclusion and concentration measure quantify material heterogeneity; none is a new confirmatory test.
+\paragraph{Post-hoc descriptive robustness} We recomputed each graph's mean NEX-minus-FEX loss across the five independently calibrated eligible cells from the archived graph-level policy-loss file. Table~\ref{tab:robustness} reports descriptive summaries; these analyses were not prespecified and are not part of a prespecified comparison family. The 10\% trimmed mean removes the six lowest and six highest graph gains. Excluding the PA-with-closure family leaves 45 graphs. The largest-five share is their summed gain divided by the signed net gain across all 60 graphs. The positive median and trimmed mean accompany substantial family heterogeneity; the largest-five share quantifies the concentration of the net gain. These summaries remain descriptive.
 
 \begin{table}[!htbp]
 \centering\small
@@ -811,7 +811,7 @@ Largest-five share of net gain & 42.38\%\\
 
 Table~\ref{tab:grid} reports every cell, including the three outside the calibrated range. The cell intervals belong to a separate 24-comparison family. The aggregate criterion confirms the defined average; it does not assert a positive effect in every cell or a statistical interaction between eligible and ineligible cells. Face-pair replacements occur in 17.2--30.6\% of deployed cell contexts.
 
-Figure~\ref{fig:confirmation}(a,b) in the main article displays the corresponding family-level means across the complete grid on a shared linear color scale. The stronger PA-with-closure responses coexist with smaller or mixed responses elsewhere. Table~\ref{tab:grid} retains every cellwise adjusted interval.
+Supplementary Fig.~\ref{fig:confirmation}(a,b) displays the corresponding family-level means across the complete grid on a shared linear color scale. The stronger PA-with-closure responses coexist with smaller or mixed responses elsewhere. Table~\ref{tab:grid} reports every cellwise adjusted interval.
 
 \begin{table}[!htbp]
 \centering\small
@@ -836,7 +836,7 @@ Cell & $k$ & $D$ & $s$ & Eligible & Gain & Interval\\
 \subsection{Initial search and mechanism evidence}
 The initial 30-graph designated FEX--NEX comparison has gain $0.02133$, 95\% interval $[-0.00185,0.04099]$, with 20 positive, nine negative, and one tied graph. Its outcome is inconclusive. The secondary FEX--greedy gain is $0.04717$ with six-comparison adjusted interval $[0.01596,0.08074]$. These remain separate results; the later conditional experiment does not replace the initial endpoint.
 
-Matched pair controls give a face-minus-control complementarity difference of $0.01495$, reduced to $0.00026$ when $\beta_2=0$, for a difference-in-differences of $0.01469$. Eighteen of thirty graph-average face complementarities are positive and the pair-level median is zero. The full distribution and unrestricted-pair, proposal-memory-off, and face-block controls are retained in the supplement. They characterize heterogeneous interactions rather than identify face restriction or memory as the unique cause of search improvement.
+Matched pair controls give a face-minus-control complementarity difference of $0.01495$, reduced to $0.00026$ when $\beta_2=0$, for a difference-in-differences of $0.01469$. Eighteen of thirty graph-average face complementarities are positive and the pair-level median is zero. The full distribution and the unrestricted-pair, proposal-memory-off and face-block controls are reported below. They characterize heterogeneous interactions rather than identify face restriction or memory as the unique cause of search improvement.
 
 \FloatBarrier\section{Independent-pilot routing and larger portfolios}
 \label{sec:adaptive_study}
@@ -852,7 +852,7 @@ a skipped screen leaves the full $\alpha$ for the race.
 The comparator is the frozen witness-plain implementation, not a weaker
 all-pairs race. Both methods receive the identical exact presolve for an
 initially rumor-free context, where all intervention losses are zero.
-All such contexts remain in the analysis and the measured presolve cost is
+These contexts remain in the analysis and the measured presolve cost is
 included. Timings are sequential, method order is randomized, and every
 method executes and pays for its own simulation. Race seed streams are
 aligned to reduce comparison noise; the pilot and confirmation phases use
@@ -909,7 +909,7 @@ Two further prespecified stress configurations use 32 new graphs each: $n=300,M=
 \FloatBarrier\section{Deterministic validation}
 Six small graphs at two cardinalities verified the quadratic score expansion, coefficient ratio bound, greedy recurrence, and score-complementarity localization by enumeration, with maximum expansion discrepancy $1.11\times10^{-16}$. Four 27-state triangle chains at $\lambda=0$ were evaluated through intervention and post-intervention occupation by matrix exponentials and independent uniformization, agreeing to $3.61\times10^{-16}$. At $\beta_1=0$, no-action and singleton losses are $0.1060307909$, versus $0.0415425304$ for the pair. The positive-memory-relaxation result is established by the path proof in the main article; these finite chains are a check of the frozen-memory cases.
 
-Sixty-six fixed-time, dependent-candidate, and sequential finite-support probability cases were checked using binomial sums or absorbing recursions. Retrospective application of empirical-Bernstein and Hoeffding certificates to the 128 archived exchange queries authorizes zero switches under either rule. This is a power diagnostic at the existing budgets, not a new deployment experiment.
+Sixty-six fixed-time, dependent-candidate, and sequential finite-support probability cases were checked using binomial sums or absorbing recursions. Retrospective application of empirical-Bernstein and Hoeffding certificates to the 128 archived exchange queries authorizes zero switches under either rule. These zero-switch findings describe certificate power at the archived budgets.
 
 \FloatBarrier\section{Implementation, initialization and runtime interpretation}
 The graphical construction uses three destination-reset proposal clocks per node, deterministic between-event memory evolution and shared uniform acceptance marks. Reset to the current state is inert. The operational-time comparator uses six directed state-transition channels per node and integrated hazards. Its incremental implementation caches local rates and uses a $6n$ indexed heap. Both are valid coupling constructions; only the graphical scheme implements the stated augmented order.
@@ -1123,13 +1123,13 @@ The decision-cost cohort includes recovered observations recomputed with the ori
 \FloatBarrier\section{Complete prespecified comparison forests}
 \begin{figure}[!htbp]
 \centering\includegraphics[width=.94\textwidth]{grid.pdf}
-\caption{All calibration-grid cells. Filled marks indicate independently eligible cells. Each interval adjusts the separate twenty-four-comparison descriptive cell family; it does not replace the aggregate primary gate.}
+\caption{All calibration-grid cells. Filled marks indicate independently eligible cells. Each interval adjusts the separate twenty-four-comparison descriptive cell family; it does not replace the aggregate primary gate.}\label{fig:grid_all}
 \end{figure}
 \begin{figure}[!htbp]
 \centering\includegraphics[width=.96\textwidth]{baselines.pdf}
-\caption{All seventeen same-pool FEX contrasts, including all seven simulation controls and ten zero-path adaptations. Positive values favor FEX. Intervals use the prespecified seventeen-comparison adjustment. Full-budget greedy and successive halving remain inconclusive. Open markers denote intervals containing zero.}
+\caption{All seventeen same-pool FEX contrasts, including all seven simulation controls and ten zero-path adaptations. Positive values favor FEX. Intervals use the prespecified seventeen-comparison adjustment. Full-budget greedy and successive halving remain inconclusive. Open markers denote intervals containing zero.}\label{fig:baseline_comparisons}
 \end{figure}
-\FloatBarrier\section{New locked portfolio-runtime cohort}
+\FloatBarrier\section{Portfolio runtime on an independent cohort}
 The local computational configuration is \texttt{protocol/runtime\_locked.json}; its SHA-256 is
 \begin{quote}\footnotesize\texttt{f2e22b384963fa5d456bdcda73a372e8}\allowbreak\texttt{9ea6df07a45f96b30ab9d6baad408372}\end{quote}
 The configuration is a local prospective lock, not a publicly registered or independently timestamped preregistration. All 32 graphs and all 96 natural histories are retained. There are 2880 timed calls and 115200 charged marginal continuations, including all methods and timing blocks. Timings use the reported environment, and compilation is excluded. Every copy is charged separately. Wall times and exact raw losses are in the accompanying archive.
@@ -1264,7 +1264,7 @@ A separately locked descriptive extension evaluates 16 fresh graphs: two per fam
 
 \subsection{Order-informed portfolio selection}
 \label{sec:envelope_experiment}
-The endpoint method in Algorithm~\ref{alg:envelope_first} is evaluated on a separate locked cohort of 32 new 100-node graphs, eight per synthetic family, with three unconditioned natural histories each. Every context freezes eight distinct size-four actions: the rumor-degree anchor and seven one-swap alternatives sharing three targets. The tolerance is $\varepsilon=0.1$ cumulative-loss units (1\% of $H=10$), and the error allocation is $\alpha=0.05$. This tolerance concerns expected regret within the frozen portfolio; it is distinct from the earlier 0.02 threshold relative to a finite-sample reference.
+The endpoint method in Algorithm~\ref{alg:envelope_first} is evaluated on a separate prespecified cohort of 32 new 100-node graphs, eight per synthetic family, with three unconditioned natural histories each. Every context freezes eight distinct size-four actions: the rumor-degree anchor and seven one-swap alternatives sharing three targets. The tolerance is $\varepsilon=0.1$ cumulative-loss units (1\% of $H=10$), and the error allocation is $\alpha=0.05$. This tolerance concerns expected regret within the frozen portfolio; it is distinct from the earlier 0.02 threshold relative to a finite-sample reference.
 
 Each method has at most 16,384 online marginal continuations. The endpoint method allocates at most 1,024 tapes to the two auxiliary actions before a paired fallback. Comparators are the same graphical paired race with screening removed, a uniform graphical sampler with the same tolerance tests and no eliminations, and the paired race using incremental RTC. Plain comparators receive their full $\alpha$ allocation, whereas the endpoint method splits it between screening and fallback. The $\alpha$ bound is per selection query; it is not a simultaneous 95\% correctness statement for all 96 outputs. Method order is randomized, and calls run sequentially. Online timing starts after candidate canonicalization and entry checks; it includes per-call validation, betting-test updates, trace collection and simulation; compilation, topology generation, prehistory and file compression are excluded. Every auxiliary copy is charged. The source and configuration hashes were frozen before comparative outcomes on these seeds.
 
@@ -1292,7 +1292,7 @@ Paired incremental RTC & 96/96 & 0 & 6490.7 & 9.292 \\
 \end{table}
 \begin{figure}[!htbp]
 \centering\includegraphics[width=.96\textwidth]{envelope_selection}
-\caption{Order-informed selection on the fresh locked cohort. (a) Comparator/envelope-first wall-time ratios; pooled planned contrasts use adjusted 97.5\% intervals, and family intervals are descriptive 95\% intervals. Values above one favor envelope-first selection. (b) Every context's total charged online copies; auxiliary endpoints count in full. Costs include unresolved runs; neither planned comparison meets the matched-certified-quality gate. These are fixed-portfolio tolerance certificates, not guarantees of globally optimal intervention.}
+\caption{Order-informed selection on the fresh prespecified cohort. (a) Comparator/envelope-first wall-time ratios; pooled planned contrasts use adjusted 97.5\% intervals, and family intervals are descriptive 95\% intervals. Values above one favor envelope-first selection. (b) Every context's total charged online copies; auxiliary endpoints count in full. Costs include unresolved runs; neither planned comparison meets the matched-certified-quality gate. These are fixed-portfolio tolerance certificates, not guarantees of globally optimal intervention.}
 \label{fig:envelope_selection}
 \end{figure}
 
@@ -1432,7 +1432,7 @@ The primary original/refined screened geometric wall-time ratio is 1.239 [1.160,
 Each of two settings contains 32 new independent graphs, eight per family, and one unconditioned history per graph. All methods use $\varepsilon=0.1$, per-query $\alpha=0.05$ and a 32,768-copy cap. The shared-core setting has $n=300,M=16$; the diverse setting has $n=100,M=32$. The settings jointly vary size, candidate count and overlap and therefore do not identify separate causal effects of these factors. The four comparisons use graph-family-stratified bootstrap and adjusted central $98.75\%$ intervals. Unresolved outputs retain their incurred capped cost.
 \begin{table}[ht]
 \centering\small
-\caption{All locked larger-portfolio cost comparisons. Certification counts are numerator/denominator method counts; no cost comparison passes the joint criterion.}
+\caption{All prespecified larger-portfolio cost comparisons. Certification counts are numerator/denominator method counts; no cost comparison passes the joint criterion.}
 \begin{tabular}{llrrl}
 \toprule Setting & Comparator/routed & Ratio & Interval & Certified\\\midrule
 $n=300,M=16$ & Plain & 1.1305 & [0.9829,1.3218] & 32/32;32/32\\
@@ -1486,7 +1486,7 @@ checks are not empirical coverage experiments or confirmation data.
 \FloatBarrier\FloatBarrier\section{Complete-search graph-level displays}
 \begin{figure}[!htbp]
 \centering\includegraphics[width=.96\textwidth]{complete_search_comparison}
-\caption{Complete adaptive search. (a) The primary replay/local ratio with its $95\%$ interval and two secondary ratios with adjusted $97.5\%$ intervals. The open RTC marker denotes equal budget, rather than matched selection quality. (b) All graph-level replay/local ratios; blue and coral indicate sizes $100$ and $300$, and horizontal bars show descriptive group geometric means.}
+\caption{Complete adaptive search. (a) The primary replay/local ratio with its $95\%$ interval and two secondary ratios with adjusted $97.5\%$ intervals. The open RTC marker denotes equal budget, rather than matched selection quality. (b) All graph-level replay/local ratios; blue and teal indicate sizes $100$ and $300$, and horizontal bars show descriptive group geometric means.}
 \label{fig:complete_search}
 \end{figure}
 
@@ -1497,7 +1497,7 @@ checks are not empirical coverage experiments or confirmation data.
 \end{figure}
 
 \FloatBarrier\section{Search specification and additional evaluation details}
-This section consolidates material from the longer main article. The study populations, locked endpoints, comparison families, outcome directions and uncertainty statements are unchanged.
+This section specifies the study populations, prespecified endpoints, comparison families and uncertainty methods for the computational applications.
 
 \subsection{Complete history and parameter specification}\label{sec:design_details}
 The evaluation distinguishes mathematical verification, fixed-contrast estimation, matched-quality decision cost, intervention search, and structural transfer. Table~\ref{tab:jcs_cohorts} summarizes the cohorts. Synthetic networks cover Erd\H{o}s--R\'enyi-type graphs~\cite{gilbert1959}, Watts--Strogatz small-world graphs~\cite{watts1998}, sparse stochastic blockmodels (SBM)~\cite{holland1983}, and preferential attachment with triangle closure~\cite{barabasi1999}. Node labels are independently permuted. Existing three-cliques are filled independently with probability $0.6$; these are explicitly synthetic groups.
@@ -1519,7 +1519,7 @@ The score freezes memory and treats targeted donors as corrected. Actual simulat
 
 Discovery evaluates the shortlist, freezes its two lowest-mean candidates, and adds the anchor. Independent holdout tapes select the lowest-mean finalist. This empirical finalist rule is the deployed policy in the reported experiments. The optional certified rule in Section~\ref{sec:certificate} is a distinct decision rule.
 
-The deployable workflow is Algorithm~\ref{alg:search} in the main article.
+Algorithm~\ref{alg:search} specifies the deployable workflow.
 
 All physical continuation calls, including the greedy anchor and integer remainders, are charged. Shared anchor work counts once in the experiment's physical total and in full in each independently deployable policy budget. Ranking considers $O(k|\mathcal C|)$ single exchanges and $O(\binom{k}{2}|P_{\mathcal C}|)$ pair exchanges, where $P_{\mathcal C}$ is the incoming-pair set. A naive score evaluation costs $O(n+|E|+|\Fset|)$. Restricting the pair set reduces this ranking workload, while its effect on final loss remains an empirical question.
 
@@ -1577,7 +1577,7 @@ The endpoint and fallback rules control risk within a finite portfolio; a capped
 
 
 \subsection{Additional fixed-quality loss estimates}\label{sec:quality_estimates}
-At the maximum online budget, graphical mean excess loss is $0.00496$, with descriptive $95\%$ interval $[0.00322,0.00678]$. The zero-simulation rumor-degree comparator has excess loss $0.13553$ $[0.11687,0.15523]$, above the quality target. The curves and the comparator mean are displayed in the main article's cost-quality figure.
+At the maximum online budget, graphical mean excess loss is $0.00496$, with descriptive $95\%$ interval $[0.00322,0.00678]$. The zero-simulation rumor-degree comparator has excess loss $0.13553$ $[0.11687,0.15523]$, above the quality target. Supplementary Fig.~\ref{fig:cost} shows the curves and the comparator mean.
 
 \FloatBarrier\section{Controlled-initial-memory response experiment}\label{sec:memory_response_details}
 This additional descriptive study fixes one graph from each family and uses constructed, ordered memory initializations $A_\sigma(0)=\pm0.9$ with identical node states. The exact design is recorded in \texttt{physica\_a\_revision/mechanism\_config.json}, together with its SHA-256 checksum. Graphs are generated with the existing sparse generators, $n=100$ and face-filling probability $0.6$. Initial states contain exactly $20$ rumor, $20$ correction and $60$ inactive nodes. Controls are either empty or the four highest-degree rumor nodes, with ties broken by node index. Rates are $\beta_1=1.15/(T_0\bar d)$ and $\beta_2=3s/(T_0\bar f)$ for $s\in\{0,1\}$, with a zero rate for a zero denominator. The parameters $T_0=0.9$, $\lambda=0.2$, $u=3$, $D=2$ and $H=10$ are fixed. Each graph uses $128$ independent tapes shared across its eight conditions. All four graphs and all conditions are reported.
@@ -1600,7 +1600,7 @@ The original simulation engines and confirmation data were not modified.
 \interlinepenalty=10000
 
 \begin{figure}[ht]\centering\includegraphics[width=.86\linewidth]{original_memory_contexts.pdf}
-\caption{Separate contexts underlying main Fig.~\ref{fig:memory_response}. Each row is one fixed graph and each column a face-strength setting. Teal and red denote initial $-T_0$ and $+T_0$; solid and dashed lines denote no control and four targets. Curves average 128 tapes within each context. The vertical line marks withdrawal. Node trajectories for the two memory initializations coincide at $s=0$.}\label{fig:original_memory_contexts}
+\caption{Separate contexts underlying main Fig.~\ref{M-fig:memory_response}. Each row is one fixed graph and each column a face-strength setting. Teal and red denote initial $-T_0$ and $+T_0$; solid and dashed lines denote four targets and no control. Curves average 128 tapes within each context. The vertical line marks withdrawal. Node trajectories for the two memory initializations coincide at $s=0$.}\label{fig:original_memory_contexts}
 \end{figure}
 \FloatBarrier\section{Memory-mechanism and comparison-bound diagnostics}\label{sec:response_extension}
 This descriptive extension uses eight new graphs (two per ER, WS, sparse SBM and PA-with-closure family), $n=100$, and one constructed initial state per graph with 20 rumor, 20 correction and 60 inactive nodes. The graph generator and face-filling rule are unchanged. Transmission parameters are $\beta_1=1.15/(T_0\bar d)$ and $\beta_2=3/(T_0\bar f)$, with zero rates when the respective denominator vanishes, and $T_0=0.9$, $u=3$, $D=2$, $H=10$. Thus the higher-order transmission prefactor remains fixed across memory comparisons.
@@ -1632,10 +1632,9 @@ For a given graph and setting, define tape-level $Y=L(\varnothing)-L(S)$, $W=L(S
 \]
 We use empirical population moments (variance divisor $128$) to compare the bound under the empirical tape distribution. These ratios are not unbiased estimates of population ratios and have no inferential intervals. Denominators at most $10^{-12}$ would be reported separately; all 72 cases are defined in both comparisons. Nested ratios range from $0.00175$ to $0.58480$ (median $0.16093$); exchange ratios range from $0.00234$ to $0.50003$ (median $0.11129$). The median exchange bound divided by $H^2$ is $0.01602$. These sampled bounds are narrower than a generic signed-contrast bound but retain appreciable slack relative to the empirical variances.
 
-\begin{figure}[ht]\centering\includegraphics[width=.98\linewidth]{bound_diagnostics.pdf}
-\caption{All 72 empirical variance-to-bound ratios for nested and nonnested comparisons. Colors and symbols identify families. The horizontal dotted line is equality with the plug-in bound. Ratios describe the empirical distribution of tapes; they do not certify population tightness.}\label{fig:bound_diagnostics}\end{figure}
+
 \begin{figure}[ht]\centering\includegraphics[width=.85\linewidth]{memory_contexts.pdf}
-\caption{Initial-memory loss gaps for every graph. Red: no control; teal: four targets. Solid and dashed lines distinguish the two graphs in each family. Every estimated graph-specific gap decreases over the three tested rates; no continuous-parameter monotonicity is inferred.}\label{fig:memory_contexts}\end{figure}
+\caption{Initial-memory loss gaps for every graph. Gray: no control; teal: four targets. Solid and dashed lines distinguish the two graphs in each family. Every estimated graph-specific gap decreases over the three tested rates; no continuous-parameter monotonicity is inferred.}\label{fig:memory_contexts}\end{figure}
 \FloatBarrier
 
 \FloatBarrier\section{Post-hoc sensitivity to the selection-quality threshold}\label{sec:threshold_sensitivity}
@@ -1847,7 +1846,7 @@ Two auxiliary controls can therefore bound the portfolio's expected-loss diamete
 \subsection{Paired variance and cost at a fixed selection quality}
 \begin{figure*}[!t]
 \centering\includegraphics[width=.98\textwidth]{cost_accuracy.pdf}
-\caption{Cost and selection quality for four equal-size nonnested actions. Panels (a) and (b) compare physical trajectory budgets and wall time on a shared vertical scale. Insets enlarge the original high-budget Graphical/RTC and thinning/antithetic comparisons. Markers alternate across observed budgets to reduce occlusion; all mean values and interval endpoints are reported. The reference is chosen on independent sample A and assessed on sample B. Trajectory counts charge both antithetic partners. The fixed threshold is excess loss $0.02$; curve error bars are descriptive 95\% intervals, while cost ratios use the adjusted intervals in Table~\ref{tab:cost}. Wall time covers online selection after candidates are fixed. The zero-simulation R-degree anchor is reported numerically below the panels and lies above their common vertical range.}
+\caption{Cost and selection quality for four equal-size nonnested actions. Panels (a) and (b) show physical trajectory budgets; (c) and (d) show wall time. Columns separate the Graphical/RTC pair from the thinning/antithetic pair. Each column shares its vertical range across the two cost axes. All observed mean values and interval endpoints are shown; distinct line styles and markers separate nearby curves. The reference is chosen on independent sample A and assessed on sample B. Trajectory counts charge both antithetic partners. The fixed threshold is excess loss $0.02$; curve error bars are descriptive 95\% intervals, while cost ratios use the adjusted intervals in Table~\ref{tab:cost}. Wall time covers online selection after candidates are fixed. The zero-simulation R-degree anchor is reported numerically below the panels and lies above both column ranges.}
 \label{fig:cost}
 \end{figure*}
 
@@ -1954,32 +1953,24 @@ The complete-search validation reconstructs 768 searches in the 64-graph cohort 
 \label{sec:memory_response}
 The first experiment asks whether current node labels suffice to describe the response to temporary control. To isolate the state carried by memory, we initialize the same node configuration with all face memories at either $-T_0$ or $+T_0$. This descriptive experiment uses one fixed $100$-node graph from each of the four families, with $20$ rumor, $20$ correction and $60$ inactive nodes. For each graph we compare no control with correction of the four highest-degree rumor nodes for $D=2$. We use $T_0=0.9$, $\lambda=0.2$, $u=3$, $H=10$, and the degree-normalized rates specified in the supplement, with face-strength scale $s=0$ or $1$. For each graph, the same $128$ independent replication tapes are reused across all eight combinations of face strength, control and initial memory. All $4,096$ trajectories are included. The design and seeds were saved before this experiment; the study is a controlled-initial-condition illustration, separate from the confirmation cohorts.
 
-Figure~\ref{fig:memory_response} shows that a common current node state can lead to different responses under the two initial memories when $s=1$. With $s=0$, the node paths coincide exactly between memory initializations on every shared tape: memory still evolves, but no longer enters the node intensities. Stronger correction and lower numerical memory preserve the node order at every recorded time. The instrumented simulator continues after rumor extinction to record the memory curves; in $256$ checks its exact occupation integrals agree with the unchanged loss-only evaluator. Full condition summaries, seeds and validation are in Supplementary Section~\ref{sec:memory_response_details}.
+Figure~\ref{M-fig:memory_response} shows that a common current node state can lead to different responses under the two initial memories when $s=1$. With $s=0$, the node paths coincide exactly between memory initializations on every shared tape: memory still evolves, but no longer enters the node intensities. Stronger correction and lower numerical memory preserve the node order at every recorded time. The instrumented simulator continues after rumor extinction to record the memory curves; in $256$ checks its exact occupation integrals agree with the unchanged loss-only evaluator. Full condition summaries, seeds and validation are in Supplementary Section~\ref{sec:memory_response_details}.
 
-\begin{figure*}[t]
-\centering\includegraphics[width=.98\textwidth]{memory_response.pdf}
-\caption{Controlled-initial-memory response (descriptive). Columns show $s=0$ and $s=1$; rows show mean rumor occupation and mean face memory. Curves average $128$ trajectories on each of four fixed graph/initial-state contexts. Color denotes initial face memory; line style denotes intervention. Shading shows conditional Monte Carlo standard errors, not uncertainty over a graph population. The vertical line marks control withdrawal at $D=2$. The two memory-initialization node curves coincide when $s=0$. All conditions are shown.}
-\label{fig:memory_response}
-\end{figure*}
+
 
 \subsection{Static bias, dynamic memory and time scales}
 \label{sec:timescales}
 A second descriptive experiment keeps higher-order transmission active and compares three memory mechanisms: $A_\sigma(t)\equiv0$, frozen $A_\sigma(t)=A_\sigma(0)$, and the dynamic relaxation law. Freezing is implemented by $\lambda=0$; it is a memory-free comparator only when the initial memory is also zero. We use eight new graphs, two per family, at $n=100$. Each graph has the same node initialization across nine memory settings and five control sets, with $128$ shared independent tapes. All $46,080$ trajectories are reported. The design was fixed before simulation and is descriptive, separate from the existing confirmation studies.
 
-For dynamic memory, $\lambda\in\{0.02,0.2,2\}$ corresponds to relaxation times $\tau_A=1/\lambda\in\{50,5,0.5\}$; with $D=2$ and $H=10$, the dimensionless durations are $\lambda D\in\{0.04,0.4,4\}$ and $\lambda H\in\{0.2,2,20\}$. Figure~\ref{fig:timescales} shows the response to initial memory $\pm T_0$, keeping transmission prefactors and control fixed. Without control, the initial-memory loss gap decreases from $5.28884$ to $2.10960$ across the dynamic grid; with four targets it decreases from $4.85156$ to $1.63153$. Each of the eight graph-specific estimated gaps decreases across this grid under both control conditions.
+For dynamic memory, $\lambda\in\{0.02,0.2,2\}$ corresponds to relaxation times $\tau_A=1/\lambda\in\{50,5,0.5\}$; with $D=2$ and $H=10$, the dimensionless durations are $\lambda D\in\{0.04,0.4,4\}$ and $\lambda H\in\{0.2,2,20\}$. Main Fig.~\ref{M-fig:memory_timescales} shows the response to initial memory $\pm T_0$, keeping transmission prefactors and control fixed. Without control, the initial-memory loss gap decreases from $5.28884$ to $2.10960$ across the dynamic grid; with four targets it decreases from $4.85156$ to $1.63153$. Each of the eight graph-specific estimated gaps decreases across this grid under both control conditions.
 
 Faster relaxation reduces sensitivity to the initial memory, but it also makes memory follow the changing donor configuration. These effects differ from removing memory modulation. At $\lambda=2$, controlled mean losses from initial $-T_0$ and $+T_0$ are $0.73032$ and $2.36186$, compared with $1.04551$ for memory fixed at zero. The results distinguish static group bias, persistence of initial memory and subsequent state-driven feedback. They establish a finite-grid response in these constructed contexts, not monotonicity in $\lambda$ for the model class. Supplementary Section~\ref{sec:response_extension} gives every condition and graph-specific curve.
 
-\begin{figure*}[t]
-\centering\includegraphics[width=.98\textwidth]{memory_timescales.pdf}
-\caption{Memory mechanisms at fixed higher-order transmission (descriptive; eight graphs). Red denotes no control and teal denotes four targets. (a) Loss difference between initial $+T_0$ and $-T_0$ under dynamic memory; dotted lines show frozen-memory differences. Error bars are one conditional Monte Carlo standard error for the equally weighted graph average; they quantify tape noise with these graphs fixed, not uncertainty across a population of graphs. (b) Mean loss from initial $-T_0$ (solid circles) and $+T_0$ (dashed squares); dotted horizontal lines show memory fixed at zero. Both signs use identical initial node states. Frozen memory means $\lambda=0$; the other tick labels give the relaxation rate. Lines connect tested settings, with no interpolation-based inference.}
-\label{fig:timescales}
-\end{figure*}
+
 
 \subsection{Naturally generated memories and feedback}\label{sec:natural_memory}
 We next replace uniform extreme memories by states produced by the process itself. On 32 new graphs (eight per family), two uncontrolled prehistories start with 10 rumor, 10 correction and 80 inactive nodes and zero memory. After two time units at $\lambda=0.2$, each terminal state branches into four memory rules: dynamic memory from the generated value, dynamic memory reset to zero, frozen generated memory, and memory held at zero. The same node state, topology, target set and continuation tapes are used within a context. Continuation rates are $\lambda=0.02,0.2,2$, with no control or four targets; $u=3,D=2,H=10$ and the transmission normalization are unchanged. All 64 histories are included, including 4 rumor-free endpoints. The design was fixed before execution; all comparisons are descriptive.
 
-Figure~\ref{fig:natural_memory} compares post-control occupation and the feedback contribution. Table~\ref{tab:natural_memory_all} reports every contrast, graph-level sign count and pointwise stratified bootstrap interval. The experiment uses 98,304 continuation trajectories in addition to the 64 prehistories. Frozen and zero-memory conditions are repeated as shared-tape controls across the three rates, not counted as additional independent evidence.
+Figure~\ref{M-fig:natural_memory} compares post-control occupation and the feedback contribution. Table~\ref{tab:natural_memory_all} reports every contrast, graph-level sign count and pointwise stratified bootstrap interval. The experiment uses 98,304 continuation trajectories in addition to the 64 prehistories. Frozen and zero-memory conditions are repeated as shared-tape controls across the three rates, not counted as additional independent evidence.
 
 With four targets, mean losses under dynamic natural memory are $1.63886$, $1.80230$ and $2.04232$ as $\lambda$ increases across the grid; frozen and zero-memory losses are $1.60478$ and $1.39725$. Dynamic-minus-frozen contrasts are $0.03408$, $0.19752$ and $0.43754$, with positive family means at every tested rate. In contrast, resetting the initial memory reduces the dynamic loss by $0.19598$, $0.12891$ and $0.02818$. Thus reduced sensitivity to initial memory coexists with increased occupation under faster dynamic feedback in these contexts. Faster forgetting of the initial condition is not equivalent to weaker post-control spreading.
 
@@ -1990,14 +1981,12 @@ For dynamic natural and reset memories at a common $\lambda$, the exact differen
 \]
 The second term records differences in subsequent node activity. It is estimated by subtracting the direct initial term from the paired memory traces. We report the full time grid, including both control conditions, rather than selecting a persistence cutoff. Spatially averaged signed responses can cancel across faces; the accompanying data also give the mean absolute paired residual. This decomposition distinguishes feedback from direct initial-memory decay without interpreting occupation differences as rebound probabilities. At $\lambda=2$ and $t=12$, the controlled mean direct term is approximately $1.69\times10^{-13}$, whereas the feedback residual is $0.00907$ with descriptive interval $[0.00477,0.01387]$. The corresponding uncontrolled interval includes zero. The observed controlled contrast therefore survives through differing node histories at this finite endpoint, even though the direct initial term has decayed.
 
-\begin{figure*}[t]\centering\includegraphics[width=.98\textwidth]{natural_memory.pdf}
-\caption{Naturally generated memory (32 graphs, 64 histories; descriptive). (a) Post-control occupation under four memory rules, with four targets. Frozen and zero controls are identical across the continuation-rate grid. (b) Spatial mean-memory contrast between dynamic natural and dynamic reset branches after subtracting direct exponential decay of the initial memory; the vertical line marks control withdrawal. Full pointwise uncertainty and both control conditions are reported in the supplement and accompanying CSV files.}\label{fig:natural_memory}
-\end{figure*}
+
 
 \subsection{Empirical size of the comparison bounds}
 The memory experiments establish response differences; we next examine the fluctuation bounds used to estimate intervention contrasts. The same tapes compare $\varnothing\subset S$ and four-target sets $S,T_{\mathrm{set}}$ sharing three nodes, with their intersection and union as auxiliary controls. Every sampled loss satisfies both the nested order and the nonnested envelope. Across the $72$ graph--memory contexts, the median empirical variance divided by the plug-in bound is $0.16093$ for nested differences and $0.11129$ for exchanges. All denominators exceed $10^{-12}$; no case is omitted. For exchanges, the median plug-in bound relative to the generic $H^2$ bound is $0.01602$.
 
-The auxiliary interval can therefore substantially reduce the generic bound in these overlapping portfolios, while still exceeding the empirical variance. The ratios use empirical moments from the same $128$ tapes, with variance normalized by $128$. Given the sampled pathwise inequalities, the corresponding empirical moment bounds follow algebraically. The plot measures their slack in these samples; ratios below one are not an independent statistical test of the population bound. Supplementary Fig.~\ref{fig:bound_diagnostics} reports all points, ranges and definitions. Portfolio overlap is important here: these actions share three targets, so the diagnostic does not establish similarly narrow envelopes for disjoint controls.
+The auxiliary interval can therefore substantially reduce the generic bound in these overlapping portfolios, while still exceeding the empirical variance. The ratios use empirical moments from the same $128$ tapes, with variance normalized by $128$. Given the sampled pathwise inequalities, the corresponding empirical moment bounds follow algebraically. The plot measures their slack in these samples; ratios below one are not an independent statistical test of the population bound. Main-text Fig.~\ref{M-fig:bound_diagnostics} reports all points, ranges and definitions. Portfolio overlap is important here: these actions share three targets, so the diagnostic does not establish similarly narrow envelopes for disjoint controls.
 
 
 \section{Withdrawal-time experiments and observed contact data}\label{sec:physics_new}

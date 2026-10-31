@@ -8,7 +8,7 @@ try:
 except urllib.error.HTTPError as e:
  if e.code==404:raise SystemExit('The assigned record is not public yet. Upload and publish the release before using this downloader.')
  raise
-needed=['PhysicaA_Physical_Response_Data.zip','PhysicaA_LaTeX_Source.zip']
+needed=['PhysicaA_Reproducibility_Code.zip','PhysicaA_Physical_Response_Data.zip','PhysicaA_LaTeX_Source.zip']
 for key in needed:
  items=[v for v in data['files'] if v['key']==key]
  if len(items)!=1:raise SystemExit('Expected archive is not present in the public record: '+key)
@@ -20,7 +20,7 @@ for key in needed:
    out.write(b)
  assert 'md5:'+hashlib.md5(path.read_bytes()).hexdigest()==item['checksum']
  with ZipFile(path) as z:
-  target=R.parent if key.endswith('Data.zip') else R/'manuscript'
+  target=R/'manuscript' if key=='PhysicaA_LaTeX_Source.zip' else R.parent
   for member in z.namelist():
    resolved=(target/member).resolve()
    if not resolved.is_relative_to(target.resolve()):raise ValueError('Unsafe archive path')

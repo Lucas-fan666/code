@@ -64,6 +64,11 @@ for method, z in precision.items():
     for key in ["reference_based_mse", "contrast_sample_variance"]:
         assert f'{z[key]:.5f}' in main
         rows.append(dict(location="Main Section 6.1", quantity=method+"_"+key, value=z[key], source="reproducibility/physicaA_precision/results/publication_summary.json"))
+effect_path=O / "editorial_review/derived_effect_expression.json"
+if effect_path.exists():
+    effect=json.loads(effect_path.read_text())
+    assert f"{effect['value']:.1f}\\%" in main
+    rows.append(dict(location="Main Section 6.1",quantity="descriptive_reference_MSE_reduction_percent",value=effect['value'],source="reports/editorial_review/derived_effect_expression.json; reproducibility/physicaA_precision/results/publication_summary.json"))
 with (O / "PhysicaA_Number_Lineage.csv").open("w") as f:
     w = csv.DictWriter(f, fieldnames=rows[0].keys()); w.writeheader(); w.writerows(rows)
 doi = json.loads((O / "doi_resolver_checks.json").read_text())
@@ -75,5 +80,8 @@ assert main.count("ChatGPT") == 1 and "ChatGPT" not in supp
 assert "AI-assisted conceptual illustration" not in main
 assert r"\section{Calibrated" not in main
 report = dict(abstract_words=abstract_words, pages=pages, highlights_characters=list(map(len, highlights)), references_checked=len(doi), doi_resolver_accessible=sum(z["status"]=="resolver accessible" for z in doi), primary_url_checked=sum(z["status"]=="primary URL verified separately" for z in doi), latex_references_resolved=True, no_overfull_boxes=True, all_configuration_hashes_match=True, physics_checks=physics, serial_retiming=json.loads((P / "physicaA_precision/results/retiming_validation.json").read_text()), proof_text_comparison=json.loads((O / "proof_notation_check.json").read_text()), publication_status="Assigned Zenodo DOI; upload/publication is the author's remaining external action.", source_sha256={name:hashlib.sha256((M/name).read_bytes()).hexdigest() for name in ["main.tex","supplement.tex","references.bib"]})
+editorial_path=O / "editorial_review/validation.json"
+if editorial_path.exists():report["editorial_checks"]=json.loads(editorial_path.read_text())
+report["figure_counts"]={"main":9,"supplement":20}
 (O / "PhysicaA_Final_Validation.json").write_text(json.dumps(report, indent=2))
 print(json.dumps({k:report[k] for k in ["abstract_words","pages","highlights_characters","references_checked","all_configuration_hashes_match"]}, indent=2))
