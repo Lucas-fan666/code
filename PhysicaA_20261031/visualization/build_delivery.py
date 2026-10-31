@@ -146,7 +146,7 @@ def code_files():
         if rel.parts[0]=='manuscript':continue
         if p.suffix not in {'.py','.cpp','.h','.hpp','.json','.csv','.sha256','.md','.txt','.cff','.tex'}:continue
         if p.name in {'main_before.tex','supplement_before.tex','readable_export_input.tex'} or p.name.startswith('before_'):continue
-        if p.name in {'github_payload.json','github_base_files.json','github_text_candidates.json'}:continue
+        if p.name in {'github_payload.json','github_base_files.json','github_text_candidates.json','confidence_before_main.tex'}:continue
         yield p
     yield from source_files()
 
@@ -187,7 +187,7 @@ def assemble():
     for p in O.iterdir():
         if visible(p) and p.name not in {'PhysicaA_Zenodo_Upload_Part1_Current.zip','PhysicaA_Submission_Package.zip'}:
             copy(p,root/p.name)
-    for name in ['PhysicaA_Source_SHA256.json','PhysicaA_Final_Validation.json','PhysicaA_Number_Lineage.csv','PhysicaA_Fresh_Extraction_Validation.json','claim_evidence_matrix.csv']:
+    for name in ['PhysicaA_Source_SHA256.json','PhysicaA_Final_Validation.json','PhysicaA_Number_Lineage.csv','PhysicaA_Fresh_Extraction_Validation.json','claim_evidence_matrix.csv','PhysicaA_GitHub_Release.json']:
         copy(REP/name,root/name)
     readme=root/'PhysicaA_Archive_README.md'
     text=readme.read_text().split('## Visual revision')[0]+'## Visual revision\n\nThe current manuscript has nine main and twenty supplementary figures. All 29 native vector PDF/SVG and 300 dpi PNG copies, a figure atlas, shared style and source inventory are included. The editorial review records notation repairs, language changes and descriptive display calculations. The raw Physical_Response_Data ZIP and the twelve historical archives are unchanged. This Part 1 replaces the previous current transport part; continue to use the unchanged historical Part 2. The code ZIP contains the complete figure inputs and revised authoring code; the original scientific commit identifies the unchanged simulation implementation.\n'
