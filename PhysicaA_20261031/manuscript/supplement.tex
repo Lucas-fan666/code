@@ -2034,6 +2034,24 @@ The following table reports every graph and duration. Synthetic graph IDs 0--7 a
 \bottomrule\end{longtable}
 The intervals in Table~\ref{tab:withdrawal_all} are conditional on each fixed graph and its two histories. The synthetic aggregate interval in the main article instead resamples graphs within the four families. The CSV file reports all four branch losses, state contributions and undefined-draw counts.
 
+\subsection{Equivalent relative expressions of the memory response}
+The primary memory fraction is $\eta_A=G_A/G$. When $G_X>0$, its equivalent relative increment over the node-state contribution is $r_A=G_A/G_X=\eta_A/(1-\eta_A)$. The following table re-expresses the same saved cohort means for every duration. Intervals map the existing descriptive pointwise 95\% endpoints through this monotone function, with no new resampling or comparison family. They use full-precision values; rounded entries in main Table~\ref{M-tab:mediation} can give slightly different ratios.
+
+\begin{table}[ht]\centering\small
+\caption{Algebraic re-expression of the withdrawal comparison. The memory share uses total gain $G$ as denominator; the additional gain uses node-state gain $G_X$. All entries are percentages.}\label{tab:relative_effects}
+\begin{tabular}{lrrl}\toprule
+Topology & $D$ & Share $100\eta_A$ & Increment $100r_A$ [interval]\\\midrule
+Synthetic & 1 & 3.51 & 3.64 [1.91, 5.34]\\
+Synthetic & 2 & 4.51 & 4.72 [3.21, 6.21]\\
+Synthetic & 4 & 6.64 & 7.12 [4.22, 9.83]\\
+High school & 1 & 12.52 & 14.31 [5.20, 28.98]\\
+High school & 2 & 19.19 & 23.75 [12.86, 40.72]\\
+High school & 4 & 28.21 & 39.29 [27.12, 57.38]\\
+Primary school & 1 & 2.72 & 2.80 [1.54, 4.65]\\
+Primary school & 2 & 6.43 & 6.88 [2.85, 14.82]\\
+Primary school & 4 & 11.53 & 13.04 [4.99, 25.59]\\
+\bottomrule\end{tabular}\end{table}
+
 \section{Single-triangle retention and rebound}\label{sec:triangle_new}
 Every cell of the eight-rate by six-duration grid uses 512 paired replications. The initial state is $(R,R,U)$, the initial memory is $T_0=0.9$, and the first two nodes are targets. Pairwise and face prefactors have the same normalization as the other experiments. The complete post-withdrawal grid is $0:0.05:10$. The sampled within-path maximum is a lower-resolution observation of continuous-time pathwise maxima; it is not the maximum of the ensemble mean. No extinction path is discarded.
 \begin{longtable}{rrrrr}

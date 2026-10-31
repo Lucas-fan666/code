@@ -69,6 +69,16 @@ if effect_path.exists():
     effect=json.loads(effect_path.read_text())
     assert f"{effect['value']:.1f}\\%" in main
     rows.append(dict(location="Main Section 6.1",quantity="descriptive_reference_MSE_reduction_percent",value=effect['value'],source="reports/editorial_review/derived_effect_expression.json; reproducibility/physicaA_precision/results/publication_summary.json"))
+relative_path=O / "editorial_review/relative_effects.json"
+if relative_path.exists():
+    relative=json.loads(relative_path.read_text())
+    var=relative['paired_variance']['value_percent']
+    assert f"{var:.1f}\\%" in main
+    rows.append(dict(location="Main Section 6.1",quantity="descriptive_paired_variance_reduction_percent",value=var,source="reports/editorial_review/relative_effects.json; reproducibility/physicaA_precision/results/publication_summary.json"))
+    for entry in relative['memory_increment']['cohorts']:
+        if entry['D']==2:
+            assert f"{entry['increment_percent']:.2f}\\%" in main
+            rows.append(dict(location="Main Section 5.2",quantity=entry['cohort']+"_memory_increment_over_node_state_percent",value=entry['increment_percent'],source="reports/editorial_review/relative_effects.json; reproducibility/physicaA_physics/results/summary.json"))
 with (O / "PhysicaA_Number_Lineage.csv").open("w") as f:
     w = csv.DictWriter(f, fieldnames=rows[0].keys()); w.writeheader(); w.writerows(rows)
 doi = json.loads((O / "doi_resolver_checks.json").read_text())

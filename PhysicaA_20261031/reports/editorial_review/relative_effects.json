@@ -1,0 +1,162 @@
+{
+  "memory_increment": {
+    "formula": "100 * G_A / G_X = 100 * eta_A / (1 - eta_A)",
+    "interpretation": "Additional intervention gain relative to the node-state contribution; ratio of cohort means.",
+    "source": "reproducibility/physicaA_physics/results/summary.json",
+    "cohorts": [
+      {
+        "cohort": "Synthetic",
+        "D": 1,
+        "memory_gain": 0.019863191688329205,
+        "node_state_gain": 0.5454048442287649,
+        "share": 0.035139421347437506,
+        "share_interval": [
+          0.01870360128847398,
+          0.05068667421487651
+        ],
+        "increment_percent": 3.641916990381145,
+        "increment_interval_percent": [
+          1.9060093681208263,
+          5.339298716043665
+        ]
+      },
+      {
+        "cohort": "Synthetic",
+        "D": 2,
+        "memory_gain": 0.03634332851537807,
+        "node_state_gain": 0.7693606326857938,
+        "share": 0.045107546028687946,
+        "share_interval": [
+          0.03106363131121137,
+          0.058442994061744614
+        ],
+        "increment_percent": 4.723835217368166,
+        "increment_interval_percent": [
+          3.2059516305748925,
+          6.207058488562416
+        ]
+      },
+      {
+        "cohort": "Synthetic",
+        "D": 4,
+        "memory_gain": 0.06849010402973982,
+        "node_state_gain": 0.9625214290910871,
+        "share": 0.06643000764736672,
+        "share_interval": [
+          0.04053696938259348,
+          0.08949648638589904
+        ],
+        "increment_percent": 7.115696540326931,
+        "increment_interval_percent": [
+          4.224964181945423,
+          9.829340035235752
+        ]
+      },
+      {
+        "cohort": "High school",
+        "D": 1,
+        "memory_gain": 0.01595920769810442,
+        "node_state_gain": 0.11148658743549822,
+        "share": 0.12522349349677822,
+        "share_interval": [
+          0.0494100095199396,
+          0.22466997039420172
+        ],
+        "increment_percent": 14.314912730948729,
+        "increment_interval_percent": [
+          5.197825562521113,
+          28.977333756623725
+        ]
+      },
+      {
+        "cohort": "High school",
+        "D": 2,
+        "memory_gain": 0.02461786498120285,
+        "node_state_gain": 0.10363552754430176,
+        "share": 0.191947086127233,
+        "share_interval": [
+          0.11393971953747474,
+          0.28937087751802937
+        ],
+        "increment_percent": 23.7542718839148,
+        "increment_interval_percent": [
+          12.85913859923819,
+          40.72037978226413
+        ]
+      },
+      {
+        "cohort": "High school",
+        "D": 4,
+        "memory_gain": 0.0669601452811291,
+        "node_state_gain": 0.17041450096524433,
+        "share": 0.28208634047475534,
+        "share_interval": [
+          0.21334931266826135,
+          0.3645976410870033
+        ],
+        "increment_percent": 39.29251613088107,
+        "increment_interval_percent": [
+          27.121226244894864,
+          57.380592938108116
+        ]
+      },
+      {
+        "cohort": "Primary school",
+        "D": 1,
+        "memory_gain": 0.018819640499382482,
+        "node_state_gain": 0.6724342269776785,
+        "share": 0.02722536738647181,
+        "share_interval": [
+          0.015192724944350703,
+          0.044432607109804706
+        ],
+        "increment_percent": 2.7987332804234546,
+        "increment_interval_percent": [
+          1.542710470278786,
+          4.649866397744536
+        ]
+      },
+      {
+        "cohort": "Primary school",
+        "D": 2,
+        "memory_gain": 0.0518718203569592,
+        "node_state_gain": 0.7544941621882719,
+        "share": 0.06432788768349311,
+        "share_interval": [
+          0.027713851919943654,
+          0.12904428310670096
+        ],
+        "increment_percent": 6.875045952180001,
+        "increment_interval_percent": [
+          2.8503802069657524,
+          14.816400030876679
+        ]
+      },
+      {
+        "cohort": "Primary school",
+        "D": 4,
+        "memory_gain": 0.11089796019367569,
+        "node_state_gain": 0.8505692018592335,
+        "share": 0.11534243141168563,
+        "share_interval": [
+          0.04751447445225643,
+          0.20374944135594528
+        ],
+        "increment_percent": 13.038087900580834,
+        "increment_interval_percent": [
+          4.98847207414857,
+          25.588608905080434
+        ]
+      }
+    ]
+  },
+  "paired_variance": {
+    "value_percent": 85.7001376850032,
+    "formula": "100 * (1 - graphical.contrast_sample_variance / thinning.contrast_sample_variance)",
+    "source": "reproducibility/physicaA_precision/results/publication_summary.json",
+    "paired_budget": 128,
+    "contexts": 4
+  },
+  "new_simulation": false,
+  "new_confirmatory_comparison": false
+}

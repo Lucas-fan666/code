@@ -38,6 +38,20 @@ q=json.loads((P/'physicaA_precision/results/publication_summary.json').read_text
 relative=100*(1-q['graphical']['reference_based_mse']/q['thinning']['reference_based_mse'])
 assert f'{relative:.1f}\\%' in main
 checks['descriptive_MSE_reduction_percent']=relative
+relative_path=R/'reports/editorial_review/relative_effects.json'
+if relative_path.exists():
+    effects=json.loads(relative_path.read_text())
+    assert len(effects['memory_increment']['cohorts'])==9
+    for z in effects['memory_increment']['cohorts']:
+        assert abs(z['increment_percent']-100*z['memory_gain']/z['node_state_gain'])<1e-12
+        assert abs(z['increment_percent']-100*z['share']/(1-z['share']))<1e-9
+        expected=[100*x/(1-x) for x in z['share_interval']]
+        np.testing.assert_allclose(expected,z['increment_interval_percent'],rtol=0,atol=1e-12)
+    checks['all_nine_relative_memory_expressions_and_transformed_intervals_agree']=True
+    v=100*(1-q['graphical']['contrast_sample_variance']/q['thinning']['contrast_sample_variance'])
+    assert abs(v-effects['paired_variance']['value_percent'])<1e-12
+    assert f'{v:.1f}\\%' in main
+    checks['descriptive_paired_variance_reduction_percent']=v
 parser=argparse.ArgumentParser()
 parser.add_argument('--baseline-dir',type=Path,help='Directory containing the previous Code and Physical_Response_Data ZIPs for byte comparison.')
 args=parser.parse_args()
