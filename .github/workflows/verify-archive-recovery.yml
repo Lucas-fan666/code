@@ -1,0 +1,80 @@
+name: Verify archive recovery
+on:
+  push:
+    branches: [physicaA-write-read-20261105]
+    paths:
+      - "PhysicaA_Write_Read/restore_zenodo_archive.py"
+      - ".github/workflows/verify-archive-recovery.yml"
+permissions:
+  contents: read
+jobs:
+  synthetic-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install numpy
+      - name: Exercise recovery on synthetic arrays only
+        run: |
+          python - <<'PY'
+          import hashlib
+          import importlib.util
+          import io
+          import json
+          from pathlib import Path
+          import sys
+          import zipfile
+          import numpy as np
+
+          root = "PhysicaA_Memory_Write_Read/"
+          source = Path("synthetic-source.zip")
+          result = Path("synthetic-recovered.zip")
+          def archive_bytes(**kwargs):
+              b = io.BytesIO()
+              np.savez_compressed(b, **kwargs)
+              return b.getvalue()
+          raw = {}
+          for i in range(32):
+              graph = f"{i:02d}_ER"
+              raw[f"results/{graph}.npz"] = archive_bytes(x=np.array([i]))
+              raw[f"dense_extension/results/{graph}.npz"] = archive_bytes(x=np.array([i, 1]))
+              raw[f"reviewer_extension/results/{graph}_strength.npz"] = archive_bytes(
+                  strengths=np.array([1.5, 3.0, 6.0]),
+                  loss=np.full((3, 2, 3, 32, 4), i / 100.0),
+                  dose=np.full((3, 2, 3, 32, 5), i / 200.0),
+              )
+          for school in ("contact-high-school", "contact-primary-school"):
+              for prefix in ("results", "dense_extension/results", "reviewer_extension/results"):
+                  raw[f"{prefix}/{school}.npz"] = archive_bytes(x=np.array([1]))
+          assert len(raw) == 102
+          hashes = {k: hashlib.sha256(v).hexdigest() for k, v in raw.items()}
+          with zipfile.ZipFile(source, "w", zipfile.ZIP_DEFLATED) as z:
+              for path, data in raw.items():
+                  z.writestr(root + "reproducibility/" + path, data)
+              z.writestr(root + "reproducibility/interpretation/occupation_integral_source_hashes.json",
+                         json.dumps(hashes))
+              for school in ("contact-high-school", "contact-primary-school"):
+                  for kind in ("nverts", "simplices"):
+                      z.writestr(root + f"reproducibility/interpretation/source_groups/{school}/{school}-{kind}.txt", "1\n")
+              z.writestr(root + "README.md", "Synthetic fixture")
+              z.writestr(root + "reproduce.py",
+                         "call(P/'manuscript/build.py');call(P/'submission/make_letters.py')")
+              z.writestr(root + "reports/version_manifest.json", "{}")
+
+          spec = importlib.util.spec_from_file_location(
+              "restore_archive", "PhysicaA_Write_Read/restore_zenodo_archive.py")
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          module.INPUT_SHA256 = hashlib.sha256(source.read_bytes()).hexdigest()
+          sys.argv = ["restore_zenodo_archive.py", str(source), str(result)]
+          module.main()
+          with zipfile.ZipFile(result) as z:
+              assert z.testzip() is None
+              part_names = [n for n in z.namelist() if "/reviewer_extension/parts/" in n]
+              assert len(part_names) == 64
+              assert all("/submission/" not in n for n in z.namelist())
+              assert b"submission/make_letters.py" not in z.read(root + "reproduce.py")
+          print("Synthetic recovery smoke test passed.")
+          PY
