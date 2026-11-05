@@ -154,6 +154,11 @@ def main():
                         if data.count(old) != 1:
                             raise ValueError("Unexpected reproduction entry point.")
                         data = data.replace(old, b"")
+                    elif info.filename == ROOT + "reports/software_resources/ACKNOWLEDGEMENTS.md":
+                        data = data.replace(
+                            b"Its MIT license and source snapshot accompany this release.",
+                            b"Its MIT license is included and its public source is linked in resources_used.json.",
+                        )
                     elif info.filename == ROOT + "reports/version_manifest.json":
                         meta = json.loads(data)
                         meta["own_dataset_doi_registration"] = "Not yet assigned"
