@@ -1,0 +1,807 @@
+{
+  "width_mm": 170,
+  "height_mm": 153.5483870967742,
+  "png_pixels": [
+    4016,
+    3627
+  ],
+  "png_dpi": [
+    600,
+    600
+  ],
+  "minimum_font_points": 7.383794767589536,
+  "caption_words": 106,
+  "matched_nodes_top": [
+    2,
+    1,
+    2,
+    0,
+    2,
+    0,
+    2
+  ],
+  "matched_nodes_bottom": [
+    2,
+    1,
+    2,
+    0,
+    2,
+    0,
+    2
+  ],
+  "donor_motifs": [
+    "RRU",
+    "RRR",
+    "CCU"
+  ],
+  "chi_psi": [
+    [
+      1,
+      1
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "icons_per_panel": [
+    0,
+    2,
+    0,
+    1
+  ],
+  "symbols_in_caption_or_figure": [
+    "chi",
+    "psi",
+    "Phi",
+    "Lh",
+    "LS",
+    "GA",
+    "D",
+    "H",
+    "lambda_w",
+    "lambda_r"
+  ],
+  "no_dangling_nodes": true,
+  "math_bounds": [
+    [
+      441.41538671875,
+      169.02,
+      472.58461328125003,
+      192.50003125
+    ],
+    [
+      379.16697265625,
+      298.52,
+      532.83302734375,
+      319.998765625
+    ],
+    [
+      184.745078125,
+      377.44,
+      445.25492187500004,
+      409.36596875
+    ],
+    [
+      107.790234375,
+      429.8,
+      522.209765625,
+      448.4771875
+    ],
+    [
+      806.502604255198,
+      374.98,
+      1061.497395744802,
+      401.06615625
+    ],
+    [
+      739.5393599365234,
+      403.28,
+      866.4606400634765,
+      424.571875
+    ],
+    [
+      1017.6918208740235,
+      403.28,
+      1150.3081791259765,
+      423.6059375
+    ],
+    [
+      777.39453125,
+      435.13,
+      790.60546875,
+      448.9821875
+    ],
+    [
+      1026.3663281249999,
+      435.13,
+      1039.633671875,
+      448.9821875
+    ],
+    [
+      677.212890625,
+      465.75,
+      686.787109375,
+      480.12171875
+    ],
+    [
+      879.39453125,
+      466.13,
+      892.60546875,
+      479.9821875
+    ],
+    [
+      1154.3895214843749,
+      466.13,
+      1205.610478515625,
+      479.9821875
+    ],
+    [
+      51.662781481933585,
+      854.21,
+      184.3372185180664,
+      875.7725
+    ],
+    [
+      248.3645002319336,
+      853.75,
+      381.63549976806644,
+      875.614375
+    ],
+    [
+      445.36450023193356,
+      853.75,
+      578.6354997680664,
+      875.614375
+    ],
+    [
+      58.0,
+      927.9,
+      72.6609375,
+      944.5271875
+    ],
+    [
+      58.0,
+      963.9,
+      71.54909407216495,
+      980.5065625
+    ],
+    [
+      952.4192091796875,
+      679.92,
+      1127.5807908203126,
+      708.435375
+    ],
+    [
+      949.3054232421875,
+      863.88,
+      1130.6945767578125,
+      891.42675
+    ],
+    [
+      916.4043942871094,
+      745.8,
+      1173.5956057128906,
+      764.278125
+    ],
+    [
+      827.2438362711588,
+      975.24,
+      1032.756163728841,
+      1005.4454375
+    ],
+    [
+      938.0,
+      1069.0,
+      998.11484375,
+      1087.3240625
+    ],
+    [
+      1135.0,
+      1069.0,
+      1195.1148437499999,
+      1087.3240625
+    ]
+  ],
+  "labels": [
+    {
+      "text": "(a)",
+      "x": 38,
+      "y": 57,
+      "size": 31,
+      "anchor": "start"
+    },
+    {
+      "text": "State and group memory",
+      "x": 95,
+      "y": 56,
+      "size": 26,
+      "anchor": "start"
+    },
+    {
+      "text": "(b)",
+      "x": 648,
+      "y": 57,
+      "size": 31,
+      "anchor": "start"
+    },
+    {
+      "text": "Writing and retention",
+      "x": 705,
+      "y": 56,
+      "size": 26,
+      "anchor": "start"
+    },
+    {
+      "text": "(c)",
+      "x": 38,
+      "y": 545,
+      "size": 31,
+      "anchor": "start"
+    },
+    {
+      "text": "Donor-dependent activation",
+      "x": 95,
+      "y": 544,
+      "size": 26,
+      "anchor": "start"
+    },
+    {
+      "text": "(d)",
+      "x": 648,
+      "y": 545,
+      "size": 31,
+      "anchor": "start"
+    },
+    {
+      "text": "Matched-state memory readout",
+      "x": 705,
+      "y": 544,
+      "size": 26,
+      "anchor": "start"
+    },
+    {
+      "text": "R",
+      "x": 63.0,
+      "y": 143.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 136.0,
+      "y": 100.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 211.0,
+      "y": 143.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 100.0,
+      "y": 211.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 200.0,
+      "y": 211.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 267.0,
+      "y": 167.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 65.0,
+      "y": 283.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 155.0,
+      "y": 285.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 254.0,
+      "y": 256.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 116.0,
+      "y": 346.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 228.0,
+      "y": 336.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 457.0,
+      "y": 118.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 391.0,
+      "y": 231.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 523.0,
+      "y": 231.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "Memory on a filled face",
+      "x": 456,
+      "y": 279,
+      "size": 22,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 685.44,
+      "y": 223.64000000000001,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 714.48,
+      "y": 177.0,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 767.28,
+      "y": 180.52,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 794.56,
+      "y": 228.92000000000002,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 766.4,
+      "y": 273.79999999999995,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 712.72,
+      "y": 270.28,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 740.0,
+      "y": 225.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "No correction",
+      "x": 1080,
+      "y": 87,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 1029.16,
+      "y": 158.76000000000002,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 1056.22,
+      "y": 115.30000000000001,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 1105.42,
+      "y": 118.58000000000001,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 1130.84,
+      "y": 163.68,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 1104.6,
+      "y": 205.5,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 1054.58,
+      "y": 202.22,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 1080.0,
+      "y": 160.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "Correction pulse",
+      "x": 1080,
+      "y": 245,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 1029.16,
+      "y": 314.76,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 1056.22,
+      "y": 271.29999999999995,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 1105.42,
+      "y": 274.58,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 1130.84,
+      "y": 319.67999999999995,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 1104.6,
+      "y": 361.5,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 1054.58,
+      "y": 358.21999999999997,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 1080.0,
+      "y": 316.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "Same stored gap; different donor states",
+      "x": 315,
+      "y": 582,
+      "size": 22,
+      "anchor": "middle"
+    },
+    {
+      "text": "Outlined nodes are donors",
+      "x": 315,
+      "y": 616,
+      "size": 20,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 118.0,
+      "y": 673.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 62.0,
+      "y": 772.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 174.0,
+      "y": 772.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 315.0,
+      "y": 673.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 259.0,
+      "y": 772.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 371.0,
+      "y": 772.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 512.0,
+      "y": 673.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 456.0,
+      "y": 772.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 568.0,
+      "y": 772.4,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "Rumor changes",
+      "x": 118,
+      "y": 832,
+      "size": 21,
+      "anchor": "middle"
+    },
+    {
+      "text": "Initially dormant",
+      "x": 315,
+      "y": 832,
+      "size": 21,
+      "anchor": "middle"
+    },
+    {
+      "text": "State change only",
+      "x": 512,
+      "y": 832,
+      "size": 21,
+      "anchor": "middle"
+    },
+    {
+      "text": "Effective memory-dependent reset",
+      "x": 92,
+      "y": 940,
+      "size": 21,
+      "anchor": "start"
+    },
+    {
+      "text": "Immediate change in rumor occupation",
+      "x": 92,
+      "y": 976,
+      "size": 21,
+      "anchor": "start"
+    },
+    {
+      "text": "same node state",
+      "x": 925,
+      "y": 595,
+      "size": 23,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 698.9,
+      "y": 702.3,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 733.55,
+      "y": 646.65,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 796.55,
+      "y": 650.85,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 829.1,
+      "y": 708.6,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 795.5,
+      "y": 762.15,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 731.45,
+      "y": 757.9499999999999,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 764.0,
+      "y": 704.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 698.9,
+      "y": 884.3,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "R",
+      "x": 733.55,
+      "y": 828.65,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 796.55,
+      "y": 832.85,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 829.1,
+      "y": 890.6,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 795.5,
+      "y": 944.15,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "U",
+      "x": 731.45,
+      "y": 939.9499999999999,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "C",
+      "x": 764.0,
+      "y": 886.4,
+      "size": 19,
+      "anchor": "middle"
+    },
+    {
+      "text": "Baseline memory",
+      "x": 1040,
+      "y": 660,
+      "size": 22,
+      "anchor": "middle"
+    },
+    {
+      "text": "Retained memory",
+      "x": 1040,
+      "y": 843,
+      "size": 22,
+      "anchor": "middle"
+    },
+    {
+      "text": "No external correction",
+      "x": 1045,
+      "y": 790,
+      "size": 20,
+      "anchor": "middle"
+    },
+    {
+      "text": "Retained-memory contribution",
+      "x": 991,
+      "y": 964,
+      "size": 20,
+      "anchor": "middle"
+    },
+    {
+      "text": "R: rumor",
+      "x": 63,
+      "y": 1083,
+      "size": 20,
+      "anchor": "start"
+    },
+    {
+      "text": "U: inactive",
+      "x": 253,
+      "y": 1083,
+      "size": 20,
+      "anchor": "start"
+    },
+    {
+      "text": "C: correction",
+      "x": 464,
+      "y": 1083,
+      "size": 20,
+      "anchor": "start"
+    },
+    {
+      "text": "Target",
+      "x": 728,
+      "y": 1083,
+      "size": 20,
+      "anchor": "start"
+    }
+  ]
+}
