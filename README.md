@@ -1,3 +1,7 @@
+**Physica A writing–readout study:** open [PhysicaA_Write_Read](PhysicaA_Write_Read/) for the complete scientific source mirror: 41 Python files, 8 C++ files, and the fixed configurations. File hashes are recorded in [SOURCE_MANIFEST_SHA256.json](PhysicaA_Write_Read/SOURCE_MANIFEST_SHA256.json). The [scientific source checks](https://github.com/Lucas-fan666/code/actions/runs/42072169213) passed. The full archived from-data workflow was also reproduced successfully.
+
+---
+
 # Renewable-Energy Power-Supply-Chain Game
 
 Reproducibility materials for the manuscript **“Renewable-Energy Uncertainty and Equilibrium Decisions in a Power Supply Chain: Risk Aversion, Market Power, and Sustainability Implications.”**
