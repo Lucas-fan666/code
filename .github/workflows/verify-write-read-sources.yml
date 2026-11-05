@@ -1,0 +1,40 @@
+name: Verify write-read scientific sources
+on:
+  push:
+    branches: [physicaA-write-read-20261105]
+    paths:
+      - 'PhysicaA_Write_Read/reproducibility/**'
+      - 'PhysicaA_Write_Read/SOURCE_MANIFEST_SHA256.json'
+      - '.github/workflows/verify-write-read-sources.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deterministic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install verification dependencies
+        run: python -m pip install numpy scipy
+      - name: Check every scientific source and configuration hash
+        working-directory: PhysicaA_Write_Read
+        run: |
+          python - <<'PY'
+          import ast, hashlib, json
+          from pathlib import Path
+          root=Path('.')
+          manifest=json.loads((root/'SOURCE_MANIFEST_SHA256.json').read_text())
+          for group in ('scientific_sources','configuration_files'):
+              for rel, expected in manifest[group].items():
+                  data=(root/rel).read_bytes()
+                  assert len(data)==expected['bytes'], rel
+                  assert hashlib.sha256(data).hexdigest()==expected['sha256'], rel
+                  if rel.endswith('.py'): ast.parse(data, filename=rel)
+          assert len(manifest['scientific_sources'])==49
+          print('Verified 49 scientific source files and',len(manifest['configuration_files']),'configuration files.')
+          PY
+      - name: Enumerate identities and replay coupled kernels
+        run: python PhysicaA_Write_Read/reproducibility/verify.py

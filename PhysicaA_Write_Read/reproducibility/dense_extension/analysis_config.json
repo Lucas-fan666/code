@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-11-05T10:33:17.074054+00:00",
+  "role": "Descriptive analysis; primary results already known and unchanged",
+  "script_sha256": "737939c2adbf9cfdf7337811c3924962d8a94a69118558896d911783ecfefb01",
+  "bootstrap_seed": 202611052712,
+  "bootstrap_draws": 20000,
+  "new_intervals": "pointwise descriptive 95%; no new hypothesis selection"
+}

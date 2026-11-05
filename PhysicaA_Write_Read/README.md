@@ -1,15 +1,64 @@
 # Writing, retention and dynamical readout of group memory
 
-This is a partial source mirror for the writing--readout study. It contains the recovered figure-generation scripts, mechanism definitions, manuscript build script, SVG icons, dependency list and a recovery utility. The full simulator and analysis code are in the complete replication archive and are not yet all mirrored in this branch.
+This branch contains all 41 Python and 8 C++ scientific source files from the
+self-contained replication archive, together with the fixed simulation and
+analysis configurations. `SOURCE_MANIFEST_SHA256.json` records their SHA-256
+hashes and sizes. The source members match those in the recovered archive.
 
-The complete archive originally assembled for Zenodo is `PhysicaA_Zenodo_Code_Data_20261105.zip` (61,202,702 bytes; SHA-256 `9c7e001d81acdfa9b147d8587eb7144bff35f15bd47e4f3f16e4a02a086bf642`). It includes the complete simulator and analysis, all saved results and the 64 inputs needed by the locked strength analysis. That archive passed a clean from-data reproduction before the workspace became unavailable.
+## Reproduce from the saved data
 
-For the earlier saved file `PhysicaA_Code_Data_Write_Read.zip` (SHA-256 `d247bdebb1af487880ebb2357dd1f66cb24849a07af358720f681f02efca9ed2`), the included `restore_zenodo_archive.py` reconstructs the 64 missing inputs from the saved merged arrays and checks all 102 original result hashes. It writes a separate archive and does not change the input. The utility passed an automated synthetic-data smoke test.
+Unpack `PhysicaA_Zenodo_Code_Data_Recovered.zip`, enter
+`PhysicaA_Memory_Write_Read`, and run:
 
-Usage with Python and NumPy installed:
-
-```text
-python restore_zenodo_archive.py /path/to/PhysicaA_Code_Data_Write_Read.zip
+```bash
+python -m pip install -r requirements.txt
+python reproduce.py --from-data
 ```
 
-The result is `PhysicaA_Zenodo_Code_Data_Recovered.zip`. The utility checks its ZIP integrity, all original-result hashes and all recovered loss/dose arrays. The full archived release contains the inputs, fonts and manuscript sources needed by `python reproduce.py --from-data`.
+The full workflow requires Python, a C++17 compiler, Cairo, pdflatex and bibtex.
+The complete archive supplies the results, seeds, realized topologies, fonts,
+manuscript sources and other inputs used by this workflow. The GitHub mirror
+provides the scientific code and configurations; the data and document assets
+are distributed in the complete archive for Zenodo.
+
+## Source layout
+
+- `reproducibility/run.py`, `engine_api.py`, `batched.cpp` and `engine/`:
+  simulation driver, coupled kernels and wrappers.
+- `reproducibility/analyze.py`, `dense_*.py`, `reviewer_*.py` and
+  `interpretation*.py`: fixed analyses, grid extension, strength and school
+  extensions, and mechanism summaries.
+- `reproducibility/verify.py` and validation scripts: exhaustive finite-state
+  identities, exact frozen-memory checks, kernel replay and result validation.
+- `reproducibility/vendor/src/`: retained simulation dependencies.
+- `figures/`: publication figure scripts and mechanism definitions.
+- `manuscript/build.py`: document build entry point used by the full archive.
+- `reports/legacy_plotting.py`: archived plotting source.
+
+To run the data-independent deterministic checks with NumPy, SciPy and a C++17
+compiler installed:
+
+```bash
+python reproducibility/verify.py
+```
+
+## Recover the self-contained archive
+
+The saved original `PhysicaA_Code_Data_Write_Read.zip` has SHA-256
+`d247bdebb1af487880ebb2357dd1f66cb24849a07af358720f681f02efca9ed2`.
+The included utility recovers 64 strength-analysis inputs from its merged arrays
+and verifies all 102 original result-file hashes:
+
+```bash
+python restore_zenodo_archive.py PhysicaA_Code_Data_Write_Read.zip
+```
+
+It writes `PhysicaA_Zenodo_Code_Data_Recovered.zip` beside the input. ZIP byte
+hashes can differ between builds because of archive metadata; the original
+result hashes and recovered loss/dose arrays are checked directly. The utility
+has an independent synthetic-data smoke test.
+
+The two school datasets supply fixed contact structures for synthetic spreading
+dynamics. Their public sources, preprocessing rules and source hashes are
+documented in `reproducibility/inputs/topology_provenance.json` and the complete
+archive. Cite the DOI of the published Zenodo record once available.
