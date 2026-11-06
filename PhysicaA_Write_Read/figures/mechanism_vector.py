@@ -132,7 +132,7 @@ class Figure:
             col=CORAL if states[0]==1 else TEAL
             self.arrow((cx+18,686),(cx+43,740),controls=((cx+41,692),(cx+47,716)),color=col,width=2.4)
             self.arrow((cx-29,781),(cx+30,781),controls=((cx-9,800),(cx+9,800)),color=col,width=2.4)
-        for i,(pos,s) in enumerate(zip(pts,states)):self.sphere(*pos,21,s,label=True,donor=i in (0,1))
+        for i,(pos,s) in enumerate(zip(pts,states)):self.sphere(*pos,21,s,label=True,donor=(states in ([1,1,0],[2,2,0]) and i in (0,1)))
 
     def icon(self,name,x,y,size=23,color=INK):
         svg=ET.parse(ROOT/'assets'/f'{name}.svg').getroot()
@@ -185,7 +185,7 @@ def build(out=None):
     fig.icon('pencil',715,402,size=21,color=GOLD)
     fig.math(r'$\mathrm{Writing}:\ \lambda_{\mathrm{w}}$',803,420,22,'middle')
     fig.icon('clock-hour-4',950,402,size=22,color=TEAL)
-    fig.math(r'$\mathrm{Readout}:\ \lambda_{\mathrm{r}}$',1084,420,22,'middle')
+    fig.math(r'$\mathrm{Retention}:\ \lambda_{\mathrm{r}}$',1084,420,22,'middle')
     fig.pic.append(d.Rectangle(682,432,204,20,rx=3,ry=3,fill=GOLD,opacity=.28))
     fig.pic.append(d.Rectangle(886,432,294,20,rx=3,ry=3,fill=TEAL,opacity=.13))
     fig.math(r'$D$',784,449,19,'middle');fig.math(r'$H$',1033,449,19,'middle')
@@ -197,7 +197,7 @@ def build(out=None):
     fig.text('Same stored gap; different donor states',315,582,22,'middle')
     fig.text('Outlined nodes are donors',315,616,20,'middle')
     for cx,states in [(118,[1,1,0]),(315,[1,1,1]),(512,[2,2,0])]:fig.motif(cx,states)
-    for cx,words,chi,psi in [(118,'Rumor changes',1,1),(315,'Initially dormant',0,0),(512,'State change only',1,0)]:
+    for cx,words,chi,psi in [(118,'Rumor changes',1,1),(315,'No eligible recipient',0,0),(512,'State change only',1,0)]:
         fig.text(words,cx,832,21,'middle')
         fig.math(r'$\chi='+str(chi)+r',\ \psi='+str(psi)+'$',cx,871,23,'middle')
     fig.pic.append(d.Rectangle(38,906,554,96,rx=9,ry=9,fill='white',stroke=RULE,stroke_width=1.1))
@@ -218,7 +218,7 @@ def build(out=None):
     fig.pic.append(d.Rectangle(897,736,297,69,rx=8,ry=8,fill='white',stroke=RULE,stroke_width=1))
     fig.math(r'$\mathrm{Same}\ \lambda_{\mathrm{r}};\ \mathrm{common\ events}$',1045,761,20,'middle')
     fig.text('No external correction',1045,790,20,'middle')
-    fig.icon('zoom-in',853,946,size=22,color=TEAL)
+    fig.icon('zoom-in',810,946,size=22,color=TEAL)
     fig.text('Retained-memory contribution',991,964,20,'middle')
     fig.math(r'$G_A=\mathbb{E}[L^h-L^{\mathrm{tr}}]$',930,1001,28,'middle')
     # The continuation arrow connects the corrected withdrawal state to (d).
@@ -261,7 +261,7 @@ def build(out=None):
     preview=img.copy();preview.thumbnail((1480,1400));pr=io.BytesIO();preview.save(pr,format='PNG');atomic(OUT/'preview/mechanism_write_read.png',pr.getvalue())
     gray=ImageOps.grayscale(preview);gb=io.BytesIO();gray.save(gb,format='PNG');atomic(OUT/'preview/mechanism_grayscale.png',gb.getvalue())
 
-    caption='''Group-memory writing and readout. (a) R, U and C denote rumor, inactivity and correction. The memory target $\\Phi_\\sigma$ equals $+T_0$ for at least two R nodes, $-T_0$ for at least two C nodes, and zero otherwise. (b) Pulse duration $D$ and readout duration $H$ have relaxation rates $\\lambda_w$ and $\\lambda_r$. (c) Outlined donors distinguish effective memory-dependent resets ($\\chi$) from immediate changes in rumor occupation ($\\psi$). (d) $L^h$ and $L^{\mathrm{tr}}$ integrate post-withdrawal rumor fractions from identical treated node states with baseline or retained memories. $G_A$ is their expected difference. Hatching and stippling distinguish positive and negative memory; emphasized faces differ between readouts.'''
+    caption='''Group-memory writing and readout. (a) R, U and C denote rumor, inactivity and correction. The memory target $\\Phi_\\sigma$ equals $+T_0$ for at least two R nodes, $-T_0$ for at least two C nodes, and zero otherwise. (b) Writing duration $D$ and retention duration $H$ have relaxation rates $\\lambda_w$ and $\\lambda_r$. (c) Outlined donors distinguish effective memory-dependent resets ($\\chi$) from immediate changes in rumor occupation ($\\psi$). (d) $L^h$ and $L^{\mathrm{tr}}$ integrate post-withdrawal rumor fractions from identical treated node states with baseline or retained memories. $G_A$ is their expected difference. Hatching and stippling distinguish positive and negative memory; emphasized faces differ between readouts.'''
     approved_caption=ROOT.parent/'reports/final_mechanism_caption.tex'
     if approved_caption.exists():caption=approved_caption.read_text().strip()
     assert len(caption.split())<=120,len(caption.split())

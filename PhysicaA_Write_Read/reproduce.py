@@ -1,4 +1,4 @@
-"""Recalculate the new manuscript, never the related JFI study."""
+"""Recalculate the writing, retention and dynamical readout study."""
 from pathlib import Path
 import sys,subprocess,hashlib,json
 P=Path(__file__).resolve().parent;R=P/'reproducibility'

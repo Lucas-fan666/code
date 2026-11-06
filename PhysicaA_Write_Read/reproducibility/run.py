@@ -27,7 +27,7 @@ DESIGN=dict(
  curve_grid=list(np.linspace(0,10,21)),curve_cells='All read rates at write=.2, both target rules; raw paired curves saved',
  zero_controls='write=0 implies both memory contrasts exactly zero at every read rate; read=0 freezes an intervention-generated gap and need not give zero',
  assumptions='Rates are synthetic. School records determine static group topology only. This is a finite-time response study, not a phase diagram or empirical misinformation-effect estimate.',
- provenance='JFI FI-S-26-06360 contains the shared model/order/simulator; its algorithmic theorems, selection results and timing data are not contributions of this study.'
+ provenance='Protocol for group-memory writing, retention and activation.'
 )
 def rng(*keys):return np.random.default_rng(np.random.SeedSequence([DESIGN['master_seed'],*keys]))
 def lock():

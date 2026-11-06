@@ -3,11 +3,11 @@
 This branch contains all 41 Python and 8 C++ scientific source files from the
 self-contained replication archive, together with the fixed simulation and
 analysis configurations. `SOURCE_MANIFEST_SHA256.json` records their SHA-256
-hashes and sizes. The source members match those in the recovered archive.
+hashes and sizes. The source members match those in the revised replication archive.
 
 ## Reproduce from the saved data
 
-Unpack `PhysicaA_Zenodo_Code_Data_Recovered.zip`, enter
+Unpack `PhysicaA_Code_Data_Revision_20261106.zip`, enter
 `PhysicaA_Memory_Write_Read`, and run:
 
 ```bash
@@ -61,4 +61,4 @@ has an independent synthetic-data smoke test.
 The two school datasets supply fixed contact structures for synthetic spreading
 dynamics. Their public sources, preprocessing rules and source hashes are
 documented in `reproducibility/inputs/topology_provenance.json` and the complete
-archive. Cite the DOI of the published Zenodo record once available.
+archive. Archive DOI: https://doi.org/10.5281/zenodo.23811459.

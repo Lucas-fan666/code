@@ -1,6 +1,7 @@
 {
   "created_utc": "2026-11-05T03:12:30.729163+00:00",
   "script_sha256": "ab73f6b1f962995f4d2bc7eed620cf257c8f990d7ae1e837aebdc10a50cdea0c",
-  "protocol_sha256": "26b296ef537d2407cce13d499a747037b358dd76b555c71d86ce948db20542c2",
-  "note": "Analysis script fixed before any numerical outcome values were opened; engine progress and file presence only were inspected."
+  "protocol_sha256": "ab86e47a863a80f0e46f5e5daf15465288bd7e4a9b5d75bc490045a863f27a3d",
+  "note": "Analysis script fixed before any numerical outcome values were opened; engine progress and file presence only were inspected.",
+  "metadata_revision": "2026-11-06: protocol provenance text updated; analysis source and prespecified comparisons unchanged."
 }

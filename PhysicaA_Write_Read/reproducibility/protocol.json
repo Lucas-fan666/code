@@ -124,7 +124,7 @@
     "curve_cells": "All read rates at write=.2, both target rules; raw paired curves saved",
     "zero_controls": "write=0 implies both memory contrasts exactly zero at every read rate; read=0 freezes an intervention-generated gap and need not give zero",
     "assumptions": "Rates are synthetic. School records determine static group topology only. This is a finite-time response study, not a phase diagram or empirical misinformation-effect estimate.",
-    "provenance": "JFI FI-S-26-06360 contains the shared model/order/simulator; its algorithmic theorems, selection results and timing data are not contributions of this study."
+    "provenance": "Protocol for group-memory writing, retention and activation."
   },
   "sources": {
     "batched.cpp": "a8f808747b2707a2f84cd36da8074f7f02097fd2f85fb4d5cc16fb6c56ac89ec",
@@ -134,7 +134,7 @@
     "inputs/contact-high-school.npz": "fd1ad7b3fe361bc98880772cccd2be18dd43cc22937bedcd300227808b606f08",
     "inputs/contact-primary-school.npz": "d5a69121238feb9e46b01b64c7db458535da0a8f218641f6887c637060eb4790",
     "inputs/topology_provenance.json": "bbdfc621f43c95e839c2aed21647a4dbf60dd852951406f1b92a67b2c48be98c",
-    "run.py": "13466c35265411348af129d22087d9bfe7b1fc7d8f82f9bb84cd8297150bf090",
+    "run.py": "12adde7c18876ed2f04edfe00314d2f8e7ef0499e5578fd3aabc2f53fe45d72e",
     "vendor/src/__init__.py": "98724be0d709afb24cd6e067f565bf3e49c1a0462dedc56200e2d57edf797004",
     "vendor/src/acs.py": "09ee1763821b7a85f6802e02ed96865d613d4363206fcdc6babfe0d71e7917b2",
     "vendor/src/aggregate.py": "a44598820345b8a3ab3a0df14118b141b8222339979523479c319341447fbe84",
@@ -151,5 +151,9 @@
     "vendor/src/set_simulator.py": "e2135305f9fbdbeefae4cd16880f7483f104d87ee7e3444358900cc520af9db1",
     "vendor/src/shared_scores.py": "7ee6c5df2e55b85c610d916194b067cefebb439dd92555c2aba08cff7bf8a1cd",
     "vendor/src/simulator.py": "5dd6b1af3b22c35651b3c91e1ad08a90a1b93d593dcee3737739f06e04f6e213"
+  },
+  "metadata_revision": {
+    "date": "2026-11-06",
+    "scope": "Bibliographic provenance text only; design parameters, random seeds and analysis specification unchanged."
   }
 }

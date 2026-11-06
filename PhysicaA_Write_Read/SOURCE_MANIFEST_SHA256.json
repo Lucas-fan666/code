@@ -1,7 +1,7 @@
 {
   "study": "Writing, retention and dynamical readout of group memory",
   "original_archive_sha256": "d247bdebb1af487880ebb2357dd1f66cb24849a07af358720f681f02efca9ed2",
-  "reference": "Scientific source members of the self-contained archive produced by restore_zenodo_archive.py",
+  "reference": "Scientific source members of PhysicaA_Code_Data_Revision_20261106.zip",
   "python_files": 41,
   "cpp_files": 8,
   "scientific_sources": {
@@ -18,8 +18,8 @@
       "bytes": 13016
     },
     "figures/mechanism_vector.py": {
-      "sha256": "bb5b3ffd790f63ec4c2064c99c563f510a0c29504aa8d6e5c0dcc78b049e59d4",
-      "bytes": 17805
+      "sha256": "b5d8c68d2ccef225610e662811c18b9d97c47f7a0dcee91ed701471197e0324b",
+      "bytes": 17849
     },
     "figures/response_four.py": {
       "sha256": "d6eecf2fceff246c13479fec1a77a6b033bceb0a4574cfc53fbb0115629a12a2",
@@ -34,8 +34,8 @@
       "bytes": 9893
     },
     "reproduce.py": {
-      "sha256": "0f72f6a2aeca556f2884d4ab6d6a1016f9a5a79332a5c6cec6cb1d80305c1ead",
-      "bytes": 1672
+      "sha256": "d48fa57b50e74c81ec47312c89089ec133be2c0e1b98f4625b3e333da984fe06",
+      "bytes": 1675
     },
     "reproducibility/analyze.py": {
       "sha256": "ab73f6b1f962995f4d2bc7eed620cf257c8f990d7ae1e837aebdc10a50cdea0c",
@@ -122,16 +122,16 @@
       "bytes": 2091
     },
     "reproducibility/run.py": {
-      "sha256": "13466c35265411348af129d22087d9bfe7b1fc7d8f82f9bb84cd8297150bf090",
-      "bytes": 9065
+      "sha256": "12adde7c18876ed2f04edfe00314d2f8e7ef0499e5578fd3aabc2f53fe45d72e",
+      "bytes": 8968
     },
     "reproducibility/topology_summary.py": {
       "sha256": "ad026f5e6fb78cca26acf0f07729268ad88473b43a2c6fb4c89423a827396e04",
       "bytes": 1651
     },
     "reproducibility/validate.py": {
-      "sha256": "10cfba654c0e762eac1008263af7639602ccf761699f34bc1e7c1230ff7a2a23",
-      "bytes": 3775
+      "sha256": "e7708c57b6aa77570d3e21857dc33e1d4effe0f35a28a29f679ee508e9402ced",
+      "bytes": 3773
     },
     "reproducibility/vendor/src/__init__.py": {
       "sha256": "98724be0d709afb24cd6e067f565bf3e49c1a0462dedc56200e2d57edf797004",
@@ -208,16 +208,16 @@
       "bytes": 157
     },
     "figures/mechanism_semantics.json": {
-      "sha256": "2310bcb1ad32680159f47763cb7939333026466635c671ed89ef00961b33f486",
-      "bytes": 12828
+      "sha256": "a21ec3b9740753ef1f9d30d29cb6618fbc9b5855c93518e954c6bb6985388dd1",
+      "bytes": 12832
     },
     "reproducibility/protocol.json": {
-      "sha256": "26b296ef537d2407cce13d499a747037b358dd76b555c71d86ce948db20542c2",
-      "bytes": 6092
+      "sha256": "ab86e47a863a80f0e46f5e5daf15465288bd7e4a9b5d75bc490045a863f27a3d",
+      "bytes": 6172
     },
     "reproducibility/analysis_lock.json": {
-      "sha256": "ea50127a2d52be47080a2531676063c71953c2bbf27e86be0c3a7b18ea99c683",
-      "bytes": 371
+      "sha256": "faea687d5a3945e55879af394a2f161adcb248b04e3827d609c6fa1246086b5e",
+      "bytes": 499
     },
     "reproducibility/dense_extension/locked_config.json": {
       "sha256": "558ec750dc2404b4b1f1b7522326bdc5397d01fb29c3e3c7086f7583d5c825d4",
@@ -246,9 +246,31 @@
     "reproducibility/inputs/topology_provenance.json": {
       "sha256": "bbdfc621f43c95e839c2aed21647a4dbf60dd852951406f1b92a67b2c48be98c",
       "bytes": 1811
+    },
+    "reproducibility/analysis_lock.sha256": {
+      "sha256": "cdb3fdcbde45024609d5f923d0ced891e648189972d684289252b71ce707f67f",
+      "bytes": 85
+    },
+    "reproducibility/protocol.sha256": {
+      "sha256": "83115dcc74d3efe82d37ed5de48efa7553a672b26ff69cb8bd2d7b8b7caf8a34",
+      "bytes": 80
+    },
+    "reproducibility/dense_extension/locked_config.sha256": {
+      "sha256": "d62a89d417554973e32ce1c327129c725272b3c1dda5d8bb4963c47073fb1f21",
+      "bytes": 85
+    },
+    "reproducibility/dense_extension/analysis_config.sha256": {
+      "sha256": "8a43d5a083fc93ab7d3688acdfa6f3f4c4006a82d1ee73a2d274f53d12c46304",
+      "bytes": 87
+    },
+    "reproducibility/reviewer_extension/protocol.sha256": {
+      "sha256": "0fe41fc93077c6e73919a5332f72f799ae8b6fcb0f07c6e1fd7bf9d139200653",
+      "bytes": 80
     }
   },
   "original_result_files": 102,
   "recovered_strength_inputs": 64,
-  "entrypoint_note": "reproduce.py matches the recovered distribution and omits submission-letter generation."
+  "entrypoint_note": "reproduce.py matches the recovered distribution and omits submission-letter generation.",
+  "dataset_doi": "10.5281/zenodo.23811459",
+  "editorial_revision": "2026-11-06: presentation and provenance metadata updated; simulation parameters, prespecified contrasts and original result files unchanged."
 }

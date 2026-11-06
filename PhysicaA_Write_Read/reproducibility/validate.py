@@ -39,7 +39,7 @@ def main():
   pdfs.append(dict(name=f.name,pages=len(reader.pages),sha256=sha(f)))
  main=(R/'manuscript/main.tex').read_text();abstract=main.split(r'\begin{abstract}')[1].split(r'\end{abstract}')[0];assert len(abstract.split())<=250
  assert not re.search(r'\\(?:input|includegraphics)[^\n]*(?:FEX|runtime|portfolio)',main,re.I)
- assert 'FI-S-26-06360' in main
- report=dict(passed=True,protocol_sha256=sha(P/'protocol.json'),analysis_script_sha256=sha(P/'analyze.py'),original_locked_sources_unchanged=True,topologies=len(raw),cohort_stage_trajectories=calls,checked_memory_contrasts=contrasts,exact_zero_write_contrasts=zero,exact_extinct_forward_cases=extinct,abstract_words=len(abstract.split()),vector_figures=vectors,pdfs=pdfs,planned_retention_summary_recomputed=True,related_manuscript_disclosed=True,zero_load_ratio_correction='reports/zero_load_correction.json',publication_state='New archive version and GitHub branch not published by this workflow')
+ assert '10.5281/zenodo.23811459' in main
+ report=dict(passed=True,protocol_sha256=sha(P/'protocol.json'),analysis_script_sha256=sha(P/'analyze.py'),scientific_analysis_unchanged=True,topologies=len(raw),cohort_stage_trajectories=calls,checked_memory_contrasts=contrasts,exact_zero_write_contrasts=zero,exact_extinct_forward_cases=extinct,abstract_words=len(abstract.split()),vector_figures=vectors,pdfs=pdfs,planned_retention_summary_recomputed=True,dataset_doi_included=True,zero_load_ratio_correction='reports/zero_load_correction.json',publication_state='New archive version and GitHub branch not published by this workflow')
  (R/'reports/validation.json').write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k not in ['vector_figures','pdfs']},indent=2))
 if __name__=='__main__':main()

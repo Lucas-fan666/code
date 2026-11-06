@@ -10,7 +10,7 @@
     600
   ],
   "minimum_font_points": 7.383794767589536,
-  "caption_words": 106,
+  "caption_words": 120,
   "matched_nodes_top": [
     2,
     1,
@@ -105,9 +105,9 @@
       424.571875
     ],
     [
-      1017.6918208740235,
+      1010.3065669677735,
       403.28,
-      1150.3081791259765,
+      1157.6934330322265,
       423.6059375
     ],
     [
@@ -615,7 +615,7 @@
       "anchor": "middle"
     },
     {
-      "text": "Initially dormant",
+      "text": "No eligible recipient",
       "x": 315,
       "y": 832,
       "size": 21,
