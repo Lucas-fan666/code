@@ -82,7 +82,7 @@ def paired(rows,groups,name,titles,obs='forward',source=''):
     fig,axs=plt.subplots(1,2,figsize=(170/25.4,103/25.4))
     fig.subplots_adjust(left=.08,right=.985,top=.92,bottom=.26,wspace=.24)
     for i,(ax,(z,lo),title) in enumerate(zip(axs,arr,titles)):
-        im=paint(ax,z,lo,norm,title,chr(97+i));ax.set_xlabel(r'Readout clock $\lambda_{\rm r}H$',fontsize=9,labelpad=4)
+        im=paint(ax,z,lo,norm,title,chr(97+i));ax.set_xlabel(r'Retention scale $\lambda_{\rm r}H$',fontsize=9,labelpad=4)
         if i==0:ax.set_ylabel(r'Writing clock $\lambda_{\rm w}D$',fontsize=9,labelpad=4)
     colorbar(fig,im,[.20,.12,.66,.027],obs)
     base.save(fig,name,[source],
@@ -107,9 +107,9 @@ def storage():
     axs[0].set_ylabel('Normalized stored load',fontsize=8.8);axs[0].set_ylim(bottom=0)
     axs[1].set_ylabel(r'Active-memory fraction $\varphi_D^q$',fontsize=8.8);axs[1].set_ylim(0,1)
     axs[1].legend(handles=[Line2D([],[],color=base.INK,ls='-',marker='o',mfc=base.INK,ms=3,label='Treated'),Line2D([],[],color=base.INK,ls='--',marker='o',mfc='white',ms=3,label='Untreated')],loc='upper left',frameon=False,fontsize=7.1)
-    axs[2].set_xlabel(r'Initial readout rate (time$^{-1}$)',fontsize=8.5)
+    axs[2].set_xlabel(r'Initial drift $\nu_D^{\rm tr}$ (time$^{-1}$)',fontsize=8.5)
     axs[2].set_ylabel(r'Retained-memory contribution $G_A$'+'\n(time units)',fontsize=8.2);axs[2].set_ylim(bottom=0);axs[2].set_xlim(left=0)
-    for i,(ax,title) in enumerate(zip(axs,['Stored load','Donor activation','Readout and response'])):
+    for i,(ax,title) in enumerate(zip(axs,['Stored load','Donor activation','Response onset'])):
         base.numeric_axes(ax);ax.tick_params(labelsize=7.8);ax.set_title(f'({chr(97+i)}) '+title,loc='left',fontweight='bold',fontsize=8.8,pad=9)
     handles=[Line2D([],[],color=base.FAMILY_COLORS[i],marker=base.MARKERS[i],lw=1,ms=3.8,label=f) for i,f in enumerate(base.FAMILIES)]
     fig.legend(handles=handles,loc='lower center',bbox_to_anchor=(.53,.015),ncol=4,frameon=False,fontsize=8,columnspacing=1.3,handlelength=1.7)

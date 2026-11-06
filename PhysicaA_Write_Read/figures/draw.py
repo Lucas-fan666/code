@@ -69,7 +69,7 @@ def numeric_axes(ax):
 
 def contrast_text(rgba):
     rgb=np.array(rgba[:3]);linear=np.where(rgb<=.04045,rgb/12.92,((rgb+.055)/1.055)**2.4)
-    lum=linear@np.array([.2126,.7152,.0722])
+    lum=linear @ np.array([.2126,.7152,.0722])
     return 'white' if (1.05/(lum+.05))>((lum+.05)/.05) else '#15252E'
 
 def heatmaps(data,groups,name,titles,observable='forward'):
@@ -89,7 +89,7 @@ def heatmaps(data,groups,name,titles,observable='forward'):
         im=ax.pcolormesh(np.arange(6),np.arange(5),z,cmap=cmap,norm=norm,edgecolors='white',linewidth=.35,rasterized=False)
         ax.set(xticks=np.arange(5)+.5,xticklabels=['0','.2','2','20','200'],
           yticks=np.arange(4)+.5,yticklabels=['0','.04','.4','4'],
-          xlabel=r'Readout clock $\lambda_{\rm r}H$',ylabel=r'Writing clock $\lambda_{\rm w}D$')
+          xlabel=r'Retention scale $\lambda_{\rm r}H$',ylabel=r'Writing clock $\lambda_{\rm w}D$')
         ax.tick_params(which='both',length=0)
         for wi in range(4):
             for ri in range(5):
@@ -135,7 +135,7 @@ def storage():
         ax.set_xlim(-.15,3.15)
     axa.set_ylabel('Normalized memory load');axa.set_ylim(bottom=0)
     for ax in [axb,axc]:ax.set_ylabel('Active-memory fraction');ax.set_ylim(0,1)
-    axd.set(xlabel=r'Initial readout rate (time$^{-1}$)',ylabel=r'Memory gain $G_A$ (time units)')
+    axd.set(xlabel=r'Initial drift $\nu_D^{\rm tr}$ (time$^{-1}$)',ylabel=r'Memory gain $G_A$ (time units)')
     axd.set_ylim(bottom=0);axd.set_xlim(left=0)
     for i,(ax,title) in enumerate(zip(axs.ravel(),['Stored load','Treated-state activation','Untreated-state activation','From activation to response'])):
         numeric_axes(ax);panel(ax,chr(97+i),title)
@@ -169,7 +169,7 @@ def curves():
             ax.ticklabel_format(axis='y',style='plain',useOffset=False)
     handles=[Line2D([],[],color=RATE_COLORS[i],ls=RATE_LINES[i],marker=RATE_MARKERS[i],
         ms=3.8,lw=1.4,label=str(v)) for i,v in enumerate(READS)]
-    fig.legend(handles=handles,title=r'Readout rate $\lambda_{\rm r}$',loc='lower center',
+    fig.legend(handles=handles,title=r'Retention rate $\lambda_{\rm r}$',loc='lower center',
         bbox_to_anchor=(.54,.005),ncol=5,frameon=False,handlelength=2.8,
         columnspacing=1.6,fontsize=8,title_fontsize=8.5)
     save(fig,'readout_curves',['curves_summary.npz','analyze.py:weights(seed=202611052712)'],

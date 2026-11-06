@@ -52,7 +52,7 @@ def heat(data,groups,name,titles,observable='forward'):
     fig.subplots_adjust(left=.078,right=.985,top=.94,bottom=.29,wspace=.22)
     for i,(ax,(z,lo),title) in enumerate(zip(axs,arrays,titles)):
         im=paint(ax,z,lo,norm,title,chr(97+i))
-        ax.set_xlabel(r'Readout clock $\lambda_{\rm r}H$',fontsize=9.5,labelpad=5)
+        ax.set_xlabel(r'Retention scale $\lambda_{\rm r}H$',fontsize=9.5,labelpad=5)
         if i==0:ax.set_ylabel(r'Writing clock $\lambda_{\rm w}D$',fontsize=9.5,labelpad=5)
     cax=fig.add_axes([.20,.14,.66,.03]);cb=fig.colorbar(im,cax=cax,orientation='horizontal')
     symbol={'forward':r'G_A','reverse':r'G_A^{\rm rev}','order_average':r'\overline{G}_A'}[observable]

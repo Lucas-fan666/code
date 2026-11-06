@@ -62,3 +62,7 @@ The two school datasets supply fixed contact structures for synthetic spreading
 dynamics. Their public sources, preprocessing rules and source hashes are
 documented in `reproducibility/inputs/topology_provenance.json` and the complete
 archive. Archive DOI: https://doi.org/10.5281/zenodo.23811459.
+
+## Short-time response verification
+
+The deterministic checker also compares the leading quadratic occupation-response coefficient with exact reward matrix exponentials for 243 single-triangle cases. These additional checks use frozen memory and introduce no new study trajectories. The general fixed-rate expansion and its proof are in the article and Supplementary Material. Figure labels distinguish retention relaxation from the initial occupation-response drift.

@@ -1,10 +1,11 @@
 cff-version: 1.2.0
-message: "Please cite this software and dataset when using the replication materials."
+message: "Please cite the replication archive when using these materials."
 type: software
 title: "Writing, retention and dynamical readout of group memory in higher-order spreading: code and data"
 authors:
   - family-names: Fan
     given-names: Junkai
     affiliation: Northeastern University
-version: "2026-11-05"
+version: "2026-11-06"
+doi: "10.5281/zenodo.23811459"
 repository-code: "https://github.com/Lucas-fan666/code/tree/physicaA-write-read-20261105/PhysicaA_Write_Read"

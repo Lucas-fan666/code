@@ -6,28 +6,28 @@
   "cpp_files": 8,
   "scientific_sources": {
     "figures/dense_draw.py": {
-      "sha256": "d08fc540697ebb496a0ef5263779a62608dd29bf7ba72665912388ea0ebb4585",
-      "bytes": 8348
+      "sha256": "61445eb79fd37cfdf8eca92b24b24cc5bdc486a63e55463966d54df8f210adf1",
+      "bytes": 8350
     },
     "figures/draw.py": {
-      "sha256": "69611f6faec2ac78227eb3ddee1f5a4260af1f58022335f59e39b318f35286a2",
-      "bytes": 14268
+      "sha256": "0e3752ea228aa549deb23604d63f256a9c7aa937f9229e9259887aa05a2d2e84",
+      "bytes": 14284
     },
     "figures/focused_draw.py": {
-      "sha256": "2016597447b2c23801e3bfd93e3aa659f54e74fd8194fe50e4fb1c1b01237370",
-      "bytes": 13016
+      "sha256": "95db0e7f38d3c6d00364c3b2b56d2f4aa33b628b6027dff551722530bdc6adb8",
+      "bytes": 13022
     },
     "figures/mechanism_vector.py": {
       "sha256": "b5d8c68d2ccef225610e662811c18b9d97c47f7a0dcee91ed701471197e0324b",
       "bytes": 17849
     },
     "figures/response_four.py": {
-      "sha256": "d6eecf2fceff246c13479fec1a77a6b033bceb0a4574cfc53fbb0115629a12a2",
-      "bytes": 4602
+      "sha256": "451895ed0a28786e08f4fe8d8f4b9378e00455074bcd53ea9252e9416f5bb943",
+      "bytes": 4610
     },
     "manuscript/build.py": {
-      "sha256": "8bdd469026e07ed4ade2d8af3429261b17cc5c7d90b0e29bd46c15428574aee2",
-      "bytes": 1999
+      "sha256": "da9d3cb8d46fc85a8408dc439c3303a2276a8ef8b057534a7818d6970e243d74",
+      "bytes": 2643
     },
     "reports/legacy_plotting.py": {
       "sha256": "b33367b2ab3f906ebd1741a9a1ae48d277908a155f39e2d60841922584d9efca",
@@ -198,8 +198,8 @@
       "bytes": 4700
     },
     "reproducibility/verify.py": {
-      "sha256": "5b104f682f8f4606599bae8aa4ada73cf274777174c6c69841d5dde45f07ee9f",
-      "bytes": 3015
+      "sha256": "6c3e44fdbc7d4885f255a0710704ab383c8170c27231f1c114a8469ba53a93eb",
+      "bytes": 4501
     }
   },
   "configuration_files": {
@@ -272,5 +272,5 @@
   "recovered_strength_inputs": 64,
   "entrypoint_note": "reproduce.py matches the recovered distribution and omits submission-letter generation.",
   "dataset_doi": "10.5281/zenodo.23811459",
-  "editorial_revision": "2026-11-06: presentation and provenance metadata updated; simulation parameters, prespecified contrasts and original result files unchanged."
+  "editorial_revision": "2026-11-06: terminology, short-time response verification and figure presentation; original statistical analysis and outcome arrays preserved."
 }
