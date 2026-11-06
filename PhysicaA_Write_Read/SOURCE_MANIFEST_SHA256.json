@@ -26,8 +26,8 @@
       "bytes": 4610
     },
     "manuscript/build.py": {
-      "sha256": "da9d3cb8d46fc85a8408dc439c3303a2276a8ef8b057534a7818d6970e243d74",
-      "bytes": 2643
+      "sha256": "9fee016c68545e734c23fb4d1c50ce6697f9e32b8e3d8866a5e442d8e0f3b3c9",
+      "bytes": 4332
     },
     "reports/legacy_plotting.py": {
       "sha256": "b33367b2ab3f906ebd1741a9a1ae48d277908a155f39e2d60841922584d9efca",
@@ -272,5 +272,5 @@
   "recovered_strength_inputs": 64,
   "entrypoint_note": "reproduce.py matches the recovered distribution and omits submission-letter generation.",
   "dataset_doi": "10.5281/zenodo.23811459",
-  "editorial_revision": "2026-11-06: terminology, short-time response verification and figure presentation; original statistical analysis and outcome arrays preserved."
+  "editorial_revision": "Matched-state history response; exact load-access factorization; current ten-history school tables synchronized at build time. Statistical analysis and raw result arrays unchanged."
 }
