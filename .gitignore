@@ -14,3 +14,8 @@ __pycache__/
 # OS noise
 .DS_Store
 Thumbs.db
+
+# repository housekeeping
+*.log
+dist/
+legacy/
