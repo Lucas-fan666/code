@@ -1,0 +1,37 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Mean selection loss at a validation budget of 100 pairs, per network.}
+\label{tab:pergraph}
+\begin{tabular}{l r r r}
+\toprule
+Network & Uniform & Two-hop & Degree-matched \\
+\midrule
+BA-1000-3 & 0.0000 & 0.0000 & 0.0000 \\
+BA-1000-5 & 0.0029 & 0.0000 & 0.0000 \\
+BA-2000-3 & 0.0000 & 0.0023 & 0.0000 \\
+BA-500-2 & 0.0000 & 0.0000 & 0.0000 \\
+CM-powerlaw & 0.0093 & 0.0000 & 0.0000 \\
+CaCondMat & 0.0002 & 0.0080 & 0.0009 \\
+CaGrQc & 0.0003 & 0.0062 & 0.0006 \\
+CaHepTh & 0.0002 & 0.0094 & 0.0100 \\
+ER-1000-0.005 & 0.0106 & 0.0018 & 0.0085 \\
+ER-500-0.010 & 0.0124 & 0.0035 & 0.0100 \\
+ER-500-0.030 & 0.0075 & 0.0016 & 0.0067 \\
+EmailEnron & 0.0044 & 0.0084 & 0.0026 \\
+EmailEuCore & 0.0076 & 0.0113 & 0.0050 \\
+FacebookEgo & 0.0025 & 0.0068 & 0.0011 \\
+Florentine & 0.1806 & 0.1222 & 0.1500 \\
+Karate & 0.0254 & 0.0000 & 0.0269 \\
+LesMiserables & 0.0033 & 0.0249 & 0.0110 \\
+P2PGnutella08 & 0.0032 & 0.0078 & 0.0000 \\
+SBM-disassortative & 0.0036 & 0.0004 & 0.0057 \\
+SBM-strong & 0.0076 & 0.0006 & 0.0019 \\
+SBM-weak & 0.0062 & 0.0008 & 0.0099 \\
+WS-1000-8-0.3 & 0.0008 & 0.0145 & 0.0009 \\
+WS-500-4-0.1 & 0.0011 & 0.0070 & 0.0010 \\
+WikiVote & 0.0041 & 0.0000 & 0.0078 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Florentine is excluded from the main benchmark because its validation pool saturates at the smallest budget; its losses are reported here for completeness and are the same at every requested budget for that reason. Means over twenty repetitions.\end{minipage}
+\end{table}

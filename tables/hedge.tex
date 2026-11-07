@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Hedged validation at a budget of 200 pairs, with the deployment regime unknown. \emph{Matched} validates under the deployment regime; \emph{mismatched} is the mean of the two single wrong regimes; \emph{hedge, two regimes} averages only the two regimes that are not the deployment one; \emph{hedge, all three} also includes it. Loss is in test AUC.}
+\label{tab:hedge}
+\begin{tabular}{l r r r r r}
+\toprule
+Deployment regime & Matched & Mismatched & Hedge (two) & Hedge (three) & Recovery, two / three \\
+\midrule
+Uniform & 0.0039 & 0.0140 & 0.0124 & 0.0064 & 12\% / 55\% \\
+Two-hop & 0.0041 & 0.0918 & 0.0878 & 0.0128 & 4\% / 86\% \\
+Degree-matched & 0.0047 & 0.0184 & 0.0181 & 0.0087 & 2\% / 53\% \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize The recovery is the share of the mismatch penalty removed, relative to the mean of the two single wrong regimes, at the same annotation budget: hedging spends extra negative sampling, not extra labels. The recovery is large only where the deployment regime is two-hop, because the two-hop penalty is an order of magnitude larger than the other two; hedging over the two regimes that exclude two-hop recovers little of it.\end{minipage}
+\end{table}

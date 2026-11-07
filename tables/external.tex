@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Selection loss on six SNAP networks held out of the frozen benchmark.}
+\label{tab:external}
+\begin{tabular}{l r r r r r r}
+\toprule
+Regime & $L(20)$ & $L(200)$ & $L(2{,}000)$ & Mis-sel.\ at 20 & Near-ties here & Near-ties benchmark \\
+\midrule
+Uniform & 0.0080 & 0.0002 & 0.0000 & 36.7\% & 33\% & 71\% \\
+Two-hop & 0.0202 & 0.0000 & 0.0000 & 33.3\% & 33\% & 64\% \\
+Degree-matched & 0.0044 & 0.0001 & 0.0000 & 33.3\% & 33\% & 62\% \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Six SNAP networks (CaHepPh 11.2k nodes, CaAstroPh 17.9k, AsCaida 26.5k, Oregon1 10.7k, P2PGnutella24 26.5k, P2PGnutella31 62.6k), ten repetitions, same budgets, regimes and indices as the main experiment, and never used in any tuning decision. A near-tie is a cell whose top-two test AUCs differ by at most 0.02; the last column repeats the same statistic on the 24-network benchmark.\end{minipage}
+\end{table}

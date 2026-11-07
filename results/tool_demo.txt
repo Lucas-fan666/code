@@ -1,0 +1,86 @@
+===== uniform (beta=0.62) =====
+cells                      1380
+candidates per cell        10
+top-two gap: median        0.0061 AUC
+             mean          0.0274 AUC
+gap < 0.01 AUC             56% of cells
+gap < 0.002 AUC            39% of cells
+near-tie exponent alpha    0.27  (fit on 858 gaps < 0.02)
+closed-form gamma          0.79  = beta(1+alpha) with beta = 0.62, alpha = 0.27
+full-pool val/test agree   71% of cells
+
+predicted selection loss (noise model)
+  budget     loss
+      20   0.0077
+      50   0.0040
+     100   0.0024
+     200   0.0015
+     500   0.0007
+    1000   0.0005
+    2000   0.0003
+fitted decay exponent      0.72  (floor 0.0000, R^2 1.000)
+
+budget needed for a target noise-limited loss
+  (the measured distribution-shift floor is additive to this)
+  loss <= 0.02   about 5 pairs
+  loss <= 0.01   about 14 pairs
+
+wrote E:\浏览器\Validation_Budget_Link_Prediction_Submission_Package\Validation_Budget_Link_Prediction\results\tool_demo_uniform.json
+
+===== two_hop (beta=0.552) =====
+cells                      1380
+candidates per cell        10
+top-two gap: median        0.0061 AUC
+             mean          0.0274 AUC
+gap < 0.01 AUC             56% of cells
+gap < 0.002 AUC            39% of cells
+near-tie exponent alpha    0.27  (fit on 858 gaps < 0.02)
+closed-form gamma          0.70  = beta(1+alpha) with beta = 0.55, alpha = 0.27
+full-pool val/test agree   71% of cells
+
+predicted selection loss (noise model)
+  budget     loss
+      20   0.0086
+      50   0.0047
+     100   0.0030
+     200   0.0020
+     500   0.0011
+    1000   0.0007
+    2000   0.0004
+fitted decay exponent      0.64  (floor 0.0000, R^2 1.000)
+
+budget needed for a target noise-limited loss
+  (the measured distribution-shift floor is additive to this)
+  loss <= 0.02   about 5 pairs
+  loss <= 0.01   about 16 pairs
+
+wrote E:\浏览器\Validation_Budget_Link_Prediction_Submission_Package\Validation_Budget_Link_Prediction\results\tool_demo_two_hop.json
+
+===== degree (beta=0.612) =====
+cells                      1380
+candidates per cell        10
+top-two gap: median        0.0061 AUC
+             mean          0.0274 AUC
+gap < 0.01 AUC             56% of cells
+gap < 0.002 AUC            39% of cells
+near-tie exponent alpha    0.27  (fit on 858 gaps < 0.02)
+closed-form gamma          0.78  = beta(1+alpha) with beta = 0.61, alpha = 0.27
+full-pool val/test agree   71% of cells
+
+predicted selection loss (noise model)
+  budget     loss
+      20   0.0079
+      50   0.0041
+     100   0.0025
+     200   0.0015
+     500   0.0008
+    1000   0.0005
+    2000   0.0003
+fitted decay exponent      0.71  (floor 0.0000, R^2 1.000)
+
+budget needed for a target noise-limited loss
+  (the measured distribution-shift floor is additive to this)
+  loss <= 0.02   about 5 pairs
+  loss <= 0.01   about 14 pairs
+
+wrote E:\浏览器\Validation_Budget_Link_Prediction_Submission_Package\Validation_Budget_Link_Prediction\results\tool_demo_degree.json

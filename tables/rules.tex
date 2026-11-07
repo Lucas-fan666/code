@@ -1,0 +1,46 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Five selection rules at a fixed annotation budget, matched design. Every rule spends exactly the same number of pairs as the single draw it is compared with; differences are paired within network.}
+\label{tab:rules}
+\begin{tabular}{l r r r r}
+\toprule
+Rule & Mean loss & $\Delta$ vs single & $p$ (Wilcoxon) & Networks better (\%) \\
+\midrule
+\multicolumn{5}{l}{Budget 50 pairs} \\
+\quad Single draw & 0.0088 & --- & --- & --- \\
+\quad Averaged AUC & 0.0117 & +0.0029 & 0.00021 & 26 \\
+\quad Rank aggregation & 0.0384 & +0.0295 & 7.9e-06 & 13 \\
+\quad Tolerance zone & 0.0172 & +0.0084 & 7.9e-06 & 13 \\
+\quad Lower confidence bound & 0.0367 & +0.0279 & 2.4e-07 & 0 \\
+\quad Shrinkage (empirical Bayes) & 0.0126 & +0.0037 & 0.00011 & 17 \\
+\addlinespace[2pt]
+\multicolumn{5}{l}{Budget 100 pairs} \\
+\quad Single draw & 0.0054 & --- & --- & --- \\
+\quad Averaged AUC & 0.0065 & +0.0011 & 0.0039 & 22 \\
+\quad Rank aggregation & 0.0170 & +0.0115 & 7.3e-05 & 13 \\
+\quad Tolerance zone & 0.0112 & +0.0057 & 4.8e-07 & 4 \\
+\quad Lower confidence bound & 0.0176 & +0.0122 & 2.4e-07 & 0 \\
+\quad Shrinkage (empirical Bayes) & 0.0073 & +0.0019 & 0.00011 & 13 \\
+\addlinespace[2pt]
+\multicolumn{5}{l}{Budget 200 pairs} \\
+\quad Single draw & 0.0043 & --- & --- & --- \\
+\quad Averaged AUC & 0.0049 & +0.0006 & 0.008 & 17 \\
+\quad Rank aggregation & 0.0082 & +0.0038 & 0.00069 & 22 \\
+\quad Tolerance zone & 0.0071 & +0.0028 & 6.1e-05 & 9 \\
+\quad Lower confidence bound & 0.0098 & +0.0054 & 7e-05 & 4 \\
+\quad Shrinkage (empirical Bayes) & 0.0052 & +0.0008 & 0.0062 & 17 \\
+\addlinespace[2pt]
+\multicolumn{5}{l}{Budget 500 pairs} \\
+\quad Single draw & 0.0036 & --- & --- & --- \\
+\quad Averaged AUC & 0.0039 & +0.0004 & 0.21 & 35 \\
+\quad Rank aggregation & 0.0043 & +0.0008 & 0.064 & 22 \\
+\quad Tolerance zone & 0.0050 & +0.0014 & 0.0002 & 0 \\
+\quad Lower confidence bound & 0.0053 & +0.0018 & 0.00033 & 9 \\
+\quad Shrinkage (empirical Bayes) & 0.0041 & +0.0005 & 0.12 & 26 \\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Mean over 23 networks and twenty repetitions, matched design. Each network contributes one mean difference (averaged over its repetitions and regimes) and $p$ is a paired Wilcoxon signed-rank test over the 23 networks, not over cells: repetitions of one network are not independent observations. A positive $\Delta$ means the rule is worse than a single draw of the same size.\end{minipage}
+\end{table}

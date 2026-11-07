@@ -1,0 +1,48 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "config": {
+    "seed": 20261108,
+    "repetitions": 10,
+    "train_fraction": 0.7,
+    "validation_fraction_of_holdout": 0.5,
+    "budgets_total_pairs": [
+      20,
+      50,
+      100,
+      200,
+      500,
+      1000,
+      2000
+    ],
+    "negative_regimes": [
+      "uniform",
+      "two_hop",
+      "degree_matched"
+    ],
+    "metrics": [
+      "roc_auc",
+      "average_precision"
+    ],
+    "methods": [
+      "CN",
+      "Salton",
+      "Jaccard",
+      "Sorensen",
+      "HP",
+      "HD",
+      "LHN",
+      "AA",
+      "RA",
+      "PA",
+      "DS"
+    ],
+    "frozen_before_run": "2026-11-07",
+    "notes": "Replication suite: six SNAP networks held out of the frozen benchmark, same budgets, regimes and indices, ten repetitions."
+  },
+  "graphs": 6,
+  "rows": 1260,
+  "method_rows": 1980,
+  "wall_seconds": 323.6,
+  "timestamp": "2026-11-07T14:47:45"
+}

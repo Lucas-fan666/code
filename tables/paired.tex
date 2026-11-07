@@ -1,0 +1,30 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Paired regime comparisons at the smallest and largest budgets, on 23 networks.
+Values are mean differences between the 23 network-level means; $p$ is a Wilcoxon
+signed-rank test over those 23 network means.}
+\label{tab:paired}
+\begin{tabular}{lllrrr}
+\toprule
+Budget & Contrast & Metric & Mean difference & $p$ & $n$ \\
+\midrule
+20 & uniform $-$ two-hop & mis-selection & 0.204 & 0.0012 & 23 \\
+20 & uniform $-$ two-hop & selection loss & 0.005 & 0.3 & 23 \\
+20 & uniform $-$ degree-matched & mis-selection & 0.083 & 0.0077 & 23 \\
+20 & uniform $-$ degree-matched & selection loss & 0.002 & 0.25 & 23 \\
+\addlinespace[2pt]
+2{,}000 & uniform $-$ two-hop & mis-selection & 0.178 & 0.017 & 23 \\
+2{,}000 & uniform $-$ two-hop & selection loss & 0.001 & 0.49 & 23 \\
+2{,}000 & uniform $-$ degree-matched & mis-selection & 0.178 & 0.0049 & 23 \\
+2{,}000 & uniform $-$ degree-matched & selection loss & 0.000 & 0.5 & 23 \\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize A positive difference in
+mis-selection means the second-listed regime has the lower (better) rate. The mean
+selection loss does not differ significantly between any pair of regimes at either
+budget, while the mis-selection rate does: hard negatives make the decision more
+accurate without making an error cheaper. The two-hop versus degree-matched contrast is
+included in \texttt{results/paired\_tests.csv}.\end{minipage}
+\end{table}

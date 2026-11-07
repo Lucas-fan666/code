@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Share of selections (\%) won by each index, pooled over networks, repetitions and budgets.}
+\label{tab:methods}
+\begin{tabular}{l r r r}
+\toprule
+Index & Uniform & Two-hop & Degree-matched \\
+\midrule
+CN & 19.0 & 2.5 & 13.4 \\
+Salton & 4.3 & 0.8 & 3.9 \\
+Jaccard & 1.7 & 1.8 & 0.3 \\
+Sorensen & -- & -- & -- \\
+HP & 4.4 & 0.3 & 21.0 \\
+HD & 3.5 & 1.4 & 0.3 \\
+LHN & 1.9 & 4.1 & 2.3 \\
+AA & 9.7 & 12.0 & 5.7 \\
+RA & 10.2 & 3.6 & 5.7 \\
+PA & 10.0 & 23.7 & 0.6 \\
+DS & 35.3 & 49.8 & 47.0 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Percentages are computed within each regime and sum to 100. S{\o}rensen is a monotone transform of Jaccard and never wins a tie, so its selection rate is exactly zero; Table~\ref{tab:oracle} therefore lists the ten distinct rankings.\end{minipage}
+\end{table}

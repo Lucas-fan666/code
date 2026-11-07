@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Selection loss at 200 validation pairs under a random split and under a time-ordered split (train on the oldest 70\% of edges, validate on the next 15\%, test on the newest 15\%). Three timestamped networks, five repetitions.}
+\label{tab:temporal}
+\begin{tabular}{l l r r r r r}
+\toprule
+Split & Deployment regime & Matched & Mismatched & Hedge (three) & Hedge (two) & Oracle AUC \\
+\midrule
+Random & Uniform & 0.0002 & 0.0103 & 0.0006 & 0.0012 & 0.927 \\
+ & Two-hop & 0.0030 & 0.0479 & 0.0008 & 0.0378 & 0.765 \\
+ & Degree-matched & 0.0008 & 0.0201 & 0.0078 & 0.0083 & 0.933 \\
+\addlinespace[2pt]
+Temporal & Uniform & 0.0013 & 0.0116 & 0.0029 & 0.0036 & 0.883 \\
+ & Two-hop & 0.0042 & 0.0685 & 0.0135 & 0.0833 & 0.723 \\
+ & Degree-matched & 0.0000 & 0.0390 & 0.0315 & 0.0386 & 0.897 \\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize The temporal shift is real but modest on these networks: the test-optimal AUC falls by 0.02--0.06 and the highest single-index AUC by 0.03--0.05. Selection loss under matched validation stays within 0.002 of the random split, while the mismatch penalty and the price of hedging both grow; edges whose endpoints never appear in the training slice are excluded (28--65\% of the temporal test positives), which is stated as a limitation.\end{minipage}
+\end{table}

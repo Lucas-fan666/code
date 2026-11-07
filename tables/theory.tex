@@ -1,0 +1,28 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Observed selection loss against the loss predicted by validation noise alone, which is simulated from the measured gap structure with DeLong standard errors and no free parameter. The last row of each block gives the fitted decay exponent.}
+\label{tab:theory}
+\begin{tabular}{l r r r r}
+\toprule
+Regime & Budget & Observed & Noise model & Excess (shift) \\
+\midrule
+Uniform & 20 & 0.0225 & 0.0311 & -0.0086 \\
+Uniform & 200 & 0.0117 & 0.0101 & 0.0016 \\
+Uniform & 2000 & 0.0108 & 0.0066 & 0.0042 \\
+\addlinespace[2pt]
+Uniform & $\gamma$ & 1.11 & 0.71 & --- \\
+Two-hop & 20 & 0.0251 & 0.0252 & -0.0001 \\
+Two-hop & 200 & 0.0089 & 0.0090 & -0.0001 \\
+Two-hop & 2000 & 0.0071 & 0.0054 & 0.0017 \\
+\addlinespace[2pt]
+Two-hop & $\gamma$ & 1.33 & 0.61 & --- \\
+Degree-matched & 20 & 0.0231 & 0.0370 & -0.0138 \\
+Degree-matched & 200 & 0.0106 & 0.0108 & -0.0002 \\
+Degree-matched & 2000 & 0.0095 & 0.0075 & 0.0020 \\
+\addlinespace[2pt]
+Degree-matched & $\gamma$ & 1.42 & 0.79 & --- \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize The noise model draws validation AUCs centred on the true test AUC with DeLong standard deviation at the effective budget, selects the argmax, and averages 400 draws per cell. Excess $=$ observed $-$ noise model is the part of the loss that validation noise cannot explain.\end{minipage}
+\end{table}

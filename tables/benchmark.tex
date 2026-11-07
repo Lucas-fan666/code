@@ -1,0 +1,37 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Benchmark networks after uniform preprocessing (self-loops removed, largest connected component retained).}
+\label{tab:benchmark}
+\begin{tabular}{l l r r r r r r}
+\toprule
+Network & Category & $n$ & $m$ & $\langle k\rangle$ & $C$ & $r$ & $g$ \\
+\midrule
+BA-1000-3 & synthetic & 1000 & 2991 & 6.0 & 0.02 & -0.08 & 0.37 \\
+BA-1000-5 & synthetic & 1000 & 4975 & 9.9 & 0.03 & -0.05 & 0.35 \\
+BA-2000-3 & synthetic & 2000 & 5991 & 6.0 & 0.01 & -0.06 & 0.37 \\
+BA-500-2 & synthetic & 500 & 996 & 4.0 & 0.02 & -0.10 & 0.37 \\
+CM-powerlaw & synthetic & 1000 & 1661 & 3.3 & 0.02 & -0.07 & 0.34 \\
+CaCondMat & collaboration & 21363 & 91286 & 8.5 & 0.26 & 0.13 & 0.50 \\
+CaGrQc & collaboration & 4158 & 13422 & 6.5 & 0.63 & 0.64 & 0.54 \\
+CaHepTh & collaboration & 8638 & 24806 & 5.7 & 0.28 & 0.24 & 0.50 \\
+ER-1000-0.005 & synthetic & 995 & 2494 & 5.0 & 0.00 & -0.01 & 0.24 \\
+ER-500-0.010 & synthetic & 500 & 1255 & 5.0 & 0.01 & 0.01 & 0.25 \\
+ER-500-0.030 & synthetic & 500 & 3660 & 14.6 & 0.03 & -0.01 & 0.15 \\
+EmailEnron & communication & 33696 & 180811 & 10.7 & 0.09 & -0.12 & 0.73 \\
+EmailEuCore & communication & 986 & 16064 & 32.6 & 0.27 & -0.03 & 0.54 \\
+FacebookEgo & social & 4039 & 88234 & 43.7 & 0.52 & 0.06 & 0.54 \\
+Florentine & social & 15 & 20 & 2.7 & 0.19 & -0.37 & 0.27 \\
+Karate & social & 34 & 78 & 4.6 & 0.26 & -0.48 & 0.39 \\
+LesMiserables & social & 77 & 254 & 6.6 & 0.50 & -0.17 & 0.46 \\
+P2PGnutella08 & technology & 6299 & 20776 & 6.6 & 0.02 & 0.04 & 0.52 \\
+SBM-disassortative & synthetic & 1000 & 8169 & 16.3 & 0.02 & -0.01 & 0.14 \\
+SBM-strong & synthetic & 1000 & 12293 & 24.6 & 0.06 & -0.01 & 0.11 \\
+SBM-weak & synthetic & 1000 & 13044 & 26.1 & 0.03 & 0.00 & 0.10 \\
+WS-1000-8-0.3 & synthetic & 1000 & 4000 & 8.0 & 0.22 & -0.05 & 0.09 \\
+WS-500-4-0.1 & synthetic & 500 & 1000 & 4.0 & 0.35 & -0.05 & 0.07 \\
+WikiVote & social & 7066 & 100736 & 28.5 & 0.13 & -0.08 & 0.75 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Categories: social, collaboration, communication, technology or synthetic. $C$ is transitivity, $r$ the degree assortativity coefficient and $g$ the Gini coefficient of the degree distribution.\end{minipage}
+\end{table}

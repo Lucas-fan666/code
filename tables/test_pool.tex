@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Where the floor comes from: the reported loss at the largest validation budget (2{,}000 pairs) split into the cost of defining the winner on a finite test pool and the cost of choosing it with a finite validation pool. Eight networks, ten repetitions, uniform negatives.}
+\label{tab:testpool}
+\begin{tabular}{r r r r r}
+\toprule
+Test pool (pairs) & Test-resolution term & Validation term & Total loss & Test-AUC s.d. \\
+\midrule
+50 & 0.0022 & -0.0000 & 0.0021 & 0.0285 \\
+100 & 0.0011 & 0.0002 & 0.0012 & 0.0203 \\
+200 & 0.0005 & 0.0001 & 0.0006 & 0.0139 \\
+500 & 0.0001 & 0.0002 & 0.0003 & 0.0081 \\
+1000 & 0.0000 & 0.0001 & 0.0001 & 0.0052 \\
+2000 & 0.0000 & 0.0001 & 0.0001 & 0.0025 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize The two terms are measured on the same test sub-pool and sum exactly to the total. The test-resolution term is the gap between the best index on the sub-pool and the best on the full 4{,}000-pair pool; the validation term is the gap between the full-pool winner and the index selected with the validation budget. Test-AUC s.d. is the standard deviation of a single index's AUC across sub-pools of that size.\end{minipage}
+\end{table}

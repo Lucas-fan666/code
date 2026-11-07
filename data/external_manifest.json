@@ -1,0 +1,74 @@
+[
+  {
+    "name": "AsCaida",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/as-caida20071105.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)",
+    "n_raw": 26475,
+    "m_raw": 53381,
+    "n_nodes": 26475,
+    "n_edges": 53381,
+    "density": 0.0001523214859084934
+  },
+  {
+    "name": "CaAstroPh",
+    "category": "collaboration",
+    "source": "SNAP, https://snap.stanford.edu/data/ca-AstroPh.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)",
+    "n_raw": 18771,
+    "m_raw": 198050,
+    "n_nodes": 17903,
+    "n_edges": 196972,
+    "density": 0.001229156340727714
+  },
+  {
+    "name": "CaHepPh",
+    "category": "collaboration",
+    "source": "SNAP, https://snap.stanford.edu/data/ca-HepPh.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)",
+    "n_raw": 12006,
+    "m_raw": 118489,
+    "n_nodes": 11204,
+    "n_edges": 117619,
+    "density": 0.0018741314222490322
+  },
+  {
+    "name": "Oregon1",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/oregon1_010331.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)",
+    "n_raw": 10670,
+    "m_raw": 22002,
+    "n_nodes": 10670,
+    "n_edges": 22002,
+    "density": 0.00038654852592138865
+  },
+  {
+    "name": "P2PGnutella24",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/p2p-Gnutella24.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Ripeanu et al. (2002); Leskovec et al. (2007)",
+    "n_raw": 26518,
+    "m_raw": 65369,
+    "n_nodes": 26498,
+    "n_edges": 65359,
+    "density": 0.00018617681354323048
+  },
+  {
+    "name": "P2PGnutella31",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/p2p-Gnutella31.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Ripeanu et al. (2002); Leskovec et al. (2007)",
+    "n_raw": 62586,
+    "m_raw": 147892,
+    "n_nodes": 62561,
+    "n_edges": 147878,
+    "density": 7.556716716096343e-05
+  }
+]

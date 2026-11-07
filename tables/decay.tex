@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Fitted decay of the mean selection loss on twenty-three networks.}
+\label{tab:decay}
+\begin{tabular}{l r r l r}
+\toprule
+Regime & $L_\infty$ & $a$ & $\gamma$ [95\% CI] & $R^2$ \\
+\midrule
+Uniform non-edges & 0.0032 & 0.3442 & 1.11 [0.59, 1.61] & 0.998 \\
+Two-hop non-edges & 0.0024 & 0.9880 & 1.33 [0.55, 1.52] & 0.996 \\
+Degree-matched non-edges & 0.0035 & 0.9899 & 1.42 [0.48, 1.82] & 0.998 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Fit of $L(b) = L_\infty + a\,b^{-\gamma}$ to the mean selection loss at 23 networks, 7 budgets and all repetitions; the interval is a network-cluster bootstrap over 1{,}000 resamples. The three parameters are weakly identified individually --- a lower asymptote and a slower decay fit the same curve almost as well --- so the fit is descriptive and the closed form of Section~\ref{sec:theory} is what identifies $\gamma$.\end{minipage}
+\end{table}

@@ -1,0 +1,32 @@
+{
+  "uniform": {
+    "matched": 0.0039,
+    "mismatched_mean": 0.014,
+    "hedge_loo": 0.0124,
+    "hedge_all": 0.0064,
+    "hedge_rank": 0.0042,
+    "hedge_min": 0.0054,
+    "recovery_all_pct": 54.5797,
+    "recovery_loo_pct": 11.889
+  },
+  "two_hop": {
+    "matched": 0.0041,
+    "mismatched_mean": 0.0918,
+    "hedge_loo": 0.0878,
+    "hedge_all": 0.0128,
+    "hedge_rank": 0.0732,
+    "hedge_min": 0.0973,
+    "recovery_all_pct": 86.0133,
+    "recovery_loo_pct": 4.3536
+  },
+  "degree_matched": {
+    "matched": 0.0047,
+    "mismatched_mean": 0.0184,
+    "hedge_loo": 0.0181,
+    "hedge_all": 0.0087,
+    "hedge_rank": 0.0084,
+    "hedge_min": 0.0111,
+    "recovery_all_pct": 52.8505,
+    "recovery_loo_pct": 1.7751
+  }
+}

@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\caption{Distribution of per-network selection loss in the two benchmark families. The mean is sensitive to a single network; the median, the mean without the family maximum, and the share of networks above 0.005 AUC describe the bulk and the tail separately.}
+\label{tab:familyrobust}
+\begin{tabular}{l r r r r r r}
+\toprule
+Family & Budget & Mean & Median & Mean (max out) & Max & Share $>0.005$ (\%) \\
+\midrule
+Empirical & 100 & 0.0067 & 0.0046 & 0.0055 & 0.0174 & 50 \\
+Synthetic & 100 & 0.0036 & 0.0032 & 0.0031 & 0.0086 & 38 \\
+Empirical & 2000 & 0.0034 & 0.0003 & 0.0019 & 0.0174 & 20 \\
+Synthetic & 2000 & 0.0026 & 0.0005 & 0.0018 & 0.0128 & 23 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Values are computed from the per-network means; each network contributes once, regardless of its size.\end{minipage}
+\end{table}

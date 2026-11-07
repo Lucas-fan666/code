@@ -1,0 +1,80 @@
+{
+  "CaHepPh": {
+    "snap_stem": "ca-HepPh",
+    "url": "https://snap.stanford.edu/data/ca-HepPh.txt.gz",
+    "sha256": "8d679f64ea507834613f4c09e6f692cc8a2405d5a01bfe1ee3b24fbbea1d807f",
+    "raw_bytes": 815086,
+    "parsed_edges": 236978,
+    "processed": "data\\processed\\ca-HepPh.edges",
+    "name": "CaHepPh",
+    "category": "collaboration",
+    "source": "SNAP, https://snap.stanford.edu/data/ca-HepPh.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)"
+  },
+  "CaAstroPh": {
+    "snap_stem": "ca-AstroPh",
+    "url": "https://snap.stanford.edu/data/ca-AstroPh.txt.gz",
+    "sha256": "51bf1e2cace269b884481a8502474efa67c0fd01d998ff7f5a154d7d3e527f27",
+    "raw_bytes": 1453950,
+    "parsed_edges": 396100,
+    "processed": "data\\processed\\ca-AstroPh.edges",
+    "name": "CaAstroPh",
+    "category": "collaboration",
+    "source": "SNAP, https://snap.stanford.edu/data/ca-AstroPh.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)"
+  },
+  "AsCaida": {
+    "snap_stem": "as-caida20071105",
+    "url": "https://snap.stanford.edu/data/as-caida20071105.txt.gz",
+    "sha256": "34ce3d63dc03bbbabbb05fdb15d5cb7fe52564166d20f860755ca0e794ac057a",
+    "raw_bytes": 447101,
+    "parsed_edges": 106762,
+    "processed": "data\\processed\\as-caida20071105.edges",
+    "name": "AsCaida",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/as-caida20071105.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)"
+  },
+  "Oregon1": {
+    "snap_stem": "oregon1_010331",
+    "url": "https://snap.stanford.edu/data/oregon1_010331.txt.gz",
+    "sha256": "6e43679e9b39eb72a058872c7c30c5b5bf5aac21879c202980c729b317111b25",
+    "raw_bytes": 69141,
+    "parsed_edges": 22003,
+    "processed": "data\\processed\\oregon1_010331.edges",
+    "name": "Oregon1",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/oregon1_010331.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Leskovec et al. (2007)"
+  },
+  "P2PGnutella24": {
+    "snap_stem": "p2p-Gnutella24",
+    "url": "https://snap.stanford.edu/data/p2p-Gnutella24.txt.gz",
+    "sha256": "6f0a91d504b0df4321b60a31bb66b4783db321f2a51a88b7f872375f91dee22e",
+    "raw_bytes": 220535,
+    "parsed_edges": 65369,
+    "processed": "data\\processed\\p2p-Gnutella24.edges",
+    "name": "P2PGnutella24",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/p2p-Gnutella24.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Ripeanu et al. (2002); Leskovec et al. (2007)"
+  },
+  "P2PGnutella31": {
+    "snap_stem": "p2p-Gnutella31",
+    "url": "https://snap.stanford.edu/data/p2p-Gnutella31.txt.gz",
+    "sha256": "20cf3b0642718e7628c7aa15a41b21e663aea872946878d5b9abc80ee360f869",
+    "raw_bytes": 511295,
+    "parsed_edges": 147892,
+    "processed": "data\\processed\\p2p-Gnutella31.edges",
+    "name": "P2PGnutella31",
+    "category": "technology",
+    "source": "SNAP, https://snap.stanford.edu/data/p2p-Gnutella31.html",
+    "licence": "SNAP terms of use (research use, attribution)",
+    "reference": "Ripeanu et al. (2002); Leskovec et al. (2007)"
+  }
+}

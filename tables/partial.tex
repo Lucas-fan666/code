@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Partial Spearman correlations between network descriptors and the mean selection
+loss at 100 pairs, controlling for $\log n$. Entries are $\rho$ ($p$), with
+$^{*}$ marking $p<0.05$ without multiplicity correction.}
+\label{tab:partial}
+\begin{tabular}{lccc}
+\toprule
+Descriptor & Uniform & Two-hop & Degree-matched \\
+\midrule
+Transitivity & -0.15 (0.493) & +0.49$^{*}$ (0.018) & +0.23 (0.289) \\
+Modularity & -0.19 (0.397) & +0.49$^{*}$ (0.019) & -0.03 (0.891) \\
+Test-AUC spread & -0.49$^{*}$ (0.019) & -0.05 (0.822) & -0.61$^{*}$ (0.002) \\
+Density & +0.29 (0.182) & +0.00 (0.983) & +0.38 (0.073) \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize $n=23$ networks. The four
+descriptors carried over from Table~\ref{tab:structure} are the ones whose raw
+correlation was largest in at least one regime; every coefficient keeps its sign after
+the control. Density loses significance in the uniform and degree-matched columns once
+$\log n$ is partialled out, whereas transitivity and modularity under two-hop negatives,
+and the test-AUC spread under uniform and degree-matched negatives, remain significant at
+the 0.05 level.\end{minipage}
+\end{table}

@@ -1,0 +1,11 @@
+test_best_method,degree_matched,two_hop,uniform
+AA,77,490,378
+CN,35,14,84
+DS,1554,1701,1162
+HD,21,21,189
+HP,1043,0,168
+Jaccard,7,84,91
+LHN,84,154,91
+PA,0,560,280
+RA,315,175,686
+Salton,84,21,91

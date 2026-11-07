@@ -1,0 +1,16 @@
+﻿# data (downloaded / generated, not versioned)
+data/raw/
+data/processed/
+data/*.gz
+# build artefacts
+manuscript/*.aux
+manuscript/*.log
+manuscript/*.out
+manuscript/*.blg
+manuscript/*.bbl
+manuscript/*.txt
+__pycache__/
+*.pyc
+# OS noise
+.DS_Store
+Thumbs.db

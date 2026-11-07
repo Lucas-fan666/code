@@ -1,0 +1,37 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Selection loss measured on AUC and on average precision, twenty-three networks. AP loss is systematically larger, but the shape and the ranking of budgets are the same, so no conclusion in the paper depends on the metric.}
+\label{tab:ap}
+\begin{tabular}{l r r r r r r}
+\toprule
+Regime & Budget & AUC loss & AP loss & AP/AUC & Mis-sel.\ AUC (\%) & Mis-sel.\ AP (\%) \\
+\midrule
+Uniform & 20 & 0.0156 & 0.0163 & 1.05 & 67.8 & 69.3 \\
+ & 50 & 0.0079 & 0.0093 & 1.18 & 59.3 & 63.0 \\
+ & 100 & 0.0049 & 0.0074 & 1.49 & 58.0 & 61.1 \\
+ & 200 & 0.0043 & 0.0058 & 1.33 & 54.6 & 52.4 \\
+ & 500 & 0.0035 & 0.0056 & 1.57 & 48.3 & 50.4 \\
+ & 1000 & 0.0033 & 0.0053 & 1.59 & 47.2 & 47.2 \\
+ & 2000 & 0.0034 & 0.0053 & 1.56 & 44.3 & 43.3 \\
+\addlinespace[2pt]
+Two-hop & 20 & 0.0209 & 0.0266 & 1.27 & 47.4 & 61.1 \\
+ & 50 & 0.0073 & 0.0141 & 1.92 & 35.9 & 50.7 \\
+ & 100 & 0.0050 & 0.0079 & 1.58 & 37.4 & 45.0 \\
+ & 200 & 0.0040 & 0.0050 & 1.25 & 33.0 & 40.0 \\
+ & 500 & 0.0026 & 0.0034 & 1.31 & 27.4 & 33.7 \\
+ & 1000 & 0.0023 & 0.0033 & 1.42 & 26.1 & 32.6 \\
+ & 2000 & 0.0021 & 0.0031 & 1.44 & 26.5 & 30.4 \\
+\addlinespace[2pt]
+Degree-matched & 20 & 0.0176 & 0.0204 & 1.16 & 59.6 & 60.9 \\
+ & 50 & 0.0073 & 0.0099 & 1.36 & 50.2 & 52.6 \\
+ & 100 & 0.0048 & 0.0060 & 1.24 & 43.9 & 49.6 \\
+ & 200 & 0.0045 & 0.0061 & 1.36 & 40.0 & 43.0 \\
+ & 500 & 0.0035 & 0.0041 & 1.19 & 34.6 & 34.1 \\
+ & 1000 & 0.0035 & 0.0038 & 1.10 & 29.1 & 30.4 \\
+ & 2000 & 0.0034 & 0.0037 & 1.07 & 26.5 & 27.4 \\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Average precision is computed on the same balanced pools as AUC, so its chance level is the positive prevalence rather than 0.5; the ratio is therefore a scale factor, not a discrepancy. Mis-selection is the share of cells whose selected index is not the AP-optimal one.\end{minipage}
+\end{table}

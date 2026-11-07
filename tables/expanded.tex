@@ -1,0 +1,39 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Candidate sets of different composition. The stacker is trained only on the same budget of validation pairs it competes for, with cross-fitting; loss is measured against the best member of each set, so the sets are comparable.}
+\label{tab:expanded}
+\begin{tabular}{l l r r r}
+\toprule
+Budget & Candidate set & Mean loss & Mis-selection & Best AUC in set \\
+\midrule
+50 & Eleven indices & 0.0088 & 0.491 & 0.6866 \\
+ & + Katz & 0.0120 & 0.488 & 0.6960 \\
+ & + stacker & 0.0193 & 0.429 & 0.8145 \\
+ & + both & 0.0204 & 0.439 & 0.8146 \\
+\addlinespace[2pt]
+100 & Eleven indices & 0.0055 & 0.465 & 0.6866 \\
+ & + Katz & 0.0073 & 0.443 & 0.6960 \\
+ & + stacker & 0.0114 & 0.299 & 0.8323 \\
+ & + both & 0.0122 & 0.303 & 0.8324 \\
+\addlinespace[2pt]
+200 & Eleven indices & 0.0046 & 0.435 & 0.6866 \\
+ & + Katz & 0.0052 & 0.388 & 0.6960 \\
+ & + stacker & 0.0060 & 0.203 & 0.8443 \\
+ & + both & 0.0067 & 0.204 & 0.8444 \\
+\addlinespace[2pt]
+500 & Eleven indices & 0.0036 & 0.374 & 0.6866 \\
+ & + Katz & 0.0042 & 0.330 & 0.6960 \\
+ & + stacker & 0.0053 & 0.159 & 0.8539 \\
+ & + both & 0.0059 & 0.161 & 0.8539 \\
+\addlinespace[2pt]
+1000 & Eleven indices & 0.0035 & 0.357 & 0.6866 \\
+ & + Katz & 0.0042 & 0.316 & 0.6960 \\
+ & + stacker & 0.0047 & 0.148 & 0.8590 \\
+ & + both & 0.0053 & 0.149 & 0.8590 \\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Ten repetitions per network, 23 networks. "Best AUC in set" is the test AUC of the oracle member of that set, reported to show how the ceiling moves.\end{minipage}
+\end{table}

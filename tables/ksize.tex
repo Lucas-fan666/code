@@ -1,0 +1,22 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Selection loss with two versus eleven candidate indices, on the eight-network supplementary suite.}
+\label{tab:ksize}
+\begin{tabular}{l r r r r}
+\toprule
+Regime & Budget & $k=2$ & $k=11$ & Ratio \\
+\midrule
+Uniform & 20 & 0.0072 & 0.0193 & 2.7 \\
+Uniform & 100 & 0.0039 & 0.0081 & 2.1 \\
+Uniform & 2000 & 0.0027 & 0.0059 & 2.2 \\
+Two-hop & 20 & 0.0084 & 0.0244 & 2.9 \\
+Two-hop & 100 & 0.0025 & 0.0117 & 4.7 \\
+Two-hop & 2000 & 0.0015 & 0.0063 & 4.2 \\
+Degree-matched & 20 & 0.0057 & 0.0183 & 3.2 \\
+Degree-matched & 100 & 0.0020 & 0.0041 & 2.0 \\
+Degree-matched & 2000 & 0.0017 & 0.0031 & 1.8 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Each value is the mean over 60 random candidate subsets, 20 repetitions and eight networks.\end{minipage}
+\end{table}

@@ -1,0 +1,29 @@
+{
+  "email-Eu-core-temporal": {
+    "url": "https://snap.stanford.edu/data/email-Eu-core-temporal.txt.gz",
+    "sha256": "f6cc93249978e59d1aba111b55ea10ec553917419a3be1210012b5db3580efa6",
+    "raw_bytes": 1683428,
+    "pairs": 16064,
+    "nodes": 986,
+    "span_days": 802.5,
+    "note": "sender recipient timestamp"
+  },
+  "soc-sign-bitcoinotc": {
+    "url": "https://snap.stanford.edu/data/soc-sign-bitcoinotc.csv.gz",
+    "sha256": "6424ac981dad3a019f697fc1b9fcd85c19d8d9f039797758e9ffb6fea100c373",
+    "raw_bytes": 397258,
+    "pairs": 21492,
+    "nodes": 5881,
+    "span_days": 1903.2,
+    "note": "SOURCE,TARGET,RATING,TIME"
+  },
+  "soc-sign-bitcoinalpha": {
+    "url": "https://snap.stanford.edu/data/soc-sign-bitcoinalpha.csv.gz",
+    "sha256": "3a178611b9c2f39c9a0dc75936f28557317f1733319b49da4838232b3757cd76",
+    "raw_bytes": 149480,
+    "pairs": 14124,
+    "nodes": 3783,
+    "span_days": 1901.0,
+    "note": "SOURCE,TARGET,RATING,TIME"
+  }
+}

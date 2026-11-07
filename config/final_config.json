@@ -1,0 +1,24 @@
+{
+  "seed": 20261106,
+  "repetitions": 20,
+  "train_fraction": 0.7,
+  "validation_fraction_of_holdout": 0.5,
+  "budgets_total_pairs": [20, 50, 100, 200, 500, 1000, 2000],
+  "negative_regimes": ["uniform", "two_hop", "degree_matched"],
+  "metrics": ["roc_auc", "average_precision"],
+  "methods": [
+    "CN",
+    "Salton",
+    "Jaccard",
+    "Sorensen",
+    "HP",
+    "HD",
+    "LHN",
+    "AA",
+    "RA",
+    "PA",
+    "DS"
+  ],
+  "frozen_before_run": "2026-11-06",
+  "notes": "Protocol frozen before the final run; budgets and regimes are fixed and were not tuned on the results."
+}

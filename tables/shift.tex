@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Cost of a validation/deployment mismatch at a budget of 200 pairs. Rows are the negative-sampling regime used to validate, columns the regime used to test. The diagonal is the matched design. The two bottom rows summarise the hedged rule (validate on all three regimes, average the AUCs) and the matched reference on the same scale.}
+\label{tab:shift}
+\begin{tabular}{l r r r}
+\toprule
+Validation regime & Uniform & Two-hop & Degree-matched \\
+\midrule
+Uniform & 0.0043 & 0.0776 & 0.0095 \\
+Two-hop & 0.0213 & 0.0042 & 0.0274 \\
+Degree-matched & 0.0068 & 0.1060 & 0.0045 \\
+\midrule
+Hedged (mean AUC) & 0.0064 & 0.0128 & 0.0087 \\
+Matched (reference) & 0.0039 & 0.0041 & 0.0047 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize Mean selection loss over 23 networks, twenty repetitions, three test regimes. Florentine (20 edges) is excluded because a balanced budget cannot be formed.\end{minipage}
+\end{table}
