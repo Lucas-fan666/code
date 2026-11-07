@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -59,7 +60,12 @@ def main() -> None:
     ap.add_argument("--repo", default=REPO)
     ap.add_argument("--message", default="Validation budget and sampler: replication package v1.0.0")
     ap.add_argument("--dry-run", action="store_true", help="stage only, do not push")
+    ap.add_argument("--proxy", default=None,
+                    help="HTTP proxy for the push (e.g. http://127.0.0.1:7892), "
+                         "required where a direct connection to github.com is reset")
     a = ap.parse_args()
+    if a.proxy is None:
+        a.proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or None
 
     if not (ROOT / ".git").exists():
         run(["git", "init", "-q", "-b", "main"])
@@ -81,8 +87,11 @@ def main() -> None:
 
     url = f"https://{a.token}@github.com/{a.repo}.git"
     refspec = f"HEAD:refs/heads/{a.branch}"
+    push = ["git", "push", "--porcelain"]
+    if a.proxy:
+        push += ["-c", f"http.proxy={a.proxy}", "-c", f"https.proxy={a.proxy}"]
     try:
-        run(["git", "push", "--porcelain", url, refspec])
+        run(push + [url, refspec])
     finally:
         # keep the token out of any remote written by mistake
         subprocess.run(["git", "remote", "remove", "origin"], cwd=ROOT,
