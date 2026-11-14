@@ -1,0 +1,2 @@
+graph,repetition,seed,selected_method_two_hop,selected_method_uniform,budget_effective_pairs_two_hop,budget_effective_pairs_uniform,val_auc_selected_two_hop,val_auc_selected_uniform,test_auc_oracle_two_hop,test_auc_oracle_uniform,two_hop_test_auc_uniform,two_hop_test_auc_two_hop,difference,distance_to_median
+CaGrQc,9,114537962,DS,AA,200,200,0.6875,0.8921,0.6787759839236714,0.873764396302326,0.6401337160419519,0.6787759839236714,0.03864226788171954,0.0008821201682356894

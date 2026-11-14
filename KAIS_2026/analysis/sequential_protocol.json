@@ -1,0 +1,38 @@
+{
+  "seed": "2026111300+100003*graph+1009*rep",
+  "networks": 4,
+  "new_splits_per_network": 20,
+  "streams_per_split": 5,
+  "grid": [
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048,
+    4096,
+    8192,
+    16384,
+    32768
+  ],
+  "epsilon": [
+    0.01,
+    0.02,
+    0.05
+  ],
+  "delta": 0.05,
+  "candidate_pool": [
+    "CN",
+    "Jaccard",
+    "AA",
+    "RA",
+    "PA",
+    "DS"
+  ],
+  "certificate_target": "conditional finite validation pool product distribution; independent target test evaluated empirically",
+  "cost": "positive-negative comparisons sampled with replacement; not unique node pairs",
+  "test_used_for_stopping": false,
+  "training": "70% edges, fixed local scores",
+  "reference": "Maurer and Pontil 2009 Theorem 4, two-sided pairwise union bound across 15 pairs and 11 looks"
+}

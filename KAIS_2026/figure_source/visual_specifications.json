@@ -1,0 +1,172 @@
+{
+  "prior_specifications": [
+    {
+      "figure": 2,
+      "claim": "The largest loss reductions precede the high-budget region; evidence availability and tail risk complete the budget picture.",
+      "sources": [
+        "analysis/source_tables/pooled23.csv",
+        "analysis/loss_risk_summary.csv",
+        "analysis/achieved_budget_overview.csv",
+        "analysis/uncapped11_budget_summary.csv"
+      ],
+      "width_inches": 5.15,
+      "height_inches": 4.7,
+      "metric": "test-AUC selection loss; panel-specific secondary measures",
+      "formats": [
+        "PDF",
+        "SVG",
+        "PNG",
+        "EPS"
+      ],
+      "palette": {
+        "uniform": "#0072B2",
+        "two_hop": "#D55E00",
+        "degree_matched": "#009E73"
+      },
+      "minimum_designed_font_pt": 8.0
+    },
+    {
+      "figure": 3,
+      "claim": "The validation sampler leaves a large loss contrast across four budgets on the same two-hop test task.",
+      "sources": [
+        "figure_source/data/fig2_crossed_sampler.csv",
+        "analysis/budget_sampler_summary.csv"
+      ],
+      "width_inches": 5.15,
+      "height_inches": 2.85,
+      "metric": "test-AUC selection loss; panel-specific secondary measures",
+      "formats": [
+        "PDF",
+        "SVG",
+        "PNG",
+        "EPS"
+      ],
+      "palette": {
+        "uniform": "#0072B2",
+        "two_hop": "#D55E00",
+        "degree_matched": "#009E73"
+      },
+      "minimum_designed_font_pt": 8.0
+    },
+    {
+      "figure": 4,
+      "claim": "Complete validation pools reinforce different candidate rankings under the two samplers.",
+      "sources": [
+        "analysis/full_validation_ranking_graphs.csv",
+        "analysis/full_pool_winner_shares.csv",
+        "analysis/source_tables/method_scores.csv"
+      ],
+      "width_inches": 5.15,
+      "height_inches": 4.85,
+      "metric": "test-AUC selection loss; panel-specific secondary measures",
+      "formats": [
+        "PDF",
+        "SVG",
+        "PNG",
+        "EPS"
+      ],
+      "palette": {
+        "uniform": "#0072B2",
+        "two_hop": "#D55E00",
+        "degree_matched": "#009E73"
+      },
+      "minimum_designed_font_pt": 8.0
+    },
+    {
+      "figure": 5,
+      "claim": "The sampler contrast is positive on most empirical networks and varies substantially in magnitude.",
+      "sources": [
+        "analysis/network_sampler_contrasts.csv"
+      ],
+      "width_inches": 5.15,
+      "height_inches": 4.8,
+      "metric": "test-AUC selection loss; panel-specific secondary measures",
+      "formats": [
+        "PDF",
+        "SVG",
+        "PNG",
+        "EPS"
+      ],
+      "palette": {
+        "uniform": "#0072B2",
+        "two_hop": "#D55E00",
+        "degree_matched": "#009E73"
+      },
+      "minimum_designed_font_pt": 8.0
+    },
+    {
+      "figure": 6,
+      "claim": "Distinct candidate rankings increase both opportunity and selection difficulty; actual selected and oracle AUCs locate the loss.",
+      "sources": [
+        "analysis/candidate_performance_intervals.csv"
+      ],
+      "width_inches": 5.15,
+      "height_inches": 4.55,
+      "metric": "test-AUC selection loss; panel-specific secondary measures",
+      "formats": [
+        "PDF",
+        "SVG",
+        "PNG",
+        "EPS"
+      ],
+      "palette": {
+        "uniform": "#0072B2",
+        "two_hop": "#D55E00",
+        "degree_matched": "#009E73"
+      },
+      "minimum_designed_font_pt": 8.0
+    },
+    {
+      "figure": 7,
+      "claim": "Validation mismatch selects poorly under both training distributions, despite shared features and held-out test pairs.",
+      "sources": [
+        "analysis/factorial_graph_summary.csv",
+        "analysis/factorial_protocol.json"
+      ],
+      "width_inches": 5.15,
+      "height_inches": 3.9,
+      "metric": "test-AUC selection loss; panel-specific secondary measures",
+      "formats": [
+        "PDF",
+        "SVG",
+        "PNG",
+        "EPS"
+      ],
+      "palette": {
+        "uniform": "#0072B2",
+        "two_hop": "#D55E00",
+        "degree_matched": "#009E73"
+      },
+      "minimum_designed_font_pt": 8.0
+    }
+  ],
+  "sequential": {
+    "figure": 8,
+    "source": "analysis/sequential_traces.csv and sequential_decisions.csv",
+    "claim": "stable misselection and finite-pool sequential certificates",
+    "cost": "Monte Carlo comparisons with replacement",
+    "uncertainty": "95% stratified split bootstrap, four fixed graphs, 3000 draws",
+    "formats": [
+      "pdf",
+      "svg",
+      "png"
+    ]
+  },
+  "selected_schematic": {
+    "published_figure": "Main 1",
+    "source": "figure_source/fig1_master.svg",
+    "sha256": "aed59e76555c8e472203664bac114e51c0d72071a869c3b092b8f145a81ba40c",
+    "content_type": "selected raster base and editable vector networks in panel (b)",
+    "network_manifest": "figure_source/fig1_network_manifest.json",
+    "panels": [
+      "network split",
+      "sampler-induced ranking change",
+      "stable misselection",
+      "adaptive validation"
+    ],
+    "units": {
+      "b": "total validation node pairs",
+      "n": "positive-negative comparisons"
+    }
+  }
+}

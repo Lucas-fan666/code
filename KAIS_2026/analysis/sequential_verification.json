@@ -1,0 +1,7 @@
+{
+  "trace_rows": 8800,
+  "decisions": 31200,
+  "all_certified_pool_losses_within_tolerance": true,
+  "first_crossing_reconstructed": true,
+  "test_not_used_by_stopping": "see sequential_validation.py: decisions depend only on mu, variance and epsilon"
+}

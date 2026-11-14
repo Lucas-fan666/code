@@ -1,0 +1,244 @@
+{
+  "figure": "Figure 1",
+  "base": "user-selected four-panel figure; local graph cleanup",
+  "panels_b_training_graph": "same 15 nodes and same edges in both samplers",
+  "points": [
+    [
+      842,
+      139
+    ],
+    [
+      878,
+      84
+    ],
+    [
+      965,
+      64
+    ],
+    [
+      1052,
+      98
+    ],
+    [
+      1080,
+      137
+    ],
+    [
+      1051,
+      184
+    ],
+    [
+      982,
+      231
+    ],
+    [
+      919,
+      216
+    ],
+    [
+      862,
+      201
+    ],
+    [
+      891,
+      176
+    ],
+    [
+      919,
+      130
+    ],
+    [
+      1000,
+      111
+    ],
+    [
+      1021,
+      147
+    ],
+    [
+      936,
+      179
+    ],
+    [
+      982,
+      189
+    ]
+  ],
+  "training_edges": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      14,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      8,
+      0
+    ],
+    [
+      0,
+      9
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      9,
+      13
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      14,
+      7
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      10,
+      13
+    ],
+    [
+      10,
+      14
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      12,
+      4
+    ],
+    [
+      12,
+      5
+    ]
+  ],
+  "schematic_heldout_positive_edges": [
+    [
+      0,
+      3
+    ],
+    [
+      8,
+      12
+    ]
+  ],
+  "uniform_sample_nonedges": [
+    [
+      0,
+      10
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      10,
+      12
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      12,
+      14
+    ],
+    [
+      5,
+      6
+    ]
+  ],
+  "two_hop": {
+    "u": 10,
+    "w": 2,
+    "v": 11,
+    "training_edges": [
+      [
+        10,
+        2
+      ],
+      [
+        2,
+        11
+      ]
+    ],
+    "sampled_nonedge": [
+      10,
+      11
+    ]
+  },
+  "checks": {
+    "training_graph_connected": true,
+    "negative_samples_exclude_all_observed_edges": true,
+    "two_hop_path_is_valid": true
+  },
+  "image": {
+    "svg_canvas_pixels": [
+      1577,
+      997
+    ],
+    "png_pixels": [
+      3154,
+      1994
+    ],
+    "raster_background_with_vector_networks": true
+  }
+}

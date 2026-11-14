@@ -1,0 +1,15 @@
+{
+  "main": {
+    "1": "Fig1",
+    "2": "Fig2",
+    "3": "Fig3",
+    "4": "Fig4",
+    "5": "Fig8"
+  },
+  "supplement": {
+    "S1": "Fig5",
+    "S2": "Fig6",
+    "S3": "Fig7"
+  },
+  "note": "Artwork filenames are stable; numbering follows placement in the manuscript."
+}

@@ -1,0 +1,16 @@
+{
+  "factorial_auc_records": 19200,
+  "factorial_decisions": 4800,
+  "split_count": 40,
+  "selection_identity_max_error": 2.220446049250313e-16,
+  "uniform_replay_max_error": 1.1102230246251565e-16,
+  "main_mean_reproduction": true,
+  "candidate_performance_identity": true,
+  "candidate_performance_records": 33600,
+  "archived_subset_replay_records": 14400,
+  "verified_files": {
+    "factorial_candidate_auc.csv": "13ef5dd6a1904285741c12692a7e5c9f035cd476b9726d66e212f6ec7152e8e9",
+    "factorial_selection_cells.csv": "b4f73989c8164b60c69bd5b5dbcd5a312cfbe45a30219092c8ebe2c480a2b395",
+    "candidate_performance_cells.csv": "33ef60c29815cfc4a3dfcb7f2883f728995fb0521a235ddf1935a261de459e17"
+  }
+}

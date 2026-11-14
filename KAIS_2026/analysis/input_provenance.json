@@ -1,0 +1,48 @@
+{
+  "source": "https://github.com/Lucas-fan666/code/tree/replication-package-v1.0.0",
+  "files": [
+    {
+      "path": "results/rules_matrix.csv",
+      "local_sha256": "f47d58d10ea5bf904d34afecdad242445c8f2a3c0df056d847be4555438b4fbf",
+      "github_git_blob_sha1_after_lf_normalization": "79dd10f14a06e3fb69a732ec56e755b47a41c619",
+      "github_expected_sha1": "79dd10f14a06e3fb69a732ec56e755b47a41c619",
+      "matched": true
+    },
+    {
+      "path": "results/raw_results.csv",
+      "local_sha256": "431933d625a00b360859d444fe17960deb6c014781f6806ca8929be839d010f7",
+      "github_git_blob_sha1_after_lf_normalization": "eaa7d22771e23921fb34fd32a0be48f9ba16cb6e",
+      "github_expected_sha1": "eaa7d22771e23921fb34fd32a0be48f9ba16cb6e",
+      "matched": true
+    },
+    {
+      "path": "results/method_scores.csv",
+      "local_sha256": "af481a50ba19d81c354888c48be988a7e8654afe2ef3568573eeca58d514f76b",
+      "github_git_blob_sha1_after_lf_normalization": "228376da4c7ed99cdd1cc98c8b941cc6270c2cc7",
+      "github_expected_sha1": "228376da4c7ed99cdd1cc98c8b941cc6270c2cc7",
+      "matched": true
+    },
+    {
+      "path": "results/candidate_subset_aucs.csv",
+      "local_sha256": "4d5f9a643c4b9192e466552f789999d1a1fafbc83c21fbf621ccf76ce3048493",
+      "github_git_blob_sha1_after_lf_normalization": "6511641c92e9e1c849746d7789ed279a237f9c41",
+      "github_expected_sha1": "6511641c92e9e1c849746d7789ed279a237f9c41",
+      "matched": true
+    },
+    {
+      "path": "results/test_pool_cells.csv",
+      "local_sha256": "6abec21dcac103b5ce2ab35c78328a03cb51dc605ed8c42eaaf99acc24ecb9f3",
+      "github_git_blob_sha1_after_lf_normalization": "7868f4bdc2abc05aa9b5c1ee0a28d9052040e6cb",
+      "github_expected_sha1": "7868f4bdc2abc05aa9b5c1ee0a28d9052040e6cb",
+      "matched": true
+    },
+    {
+      "path": "results/test_pool_noise.csv",
+      "local_sha256": "1a7f035a24ed586cea0b302397f6aed993da5c51257d669ab5123e671ea3f341",
+      "github_git_blob_sha1_after_lf_normalization": "26375f334f7b676f688242fbea33d3c6072a1511",
+      "github_expected_sha1": "26375f334f7b676f688242fbea33d3c6072a1511",
+      "matched": true
+    }
+  ],
+  "note": "Git blob hash computed after CRLF-to-LF normalization; equality identifies stored bytes modulo newline style, not input generation provenance."
+}

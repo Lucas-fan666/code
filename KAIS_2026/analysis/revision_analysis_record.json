@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-13",
+  "bootstrap": "10000 resamples of whole graph means; fixed seed 20261113",
+  "loss_thresholds": [
+    0.005,
+    0.01,
+    0.02
+  ],
+  "threshold_status": "retrospective sensitivity settings",
+  "tolerance_budget": "smallest observed grid budget whose graph-average loss and all larger-grid losses are within tolerance, on the fixed uncapped 11-network collection",
+  "candidate_check_max_error": 9.996344030316351e-17
+}

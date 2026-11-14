@@ -1,0 +1,7 @@
+graph,split,mean_excluded_test_positives,matched_loss,mismatched_loss
+email-Eu-core-temporal,random,0.0,0.0008310666666666401,0.14361133333333326
+email-Eu-core-temporal,temporal,684.0,0.01269324444444446,0.17282097777777775
+soc-sign-bitcoinalpha,random,0.0,0.008080311111111101,0.0
+soc-sign-bitcoinalpha,temporal,1544.0,0.0,0.00918941398865782
+soc-sign-bitcoinotc,random,0.0,0.0,0.0
+soc-sign-bitcoinotc,temporal,2081.0,0.0,0.02347370620667167
